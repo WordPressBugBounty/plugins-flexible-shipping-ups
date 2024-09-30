@@ -19,7 +19,7 @@ class Locator extends \UpsFreeVendor\Ups\Locator
         $this->client = $client;
         $this->is_testing = $is_testing;
     }
-    public function getLocations(\UpsFreeVendor\Ups\Entity\LocatorRequest $request, $requestOption = self::OPTION_UPS_ACCESS_POINT_LOCATIONS)
+    public function getLocations(LocatorRequest $request, $requestOption = self::OPTION_UPS_ACCESS_POINT_LOCATIONS)
     {
         try {
             $response = $this->client->locator($requestOption, $this->prepare_payload($request));
@@ -29,7 +29,7 @@ class Locator extends \UpsFreeVendor\Ups\Locator
             throw $e;
         }
     }
-    private function prepare_payload(\UpsFreeVendor\Ups\Entity\LocatorRequest $request) : array
+    private function prepare_payload(LocatorRequest $request): array
     {
         $payload = ['LocatorRequest' => $this->prepare_object_properties($request)];
         if (isset($payload['LocatorRequest']['OriginAddress']['AddressKeyFormat']['AddressLine1'])) {

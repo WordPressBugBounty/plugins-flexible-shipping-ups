@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class FreightCharges implements \UpsFreeVendor\Ups\NodeInterface
+class FreightCharges implements NodeInterface
 {
     protected $monetaryValue;
     public function __construct($response = null)
@@ -21,10 +21,10 @@ class FreightCharges implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('FreightCharges');
         $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));
@@ -46,12 +46,12 @@ class FreightCharges implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setMonetaryValue($var)
     {
-        $this->monetaryValue = \round($var, 2);
+        $this->monetaryValue = round($var, 2);
         // Max 2 decimals places
         if ($this->monetaryValue < 0) {
             throw new \Exception('Freight charges cannot be negative');
         }
-        if (\strlen((string) $this->monetaryValue) > 15) {
+        if (strlen((string) $this->monetaryValue) > 15) {
             throw new \Exception('Value too long');
         }
         return $this;

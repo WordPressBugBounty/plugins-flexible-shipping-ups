@@ -66,7 +66,7 @@ class UpsRateRequestBuilder
      * @param Shipment $shipment Shipment.
      * @param ShopSettings $helper Helper.
      */
-    public function __construct(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings $helper)
+    public function __construct(SettingsValues $settings, Shipment $shipment, ShopSettings $helper)
     {
         $this->settings = $settings;
         $this->shipment = $shipment;
@@ -80,7 +80,7 @@ class UpsRateRequestBuilder
      */
     protected function prepare_rate_request()
     {
-        $request = new \UpsFreeVendor\Ups\Entity\RateRequest();
+        $request = new RateRequest();
         return $request;
     }
     /**
@@ -90,7 +90,7 @@ class UpsRateRequestBuilder
      *
      * @return UpsAddressAlias
      */
-    protected function set_address_data_from_ship_from(\UpsFreeVendor\Ups\Entity\Address $address)
+    protected function set_address_data_from_ship_from(UpsAddressAlias $address)
     {
         $ship_from_addres = $this->shipment->ship_from->address;
         $address->setAddressLine1($ship_from_addres->address_line1);
@@ -106,10 +106,10 @@ class UpsRateRequestBuilder
      */
     protected function set_shipper_address()
     {
-        if ($this->shipment->ship_from->address instanceof \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address) {
+        if ($this->shipment->ship_from->address instanceof Address) {
             $ups_shipment = $this->request->getShipment();
             $shipper = $ups_shipment->getShipper();
-            $shipper->setShipperNumber($this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCOUNT_NUMBER));
+            $shipper->setShipperNumber($this->settings->get_value(UpsSettingsDefinition::ACCOUNT_NUMBER));
             $this->set_address_data_from_ship_from($shipper->getAddress());
         }
     }
@@ -118,11 +118,11 @@ class UpsRateRequestBuilder
      */
     protected function set_ship_from_address()
     {
-        if ($this->shipment->ship_from->address instanceof \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address) {
+        if ($this->shipment->ship_from->address instanceof Address) {
             $ups_shipment = $this->request->getShipment();
-            $address = new \UpsFreeVendor\Ups\Entity\Address();
+            $address = new UpsAddressAlias();
             $address = $this->set_address_data_from_ship_from($address);
-            $ship_from_address = new \UpsFreeVendor\Ups\Entity\ShipFrom();
+            $ship_from_address = new ShipFrom();
             $ship_from_address->setAddress($address);
             $ups_shipment->setShipFrom($ship_from_address);
         }
@@ -132,7 +132,7 @@ class UpsRateRequestBuilder
      */
     protected function set_recipient_address()
     {
-        if ($this->shipment->ship_to->address instanceof \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address) {
+        if ($this->shipment->ship_to->address instanceof Address) {
             $ship_to_address = $this->shipment->ship_to->address;
             $ups_shipment = $this->request->getShipment();
             $ups_ship_to = $ups_shipment->getShipTo();
@@ -159,7 +159,7 @@ class UpsRateRequestBuilder
     {
         $package_weight = 0.0;
         foreach ($shipment_package->items as $item) {
-            $item_weight = (new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalWeight($item->weight->weight, $item->weight->weight_unit))->as_unit_rounded($weight_unit);
+            $item_weight = (new UniversalWeight($item->weight->weight, $item->weight->weight_unit))->as_unit_rounded($weight_unit);
             $package_weight += $item_weight;
         }
         return $package_weight;
@@ -188,7 +188,7 @@ class UpsRateRequestBuilder
      */
     protected function get_weight_unit_from_settings()
     {
-        if ($this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS) === \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS_IMPERIAL) {
+        if ($this->settings->get_value(UpsSettingsDefinition::UNITS) === UpsSettingsDefinition::UNITS_IMPERIAL) {
             return 'lb';
         }
         return 'kg';
@@ -200,10 +200,10 @@ class UpsRateRequestBuilder
      */
     protected function get_ups_dimensions_unit_from_settings()
     {
-        if ($this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS) === \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS_IMPERIAL) {
-            return \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_IN;
+        if ($this->settings->get_value(UpsSettingsDefinition::UNITS) === UpsSettingsDefinition::UNITS_IMPERIAL) {
+            return UnitOfMeasurement::UOM_IN;
         }
-        return \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_CM;
+        return UnitOfMeasurement::UOM_CM;
     }
     /**
      * Get UPS weight unit from settings.
@@ -212,11 +212,11 @@ class UpsRateRequestBuilder
      */
     protected function get_ups_weight_unit_from_settings()
     {
-        $settings_units = $this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS);
-        if (\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS_IMPERIAL === $settings_units) {
-            return \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_LBS;
+        $settings_units = $this->settings->get_value(UpsSettingsDefinition::UNITS);
+        if (UpsSettingsDefinition::UNITS_IMPERIAL === $settings_units) {
+            return UnitOfMeasurement::UOM_LBS;
         }
-        return \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_KGS;
+        return UnitOfMeasurement::UOM_KGS;
     }
     /**
      * Set insurance.
@@ -224,10 +224,10 @@ class UpsRateRequestBuilder
      * @param Package $ups_package .
      * @param \WPDesk\AbstractShipping\Shipment\Package $shipment_package .
      */
-    private function set_insurance_if_enabled(\UpsFreeVendor\Ups\Entity\Package $ups_package, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
+    private function set_insurance_if_enabled(Package $ups_package, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
     {
-        if ('yes' === $this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::INSURANCE, 'no')) {
-            $insured_value = new \UpsFreeVendor\Ups\Entity\InsuredValue();
+        if ('yes' === $this->settings->get_value(UpsSettingsDefinition::INSURANCE, 'no')) {
+            $insured_value = new InsuredValue();
             $insured_value->setMonetaryValue($this->calculate_package_value($shipment_package));
             $insured_value->setCurrencyCode($this->shop_settings->get_currency());
             $ups_package->getPackageServiceOptions()->setInsuredValue($insured_value);
@@ -252,15 +252,15 @@ class UpsRateRequestBuilder
      *
      * @throws UnitConversionException .
      */
-    private function set_package_weight_if_present(\UpsFreeVendor\Ups\Entity\PackageWeight $ups_package_weight, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
+    private function set_package_weight_if_present(PackageWeight $ups_package_weight, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
     {
         if (isset($shipment_package->weight)) {
-            $ups_package_weight->setWeight((new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalWeight($shipment_package->weight->weight, $shipment_package->weight->weight_unit))->as_unit_rounded($this->get_weight_unit_from_settings()));
+            $ups_package_weight->setWeight((new UniversalWeight($shipment_package->weight->weight, $shipment_package->weight->weight_unit))->as_unit_rounded($this->get_weight_unit_from_settings()));
         } else {
             $ups_package_weight->setWeight($this->calculate_package_weight($shipment_package, $this->get_weight_unit_from_settings()));
         }
         $this->verify_minimal_package_weight($ups_package_weight);
-        $unit_of_measurements = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement();
+        $unit_of_measurements = new UnitOfMeasurement();
         $unit_of_measurements->setCode($this->get_ups_weight_unit_from_settings());
         $ups_package_weight->setUnitOfMeasurement($unit_of_measurements);
     }
@@ -273,17 +273,17 @@ class UpsRateRequestBuilder
      * @return Package
      * @throws UnitConversionException .
      */
-    private function set_dimensions_if_present(\UpsFreeVendor\Ups\Entity\Package $ups_package, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
+    private function set_dimensions_if_present(Package $ups_package, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
     {
         if (isset($shipment_package->dimensions)) {
-            $ups_dimensions = new \UpsFreeVendor\Ups\Entity\Dimensions();
-            $ups_unit_of_measurement = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement();
+            $ups_dimensions = new Dimensions();
+            $ups_unit_of_measurement = new UnitOfMeasurement();
             $target_dimension_unit = $this->get_ups_dimensions_unit_from_settings();
             $ups_unit_of_measurement->setCode($target_dimension_unit);
             $ups_dimensions->setUnitOfMeasurement($ups_unit_of_measurement);
-            $width = new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalDimension($shipment_package->dimensions->width, $shipment_package->dimensions->dimensions_unit);
-            $height = new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalDimension($shipment_package->dimensions->height, $shipment_package->dimensions->dimensions_unit);
-            $length = new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalDimension($shipment_package->dimensions->length, $shipment_package->dimensions->dimensions_unit);
+            $width = new UniversalDimension($shipment_package->dimensions->width, $shipment_package->dimensions->dimensions_unit);
+            $height = new UniversalDimension($shipment_package->dimensions->height, $shipment_package->dimensions->dimensions_unit);
+            $length = new UniversalDimension($shipment_package->dimensions->length, $shipment_package->dimensions->dimensions_unit);
             $ups_dimensions->setHeight($height->as_unit_rounded($target_dimension_unit));
             $ups_dimensions->setWidth($width->as_unit_rounded($target_dimension_unit));
             $ups_dimensions->setLength($length->as_unit_rounded($target_dimension_unit));
@@ -300,7 +300,7 @@ class UpsRateRequestBuilder
      */
     private function add_package(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Package $shipment_package)
     {
-        $ups_package = new \UpsFreeVendor\Ups\Entity\Package();
+        $ups_package = new Package();
         $ups_package->getPackagingType()->setCode(\UpsFreeVendor\Ups\Entity\PackagingType::PT_PACKAGE);
         $this->set_package_weight_if_present($ups_package->getPackageWeight(), $shipment_package);
         $this->set_dimensions_if_present($ups_package, $shipment_package);
@@ -324,9 +324,9 @@ class UpsRateRequestBuilder
      */
     protected function set_pickup_type()
     {
-        $pickup_type_code = $this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::PICKUP_TYPE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DEFAULT_PICKUP_TYPE);
-        if (\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::NOT_SET !== $pickup_type_code) {
-            $pickup_type = new \UpsFreeVendor\Ups\Entity\PickupType();
+        $pickup_type_code = $this->settings->get_value(UpsSettingsDefinition::PICKUP_TYPE, UpsSettingsDefinition::DEFAULT_PICKUP_TYPE);
+        if (UpsSettingsDefinition::NOT_SET !== $pickup_type_code) {
+            $pickup_type = new PickupType();
             $pickup_type->setCode($pickup_type_code);
             $this->request->setPickupType($pickup_type);
         } else {
@@ -338,10 +338,10 @@ class UpsRateRequestBuilder
      */
     protected function set_negotiated_rates()
     {
-        $negotiated_rates = 'yes' === $this->settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::NEGOTIATED_RATES);
+        $negotiated_rates = 'yes' === $this->settings->get_value(UpsSettingsDefinition::NEGOTIATED_RATES);
         if ($negotiated_rates) {
             $ups_shipment = $this->request->getShipment();
-            $rate_information = new \UpsFreeVendor\Ups\Entity\RateInformation();
+            $rate_information = new RateInformation();
             $rate_information->setNegotiatedRatesIndicator(1);
             $ups_shipment->setRateInformation($rate_information);
         }
@@ -351,14 +351,14 @@ class UpsRateRequestBuilder
      *
      * @param CollectionPoint $collection_point .
      */
-    public function set_collection_point(\UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint $collection_point)
+    public function set_collection_point(CollectionPoint $collection_point)
     {
         $ups_shipment = $this->request->getShipment();
-        $shipment_indication_type = new \UpsFreeVendor\Ups\Entity\ShipmentIndicationType();
-        $shipment_indication_type->setCode(\UpsFreeVendor\Ups\Entity\ShipmentIndicationType::CODE_ACCESS_POINT_DELIVERY);
+        $shipment_indication_type = new ShipmentIndicationType();
+        $shipment_indication_type->setCode(ShipmentIndicationType::CODE_ACCESS_POINT_DELIVERY);
         $ups_shipment->setShipmentIndicationType($shipment_indication_type);
         $collection_point_address = $collection_point->collection_point_address;
-        $alternate_delivery_address = new \UpsFreeVendor\Ups\Entity\AlternateDeliveryAddress();
+        $alternate_delivery_address = new AlternateDeliveryAddress();
         $access_point_address = $alternate_delivery_address->getAddress();
         $access_point_address->setAddressLine1($collection_point_address->address_line1);
         $access_point_address->setAddressLine2($collection_point_address->address_line2);

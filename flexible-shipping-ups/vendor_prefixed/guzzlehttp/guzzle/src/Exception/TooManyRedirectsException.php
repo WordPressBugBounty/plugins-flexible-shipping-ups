@@ -2,6 +2,6 @@
 
 namespace UpsFreeVendor\GuzzleHttp\Exception;
 
-class TooManyRedirectsException extends \UpsFreeVendor\GuzzleHttp\Exception\RequestException
+class TooManyRedirectsException extends RequestException
 {
 }

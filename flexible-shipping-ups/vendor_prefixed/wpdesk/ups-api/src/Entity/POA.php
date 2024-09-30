@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class POA implements \UpsFreeVendor\Ups\NodeInterface
+class POA implements NodeInterface
 {
     const POA_ONE_TIME = '1';
     // One Time POA
@@ -38,10 +38,10 @@ class POA implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('POA');
         $code = $this->getCode();

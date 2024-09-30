@@ -10,7 +10,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSenderSingleRate;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsServices;
-class UpsRestApiSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSenderSingleRate
+class UpsRestApiSenderSingleRate extends UpsSenderSingleRate
 {
     /**
      * Token.
@@ -48,7 +48,7 @@ class UpsRestApiSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingServic
      * @param bool            $is_testing Is testing?.
      * @param bool            $is_tax_enabled Is tax enabled?.
      */
-    public function __construct($client, $service_code, \UpsFreeVendor\Psr\Log\LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
+    public function __construct($client, $service_code, LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
     {
         $this->rest_api_client = $client;
         $this->logger = $logger;
@@ -66,22 +66,22 @@ class UpsRestApiSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingServic
      * @throws \Exception .
      * @throws RateException .
      */
-    public function send(\UpsFreeVendor\Ups\Entity\RateRequest $request)
+    public function send(RateRequest $request)
     {
         $rate = $this->create_rate();
         try {
             $request->getShipment()->getService()->setCode($this->service_code);
-            if (\UpsFreeVendor\WPDesk\UpsShippingService\UpsServices::SUREPOST_LESS_THAN_1_LB === $this->service_code) {
+            if (UpsServices::SUREPOST_LESS_THAN_1_LB === $this->service_code) {
                 $this->convert_weight_to_ozs($request);
             }
             $reply = $rate->getRate($request);
-        } catch (\UpsFreeVendor\Ups\Exception\InvalidResponseException $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($e->getMessage(), ['exception' => $e->getCode()]);
+        } catch (InvalidResponseException $e) {
+            throw new RateException($e->getMessage(), ['exception' => $e->getCode()]);
             //phpcs:ignore
         }
-        $rate_interpretation = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation($reply, $this->is_tax_enabled());
+        $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled());
         if ($rate_interpretation->has_reply_error()) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
+            throw new RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
             //phpcs:ignore
         }
         return $reply;
@@ -91,6 +91,6 @@ class UpsRestApiSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingServic
      */
     protected function create_rate()
     {
-        return new \UpsFreeVendor\Octolize\Ups\RestApi\Rate($this->rest_api_client, $this->logger, $this->is_testing, $this->is_tax_enabled);
+        return new Rate($this->rest_api_client, $this->logger, $this->is_testing, $this->is_tax_enabled);
     }
 }

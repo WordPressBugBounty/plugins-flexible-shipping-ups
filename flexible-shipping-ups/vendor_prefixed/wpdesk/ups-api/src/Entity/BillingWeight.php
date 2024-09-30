@@ -14,10 +14,10 @@ class BillingWeight
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->UnitOfMeasurement = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement();
+        $this->UnitOfMeasurement = new UnitOfMeasurement();
         if (null !== $response) {
             if (isset($response->UnitOfMeasurement)) {
-                $this->UnitOfMeasurement = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement($response->UnitOfMeasurement);
+                $this->UnitOfMeasurement = new UnitOfMeasurement($response->UnitOfMeasurement);
             }
             if (isset($response->Weight)) {
                 $this->Weight = $response->Weight;

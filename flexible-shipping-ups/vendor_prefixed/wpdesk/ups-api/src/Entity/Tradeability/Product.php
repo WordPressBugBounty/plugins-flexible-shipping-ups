@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class Product.
  */
-class Product implements \UpsFreeVendor\Ups\NodeInterface
+class Product implements NodeInterface
 {
     /**
      * @var string
@@ -47,10 +47,10 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Product');
         // Required
@@ -73,7 +73,7 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
         if ($this->getProductCountryCodeOfOrigin() !== null) {
             $node->appendChild($document->createElement('ProductCountryCodeOfOrigin', $this->getProductCountryCodeOfOrigin()));
         }
-        if ($this->getWeight() instanceof \UpsFreeVendor\Ups\Entity\Tradeability\Weight) {
+        if ($this->getWeight() instanceof Weight) {
             $node->appendChild($this->getWeight()->toNode($document));
         }
         if ($this->getTariffCodeAlert() !== null) {
@@ -92,7 +92,7 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      * @param TariffInfo $tariffInfo
      * @return Product
      */
-    public function setTariffInfo(\UpsFreeVendor\Ups\Entity\Tradeability\TariffInfo $tariffInfo)
+    public function setTariffInfo(TariffInfo $tariffInfo)
     {
         $this->tariffInfo = $tariffInfo;
         return $this;

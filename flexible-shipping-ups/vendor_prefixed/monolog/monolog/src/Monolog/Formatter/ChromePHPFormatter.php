@@ -17,14 +17,14 @@ use UpsFreeVendor\Monolog\Logger;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-class ChromePHPFormatter implements \UpsFreeVendor\Monolog\Formatter\FormatterInterface
+class ChromePHPFormatter implements FormatterInterface
 {
     /**
      * Translates Monolog log levels to Wildfire levels.
      *
      * @var array<int, 'log'|'info'|'warn'|'error'>
      */
-    private $logLevels = [\UpsFreeVendor\Monolog\Logger::DEBUG => 'log', \UpsFreeVendor\Monolog\Logger::INFO => 'info', \UpsFreeVendor\Monolog\Logger::NOTICE => 'info', \UpsFreeVendor\Monolog\Logger::WARNING => 'warn', \UpsFreeVendor\Monolog\Logger::ERROR => 'error', \UpsFreeVendor\Monolog\Logger::CRITICAL => 'error', \UpsFreeVendor\Monolog\Logger::ALERT => 'error', \UpsFreeVendor\Monolog\Logger::EMERGENCY => 'error'];
+    private $logLevels = [Logger::DEBUG => 'log', Logger::INFO => 'info', Logger::NOTICE => 'info', Logger::WARNING => 'warn', Logger::ERROR => 'error', Logger::CRITICAL => 'error', Logger::ALERT => 'error', Logger::EMERGENCY => 'error'];
     /**
      * {@inheritDoc}
      */
@@ -43,8 +43,8 @@ class ChromePHPFormatter implements \UpsFreeVendor\Monolog\Formatter\FormatterIn
         if ($record['extra']) {
             $message['extra'] = $record['extra'];
         }
-        if (\count($message) === 1) {
-            $message = \reset($message);
+        if (count($message) === 1) {
+            $message = reset($message);
         }
         return [$record['channel'], $message, $backtrace, $this->logLevels[$record['level']]];
     }

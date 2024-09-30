@@ -32,7 +32,7 @@ class UpsValidateShipment
      * @param Shipment        $shipment Shipment.
      * @param LoggerInterface $logger Logger.
      */
-    public function __construct(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment, \UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function __construct(Shipment $shipment, LoggerInterface $logger)
     {
         $this->shipment = $shipment;
         $this->logger = $logger;

@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class Unit.
  */
-class Unit implements \UpsFreeVendor\Ups\NodeInterface
+class Unit implements NodeInterface
 {
     /**
      * @var string
@@ -35,7 +35,7 @@ class Unit implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setValue($attributes->Value);
             }
             if (isset($attributes->UnitOfMeasurement)) {
-                $this->setUnitOfMeasurement(new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement($attributes->UnitOfMeasurement));
+                $this->setUnitOfMeasurement(new UnitOfMeasurement($attributes->UnitOfMeasurement));
             }
         }
     }
@@ -44,10 +44,10 @@ class Unit implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Unit');
         $node->appendChild($document->createElement('Number', $this->getNumber()));
@@ -83,8 +83,8 @@ class Unit implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setValue($value)
     {
-        $this->value = \number_format($value, 6, '.', '');
-        if (\strlen((string) $this->value) > 19) {
+        $this->value = number_format($value, 6, '.', '');
+        if (strlen((string) $this->value) > 19) {
             throw new \Exception('Value too long');
         }
         return $this;
@@ -101,7 +101,7 @@ class Unit implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement $unit)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unit)
     {
         $this->unitOfMeasurement = $unit;
         return $this;

@@ -9,7 +9,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod;
 /**
  * UPS Shipping Method.
  */
-class UpsSurepostShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod implements \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasFreeShipping, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasCustomOrigin
+class UpsSurepostShippingMethod extends ShippingMethod implements ShippingMethod\HasFreeShipping, ShippingMethod\HasCustomOrigin
 {
     /** @var PluginShippingDecisions */
     protected static $plugin_shipping_decisions;
@@ -24,7 +24,7 @@ class UpsSurepostShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShippin
      *
      * @param PluginShippingDecisions $plugin_shipping_decisions .
      */
-    public static function set_plugin_shipping_decisions(\UpsFreeVendor\WPDesk\WooCommerceShipping\PluginShippingDecisions $plugin_shipping_decisions)
+    public static function set_plugin_shipping_decisions(PluginShippingDecisions $plugin_shipping_decisions)
     {
         self::$plugin_shipping_decisions = $plugin_shipping_decisions;
     }
@@ -58,7 +58,7 @@ class UpsSurepostShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShippin
      */
     protected function create_metadata_builder()
     {
-        return new \UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsMetaDataBuilder($this);
+        return new UpsMetaDataBuilder($this);
     }
     /**
      * Render shipping method settings.
@@ -70,7 +70,7 @@ class UpsSurepostShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShippin
     }
     public function get_option_key()
     {
-        return $this->plugin_id . \UpsFreeVendor\WPDesk\UpsShippingService\UpsShippingService::UNIQUE_ID . '_settings';
+        return $this->plugin_id . UpsShippingService::UNIQUE_ID . '_settings';
     }
     /**
      * Prepare description.
@@ -80,14 +80,14 @@ class UpsSurepostShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShippin
      */
     private function prepare_description()
     {
-        if ('pl_PL' === \get_locale()) {
+        if ('pl_PL' === get_locale()) {
             $docs_link = 'https://octol.io/ups-method-docs-pl';
         } else {
             $docs_link = 'https://octol.io/ups-method-docs';
         }
-        return \sprintf(
+        return sprintf(
             // Translators: docs URL.
-            \__('Dynamically calculated UPS SurePost live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
+            __('Dynamically calculated UPS SurePost live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
             '<a target="_blank" href="' . $docs_link . '">',
             '</a>'
         );

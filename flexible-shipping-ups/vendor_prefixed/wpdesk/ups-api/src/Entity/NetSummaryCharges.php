@@ -17,13 +17,13 @@ class NetSummaryCharges
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->GrandTotal = new \UpsFreeVendor\Ups\Entity\Charges();
+        $this->GrandTotal = new Charges();
         if (null !== $response) {
             if (isset($response->GrandTotal)) {
-                $this->GrandTotal = new \UpsFreeVendor\Ups\Entity\Charges($response->GrandTotal);
+                $this->GrandTotal = new Charges($response->GrandTotal);
             }
             if (isset($response->TotalChargesWithTaxes)) {
-                $this->TotalChargesWithTaxes = new \UpsFreeVendor\Ups\Entity\Charges($response->TotalChargesWithTaxes);
+                $this->TotalChargesWithTaxes = new Charges($response->TotalChargesWithTaxes);
             }
         }
     }

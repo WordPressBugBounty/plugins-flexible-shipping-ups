@@ -13,7 +13,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\Fallback\
 /**
  * Can interpret Fallback meta data from WooCommerce order shipping on admin.
  */
-class FallbackAdminMetaDataInterpreter implements \UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData\SingleAdminOrderMetaDataInterpreter
+class FallbackAdminMetaDataInterpreter implements SingleAdminOrderMetaDataInterpreter
 {
     use AdminMetaDataUnchangedTrait;
     /**
@@ -28,7 +28,7 @@ class FallbackAdminMetaDataInterpreter implements \UpsFreeVendor\WPDesk\WooComme
     public function get_display_key($display_key, $meta, $order_item)
     {
         if ($this->is_supported_key_on_admin($display_key)) {
-            return \__('Fallback reason', 'flexible-shipping-ups');
+            return __('Fallback reason', 'flexible-shipping-ups');
         }
         return $display_key;
     }
@@ -41,6 +41,6 @@ class FallbackAdminMetaDataInterpreter implements \UpsFreeVendor\WPDesk\WooComme
      */
     public function is_supported_key_on_admin($display_key)
     {
-        return $display_key === \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\Fallback\FallbackRateMethod::META_DATA_KEY;
+        return $display_key === FallbackRateMethod::META_DATA_KEY;
     }
 }

@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class Product.
  */
-class Product implements \UpsFreeVendor\Ups\NodeInterface
+class Product implements NodeInterface
 {
     /**
      * @var string
@@ -63,10 +63,10 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Product');
         for ($i = 1; $i <= 3; $i++) {
@@ -103,8 +103,8 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setDescription1($description)
     {
-        if (\strlen($description) > 35) {
-            $description = \substr($description, 0, 35);
+        if (strlen($description) > 35) {
+            $description = substr($description, 0, 35);
         }
         $this->description1 = $description;
         return $this;
@@ -123,8 +123,8 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setDescription2($description)
     {
-        if (\strlen($description) > 35) {
-            $description = \substr($description, 0, 35);
+        if (strlen($description) > 35) {
+            $description = substr($description, 0, 35);
         }
         $this->description2 = $description;
         return $this;
@@ -143,8 +143,8 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setDescription3($description)
     {
-        if (\strlen($description) > 35) {
-            $description = \substr($description, 0, 35);
+        if (strlen($description) > 35) {
+            $description = substr($description, 0, 35);
         }
         $this->description3 = $description;
         return $this;
@@ -171,7 +171,7 @@ class Product implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setUnit(\UpsFreeVendor\Ups\Entity\Unit $unit)
+    public function setUnit(Unit $unit)
     {
         $this->unit = $unit;
         return $this;

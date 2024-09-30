@@ -9,7 +9,7 @@ use UpsFreeVendor\Psr\Http\Message\StreamInterface;
  *
  * @final
  */
-class DroppingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
+class DroppingStream implements StreamInterface
 {
     use StreamDecoratorTrait;
     private $maxLength;
@@ -17,7 +17,7 @@ class DroppingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
      * @param StreamInterface $stream    Underlying stream to decorate.
      * @param int             $maxLength Maximum size before dropping data.
      */
-    public function __construct(\UpsFreeVendor\Psr\Http\Message\StreamInterface $stream, $maxLength)
+    public function __construct(StreamInterface $stream, $maxLength)
     {
         $this->stream = $stream;
         $this->maxLength = $maxLength;
@@ -30,9 +30,9 @@ class DroppingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
             return 0;
         }
         // Write the stream or a subset of the stream if needed.
-        if (\strlen($string) < $diff) {
+        if (strlen($string) < $diff) {
             return $this->stream->write($string);
         }
-        return $this->stream->write(\substr($string, 0, $diff));
+        return $this->stream->write(substr($string, 0, $diff));
     }
 }

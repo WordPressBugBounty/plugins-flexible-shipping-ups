@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Octolize\Tracker\OptInNotice;
 /**
  * Should display $_GET parameter value.
  */
-class ShouldDisplayGetParameterValue implements \UpsFreeVendor\Octolize\Tracker\OptInNotice\ShouldDisplay
+class ShouldDisplayGetParameterValue implements ShouldDisplay
 {
     /**
      * @var string

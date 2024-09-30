@@ -51,7 +51,7 @@ class ShipmentCharge
      * @param BillShipper $billShipper
      * @return ShipmentCharge
      */
-    public function setBillShipper(\UpsFreeVendor\Ups\Entity\BillShipper $billShipper)
+    public function setBillShipper(BillShipper $billShipper)
     {
         $this->billShipper = $billShipper;
         return $this;
@@ -67,7 +67,7 @@ class ShipmentCharge
      * @param BillReceiver $billReceiver
      * @return ShipmentCharge
      */
-    public function setBillReceiver(\UpsFreeVendor\Ups\Entity\BillReceiver $billReceiver = null)
+    public function setBillReceiver(BillReceiver $billReceiver = null)
     {
         $this->billReceiver = $billReceiver;
         return $this;
@@ -83,7 +83,7 @@ class ShipmentCharge
      * @param BillThirdParty $billThirdParty
      * @return ShipmentCharge
      */
-    public function setBillThirdParty(\UpsFreeVendor\Ups\Entity\BillThirdParty $billThirdParty = null)
+    public function setBillThirdParty(BillThirdParty $billThirdParty = null)
     {
         $this->billThirdParty = $billThirdParty;
         return $this;

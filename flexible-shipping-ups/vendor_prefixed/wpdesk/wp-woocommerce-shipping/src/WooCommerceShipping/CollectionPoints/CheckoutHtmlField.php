@@ -12,7 +12,7 @@ namespace UpsFreeVendor\WPDesk\WooCommerceShipping\CollectionPoints;
  *
  * @package WPDesk\CustomFields
  */
-class CheckoutHtmlField extends \UpsFreeVendor\WPDesk\WooCommerceShipping\CollectionPoints\CheckoutField
+class CheckoutHtmlField extends CheckoutField
 {
     protected $template_name = 'shipping-method-after-access-point-single';
 }

@@ -10,7 +10,7 @@ use SimpleXMLElement;
 /**
  * Quantum View API Wrapper.
  */
-class QuantumView extends \UpsFreeVendor\Ups\Ups
+class QuantumView extends Ups
 {
     const ENDPOINT = '/QVEvents';
     /**
@@ -50,7 +50,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -81,7 +81,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
         }
         // If user provided a begin date time but no end date time, we assume the end date time is now
         if (null !== $beginDateTime && null === $endDateTime) {
-            $endDateTime = $this->formatDateTime(\time());
+            $endDateTime = $this->formatDateTime(time());
         }
         $this->name = $name;
         $this->beginDateTime = $beginDateTime;
@@ -94,10 +94,10 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
         $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             if (isset($response->Bookmark)) {
                 $this->setBookmark((string) $response->Bookmark);
@@ -114,7 +114,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
      */
     private function createRequest()
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         // Create the QuantumViewRequest element
         $quantumViewRequest = $xml->appendChild($xml->createElement('QuantumViewRequest'));
@@ -154,10 +154,10 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
      *
      * @return ArrayObject
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         $eventsException = ['FileName', 'StatusType'];
-        $output = new \ArrayObject();
+        $output = new ArrayObject();
         // Empty response?
         if (!isset($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile)) {
             return $output;
@@ -165,9 +165,9 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
         // Loop subscription files
         foreach ($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
             foreach ($subcriptionFile as $eventName => $event) {
-                if (!\in_array($eventName, $eventsException)) {
+                if (!in_array($eventName, $eventsException)) {
                     $event = $this->convertXmlObject($event);
-                    $event = (object) \array_merge(['Type' => $eventName], (array) $event);
+                    $event = (object) array_merge(['Type' => $eventName], (array) $event);
                     $output->append($event);
                 }
             }
@@ -208,7 +208,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -217,7 +217,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -234,7 +234,7 @@ class QuantumView extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

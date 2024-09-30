@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class Hazmat
  * @package Ups\Entity
  */
-class HazMat implements \UpsFreeVendor\Ups\NodeInterface
+class HazMat implements NodeInterface
 {
     /**
      * @var string
@@ -114,10 +114,10 @@ class HazMat implements \UpsFreeVendor\Ups\NodeInterface
      * @param DOMDocument|null $document
      * @return \DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('HazMat');
         if ($this->getPackagingTypeQuantity()) {

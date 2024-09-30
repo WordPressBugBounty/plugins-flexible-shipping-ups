@@ -9,7 +9,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class HazMatPackageInformation
  * @package Ups\Entity
  */
-class HazMatPackageInformation implements \UpsFreeVendor\Ups\NodeInterface
+class HazMatPackageInformation implements NodeInterface
 {
     /**
      * @var bool
@@ -28,10 +28,10 @@ class HazMatPackageInformation implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('HazMatPackageInformation');
         if ($this->isAllPackedInOneIndicator()) {

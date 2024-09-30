@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Dimensions implements \UpsFreeVendor\Ups\NodeInterface
+class Dimensions implements NodeInterface
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class Dimensions implements \UpsFreeVendor\Ups\NodeInterface
     private $unitOfMeasurement;
     public function __construct($response = null)
     {
-        $this->setUnitOfMeasurement(new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement(isset($response->UnitOfMeasurement) ? $response->UnitOfMeasurement : null));
+        $this->setUnitOfMeasurement(new UnitOfMeasurement(isset($response->UnitOfMeasurement) ? $response->UnitOfMeasurement : null));
         if (null !== $response) {
             if (isset($response->Length)) {
                 $this->setLength($response->Length);
@@ -43,10 +43,10 @@ class Dimensions implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Dimensions');
         $node->appendChild($document->createElement('Length', $this->getLength()));
@@ -67,7 +67,7 @@ class Dimensions implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
         return $this;

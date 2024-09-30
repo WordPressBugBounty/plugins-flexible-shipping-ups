@@ -12,7 +12,7 @@ use UpsFreeVendor\Ups\Entity\Shipment;
 /**
  * RateTimeInTransit API Wrapper.
  */
-class RateTimeInTransit extends \UpsFreeVendor\Ups\Rate
+class RateTimeInTransit extends Rate
 {
     /**
      * @param $rateRequest
@@ -23,9 +23,9 @@ class RateTimeInTransit extends \UpsFreeVendor\Ups\Rate
      */
     public function getRateTimeInTransit($rateRequest)
     {
-        if ($rateRequest instanceof \UpsFreeVendor\Ups\Entity\Shipment) {
+        if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
-            $rateRequest = new \UpsFreeVendor\Ups\Entity\RateRequest();
+            $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
         }
         $this->requestOption = 'Ratetimeintransit';
@@ -40,9 +40,9 @@ class RateTimeInTransit extends \UpsFreeVendor\Ups\Rate
      */
     public function shopRatesTimeInTransit($rateRequest)
     {
-        if ($rateRequest instanceof \UpsFreeVendor\Ups\Entity\Shipment) {
+        if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
-            $rateRequest = new \UpsFreeVendor\Ups\Entity\RateRequest();
+            $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
         }
         $this->requestOption = 'Shoptimeintransit';

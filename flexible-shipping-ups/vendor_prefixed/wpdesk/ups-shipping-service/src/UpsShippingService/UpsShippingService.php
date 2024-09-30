@@ -19,7 +19,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\ShippingServiceCapability\CanTestSetti
 /**
  * Ups main shipping class injected into WooCommerce shipping method.
  */
-class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\AbstractUpsShippingService implements \UpsFreeVendor\WPDesk\AbstractShipping\ShippingServiceCapability\CanRateToCollectionPoint, \UpsFreeVendor\WPDesk\AbstractShipping\ShippingServiceCapability\CanTestSettings
+class UpsShippingService extends AbstractUpsShippingService implements CanRateToCollectionPoint, CanTestSettings
 {
     const UNIQUE_ID = 'flexible_shipping_ups';
     /**
@@ -29,9 +29,9 @@ class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\Abstra
      *
      * @return bool
      */
-    public function is_rate_to_collection_point_enabled(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    public function is_rate_to_collection_point_enabled(SettingsValues $settings)
     {
-        return \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES !== $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCESS_POINT, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES);
+        return UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES !== $settings->get_value(UpsSettingsDefinition::ACCESS_POINT, UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES);
     }
     /**
      * Rate shipment.
@@ -44,7 +44,7 @@ class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\Abstra
      * @throws RateException RateException.
      * @throws UnitConversionException Weight exception.
      */
-    public function rate_shipment(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    public function rate_shipment(SettingsValues $settings, Shipment $shipment)
     {
         return $this->rate_shipment_for_ups($settings, $shipment, $this->get_services($settings), $this->create_sender($settings));
     }
@@ -60,7 +60,7 @@ class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\Abstra
      * @throws RateException RateException.
      * @throws UnitConversionException Weight exception.
      */
-    public function rate_shipment_to_collection_point(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment, \UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint $collection_point)
+    public function rate_shipment_to_collection_point(SettingsValues $settings, Shipment $shipment, CollectionPoint $collection_point)
     {
         return $this->rate_shipment_for_ups($settings, $shipment, $this->get_services($settings), $this->create_sender($settings), $collection_point);
     }
@@ -80,7 +80,7 @@ class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\Abstra
      */
     public function get_name()
     {
-        return \__('UPS Live Rates', 'flexible-shipping-ups');
+        return __('UPS Live Rates', 'flexible-shipping-ups');
     }
     /**
      * Get description.
@@ -89,6 +89,6 @@ class UpsShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\Abstra
      */
     public function get_description()
     {
-        return \__('UPS integration', 'flexible-shipping-ups');
+        return __('UPS integration', 'flexible-shipping-ups');
     }
 }

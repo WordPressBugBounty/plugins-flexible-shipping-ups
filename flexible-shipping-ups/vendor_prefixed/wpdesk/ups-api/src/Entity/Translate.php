@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class Translate
  * @package Ups\Entity
  */
-class Translate implements \UpsFreeVendor\Ups\NodeInterface
+class Translate implements NodeInterface
 {
     /**
      * @deprecated
@@ -62,10 +62,10 @@ class Translate implements \UpsFreeVendor\Ups\NodeInterface
      * @param DOMDocument|null $document
      * @return \DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Translate');
         $node->appendChild($document->createElement('LanguageCode', $this->getLanguageCode()));

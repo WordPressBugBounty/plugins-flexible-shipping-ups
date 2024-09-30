@@ -12,7 +12,7 @@ interface ResponseInterface
     /**
      * @param SimpleXMLElement $response
      */
-    public function setResponse(\SimpleXMLElement $response);
+    public function setResponse(SimpleXMLElement $response);
     /**
      * @return string
      */

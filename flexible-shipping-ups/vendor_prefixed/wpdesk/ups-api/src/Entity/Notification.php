@@ -6,7 +6,7 @@ use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
 // @todo Extend with more notification options (e.g. VoiceMessage)
-class Notification implements \UpsFreeVendor\Ups\NodeInterface
+class Notification implements NodeInterface
 {
     /**
      * @var
@@ -38,10 +38,10 @@ class Notification implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Notification');
         $node->appendChild($document->createElement('NotificationCode', $this->getNotificationCode()));

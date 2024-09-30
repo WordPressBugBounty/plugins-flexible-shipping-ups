@@ -17,7 +17,7 @@ use UpsFreeVendor\Psr\Http\Message\RequestInterface;
  * "request_options" array that should be merged on top of any existing
  * options, and the function MUST then return a wait-able promise.
  */
-class Pool implements \UpsFreeVendor\GuzzleHttp\Promise\PromisorInterface
+class Pool implements PromisorInterface
 {
     /** @var EachPromise */
     private $each;
@@ -31,7 +31,7 @@ class Pool implements \UpsFreeVendor\GuzzleHttp\Promise\PromisorInterface
      *     - fulfilled: (callable) Function to invoke when a request completes.
      *     - rejected: (callable) Function to invoke when a request is rejected.
      */
-    public function __construct(\UpsFreeVendor\GuzzleHttp\ClientInterface $client, $requests, array $config = [])
+    public function __construct(ClientInterface $client, $requests, array $config = [])
     {
         // Backwards compatibility.
         if (isset($config['pool_size'])) {
@@ -46,18 +46,18 @@ class Pool implements \UpsFreeVendor\GuzzleHttp\Promise\PromisorInterface
             $opts = [];
         }
         $iterable = \UpsFreeVendor\GuzzleHttp\Promise\iter_for($requests);
-        $requests = function () use($iterable, $client, $opts) {
+        $requests = function () use ($iterable, $client, $opts) {
             foreach ($iterable as $key => $rfn) {
-                if ($rfn instanceof \UpsFreeVendor\Psr\Http\Message\RequestInterface) {
-                    (yield $key => $client->sendAsync($rfn, $opts));
-                } elseif (\is_callable($rfn)) {
-                    (yield $key => $rfn($opts));
+                if ($rfn instanceof RequestInterface) {
+                    yield $key => $client->sendAsync($rfn, $opts);
+                } elseif (is_callable($rfn)) {
+                    yield $key => $rfn($opts);
                 } else {
-                    throw new \InvalidArgumentException('Each value yielded by ' . 'the iterator must be a Psr7\\Http\\Message\\RequestInterface ' . 'or a callable that returns a promise that fulfills ' . 'with a Psr7\\Message\\Http\\ResponseInterface object.');
+                    throw new \InvalidArgumentException('Each value yielded by ' . 'the iterator must be a Psr7\Http\Message\RequestInterface ' . 'or a callable that returns a promise that fulfills ' . 'with a Psr7\Message\Http\ResponseInterface object.');
                 }
             }
         };
-        $this->each = new \UpsFreeVendor\GuzzleHttp\Promise\EachPromise($requests(), $config);
+        $this->each = new EachPromise($requests(), $config);
     }
     /**
      * Get promise
@@ -85,14 +85,14 @@ class Pool implements \UpsFreeVendor\GuzzleHttp\Promise\PromisorInterface
      *               in the same order that the requests were sent.
      * @throws \InvalidArgumentException if the event format is incorrect.
      */
-    public static function batch(\UpsFreeVendor\GuzzleHttp\ClientInterface $client, $requests, array $options = [])
+    public static function batch(ClientInterface $client, $requests, array $options = [])
     {
         $res = [];
         self::cmpCallback($options, 'fulfilled', $res);
         self::cmpCallback($options, 'rejected', $res);
         $pool = new static($client, $requests, $options);
         $pool->promise()->wait();
-        \ksort($res);
+        ksort($res);
         return $res;
     }
     /**
@@ -103,12 +103,12 @@ class Pool implements \UpsFreeVendor\GuzzleHttp\Promise\PromisorInterface
     private static function cmpCallback(array &$options, $name, array &$results)
     {
         if (!isset($options[$name])) {
-            $options[$name] = function ($v, $k) use(&$results) {
+            $options[$name] = function ($v, $k) use (&$results) {
                 $results[$k] = $v;
             };
         } else {
             $currentFn = $options[$name];
-            $options[$name] = function ($v, $k) use(&$results, $currentFn) {
+            $options[$name] = function ($v, $k) use (&$results, $currentFn) {
                 $currentFn($v, $k);
                 $results[$k] = $v;
             };

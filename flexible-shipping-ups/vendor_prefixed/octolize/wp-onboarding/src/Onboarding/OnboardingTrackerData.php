@@ -9,7 +9,7 @@ use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 /**
  * Can append onboarding data to tracker.
  */
-class OnboardingTrackerData implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
+class OnboardingTrackerData implements Hookable
 {
     const PRIORITY = 1000;
     /**
@@ -27,7 +27,7 @@ class OnboardingTrackerData implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugi
     /**
      * @param string $append_data_to
      */
-    public function __construct(string $append_data_to, \UpsFreeVendor\Octolize\Onboarding\OnboardingOption $onboarding_option, $append_as = 'octolize_onboarding')
+    public function __construct(string $append_data_to, OnboardingOption $onboarding_option, $append_as = 'octolize_onboarding')
     {
         $this->append_data_to = $append_data_to;
         $this->onboarding_option = $onboarding_option;
@@ -35,7 +35,7 @@ class OnboardingTrackerData implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugi
     }
     public function hooks()
     {
-        \add_filter('wpdesk_tracker_data', [$this, 'append_data_to_tracker'], self::PRIORITY);
+        add_filter('wpdesk_tracker_data', [$this, 'append_data_to_tracker'], self::PRIORITY);
     }
     public function append_data_to_tracker($data)
     {

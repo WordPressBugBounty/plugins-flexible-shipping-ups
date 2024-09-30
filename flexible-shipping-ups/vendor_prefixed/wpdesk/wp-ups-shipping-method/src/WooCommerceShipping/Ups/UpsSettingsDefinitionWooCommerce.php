@@ -14,9 +14,9 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\Fallback\
 /**
  * Can handle global and instance settings for WooCommerce shipping method.
  */
-class UpsSettingsDefinitionWooCommerce extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition
+class UpsSettingsDefinitionWooCommerce extends UpsSettingsDefinition
 {
-    private $global_method_fields = [\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::OAUTH, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::SHIPPING_METHOD_TITLE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_SETTINGS_TITLE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::USER_ID, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::PASSWORD, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCESS_KEY, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCOUNT_NUMBER, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::TESTING, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_SETTINGS_TITLE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::CUSTOM_ORIGIN, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_ADDRESS, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_CITY, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_POSTCODE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_COUNTRY, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ADVANCED_OPTIONS_TITLE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::UNITS, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DEBUG_MODE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_STATUS];
+    private $global_method_fields = [UpsSettingsDefinition::API_TYPE, UpsSettingsDefinition::OAUTH, UpsSettingsDefinition::SHIPPING_METHOD_TITLE, UpsSettingsDefinition::API_SETTINGS_TITLE, UpsSettingsDefinition::USER_ID, UpsSettingsDefinition::PASSWORD, UpsSettingsDefinition::ACCESS_KEY, UpsSettingsDefinition::ACCOUNT_NUMBER, UpsSettingsDefinition::TESTING, UpsSettingsDefinition::ORIGIN_SETTINGS_TITLE, UpsSettingsDefinition::CUSTOM_ORIGIN, UpsSettingsDefinition::ORIGIN_ADDRESS, UpsSettingsDefinition::ORIGIN_CITY, UpsSettingsDefinition::ORIGIN_POSTCODE, UpsSettingsDefinition::ORIGIN_COUNTRY, UpsSettingsDefinition::ADVANCED_OPTIONS_TITLE, UpsSettingsDefinition::UNITS, UpsSettingsDefinition::DEBUG_MODE, UpsSettingsDefinition::API_STATUS];
     /**
      * Form fields.
      *
@@ -33,7 +33,7 @@ class UpsSettingsDefinitionWooCommerce extends \UpsFreeVendor\WPDesk\UpsShipping
     {
         $this->form_fields = $form_fields;
         if ($default_api_type_xml) {
-            $this->form_fields[\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE]['default'] = \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE_XML;
+            $this->form_fields[UpsSettingsDefinition::API_TYPE]['default'] = UpsSettingsDefinition::API_TYPE_XML;
         }
     }
     /**
@@ -75,7 +75,7 @@ class UpsSettingsDefinitionWooCommerce extends \UpsFreeVendor\WPDesk\UpsShipping
     {
         $fields = [];
         foreach ($all_fields as $key => $field) {
-            $is_instance_field = !\in_array($key, $this->get_global_method_fields(), \true);
+            $is_instance_field = !in_array($key, $this->get_global_method_fields(), \true);
             if ($instance_fields && $is_instance_field || !$instance_fields && !$is_instance_field) {
                 $fields[$key] = $field;
             }

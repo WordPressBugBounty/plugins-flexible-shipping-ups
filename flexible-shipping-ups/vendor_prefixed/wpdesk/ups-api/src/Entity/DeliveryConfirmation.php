@@ -9,7 +9,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class DeliveryConfirmation
  * @package Ups\Entity
  */
-class DeliveryConfirmation implements \UpsFreeVendor\Ups\NodeInterface
+class DeliveryConfirmation implements NodeInterface
 {
     /**
      * @var int
@@ -25,10 +25,10 @@ class DeliveryConfirmation implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('DeliveryConfirmation');
         $node->appendChild($document->createElement('DCISType', $this->getDcisType()));

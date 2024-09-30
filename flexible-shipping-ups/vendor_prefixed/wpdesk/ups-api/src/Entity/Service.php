@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Service implements \UpsFreeVendor\Ups\NodeInterface
+class Service implements NodeInterface
 {
     // Valid domestic values
     const S_AIR_1DAYEARLYAM = '14';
@@ -137,10 +137,10 @@ class Service implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Service');
         $node->appendChild($document->createElement('Code', $this->getCode() ?? ''));

@@ -32,7 +32,7 @@ class CreditCard
      */
     public function __construct(\stdClass $attributes = null)
     {
-        $this->setAddress(new \UpsFreeVendor\Ups\Entity\Address(isset($attributes->Address) ? $attributes->Address : null));
+        $this->setAddress(new Address(isset($attributes->Address) ? $attributes->Address : null));
         if (isset($attributes->Type)) {
             $this->setType($attributes->Type);
         }
@@ -105,7 +105,7 @@ class CreditCard
      * @param Address $address
      * @return CreditCard
      */
-    public function setAddress(\UpsFreeVendor\Ups\Entity\Address $address)
+    public function setAddress(Address $address)
     {
         $this->address = $address;
         return $this;

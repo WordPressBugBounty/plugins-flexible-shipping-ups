@@ -17,10 +17,10 @@ class ServiceSummary
     public function __construct(\stdClass $response = null)
     {
         $this->build($response);
-        $this->setEstimatedArrival(new \UpsFreeVendor\Ups\Entity\EstimatedArrival());
+        $this->setEstimatedArrival(new EstimatedArrival());
         if (null !== $response) {
             if (isset($response->EstimatedArrival)) {
-                $this->setEstimatedArrival(new \UpsFreeVendor\Ups\Entity\EstimatedArrival($response->EstimatedArrival));
+                $this->setEstimatedArrival(new EstimatedArrival($response->EstimatedArrival));
             }
         }
     }
@@ -34,7 +34,7 @@ class ServiceSummary
     /**
      * @param EstimatedArrival
      */
-    public function setEstimatedArrival(\UpsFreeVendor\Ups\Entity\EstimatedArrival $estimatedArrival)
+    public function setEstimatedArrival(EstimatedArrival $estimatedArrival)
     {
         $this->EstimatedArrival = $estimatedArrival;
         $this->estimatedArrival = $estimatedArrival;

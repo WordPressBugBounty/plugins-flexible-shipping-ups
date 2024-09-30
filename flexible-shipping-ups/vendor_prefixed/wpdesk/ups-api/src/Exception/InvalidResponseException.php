@@ -3,6 +3,6 @@
 namespace UpsFreeVendor\Ups\Exception;
 
 use Exception;
-class InvalidResponseException extends \Exception
+class InvalidResponseException extends Exception
 {
 }

@@ -11,13 +11,13 @@ class FailureNotification
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->FailureNotificationCode = new \UpsFreeVendor\Ups\Entity\FailureNotificationCode();
+        $this->FailureNotificationCode = new FailureNotificationCode();
         if (null !== $response) {
             if (isset($response->FailedEmailAddress)) {
                 $this->FailedEmailAddress = $response->FailedEmailAddress;
             }
             if (isset($response->FailureNotificationCode)) {
-                $this->FailureNotificationCode = new \UpsFreeVendor\Ups\Entity\FailureNotificationCode($response->FailureNotificationCode);
+                $this->FailureNotificationCode = new FailureNotificationCode($response->FailureNotificationCode);
             }
         }
     }

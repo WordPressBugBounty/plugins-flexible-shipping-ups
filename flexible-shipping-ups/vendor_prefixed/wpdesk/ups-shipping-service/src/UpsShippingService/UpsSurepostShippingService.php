@@ -12,7 +12,7 @@ use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSenderSingleRate;
 /**
  * Ups main shipping class injected into WooCommerce shipping method.
  */
-class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingService\AbstractUpsShippingService
+class UpsSurepostShippingService extends AbstractUpsShippingService
 {
     const UNIQUE_ID = 'flexible_shipping_ups_surepost';
     /**
@@ -25,13 +25,13 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
      * @throws InvalidSettingsException InvalidSettingsException.
      * @throws RateException RateException.
      */
-    public function rate_shipment(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    public function rate_shipment(SettingsValues $settings, Shipment $shipment)
     {
-        $ups_shipment_rating = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsShipmentRatingImplementation([], \false);
-        $ups_services = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsServices();
+        $ups_shipment_rating = new UpsShipmentRatingImplementation([], \false);
+        $ups_services = new UpsServices();
         if ($this->is_us_domestic_shipment($shipment)) {
-            $surepost_services = $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::SUREPOST_SERVICES, []);
-            $surepost_services = \is_array($surepost_services) ? $surepost_services : [];
+            $surepost_services = $settings->get_value(UpsSettingsDefinition::SUREPOST_SERVICES, []);
+            $surepost_services = is_array($surepost_services) ? $surepost_services : [];
             foreach ($surepost_services as $surepost_service) {
                 if (isset($surepost_service['enabled']) && $this->should_add_surepost_service($ups_shipment_rating->get_ratings(), $surepost_service['enabled'], $ups_services->get_surepost_same_services())) {
                     $surepost_service_code = $surepost_service['enabled'];
@@ -39,19 +39,19 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
                         $sender = $this->create_single_rate_sender($settings, $surepost_service_code);
                         $ups_shipment_rating->merge_ratings($this->rate_shipment_for_ups($settings, $shipment, $surepost_services, $sender));
                     } catch (\Exception $e) {
-                        $this->get_logger()->info(\sprintf('UPS surepost rate not added! %1$s', $e->getMessage()));
+                        $this->get_logger()->info(sprintf('UPS surepost rate not added! %1$s', $e->getMessage()));
                     }
                 }
             }
         }
         return $ups_shipment_rating;
     }
-    protected function create_single_rate_sender(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, string $surepost_service_code)
+    protected function create_single_rate_sender(SettingsValues $settings, string $surepost_service_code)
     {
-        if ($settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE_XML) === \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE_REST) {
+        if ($settings->get_value(UpsSettingsDefinition::API_TYPE, UpsSettingsDefinition::API_TYPE_XML) === UpsSettingsDefinition::API_TYPE_REST) {
             return new \UpsFreeVendor\Octolize\Ups\RestApi\UpsRestApiSenderSingleRate($this->rest_api_client, $surepost_service_code, $this->get_logger(), $this->is_testing($settings), $this->get_shop_settings()->is_tax_enabled());
         } else {
-            return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSenderSingleRate($settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCESS_KEY), $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::USER_ID), $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::PASSWORD), $surepost_service_code, $this->get_logger(), $this->is_testing($settings), $this->get_shop_settings()->is_tax_enabled());
+            return new UpsSenderSingleRate($settings->get_value(UpsSettingsDefinition::ACCESS_KEY), $settings->get_value(UpsSettingsDefinition::USER_ID), $settings->get_value(UpsSettingsDefinition::PASSWORD), $surepost_service_code, $this->get_logger(), $this->is_testing($settings), $this->get_shop_settings()->is_tax_enabled());
         }
     }
     /**
@@ -63,7 +63,7 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
     {
         foreach ($ratings as $single_rate) {
             foreach ($same_services as $same_service) {
-                if (\in_array($single_rate->service_type, $same_service, \true) && \in_array($service, $same_service, \true)) {
+                if (in_array($single_rate->service_type, $same_service, \true) && in_array($service, $same_service, \true)) {
                     return \false;
                 }
             }
@@ -75,7 +75,7 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
      *
      * @return bool
      */
-    private function is_us_domestic_shipment(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    private function is_us_domestic_shipment(Shipment $shipment)
     {
         return 'US' === $shipment->ship_from->address->country_code && 'US' === $shipment->ship_to->address->country_code;
     }
@@ -95,7 +95,7 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
      */
     public function get_name()
     {
-        return \__('UPS SurePost Live Rates', 'flexible-shipping-ups');
+        return __('UPS SurePost Live Rates', 'flexible-shipping-ups');
     }
     /**
      * Get description.
@@ -104,7 +104,7 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
      */
     public function get_description()
     {
-        return \__('UPS integration', 'flexible-shipping-ups');
+        return __('UPS integration', 'flexible-shipping-ups');
     }
     /**
      * Get settings
@@ -113,6 +113,6 @@ class UpsSurepostShippingService extends \UpsFreeVendor\WPDesk\UpsShippingServic
      */
     public function get_settings_definition()
     {
-        return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsSurepostSettingsDefinition($this->get_shop_settings());
+        return new UpsSurepostSettingsDefinition($this->get_shop_settings());
     }
 }

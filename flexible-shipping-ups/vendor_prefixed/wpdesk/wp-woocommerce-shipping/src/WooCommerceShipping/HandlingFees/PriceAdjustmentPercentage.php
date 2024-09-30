@@ -10,7 +10,7 @@ namespace UpsFreeVendor\WPDesk\WooCommerceShipping\HandlingFees;
 /**
  * Can apply percentage value to price.
  */
-class PriceAdjustmentPercentage implements \UpsFreeVendor\WPDesk\WooCommerceShipping\HandlingFees\PriceAdjustment
+class PriceAdjustmentPercentage implements PriceAdjustment
 {
     const ADJUSTMENT_TYPE = 'percent';
     /**
@@ -43,6 +43,6 @@ class PriceAdjustmentPercentage implements \UpsFreeVendor\WPDesk\WooCommerceShip
      */
     public function apply_on_price($price)
     {
-        return \round($price + $price * $this->adjustment_percent / 100, $this->rounding);
+        return round($price + $price * $this->adjustment_percent / 100, $this->rounding);
     }
 }

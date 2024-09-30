@@ -14,7 +14,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings;
 /**
  * Can filter rates to maximum transit time settings.
  */
-class UpsCurrencyVerifyRatesFilter implements \UpsFreeVendor\WPDesk\AbstractShipping\Rate\ShipmentRating
+class UpsCurrencyVerifyRatesFilter implements ShipmentRating
 {
     /**
      * Rates to filter.
@@ -39,7 +39,7 @@ class UpsCurrencyVerifyRatesFilter implements \UpsFreeVendor\WPDesk\AbstractShip
      * @param ShopSettings    $shop_settings .
      * @param LoggerInterface $logger Logger.
      */
-    public function __construct(\UpsFreeVendor\WPDesk\AbstractShipping\Rate\ShipmentRating $shipment_rating, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings $shop_settings, \UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function __construct(ShipmentRating $shipment_rating, ShopSettings $shop_settings, LoggerInterface $logger)
     {
         $this->shipment_rating = $shipment_rating;
         $this->shop_settings = $shop_settings;
@@ -52,7 +52,7 @@ class UpsCurrencyVerifyRatesFilter implements \UpsFreeVendor\WPDesk\AbstractShip
      *
      * @return bool
      */
-    private function is_valid_rate_currency(\UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate $rate)
+    private function is_valid_rate_currency(SingleRate $rate)
     {
         if (!isset($rate->total_charge, $rate->total_charge->currency) || $this->shop_settings->get_default_currency() !== $rate->total_charge->currency) {
             return \false;
@@ -70,9 +70,9 @@ class UpsCurrencyVerifyRatesFilter implements \UpsFreeVendor\WPDesk\AbstractShip
         foreach ($rates as $key => $rate) {
             if (!$this->is_valid_rate_currency($rate)) {
                 unset($rates[$key]);
-                $this->logger->error(\sprintf(
+                $this->logger->error(sprintf(
                     // Translators: link.
-                    \__('Invalid UPS currency %1$s for service %2$s. %3$sCheck out more →%4$s', 'flexible-shipping-ups'),
+                    __('Invalid UPS currency %1$s for service %2$s. %3$sCheck out more →%4$s', 'flexible-shipping-ups'),
                     $rate->total_charge->currency,
                     $rate->service_type,
                     '<a href="' . ('pl_PL' === $this->shop_settings->get_locale() ? 'https://wpde.sk/ups-pro-currency-pl' : 'https://wpde.sk/ups-pro-currency') . '" target="_blank">',

@@ -12,7 +12,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate;
 /**
  * Can modify shipment rating.
  */
-class UpsShipmentRatingImplementation implements \UpsFreeVendor\WPDesk\AbstractShipping\Rate\ShipmentRating
+class UpsShipmentRatingImplementation implements ShipmentRating
 {
     /**
      * Rates.
@@ -40,7 +40,7 @@ class UpsShipmentRatingImplementation implements \UpsFreeVendor\WPDesk\AbstractS
     /**
      * @param ShipmentRating $rating .
      */
-    public function merge_ratings(\UpsFreeVendor\WPDesk\AbstractShipping\Rate\ShipmentRating $rating)
+    public function merge_ratings(ShipmentRating $rating)
     {
         foreach ($rating->get_ratings() as $rate) {
             $this->rates[] = $rate;
@@ -57,7 +57,7 @@ class UpsShipmentRatingImplementation implements \UpsFreeVendor\WPDesk\AbstractS
             foreach ($this->rates as $rate) {
                 if (!$rate->is_collection_point_rate) {
                     $rate->is_collection_point_rate = \true;
-                    $rate->service_name .= ' ' . \__('(Access Point)', 'flexible-shipping-ups');
+                    $rate->service_name .= ' ' . __('(Access Point)', 'flexible-shipping-ups');
                 }
             }
         }

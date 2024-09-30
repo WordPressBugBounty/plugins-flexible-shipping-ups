@@ -13,8 +13,8 @@ class SubscriptionEvents
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->SubscriptionStatus = new \UpsFreeVendor\Ups\Entity\SubscriptionStatus();
-        $this->DateRange = new \UpsFreeVendor\Ups\Entity\DateRange();
+        $this->SubscriptionStatus = new SubscriptionStatus();
+        $this->DateRange = new DateRange();
         if (null !== $response) {
             if (isset($response->Name)) {
                 $this->Name = new $response->Name();
@@ -23,10 +23,10 @@ class SubscriptionEvents
                 $this->Number = new $response->Number();
             }
             if (isset($response->SubscriptionStatus)) {
-                $this->SubscriptionStatus = new \UpsFreeVendor\Ups\Entity\SubscriptionStatus($response->SubscriptionStatus);
+                $this->SubscriptionStatus = new SubscriptionStatus($response->SubscriptionStatus);
             }
             if (isset($response->DateRange)) {
-                $this->DateRange = new \UpsFreeVendor\Ups\Entity\DateRange($response->DateRange);
+                $this->DateRange = new DateRange($response->DateRange);
             }
         }
     }

@@ -53,7 +53,7 @@ class ConnectionChecker
      * @param SettingsValues     $settings .
      * @param LoggerInterface    $logger .
      */
-    public function __construct(\UpsFreeVendor\WPDesk\UpsShippingService\UpsShippingService $shipping_service, \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sender $sender, \UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, $logger)
+    public function __construct(UpsShippingService $shipping_service, Sender $sender, SettingsValues $settings, $logger)
     {
         $this->shipping_service = $shipping_service;
         $this->settings = $settings;
@@ -67,16 +67,16 @@ class ConnectionChecker
      */
     public function check_connection()
     {
-        $address = new \UpsFreeVendor\Ups\Entity\Address();
+        $address = new Address();
         $address->setStateProvinceCode('NY');
         $address->setCity('New York');
         $address->setCountryCode('US');
         $address->setPostalCode('10000');
-        $request = new \UpsFreeVendor\Ups\Entity\RateRequest();
-        $package = new \UpsFreeVendor\Ups\Entity\Package();
-        $weight = new \UpsFreeVendor\Ups\Entity\PackageWeight();
+        $request = new RateRequest();
+        $package = new Package();
+        $weight = new PackageWeight();
         $weight->setWeight(1);
-        $weight->getUnitOfMeasurement()->setCode(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_LBS);
+        $weight->getUnitOfMeasurement()->setCode(UnitOfMeasurement::UOM_LBS);
         $package->setPackageWeight($weight);
         $request->getShipment()->addPackage($package);
         $request->getShipment()->getShipper()->setAddress($address);

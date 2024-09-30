@@ -2,14 +2,14 @@
 
 namespace UpsFreeVendor\WPDesk\PluginBuilder\Plugin;
 
-interface HookableCollection extends \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
+interface HookableCollection extends Hookable
 {
     /**
      * Add hookable object.
      *
      * @param Hookable|HookablePluginDependant $hookable_object Hookable object.
      */
-    public function add_hookable(\UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable $hookable_object);
+    public function add_hookable(Hookable $hookable_object);
     /**
      * Get hookable instance.
      *

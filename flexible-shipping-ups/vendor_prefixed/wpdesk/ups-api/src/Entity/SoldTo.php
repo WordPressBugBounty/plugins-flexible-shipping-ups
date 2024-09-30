@@ -2,7 +2,7 @@
 
 namespace UpsFreeVendor\Ups\Entity;
 
-class SoldTo extends \UpsFreeVendor\Ups\Entity\ShipTo
+class SoldTo extends ShipTo
 {
     /**
      * @var string

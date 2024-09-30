@@ -7,13 +7,13 @@ namespace UpsFreeVendor\WPDesk\Forms\Field;
  *
  * Use WPEditorField
  */
-class WyswigField extends \UpsFreeVendor\WPDesk\Forms\Field\BasicField
+class WyswigField extends BasicField
 {
-    public function get_template_name() : string
+    public function get_template_name(): string
     {
         return 'wyswig';
     }
-    public function should_override_form_template() : bool
+    public function should_override_form_template(): bool
     {
         return \true;
     }

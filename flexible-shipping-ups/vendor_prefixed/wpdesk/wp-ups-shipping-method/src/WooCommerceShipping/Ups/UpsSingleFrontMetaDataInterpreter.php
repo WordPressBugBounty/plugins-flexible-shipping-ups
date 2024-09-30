@@ -12,7 +12,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData\SingleFrontOrderMetaD
 /**
  * Can interpret UPS meta data from WooCommerce order shipping on admin and front.
  */
-class UpsSingleFrontMetaDataInterpreter implements \UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData\SingleFrontOrderMetaDataInterpreter
+class UpsSingleFrontMetaDataInterpreter implements SingleFrontOrderMetaDataInterpreter
 {
     /**
      * Key.

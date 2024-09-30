@@ -22,8 +22,8 @@ class RateRequest
     private $shipment;
     public function __construct()
     {
-        $this->setShipment(new \UpsFreeVendor\Ups\Entity\Shipment());
-        $this->setPickupType(new \UpsFreeVendor\Ups\Entity\PickupType());
+        $this->setShipment(new Shipment());
+        $this->setPickupType(new PickupType());
     }
     /**
      * @return PickupType|null
@@ -55,7 +55,7 @@ class RateRequest
      *
      * @return $this
      */
-    public function setCustomerClassification(\UpsFreeVendor\Ups\Entity\CustomerClassification $customerClassification)
+    public function setCustomerClassification(CustomerClassification $customerClassification)
     {
         $this->customerClassification = $customerClassification;
         return $this;
@@ -72,7 +72,7 @@ class RateRequest
      *
      * @return $this
      */
-    public function setShipment(\UpsFreeVendor\Ups\Entity\Shipment $shipment)
+    public function setShipment(Shipment $shipment)
     {
         $this->Shipment = $shipment;
         $this->shipment = $shipment;

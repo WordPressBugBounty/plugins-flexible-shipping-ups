@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class LabelDelivery implements \UpsFreeVendor\Ups\NodeInterface
+class LabelDelivery implements NodeInterface
 {
     /**
      * @var boolean
@@ -76,10 +76,10 @@ class LabelDelivery implements \UpsFreeVendor\Ups\NodeInterface
      * @param null|DOMDocument $document
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('LabelDelivery');
         if (isset($this->LabelLinkIndicator)) {

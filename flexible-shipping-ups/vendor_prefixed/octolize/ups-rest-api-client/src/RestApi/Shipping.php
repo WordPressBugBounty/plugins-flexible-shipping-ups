@@ -22,24 +22,24 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         $this->client = $client;
         $this->is_testing = $is_testing;
     }
-    public function confirm($validation, \UpsFreeVendor\Ups\Entity\Shipment $shipment, \UpsFreeVendor\Ups\Entity\ShipmentRequestLabelSpecification $labelSpec = null, \UpsFreeVendor\Ups\Entity\ShipmentRequestReceiptSpecification $receiptSpec = null)
+    public function confirm($validation, Shipment $shipment, ShipmentRequestLabelSpecification $labelSpec = null, ShipmentRequestReceiptSpecification $receiptSpec = null)
     {
-        $this->client->setLogger($this->logger ?? new \UpsFreeVendor\Psr\Log\NullLogger());
+        $this->client->setLogger($this->logger ?? new NullLogger());
         $response = $this->client->shipment_send($this->prepare_payload($shipment));
         return $response->ShipmentResponse->ShipmentResults;
     }
     public function void($shipmentData)
     {
-        $this->client->setLogger($this->logger ?? new \UpsFreeVendor\Psr\Log\NullLogger());
+        $this->client->setLogger($this->logger ?? new NullLogger());
         return $this->client->shipment_void($shipmentData['shipmentId']);
     }
     public function recoverLabel($trackingData, $labelSpecification = null, $labelDelivery = null, $translate = null)
     {
-        $this->client->setLogger($this->logger ?? new \UpsFreeVendor\Psr\Log\NullLogger());
+        $this->client->setLogger($this->logger ?? new NullLogger());
         $payload = ["LabelRecoveryRequest" => ["LabelSpecification" => ["HTTPUserAgent" => "Mozilla/4.5", "LabelImageFormat" => ["Code" => $labelSpecification['imageFormat']]], "TrackingNumber" => $trackingData]];
         return $this->client->shipment_recover_label($payload)->LabelRecoveryResponse;
     }
-    private function prepare_payload(\UpsFreeVendor\Ups\Entity\Shipment $shipment) : array
+    private function prepare_payload(Shipment $shipment): array
     {
         $payload = ['ShipmentRequest' => ['Shipment' => $this->prepare_object_properties($shipment)]];
         $payload['ShipmentRequest']['Shipment']['Package'] = $payload['ShipmentRequest']['Shipment']['Packages'];
@@ -55,7 +55,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         $payload = $this->prepare_negotiated_rates($payload);
         return $payload;
     }
-    private function prepare_ship_from(array $payload) : array
+    private function prepare_ship_from(array $payload): array
     {
         $payload['ShipmentRequest']['Shipment']['ShipFrom']['Address']['AddressLine'] = [$payload['ShipmentRequest']['Shipment']['ShipFrom']['Address']['AddressLine1']];
         unset($payload['ShipmentRequest']['Shipment']['ShipFrom']['Address']['AddressLine1']);
@@ -67,7 +67,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         unset($payload['ShipmentRequest']['Shipment']['ShipFrom']['CompanyName']);
         return $payload;
     }
-    private function prepare_ship_to(array $payload) : array
+    private function prepare_ship_to(array $payload): array
     {
         $payload['ShipmentRequest']['Shipment']['ShipTo']['Address']['AddressLine'] = [$payload['ShipmentRequest']['Shipment']['ShipTo']['Address']['AddressLine1']];
         unset($payload['ShipmentRequest']['Shipment']['ShipTo']['Address']['AddressLine1']);
@@ -79,7 +79,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         $payload['ShipmentRequest']['Shipment']['ShipTo']['Phone'] = $phone;
         return $payload;
     }
-    private function prepare_shipper(array $payload) : array
+    private function prepare_shipper(array $payload): array
     {
         $payload['ShipmentRequest']['Shipment']['Shipper']['Address']['AddressLine'] = [$payload['ShipmentRequest']['Shipment']['Shipper']['Address']['AddressLine1']];
         unset($payload['ShipmentRequest']['Shipment']['Shipper']['Address']['AddressLine1']);
@@ -91,7 +91,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         $payload['ShipmentRequest']['Shipment']['Shipper']['Phone'] = $phone;
         return $payload;
     }
-    private function prepare_packages(array $payload) : array
+    private function prepare_packages(array $payload): array
     {
         foreach ($payload['ShipmentRequest']['Shipment']['Package'] as $key => $package) {
             $payload['ShipmentRequest']['Shipment']['Package'][$key]['Packaging'] = $payload['ShipmentRequest']['Shipment']['Package'][$key]['PackagingType'];
@@ -103,7 +103,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         }
         return $payload;
     }
-    private function prepare_negotiated_rates(array $payload) : array
+    private function prepare_negotiated_rates(array $payload): array
     {
         if (isset($payload['ShipmentRequest']['Shipment']['RateInformation'], $payload['ShipmentRequest']['Shipment']['RateInformation']['NegotiatedRatesIndicator'])) {
             $payload['ShipmentRequest']['Shipment']['ShipmentRatingOptions'] = $payload['ShipmentRequest']['Shipment']['ShipmentRatingOptions'] ?? [];

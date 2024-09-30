@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * @author mazzarito
  */
-class DeliveryTimeInformation implements \UpsFreeVendor\Ups\NodeInterface
+class DeliveryTimeInformation implements NodeInterface
 {
     const PBT_DOCUMENT_ONLY = '02';
     const PBT_NON_DOCUMENT = '03';
@@ -26,10 +26,10 @@ class DeliveryTimeInformation implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('DeliveryTimeInformation');
         $node->appendChild($document->createElement('PackageBillType', $this->getPackageBillType()));

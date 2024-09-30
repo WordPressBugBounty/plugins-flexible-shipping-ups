@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class CODAmount implements \UpsFreeVendor\Ups\NodeInterface
+class CODAmount implements NodeInterface
 {
     public $CurrencyCode;
     public $MonetaryValue;
@@ -25,10 +25,10 @@ class CODAmount implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('CODAmount');
         if ($this->CurrencyCode) {

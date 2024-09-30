@@ -29,7 +29,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings;
 /**
  * Ups main shipping class injected into WooCommerce shipping method.
  */
-abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\AbstractShipping\ShippingService implements \UpsFreeVendor\WPDesk\AbstractShipping\ShippingServiceCapability\HasSettings, \UpsFreeVendor\WPDesk\AbstractShipping\ShippingServiceCapability\CanRate
+abstract class AbstractUpsShippingService extends ShippingService implements HasSettings, CanRate
 {
     /** Logger.
      *
@@ -60,7 +60,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      * @param string             $origin_country Origin country.
      * @param RestApiClient|null $rest_api_client Client.
      */
-    public function __construct(\UpsFreeVendor\Psr\Log\LoggerInterface $logger, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings $shop_settings, string $origin_country, \UpsFreeVendor\Octolize\Ups\RestApi\RestApiClient $rest_api_client)
+    public function __construct(LoggerInterface $logger, ShopSettings $shop_settings, string $origin_country, RestApiClient $rest_api_client)
     {
         $this->logger = $logger;
         $this->shop_settings = $shop_settings;
@@ -72,7 +72,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @param LoggerInterface $logger Logger.
      */
-    public function setLogger(\UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -101,12 +101,12 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return UpsSender
      */
-    protected function create_sender(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    protected function create_sender(SettingsValues $settings)
     {
-        if ($settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE_XML) === \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE_REST) {
-            return new \UpsFreeVendor\Octolize\Ups\RestApi\UpsRestApiSender($this->rest_api_client, $this->logger, $this->is_testing($settings), $this->shop_settings->is_tax_enabled());
+        if ($settings->get_value(UpsSettingsDefinition::API_TYPE, UpsSettingsDefinition::API_TYPE_XML) === UpsSettingsDefinition::API_TYPE_REST) {
+            return new UpsRestApiSender($this->rest_api_client, $this->logger, $this->is_testing($settings), $this->shop_settings->is_tax_enabled());
         } else {
-            return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSender($settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCESS_KEY), $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::USER_ID), $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::PASSWORD), $this->logger, $this->is_testing($settings), $this->shop_settings->is_tax_enabled());
+            return new UpsSender($settings->get_value(UpsSettingsDefinition::ACCESS_KEY), $settings->get_value(UpsSettingsDefinition::USER_ID), $settings->get_value(UpsSettingsDefinition::PASSWORD), $this->logger, $this->is_testing($settings), $this->shop_settings->is_tax_enabled());
         }
     }
     /**
@@ -118,9 +118,9 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return UpsRateReplyInterpretation
      */
-    protected function create_reply_interpretation(\UpsFreeVendor\Ups\Entity\RateResponse $response, $shop_settings, $settings)
+    protected function create_reply_interpretation(RateResponse $response, $shop_settings, $settings)
     {
-        return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation($response, $shop_settings->is_tax_enabled());
+        return new UpsRateReplyInterpretation($response, $shop_settings->is_tax_enabled());
     }
     /**
      * Create shipment rating implementation.
@@ -133,7 +133,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      */
     protected function create_shipment_rating_implementation(array $rates, $is_access_point_rating, $settings)
     {
-        return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsShipmentRatingImplementation($rates, $is_access_point_rating);
+        return new UpsShipmentRatingImplementation($rates, $is_access_point_rating);
     }
     /**
      * Rate shipment.
@@ -149,10 +149,10 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      * @throws RateException RateException.
      * @throws UnitConversionException Weight exception.
      */
-    protected function rate_shipment_for_ups(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment, array $services, \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sender $sender, \UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint $collection_point = null)
+    protected function rate_shipment_for_ups(SettingsValues $settings, Shipment $shipment, array $services, Sender $sender, CollectionPoint $collection_point = null)
     {
         if (!$this->get_settings_definition()->validate_settings($settings)) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\InvalidSettingsException();
+            throw new InvalidSettingsException();
         }
         $this->verify_currency($this->shop_settings->get_default_currency(), $this->shop_settings->get_currency());
         $request_builder = $this->create_rate_request_builder($settings, $shipment, $this->shop_settings);
@@ -169,8 +169,8 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
             }
             $ups_rates = $reply->get_rates();
             $rates = $this->create_shipment_rating_implementation($this->filter_service_rates($services, $ups_rates, $this->is_custom_services_enabled($settings)), null !== $collection_point, $settings);
-            $rates = new \UpsFreeVendor\WPDesk\UpsShippingService\CurrencyVerify\UpsCurrencyVerifyRatesFilter($rates, $this->shop_settings, $this->logger);
-        } catch (\UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException $e) {
+            $rates = new UpsCurrencyVerifyRatesFilter($rates, $this->shop_settings, $this->logger);
+        } catch (RateException $e) {
             $this->logger->info('UPS response', $e->get_context());
             throw $e;
         }
@@ -185,9 +185,9 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return UpsRateRequestBuilder
      */
-    protected function create_rate_request_builder(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings $shop_settings)
+    protected function create_rate_request_builder(SettingsValues $settings, Shipment $shipment, ShopSettings $shop_settings)
     {
-        return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateRequestBuilder($settings, $shipment, $shop_settings);
+        return new UpsRateRequestBuilder($settings, $shipment, $shop_settings);
     }
     /**
      * Is standard rate enabled?
@@ -196,18 +196,18 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return bool
      */
-    public function is_rate_enabled(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    public function is_rate_enabled(SettingsValues $settings)
     {
-        return \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ADD_ONLY_ACCESS_POINTS_TO_RATES !== $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ACCESS_POINT, \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES);
+        return UpsSettingsDefinition::ADD_ONLY_ACCESS_POINTS_TO_RATES !== $settings->get_value(UpsSettingsDefinition::ACCESS_POINT, UpsSettingsDefinition::DO_NOT_ADD_ACCESS_POINTS_TO_RATES);
     }
     /**
      * @param SettingsValues $settings
      *
      * @return array
      */
-    protected function get_services(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    protected function get_services(SettingsValues $settings)
     {
-        return $this->is_custom_services_enabled($settings) ? $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::FIELD_SERVICES_TABLE) : $this->convert_services_to_settings_services(\UpsFreeVendor\WPDesk\UpsShippingService\UpsServices::get_services_for_country($this->origin_country));
+        return $this->is_custom_services_enabled($settings) ? $settings->get_value(UpsSettingsDefinition::FIELD_SERVICES_TABLE) : $this->convert_services_to_settings_services(UpsServices::get_services_for_country($this->origin_country));
     }
     /**
      * Verify currency.
@@ -221,7 +221,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
     protected function verify_currency($default_shop_currency, $checkout_currency)
     {
         if ($default_shop_currency !== $checkout_currency) {
-            throw new \UpsFreeVendor\WPDesk\UpsShippingService\Exception\CurrencySwitcherException();
+            throw new CurrencySwitcherException();
         }
     }
     /**
@@ -229,7 +229,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return bool
      */
-    private function is_us_domestic_shipment(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    private function is_us_domestic_shipment(Shipment $shipment)
     {
         return 'US' === $shipment->ship_from->address->country_code && 'US' === $shipment->ship_to->address->country_code;
     }
@@ -238,7 +238,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @param RateRequest $request Request.
      */
-    private function log_request_once(\UpsFreeVendor\Ups\Entity\RateRequest $request)
+    private function log_request_once(RateRequest $request)
     {
         static $already_logged;
         if (!$already_logged) {
@@ -253,7 +253,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return bool
      */
-    public function is_testing(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    public function is_testing(SettingsValues $settings)
     {
         $testing = \false;
         if ($settings->has_value('testing') && $this->shop_settings->is_testing()) {
@@ -327,9 +327,9 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      *
      * @return bool
      */
-    private function is_custom_services_enabled(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings)
+    private function is_custom_services_enabled(SettingsValues $settings)
     {
-        return $settings->has_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::CUSTOM_SERVICES) && 'yes' === $settings->get_value(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::CUSTOM_SERVICES);
+        return $settings->has_value(UpsSettingsDefinition::CUSTOM_SERVICES) && 'yes' === $settings->get_value(UpsSettingsDefinition::CUSTOM_SERVICES);
     }
     /**
      * Get settings
@@ -338,7 +338,7 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      */
     public function get_settings_definition()
     {
-        return new \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition($this->shop_settings);
+        return new UpsSettingsDefinition($this->shop_settings);
     }
     /**
      * Pings API.
@@ -348,10 +348,10 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      * @param LoggerInterface $logger .
      * @return string
      */
-    public function check_connection(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function check_connection(SettingsValues $settings, LoggerInterface $logger)
     {
         try {
-            $connection_checker = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\ConnectionChecker($this, $this->create_sender($settings), $settings, $logger);
+            $connection_checker = new ConnectionChecker($this, $this->create_sender($settings), $settings, $logger);
             $connection_checker->check_connection();
             return '';
         } catch (\Exception $e) {
@@ -365,6 +365,6 @@ abstract class AbstractUpsShippingService extends \UpsFreeVendor\WPDesk\Abstract
      */
     public function get_field_before_api_status_field()
     {
-        return \UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::DEBUG_MODE;
+        return UpsSettingsDefinition::DEBUG_MODE;
     }
 }

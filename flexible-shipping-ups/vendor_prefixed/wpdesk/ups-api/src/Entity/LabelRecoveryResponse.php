@@ -12,16 +12,16 @@ class LabelRecoveryResponse
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->LabelResults = new \UpsFreeVendor\Ups\Entity\LabelResults();
+        $this->LabelResults = new LabelResults();
         if (null !== $response) {
             if (isset($response->ShipmentIdentificationNumber)) {
                 $this->ShipmentIdentificationNumber = $response->ShipmentIdentificationNumber;
             }
             if (isset($response->LabelResults)) {
-                $this->LabelResults = new \UpsFreeVendor\Ups\Entity\LabelResults($response->LabelResults);
+                $this->LabelResults = new LabelResults($response->LabelResults);
             }
             if (isset($response->TrackingCandidate)) {
-                $this->TrackingCandidate = new \UpsFreeVendor\Ups\Entity\TrackingCandidate($response->TrackingCandidate);
+                $this->TrackingCandidate = new TrackingCandidate($response->TrackingCandidate);
             }
         }
     }

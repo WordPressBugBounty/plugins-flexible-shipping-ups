@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class LabelMethod implements \UpsFreeVendor\Ups\NodeInterface
+class LabelMethod implements NodeInterface
 {
     const C_PRINT_AND_MAIL = '01';
     // UPS prints the label and mails the label to the customer.
@@ -44,10 +44,10 @@ class LabelMethod implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('LabelMethod');
         $code = $this->getCode();

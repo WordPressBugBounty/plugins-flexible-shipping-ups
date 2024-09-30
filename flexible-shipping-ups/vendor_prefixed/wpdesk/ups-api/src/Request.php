@@ -12,7 +12,7 @@ use UpsFreeVendor\Psr\Log\NullLogger;
 use SimpleXMLElement;
 use UpsFreeVendor\Ups\Exception\InvalidResponseException;
 use UpsFreeVendor\Ups\Exception\RequestException;
-class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr\Log\LoggerAwareInterface
+class Request implements RequestInterface, LoggerAwareInterface
 {
     /**
      * @var string
@@ -37,12 +37,12 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
     /**
      * @param LoggerInterface $logger
      */
-    public function __construct(\UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(LoggerInterface $logger = null)
     {
         if ($logger !== null) {
             $this->setLogger($logger);
         } else {
-            $this->setLogger(new \UpsFreeVendor\Psr\Log\NullLogger());
+            $this->setLogger(new NullLogger());
         }
         $this->setClient();
     }
@@ -53,7 +53,7 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
      *
      * @return null
      */
-    public function setLogger(\UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -64,7 +64,7 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
      */
     public function setClient()
     {
-        $this->client = new \UpsFreeVendor\GuzzleHttp\Client();
+        $this->client = new Guzzle();
     }
     /**
      * Send request to UPS.
@@ -84,7 +84,7 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
         $this->setRequest($request);
         $this->setEndpointUrl($endpointurl);
         // Log request
-        $date = new \DateTime();
+        $date = new DateTime();
         $id = $date->format('YmdHisu');
         $this->logger->debug('Request to UPS API', ['content' => $this->getRequest(), 'id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
         try {
@@ -97,27 +97,27 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
             $this->logger->debug('Response from UPS API', ['content' => $content, 'id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
             if ($response->getStatusCode() === 200) {
                 $body = $this->convertEncoding($body);
-                if ('' === \trim($body)) {
-                    throw new \UpsFreeVendor\Ups\Exception\InvalidResponseException('Failure: response is an empty string.');
+                if ('' === trim($body)) {
+                    throw new InvalidResponseException('Failure: response is an empty string.');
                 } else {
-                    $xml = new \SimpleXMLElement($body);
+                    $xml = new SimpleXMLElement($body);
                     if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
                         if ($xml->Response->ResponseStatusCode == 1) {
-                            $responseInstance = new \UpsFreeVendor\Ups\Response();
+                            $responseInstance = new Response();
                             return $responseInstance->setText($body)->setResponse($xml);
                         } elseif ($xml->Response->ResponseStatusCode == 0) {
                             $code = (int) $xml->Response->Error->ErrorCode;
-                            throw new \UpsFreeVendor\Ups\Exception\InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')', $code);
+                            throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')', $code);
                         }
                     } else {
-                        throw new \UpsFreeVendor\Ups\Exception\InvalidResponseException('Failure: response is in an unexpected format.');
+                        throw new InvalidResponseException('Failure: response is in an unexpected format.');
                     }
                 }
             }
         } catch (\UpsFreeVendor\GuzzleHttp\Exception\TransferException $e) {
             // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
             $this->logger->alert($e->getMessage(), ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
-            throw new \UpsFreeVendor\Ups\Exception\RequestException('Failure: ' . $e->getMessage());
+            throw new RequestException('Failure: ' . $e->getMessage());
         }
     }
     /**
@@ -129,7 +129,7 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
      */
     private function formatXml($xml)
     {
-        $xmlDocument = new \DOMDocument('1.0');
+        $xmlDocument = new DOMDocument('1.0');
         $xmlDocument->preserveWhiteSpace = \false;
         $xmlDocument->formatOutput = \true;
         $xmlDocument->loadXML($xml);
@@ -192,13 +192,13 @@ class Request implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr
      */
     protected function convertEncoding($body)
     {
-        if (!\function_exists('mb_convert_encoding')) {
+        if (!function_exists('mb_convert_encoding')) {
             return $body;
         }
-        $encoding = \mb_detect_encoding($body);
+        $encoding = mb_detect_encoding($body);
         if ($encoding) {
-            return \mb_convert_encoding($body, 'UTF-8', $encoding);
+            return mb_convert_encoding($body, 'UTF-8', $encoding);
         }
-        return \utf8_encode($body);
+        return utf8_encode($body);
     }
 }

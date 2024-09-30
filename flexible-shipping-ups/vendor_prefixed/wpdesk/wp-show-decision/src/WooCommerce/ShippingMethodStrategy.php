@@ -3,7 +3,7 @@
 namespace UpsFreeVendor\WPDesk\ShowDecision\WooCommerce;
 
 use UpsFreeVendor\WPDesk\ShowDecision\GetStrategy;
-class ShippingMethodStrategy extends \UpsFreeVendor\WPDesk\ShowDecision\GetStrategy
+class ShippingMethodStrategy extends GetStrategy
 {
     public function __construct(string $method_id)
     {

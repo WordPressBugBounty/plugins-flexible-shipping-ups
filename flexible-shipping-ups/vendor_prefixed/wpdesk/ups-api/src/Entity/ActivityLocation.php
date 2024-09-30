@@ -10,10 +10,10 @@ class ActivityLocation
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->AddressArtifactFormat = new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat();
+        $this->AddressArtifactFormat = new AddressArtifactFormat();
         if (null !== $response) {
             if (isset($response->AddressArtifactFormat)) {
-                $this->AddressArtifactFormat = new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat($response->AddressArtifactFormat);
+                $this->AddressArtifactFormat = new AddressArtifactFormat($response->AddressArtifactFormat);
             }
         }
     }

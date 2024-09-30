@@ -2,22 +2,22 @@
 
 namespace UpsFreeVendor\WPDesk\ShowDecision;
 
-class OrStrategy implements \UpsFreeVendor\WPDesk\ShowDecision\ShouldShowStrategy
+class OrStrategy implements ShouldShowStrategy
 {
     /**
      * @var ShouldShowStrategy[]
      */
     private array $conditions = [];
-    public function __construct(\UpsFreeVendor\WPDesk\ShowDecision\ShouldShowStrategy $strategy)
+    public function __construct(ShouldShowStrategy $strategy)
     {
         $this->conditions[] = $strategy;
     }
-    public function addCondition(\UpsFreeVendor\WPDesk\ShowDecision\ShouldShowStrategy $condition) : self
+    public function addCondition(ShouldShowStrategy $condition): self
     {
         $this->conditions[] = $condition;
         return $this;
     }
-    public function shouldDisplay() : bool
+    public function shouldDisplay(): bool
     {
         foreach ($this->conditions as $condition) {
             if ($condition->shouldDisplay()) {

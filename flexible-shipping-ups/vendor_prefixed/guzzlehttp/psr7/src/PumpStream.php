@@ -15,7 +15,7 @@ use UpsFreeVendor\Psr\Http\Message\StreamInterface;
  *
  * @final
  */
-class PumpStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
+class PumpStream implements StreamInterface
 {
     /** @var callable */
     private $source;
@@ -42,12 +42,12 @@ class PumpStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
         $this->source = $source;
         $this->size = isset($options['size']) ? $options['size'] : null;
         $this->metadata = isset($options['metadata']) ? $options['metadata'] : [];
-        $this->buffer = new \UpsFreeVendor\GuzzleHttp\Psr7\BufferStream();
+        $this->buffer = new BufferStream();
     }
     public function __toString()
     {
         try {
-            return \UpsFreeVendor\GuzzleHttp\Psr7\Utils::copyToString($this);
+            return Utils::copyToString($this);
         } catch (\Exception $e) {
             return '';
         }
@@ -101,13 +101,13 @@ class PumpStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
     public function read($length)
     {
         $data = $this->buffer->read($length);
-        $readLen = \strlen($data);
+        $readLen = strlen($data);
         $this->tellPos += $readLen;
         $remaining = $length - $readLen;
         if ($remaining) {
             $this->pump($remaining);
             $data .= $this->buffer->read($remaining);
-            $this->tellPos += \strlen($data) - $readLen;
+            $this->tellPos += strlen($data) - $readLen;
         }
         return $data;
     }
@@ -130,13 +130,13 @@ class PumpStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
     {
         if ($this->source) {
             do {
-                $data = \call_user_func($this->source, $length);
+                $data = call_user_func($this->source, $length);
                 if ($data === \false || $data === null) {
                     $this->source = null;
                     return;
                 }
                 $this->buffer->write($data);
-                $length -= \strlen($data);
+                $length -= strlen($data);
             } while ($length > 0);
         }
     }

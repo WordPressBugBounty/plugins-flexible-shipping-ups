@@ -7,7 +7,7 @@ namespace UpsFreeVendor\WPDesk\WooCommerceShipping\CustomOrigin;
  *
  * @package WPDesk\WooCommerceShipping\CustomOrigin
  */
-class InstanceCustomOriginFields extends \UpsFreeVendor\WPDesk\WooCommerceShipping\CustomOrigin\CustomOriginFields
+class InstanceCustomOriginFields extends CustomOriginFields
 {
     const FIELD_TYPE_CUSTOM_ORIGIN = 'instance_custom_origin';
     const CUSTOM_ORIGIN = 'instance_custom_origin';
@@ -28,20 +28,20 @@ class InstanceCustomOriginFields extends \UpsFreeVendor\WPDesk\WooCommerceShippi
      */
     public function get_custom_origin_section_title()
     {
-        return \__('Origin Settings for this Shipping Method', 'flexible-shipping-ups');
+        return __('Origin Settings for this Shipping Method', 'flexible-shipping-ups');
     }
     /**
      * @return string
      */
     protected function get_custom_origin_label()
     {
-        return \__('Enable custom origin for this shipping method', 'flexible-shipping-ups');
+        return __('Enable custom origin for this shipping method', 'flexible-shipping-ups');
     }
     /**
      * @return string
      */
     protected function get_custom_origin_description()
     {
-        return \__('Use this option to use a different shipper\'s address for this shipping method.', 'flexible-shipping-ups');
+        return __('Use this option to use a different shipper\'s address for this shipping method.', 'flexible-shipping-ups');
     }
 }

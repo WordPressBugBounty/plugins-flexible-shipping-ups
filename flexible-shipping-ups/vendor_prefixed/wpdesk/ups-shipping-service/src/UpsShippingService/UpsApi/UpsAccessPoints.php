@@ -24,7 +24,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address;
 /**
  * Provides UPS access points as Collection Points.
  */
-class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\CollectionPointCapability\CollectionPointsProvider
+class UpsAccessPoints implements CollectionPointsProvider
 {
     /**
      * Access key.
@@ -66,7 +66,7 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
      * @param string $password .
      * @param LoggerInterface $logger Logger.
      */
-    public function __construct($access_key, $user_id, $password, \UpsFreeVendor\Psr\Log\LoggerInterface $logger, \UpsFreeVendor\Octolize\Ups\RestApi\RestApiClient $client, string $api_type)
+    public function __construct($access_key, $user_id, $password, LoggerInterface $logger, RestApiClient $client, string $api_type)
     {
         $this->access_key = $access_key;
         $this->user_id = $user_id;
@@ -85,30 +85,30 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
      * @return \stdClass
      * @throws \Exception .
      */
-    private function search_access_points(\UpsFreeVendor\Ups\Entity\AddressKeyFormat $address_key_format, \UpsFreeVendor\Ups\Entity\AccessPointSearch $access_point_search, int $maximum_list_size = 50)
+    private function search_access_points(AddressKeyFormat $address_key_format, AccessPointSearch $access_point_search, int $maximum_list_size = 50)
     {
-        $locator_request = new \UpsFreeVendor\Ups\Entity\LocatorRequest();
-        $origin_address = new \UpsFreeVendor\Ups\Entity\OriginAddress();
+        $locator_request = new LocatorRequest();
+        $origin_address = new OriginAddress();
         $origin_address->setAddressKeyFormat($address_key_format);
         $locator_request->setOriginAddress($origin_address);
-        $location_search = new \UpsFreeVendor\Ups\Entity\LocationSearchCriteria();
+        $location_search = new LocationSearchCriteria();
         $location_search->setAccessPointSearch($access_point_search);
         $location_search->setMaximumListSize($maximum_list_size);
-        $unit_of_measurement = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement();
-        $unit_of_measurement->setCode(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_KM);
+        $unit_of_measurement = new UnitOfMeasurement();
+        $unit_of_measurement->setCode(UnitOfMeasurement::UOM_KM);
         $locator_request->setUnitOfMeasurement($unit_of_measurement);
         $locator_request->setLocationSearchCriteria($location_search);
-        $translate = new \UpsFreeVendor\Ups\Entity\Translate();
-        $translate->setLocale(\get_locale());
-        $translate->setLanguageCode(\substr(\get_locale(), 0, 2));
+        $translate = new Translate();
+        $translate->setLocale(get_locale());
+        $translate->setLanguageCode(substr(get_locale(), 0, 2));
         $locator_request->setTranslate($translate);
         if ($this->api_type === 'xml') {
-            $locator = new \UpsFreeVendor\Ups\Locator($this->access_key, $this->user_id, $this->password);
+            $locator = new Locator($this->access_key, $this->user_id, $this->password);
         } else {
             $locator = new \UpsFreeVendor\Octolize\Ups\RestApi\Locator($this->rest_api_client);
         }
         $locator->setLogger($this->logger);
-        return $locator->getLocations($locator_request, \UpsFreeVendor\Ups\Locator::OPTION_UPS_ACCESS_POINT_LOCATIONS);
+        return $locator->getLocations($locator_request, Locator::OPTION_UPS_ACCESS_POINT_LOCATIONS);
     }
     /**
      * Convert location to collection point.
@@ -119,12 +119,12 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
      */
     private function convert_location_to_collection_point(\stdClass $location)
     {
-        $collection_point = new \UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint();
+        $collection_point = new CollectionPoint();
         $collection_point->collection_point_id = $location->AccessPointInformation->PublicAccessPointID;
         // phpcs:ignore
         $collection_point->collection_point_name = $location->AddressKeyFormat->ConsigneeName;
         // phpcs:ignore
-        $address = new \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address();
+        $address = new Address();
         $address->address_line1 = $location->AddressKeyFormat->AddressLine;
         // phpcs:ignore
         $address->postal_code = $location->AddressKeyFormat->PostcodePrimaryLow;
@@ -148,17 +148,17 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
     public function get_point_by_id($collection_point_id, $country_code)
     {
         $access_point_id = $collection_point_id;
-        $address = new \UpsFreeVendor\Ups\Entity\AddressKeyFormat();
+        $address = new AddressKeyFormat();
         $address->setCountryCode($country_code);
-        $access_point_search = new \UpsFreeVendor\Ups\Entity\AccessPointSearch();
-        $access_point_search->setAccessPointStatus(\UpsFreeVendor\Ups\Entity\AccessPointSearch::STATUS_ACTIVE_AVAILABLE);
+        $access_point_search = new AccessPointSearch();
+        $access_point_search->setAccessPointStatus(AccessPointSearch::STATUS_ACTIVE_AVAILABLE);
         $access_point_search->setPublicAccessPointId($access_point_id);
         try {
             $locations = $this->search_access_points($address, $access_point_search, 1);
-            return $this->convert_location_to_collection_point(\is_array($locations->SearchResults->DropLocation) ? $locations->SearchResults->DropLocation[0] : $locations->SearchResults->DropLocation);
+            return $this->convert_location_to_collection_point(is_array($locations->SearchResults->DropLocation) ? $locations->SearchResults->DropLocation[0] : $locations->SearchResults->DropLocation);
             // phpcs:ignore
         } catch (\Exception $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\CollectionPointNotFoundException($e->getMessage(), $e->getCode());
+            throw new CollectionPointNotFoundException($e->getMessage(), $e->getCode());
         }
     }
     /**
@@ -169,20 +169,20 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
      * @return CollectionPoint[]
      * @throws CollectionPointNotFoundException .
      */
-    public function get_nearest_collection_points(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address $address, int $maximum_list_size = 50)
+    public function get_nearest_collection_points(Address $address, int $maximum_list_size = 50)
     {
-        $address_key_format = new \UpsFreeVendor\Ups\Entity\AddressKeyFormat();
+        $address_key_format = new AddressKeyFormat();
         $address_key_format->setAddressLine1($address->address_line1);
         $address_key_format->setAddressLine2($address->address_line2);
         $address_key_format->setCountryCode($address->country_code);
         $address_key_format->setPoliticalDivision2($address->city);
         $address_key_format->setPostcodePrimaryLow($address->postal_code);
-        $access_point_search = new \UpsFreeVendor\Ups\Entity\AccessPointSearch();
-        $access_point_search->setAccessPointStatus(\UpsFreeVendor\Ups\Entity\AccessPointSearch::STATUS_ACTIVE_AVAILABLE);
+        $access_point_search = new AccessPointSearch();
+        $access_point_search->setAccessPointStatus(AccessPointSearch::STATUS_ACTIVE_AVAILABLE);
         try {
             $locations = $this->search_access_points($address_key_format, $access_point_search, $maximum_list_size);
             $collection_points = array();
-            if (!\is_array($locations->SearchResults->DropLocation)) {
+            if (!is_array($locations->SearchResults->DropLocation)) {
                 // phpcs:ignore
                 $locations->SearchResults->DropLocation = array($locations->SearchResults->DropLocation);
                 // phpcs:ignore
@@ -194,7 +194,7 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
             }
             return $collection_points;
         } catch (\Exception $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\CollectionPointNotFoundException($e->getMessage(), $e->getCode());
+            throw new CollectionPointNotFoundException($e->getMessage(), $e->getCode());
         }
     }
     /**
@@ -205,9 +205,9 @@ class UpsAccessPoints implements \UpsFreeVendor\WPDesk\AbstractShipping\Collecti
      * @return CollectionPoint
      * @throws CollectionPointNotFoundException .
      */
-    public function get_single_nearest_collection_point(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address $address)
+    public function get_single_nearest_collection_point(Address $address)
     {
         $collection_points = $this->get_nearest_collection_points($address, 1);
-        return \array_shift($collection_points);
+        return array_shift($collection_points);
     }
 }

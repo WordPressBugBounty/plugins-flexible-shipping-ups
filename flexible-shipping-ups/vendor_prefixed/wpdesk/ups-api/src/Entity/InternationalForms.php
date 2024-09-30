@@ -6,7 +6,7 @@ use DateTime;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
+class InternationalForms implements NodeInterface
 {
     /**
      * @var array
@@ -133,7 +133,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setInvoiceNumber($attributes->InvoiceNumber);
             }
             if (isset($attributes->InvoiceDate)) {
-                $this->setInvoiceDate(new \DateTime($attributes->InvoiceDate));
+                $this->setInvoiceDate(new DateTime($attributes->InvoiceDate));
             }
             if (isset($attributes->PurchaseOrderNumber)) {
                 $this->setPurchaseOrderNumber($attributes->PurchaseOrderNumber);
@@ -151,7 +151,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setCurrencyCode($attributes->CurrencyCode);
             }
             if (isset($attributes->EEIFilingOption)) {
-                $this->setEEIFilingOption(new \UpsFreeVendor\Ups\Entity\EEIFilingOption($attributes->EEIFilingOption));
+                $this->setEEIFilingOption(new EEIFilingOption($attributes->EEIFilingOption));
             }
         }
     }
@@ -186,7 +186,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setFreightCharges(\UpsFreeVendor\Ups\Entity\FreightCharges $freightCharges)
+    public function setFreightCharges(FreightCharges $freightCharges)
     {
         $this->freightCharges = $freightCharges;
         return $this;
@@ -203,7 +203,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setDiscount(\UpsFreeVendor\Ups\Entity\Discount $discount)
+    public function setDiscount(Discount $discount)
     {
         $this->discount = $discount;
         return $this;
@@ -220,9 +220,9 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function addProduct(\UpsFreeVendor\Ups\Entity\Product $product)
+    public function addProduct(Product $product)
     {
-        \array_push($this->products, $product);
+        array_push($this->products, $product);
         return $this;
     }
     /**
@@ -237,10 +237,10 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('InternationalForms');
         foreach ($this->getTypes() as $type) {
@@ -309,7 +309,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setInvoiceDate(\DateTime $date)
+    public function setInvoiceDate(DateTime $date)
     {
         $this->invoiceDate = $date;
         return $this;
@@ -362,8 +362,8 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setReasonForExport($reason)
     {
-        if (\strlen($reason) > 20) {
-            $reason = \substr($reason, 0, 20);
+        if (strlen($reason) > 20) {
+            $reason = substr($reason, 0, 20);
         }
         $this->reasonForExport = $reason;
         return $this;
@@ -382,8 +382,8 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setComments($comments)
     {
-        if (\strlen($comments) > 150) {
-            $comments = \substr($comments, 0, 150);
+        if (strlen($comments) > 150) {
+            $comments = substr($comments, 0, 150);
         }
         $this->comments = $comments;
         return $this;
@@ -450,7 +450,7 @@ class InternationalForms implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setEEIFilingOption(\UpsFreeVendor\Ups\Entity\EEIFilingOption $eeiFilingOption)
+    public function setEEIFilingOption(EEIFilingOption $eeiFilingOption)
     {
         $this->eeiFilingOption = $eeiFilingOption;
         return $this;

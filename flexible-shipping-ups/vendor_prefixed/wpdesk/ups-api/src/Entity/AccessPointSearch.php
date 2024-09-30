@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class AccessPointSearch implements \UpsFreeVendor\Ups\NodeInterface
+class AccessPointSearch implements NodeInterface
 {
     /**
      * Access Point Status Codes.
@@ -29,10 +29,10 @@ class AccessPointSearch implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('AccessPointSearch');
         if ($this->getAccessPointStatus()) {

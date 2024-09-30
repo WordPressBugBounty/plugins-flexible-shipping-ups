@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class Weight
  */
-class Weight implements \UpsFreeVendor\Ups\NodeInterface
+class Weight implements NodeInterface
 {
     /**
      * @var UnitOfMeasurement
@@ -23,16 +23,16 @@ class Weight implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Weight');
         // Required
         $node->appendChild($document->createElement('Value', $this->getValue()));
         // Optional
-        if ($this->getUnitOfMeasurement() instanceof \UpsFreeVendor\Ups\Entity\Tradeability\UnitOfMeasurement) {
+        if ($this->getUnitOfMeasurement() instanceof UnitOfMeasurement) {
             $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
         }
         return $node;
@@ -64,7 +64,7 @@ class Weight implements \UpsFreeVendor\Ups\NodeInterface
      * @param UnitOfMeasurement $unitOfMeasurement
      * @return Quantity
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\Tradeability\UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
         return $this;

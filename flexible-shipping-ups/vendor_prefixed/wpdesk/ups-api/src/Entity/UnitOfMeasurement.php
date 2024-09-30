@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class UnitOfMeasurement implements \UpsFreeVendor\Ups\NodeInterface
+class UnitOfMeasurement implements NodeInterface
 {
     // PackageWeight
     const UOM_LBS = 'LBS';
@@ -94,7 +94,7 @@ class UnitOfMeasurement implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null !== $document) {
             $node = $document->createElement('UnitOfMeasurement');
@@ -102,7 +102,7 @@ class UnitOfMeasurement implements \UpsFreeVendor\Ups\NodeInterface
             $node->appendChild($document->createElement('Description', $this->getDescription() ?? ''));
             return $node;
         }
-        return new \DOMElement('UnitOfMeasurement');
+        return new DOMElement('UnitOfMeasurement');
     }
     /**
      * @return string

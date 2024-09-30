@@ -3,7 +3,7 @@
 namespace UpsFreeVendor\Octolize\Blocks\PickupPoint;
 
 use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable;
-class Registrator implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
+class Registrator implements Hookable
 {
     private string $integration_name;
     /**
@@ -18,8 +18,8 @@ class Registrator implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
      * @var string
      */
     private string $plugin_file;
-    private \UpsFreeVendor\Octolize\Blocks\PickupPoint\IntegrationData $integration_data;
-    public function __construct(\UpsFreeVendor\Octolize\Blocks\PickupPoint\IntegrationData $integration_data, string $plugin_dir, string $plugin_file)
+    private IntegrationData $integration_data;
+    public function __construct(IntegrationData $integration_data, string $plugin_dir, string $plugin_file)
     {
         $this->integration_data = $integration_data;
         $this->integration_name = $integration_data->get_integration_name();
@@ -29,9 +29,9 @@ class Registrator implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
     }
     public function hooks()
     {
-        \add_action('woocommerce_blocks_checkout_block_registration', function ($integration_registry) {
-            $integration_registry->register(new \UpsFreeVendor\Octolize\Blocks\PickupPoint\CheckoutIntegration($this->integration_data, $this->plugin_dir, $this->plugin_file));
+        add_action('woocommerce_blocks_checkout_block_registration', function ($integration_registry) {
+            $integration_registry->register(new CheckoutIntegration($this->integration_data, $this->plugin_dir, $this->plugin_file));
         });
-        (new \UpsFreeVendor\Octolize\Blocks\PickupPoint\StoreEndpoint($this->integration_name, $this->meta_data_name))->hooks();
+        (new StoreEndpoint($this->integration_name, $this->meta_data_name))->hooks();
     }
 }

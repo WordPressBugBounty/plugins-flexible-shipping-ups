@@ -7,7 +7,7 @@ use UpsFreeVendor\Octolize\Onboarding\OnboardingOption;
 /**
  * Can handle plugin upgrade onboarding Ajax actions.
  */
-class PluginUpgradeAjax extends \UpsFreeVendor\Octolize\Onboarding\OnboardingAjax
+class PluginUpgradeAjax extends OnboardingAjax
 {
     /**
      * @var string
@@ -16,7 +16,7 @@ class PluginUpgradeAjax extends \UpsFreeVendor\Octolize\Onboarding\OnboardingAja
     /**
      * @param string $plugin_version
      */
-    public function __construct(\UpsFreeVendor\Octolize\Onboarding\OnboardingOption $onboarding_option, string $plugin_version)
+    public function __construct(OnboardingOption $onboarding_option, string $plugin_version)
     {
         parent::__construct($onboarding_option);
         $this->plugin_version = $plugin_version;

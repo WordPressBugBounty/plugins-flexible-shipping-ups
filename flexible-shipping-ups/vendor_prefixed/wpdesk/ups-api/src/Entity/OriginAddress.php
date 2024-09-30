@@ -4,17 +4,17 @@ namespace UpsFreeVendor\Ups\Entity;
 
 use DOMDocument;
 use UpsFreeVendor\Ups\NodeInterface;
-class OriginAddress implements \UpsFreeVendor\Ups\NodeInterface
+class OriginAddress implements NodeInterface
 {
     private $landmarkCode;
     private $phoneNumber;
     private $geoCode;
     private $addressKeyFormat;
     private $maximumListSize;
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('OriginAddress');
         if ($this->getPhoneNumber()) {
@@ -61,7 +61,7 @@ class OriginAddress implements \UpsFreeVendor\Ups\NodeInterface
     /**
      * @param mixed $geoCode
      */
-    public function setGeoCode(\UpsFreeVendor\Ups\Entity\GeoCode $geoCode)
+    public function setGeoCode(GeoCode $geoCode)
     {
         $this->geoCode = $geoCode;
     }

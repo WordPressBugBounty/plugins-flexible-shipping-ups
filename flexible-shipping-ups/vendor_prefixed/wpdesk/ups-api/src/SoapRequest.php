@@ -10,7 +10,7 @@ use UpsFreeVendor\Psr\Log\NullLogger;
 use SimpleXMLElement;
 use SoapClient;
 use UpsFreeVendor\Ups\Exception\InvalidResponseException;
-class SoapRequest implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor\Psr\Log\LoggerAwareInterface
+class SoapRequest implements RequestInterface, LoggerAwareInterface
 {
     /**
      * @var string
@@ -31,12 +31,12 @@ class SoapRequest implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor
     /**
      * @param LoggerInterface $logger
      */
-    public function __construct(\UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(LoggerInterface $logger = null)
     {
         if ($logger !== null) {
             $this->setLogger($logger);
         } else {
-            $this->setLogger(new \UpsFreeVendor\Psr\Log\NullLogger());
+            $this->setLogger(new NullLogger());
         }
     }
     /**
@@ -46,7 +46,7 @@ class SoapRequest implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor
      *
      * @return null
      */
-    public function setLogger(\UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -67,11 +67,11 @@ class SoapRequest implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor
     public function request($access, $request, $endpointurl, $operation = null, $wsdl = null)
     {
         // Check for operation
-        if (\is_null($operation)) {
+        if (is_null($operation)) {
             throw new \Exception('Operation is required');
         }
         // Check for WSDL
-        if (\is_null($wsdl)) {
+        if (is_null($wsdl)) {
             throw new \Exception('WSDL is required');
         }
         // Set data
@@ -81,43 +81,43 @@ class SoapRequest implements \UpsFreeVendor\Ups\RequestInterface, \UpsFreeVendor
         // Settings based on UPS PHP Example
         $mode = array('soap_version' => 'SOAP_1_1', 'trace' => 1, 'connection_timeout' => 2, 'cache_wsdl' => \WSDL_CACHE_BOTH);
         // Initialize soap client
-        $client = new \SoapClient(__DIR__ . '/WSDL/' . $wsdl . '.wsdl', $mode);
+        $client = new SoapClient(__DIR__ . '/WSDL/' . $wsdl . '.wsdl', $mode);
         // Set endpoint URL + auth & request data
         $client->__setLocation($endpointurl);
-        $auth = (array) new \SimpleXMLElement($access);
-        $request = (array) new \SimpleXMLElement($request);
+        $auth = (array) new SimpleXMLElement($access);
+        $request = (array) new SimpleXMLElement($request);
         // Build auth header
         $header = new \SoapHeader('http://www.ups.com/schema/xpci/1.0/auth', 'AccessRequest', $auth);
         $client->__setSoapHeaders($header);
         // Log request
-        $date = new \DateTime();
+        $date = new DateTime();
         $id = $date->format('YmdHisu');
         $this->logger->info('Request To UPS API', ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
         $this->logger->debug('Request: ' . $this->getRequest(), ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
         // Perform call and get response
         try {
-            $request = \json_decode(\json_encode((array) $request), \true);
+            $request = json_decode(json_encode((array) $request), \true);
             $client->__soapCall($operation, [$request]);
             $body = $client->__getLastResponse();
             $this->logger->info('Response from UPS API', ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
             $this->logger->debug('Response: ' . $body, ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
             // Strip off namespaces and make XML
-            $body = \preg_replace('/(<\\/*)[^>:]+:/', '$1', $body);
-            $xml = new \SimpleXMLElement($body);
-            $responseInstance = new \UpsFreeVendor\Ups\Response();
+            $body = preg_replace('/(<\/*)[^>:]+:/', '$1', $body);
+            $xml = new SimpleXMLElement($body);
+            $responseInstance = new Response();
             return $responseInstance->setText($body)->setResponse($xml);
         } catch (\Exception $e) {
             // Parse error response
-            $xml = new \SimpleXMLElement($client->__getLastResponse());
+            $xml = new SimpleXMLElement($client->__getLastResponse());
             $xml->registerXPathNamespace('err', 'http://www.ups.com/schema/xpci/1.0/error');
             $errorCode = $xml->xpath('//err:PrimaryErrorCode/err:Code');
             $errorMsg = $xml->xpath('//err:PrimaryErrorCode/err:Description');
             if (isset($errorCode[0]) && isset($errorMsg[0])) {
                 $this->logger->alert($errorMsg[0], ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
-                throw new \UpsFreeVendor\Ups\Exception\InvalidResponseException('Failure: ' . (string) $errorMsg[0] . ' (' . (string) $errorCode[0] . ')');
+                throw new InvalidResponseException('Failure: ' . (string) $errorMsg[0] . ' (' . (string) $errorCode[0] . ')');
             } else {
                 $this->logger->alert($e->getMessage(), ['id' => $id, 'endpointurl' => $this->getEndpointUrl()]);
-                throw new \UpsFreeVendor\Ups\Exception\InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(), $e);
+                throw new InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(), $e);
             }
         }
     }

@@ -9,7 +9,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class AccessPointCOD
  * @package Ups\Entity
  */
-class AccessPointCOD implements \UpsFreeVendor\Ups\NodeInterface
+class AccessPointCOD implements NodeInterface
 {
     /**
      * @var string
@@ -24,10 +24,10 @@ class AccessPointCOD implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('AccessPointCOD');
         $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));

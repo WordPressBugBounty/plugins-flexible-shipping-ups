@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class TariffInfo.
  */
-class TariffInfo implements \UpsFreeVendor\Ups\NodeInterface
+class TariffInfo implements NodeInterface
 {
     /**
      * @var string
@@ -35,10 +35,10 @@ class TariffInfo implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('TariffInfo');
         // Required

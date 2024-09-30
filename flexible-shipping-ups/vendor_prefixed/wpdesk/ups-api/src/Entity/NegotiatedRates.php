@@ -13,10 +13,10 @@ class NegotiatedRates
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->NetSummaryCharges = new \UpsFreeVendor\Ups\Entity\NetSummaryCharges();
+        $this->NetSummaryCharges = new NetSummaryCharges();
         if (null !== $response) {
             if (isset($response->NetSummaryCharges)) {
-                $this->NetSummaryCharges = new \UpsFreeVendor\Ups\Entity\NetSummaryCharges($response->NetSummaryCharges);
+                $this->NetSummaryCharges = new NetSummaryCharges($response->NetSummaryCharges);
             }
         }
     }

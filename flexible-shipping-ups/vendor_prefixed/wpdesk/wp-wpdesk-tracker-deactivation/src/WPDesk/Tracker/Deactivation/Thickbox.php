@@ -14,7 +14,7 @@ class Thickbox
      * @param PluginData $plugin_data .
      * @param string|null $view_file .
      */
-    public function __construct(\UpsFreeVendor\WPDesk\Tracker\Deactivation\PluginData $plugin_data, \UpsFreeVendor\WPDesk\Tracker\Deactivation\ReasonsFactory $reasons_factory, $view_file = null)
+    public function __construct(PluginData $plugin_data, ReasonsFactory $reasons_factory, $view_file = null)
     {
         $this->plugin_data = $plugin_data;
         $this->reasons_factory = $reasons_factory;

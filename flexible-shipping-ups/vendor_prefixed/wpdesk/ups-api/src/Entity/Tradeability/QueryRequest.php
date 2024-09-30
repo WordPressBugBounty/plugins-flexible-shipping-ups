@@ -2,10 +2,10 @@
 
 namespace UpsFreeVendor\Ups\Entity\Tradeability;
 
-use UpsFreeVendor\DomDocument;
-use UpsFreeVendor\DomElement;
+use DomDocument;
+use DomElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class QueryRequest implements \UpsFreeVendor\Ups\NodeInterface
+class QueryRequest implements NodeInterface
 {
     /**
      * @var Shipment
@@ -20,10 +20,10 @@ class QueryRequest implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\UpsFreeVendor\DomDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \UpsFreeVendor\DomDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('QueryRequest');
         if ($this->getShipment() !== null) {

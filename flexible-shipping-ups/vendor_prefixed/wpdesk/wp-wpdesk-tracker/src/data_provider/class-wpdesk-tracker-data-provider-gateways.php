@@ -14,7 +14,7 @@ namespace UpsFreeVendor;
 if (!\defined('ABSPATH')) {
     exit;
 }
-if (!\class_exists('UpsFreeVendor\\WPDesk_Tracker_Data_Provider_Gateways')) {
+if (!\class_exists('UpsFreeVendor\WPDesk_Tracker_Data_Provider_Gateways')) {
     /**
      * Class WPDesk_Tracker_Data_Provider_Gateways
      */

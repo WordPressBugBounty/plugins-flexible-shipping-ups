@@ -24,7 +24,7 @@ class BillShipper
             $this->setAccountNumber($attributes->AccountNumber);
         }
         if (isset($attributes->CreditCard)) {
-            $this->setAccountNumber(new \UpsFreeVendor\Ups\Entity\CreditCard($attributes->CreditCard));
+            $this->setAccountNumber(new CreditCard($attributes->CreditCard));
         }
     }
     /**
@@ -55,7 +55,7 @@ class BillShipper
      * @param CreditCard $creditCard
      * @return BillShipper
      */
-    public function setCreditCard(\UpsFreeVendor\Ups\Entity\CreditCard $creditCard)
+    public function setCreditCard(CreditCard $creditCard)
     {
         $this->creditCard = $creditCard;
         return $this;

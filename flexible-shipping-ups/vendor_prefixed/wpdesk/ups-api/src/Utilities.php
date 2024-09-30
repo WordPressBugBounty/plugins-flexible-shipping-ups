@@ -14,7 +14,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addAddressNode(&$address, \DOMNode $element)
+    public static function addAddressNode(&$address, DOMNode $element)
     {
         $node = $element->appendChild($element->ownerDocument->createElement('Address'));
         self::appendChild($address, 'AddressLine1', $node);
@@ -33,7 +33,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addAddressArtifactNode(&$address, \DOMNode $element)
+    public static function addAddressArtifactNode(&$address, DOMNode $element)
     {
         $node = $element->appendChild($element->ownerDocument->createElement('AddressArtifactFormat'));
         self::appendChild($address, 'CountryCode', $node);
@@ -49,7 +49,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addLocationInformation(\stdClass $location, \DOMNode $locationNode)
+    public static function addLocationInformation(stdClass $location, DOMNode $locationNode)
     {
         self::appendChild($location, 'CompanyName', $locationNode);
         self::appendChild($location, 'AttentionName', $locationNode);
@@ -63,7 +63,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addPackages(\stdClass $shipment, \DOMNode $node)
+    public static function addPackages(stdClass $shipment, DOMNode $node)
     {
         foreach ($shipment->Package as $package) {
             $packageNode = $node->appendChild($node->ownerDocument->createElement('Package'));
@@ -93,7 +93,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function appendChild(\stdClass $object, $propertyName, \DOMNode $node)
+    public static function appendChild(stdClass $object, $propertyName, DOMNode $node)
     {
         if (isset($object->{$propertyName})) {
             $node->appendChild($node->ownerDocument->createElement($propertyName, $object->{$propertyName}));

@@ -11,13 +11,13 @@ class Receipt
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->Image = new \UpsFreeVendor\Ups\Entity\Image();
+        $this->Image = new Image();
         if (null !== $response) {
             if (isset($response->HTMLImage)) {
                 $this->HTMLImage = $response->HTMLImage;
             }
             if (isset($response->Image)) {
-                $this->Image = new \UpsFreeVendor\Ups\Entity\Image($response->Image);
+                $this->Image = new Image($response->Image);
             }
         }
     }

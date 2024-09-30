@@ -3,7 +3,7 @@
 namespace UpsFreeVendor\Ups;
 
 use SimpleXMLElement;
-class Response implements \UpsFreeVendor\Ups\ResponseInterface
+class Response implements ResponseInterface
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class Response implements \UpsFreeVendor\Ups\ResponseInterface
      *
      * @return $this
      */
-    public function setResponse(\SimpleXMLElement $response)
+    public function setResponse(SimpleXMLElement $response)
     {
         $this->response = $response;
         return $this;

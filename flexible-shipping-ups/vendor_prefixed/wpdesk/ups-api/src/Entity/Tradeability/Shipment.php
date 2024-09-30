@@ -2,10 +2,10 @@
 
 namespace UpsFreeVendor\Ups\Entity\Tradeability;
 
-use UpsFreeVendor\DomDocument;
-use UpsFreeVendor\DomElement;
+use DomDocument;
+use DomElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Shipment implements \UpsFreeVendor\Ups\NodeInterface
+class Shipment implements NodeInterface
 {
     const TRANSPORT_MODE_AIR = 1;
     const TRANSPORT_MODE_GROUND = 2;
@@ -60,13 +60,13 @@ class Shipment implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\UpsFreeVendor\DomDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \UpsFreeVendor\DomDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Shipment');
-        if ($this->getFreightCharges() instanceof \UpsFreeVendor\Ups\Entity\Tradeability\FreightCharges) {
+        if ($this->getFreightCharges() instanceof FreightCharges) {
             $node->appendChild($this->getFreightCharges()->toNode($document));
         }
         // Then the required values
@@ -279,9 +279,9 @@ class Shipment implements \UpsFreeVendor\Ups\NodeInterface
      * @param Product $product
      * @return $this
      */
-    public function addProduct(\UpsFreeVendor\Ups\Entity\Tradeability\Product $product)
+    public function addProduct(Product $product)
     {
-        \array_push($this->products, $product);
+        array_push($this->products, $product);
         return $this;
     }
 }

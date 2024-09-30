@@ -9,7 +9,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * Class PackageServiceOptions
  * @package Ups\Entity
  */
-class PackageServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
+class PackageServiceOptions implements NodeInterface
 {
     /**
      * @var COD
@@ -50,10 +50,10 @@ class PackageServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
     {
         if (null !== $parameters) {
             if (isset($parameters->COD)) {
-                $this->setCOD(new \UpsFreeVendor\Ups\Entity\COD($parameters->COD));
+                $this->setCOD(new COD($parameters->COD));
             }
             if (isset($parameters->InsuredValue)) {
-                $this->setInsuredValue(new \UpsFreeVendor\Ups\Entity\InsuredValue($parameters->InsuredValue));
+                $this->setInsuredValue(new InsuredValue($parameters->InsuredValue));
             }
             if (isset($parameters->EarliestDeliveryTime)) {
                 $this->setEarliestDeliveryTime($parameters->EarliestDeliveryTime);
@@ -76,10 +76,10 @@ class PackageServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('PackageServiceOptions');
         if ($this->getInsuredValue()) {
@@ -158,7 +158,7 @@ class PackageServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
     /**
      * @param HazMat $hazmat
      */
-    public function addHazMat(\UpsFreeVendor\Ups\Entity\HazMat $hazmat)
+    public function addHazMat(HazMat $hazmat)
     {
         $this->hazMat[] = $hazmat;
     }
@@ -194,7 +194,7 @@ class PackageServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      * @param DeliveryConfirmation $deliveryConfirmation
      * @return ShipmentServiceOptions
      */
-    public function setDeliveryConfirmation(\UpsFreeVendor\Ups\Entity\DeliveryConfirmation $deliveryConfirmation)
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
     {
         $this->deliveryConfirmation = $deliveryConfirmation;
         return $this;

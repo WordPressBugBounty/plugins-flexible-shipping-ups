@@ -16,7 +16,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException;
 /**
  * Send request to UPS API
  */
-class UpsSender implements \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sender
+class UpsSender implements Sender
 {
     /**
      * Access key.
@@ -64,7 +64,7 @@ class UpsSender implements \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sende
      * @param bool            $is_testing Is testing?.
      * @param bool            $is_tax_enabled Is tax enabled?.
      */
-    public function __construct($access_key, $user_id, $password, \UpsFreeVendor\Psr\Log\LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
+    public function __construct($access_key, $user_id, $password, LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
     {
         $this->access_key = $access_key;
         $this->user_id = $user_id;
@@ -137,18 +137,18 @@ class UpsSender implements \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sende
      * @throws \Exception .
      * @throws RateException .
      */
-    public function send(\UpsFreeVendor\Ups\Entity\RateRequest $request)
+    public function send(RateRequest $request)
     {
         $rate = $this->create_rate();
         try {
             $reply = $rate->shopRates($request);
-        } catch (\UpsFreeVendor\Ups\Exception\InvalidResponseException $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($e->getMessage(), ['exception' => $e->getCode()]);
+        } catch (InvalidResponseException $e) {
+            throw new RateException($e->getMessage(), ['exception' => $e->getCode()]);
             //phpcs:ignore
         }
-        $rate_interpretation = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation($reply, $this->is_tax_enabled);
+        $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled);
         if ($rate_interpretation->has_reply_error()) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
+            throw new RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
             //phpcs:ignore
         }
         return $reply;
@@ -158,6 +158,6 @@ class UpsSender implements \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sende
      */
     protected function create_rate()
     {
-        return new \UpsFreeVendor\Ups\Rate($this->access_key, $this->user_id, $this->password, $this->is_testing, $this->logger);
+        return new Rate($this->access_key, $this->user_id, $this->password, $this->is_testing, $this->logger);
     }
 }

@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Octolize\Tracker\OptInNotice;
 /**
  * Should display shipping method settings page.
  */
-class ShouldDisplayShippingMethodInstanceSettings implements \UpsFreeVendor\Octolize\Tracker\OptInNotice\ShouldDisplay
+class ShouldDisplayShippingMethodInstanceSettings implements ShouldDisplay
 {
     /**
      * @var string

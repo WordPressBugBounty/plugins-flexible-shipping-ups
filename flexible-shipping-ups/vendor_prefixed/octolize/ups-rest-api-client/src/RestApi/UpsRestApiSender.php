@@ -11,7 +11,7 @@ use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSender;
 /**
  * Send request to UPS REST API
  */
-class UpsRestApiSender extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSender
+class UpsRestApiSender extends UpsSender
 {
     /**
      * Token.
@@ -45,7 +45,7 @@ class UpsRestApiSender extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\U
      * @param bool $is_testing Is testing?.
      * @param bool $is_tax_enabled Is tax enabled?.
      */
-    public function __construct($client, \UpsFreeVendor\Psr\Log\LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
+    public function __construct($client, LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
     {
         $this->rest_api_client = $client;
         $this->logger = $logger;
@@ -62,18 +62,18 @@ class UpsRestApiSender extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\U
      * @throws \Exception .
      * @throws RateException .
      */
-    public function send(\UpsFreeVendor\Ups\Entity\RateRequest $request)
+    public function send(RateRequest $request)
     {
         $rate = $this->create_rate();
         try {
             $reply = $rate->shopRates($request);
         } catch (\RuntimeException $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($e->getMessage(), ['exception' => $e->getMessage()]);
+            throw new RateException($e->getMessage(), ['exception' => $e->getMessage()]);
             //phpcs:ignore
         }
-        $rate_interpretation = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation($reply, $this->is_tax_enabled);
+        $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled);
         if ($rate_interpretation->has_reply_error()) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
+            throw new RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
             //phpcs:ignore
         }
         return $reply;
@@ -83,6 +83,6 @@ class UpsRestApiSender extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\U
      */
     protected function create_rate()
     {
-        return new \UpsFreeVendor\Octolize\Ups\RestApi\Rate($this->rest_api_client, $this->logger, $this->is_testing, $this->is_tax_enabled);
+        return new Rate($this->rest_api_client, $this->logger, $this->is_testing, $this->is_tax_enabled);
     }
 }

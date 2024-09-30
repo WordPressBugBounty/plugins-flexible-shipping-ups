@@ -12,7 +12,7 @@ namespace UpsFreeVendor\WPDesk\AbstractShipping\Settings;
  *
  * @package WPDesk\AbstractShipping\Settings
  */
-class SettingsValuesAsArray implements \UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues
+class SettingsValuesAsArray implements SettingsValues
 {
     /**
      * Values.
@@ -59,6 +59,6 @@ class SettingsValuesAsArray implements \UpsFreeVendor\WPDesk\AbstractShipping\Se
      */
     public function get_settings_md5_hash()
     {
-        return \md5(\json_encode($this->values));
+        return md5(json_encode($this->values));
     }
 }

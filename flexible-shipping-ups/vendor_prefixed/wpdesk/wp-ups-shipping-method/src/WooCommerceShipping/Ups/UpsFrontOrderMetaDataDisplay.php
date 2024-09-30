@@ -14,7 +14,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\MetaDataInterpreters\UpsSingleF
 /**
  * Can interpret UPS meta data on order.
  */
-class UpsFrontOrderMetaDataDisplay extends \UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData\FrontOrderMetaDataDisplay
+class UpsFrontOrderMetaDataDisplay extends FrontOrderMetaDataDisplay
 {
     const META_FALLBACK_REASON = 'fallback_reason';
     /**
@@ -26,9 +26,9 @@ class UpsFrontOrderMetaDataDisplay extends \UpsFreeVendor\WPDesk\WooCommerceShip
     /**
      * UpsOrderMetaDataInterpreter constructor.
      */
-    public function __construct(\UpsFreeVendor\WPDesk\View\Renderer\Renderer $renderer)
+    public function __construct(Renderer $renderer)
     {
-        parent::__construct(\UpsFreeVendor\WPDesk\UpsShippingService\UpsShippingService::UNIQUE_ID);
+        parent::__construct(UpsShippingService::UNIQUE_ID);
         $this->renderer = $renderer;
     }
     /**
@@ -36,6 +36,6 @@ class UpsFrontOrderMetaDataDisplay extends \UpsFreeVendor\WPDesk\WooCommerceShip
      */
     public function init_interpreters()
     {
-        $this->add_interpreter(new \UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\MetaDataInterpreters\UpsSingleFrontMetaDataInterpreter(\UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsMetaDataBuilder::META_UPS_ACCESS_POINT_ADDRESS, \__('UPS Access Point Address', 'flexible-shipping-ups'), 'order-details-after-table-access-point-address', $this->renderer));
+        $this->add_interpreter(new UpsSingleFrontMetaDataInterpreter(UpsMetaDataBuilder::META_UPS_ACCESS_POINT_ADDRESS, __('UPS Access Point Address', 'flexible-shipping-ups'), 'order-details-after-table-access-point-address', $this->renderer));
     }
 }

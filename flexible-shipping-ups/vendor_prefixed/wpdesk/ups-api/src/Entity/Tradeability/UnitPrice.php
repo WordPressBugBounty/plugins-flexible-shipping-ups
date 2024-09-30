@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * Class UnitPrice.
  */
-class UnitPrice implements \UpsFreeVendor\Ups\NodeInterface
+class UnitPrice implements NodeInterface
 {
     /**
      * @var float
@@ -23,10 +23,10 @@ class UnitPrice implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('UnitPrice');
         // Required

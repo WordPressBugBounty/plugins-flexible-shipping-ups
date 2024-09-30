@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class UPSFiled implements \UpsFreeVendor\Ups\NodeInterface
+class UPSFiled implements NodeInterface
 {
     /**
      * @var POA
@@ -18,7 +18,7 @@ class UPSFiled implements \UpsFreeVendor\Ups\NodeInterface
     {
         if (null !== $attributes) {
             if (isset($attributes->POA)) {
-                $this->setPOA(new \UpsFreeVendor\Ups\Entity\POA($attributes->POA));
+                $this->setPOA(new POA($attributes->POA));
             }
         }
     }
@@ -27,10 +27,10 @@ class UPSFiled implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('UPSFiled');
         $poa = $this->getPOA();
@@ -49,7 +49,7 @@ class UPSFiled implements \UpsFreeVendor\Ups\NodeInterface
     /**
      * @return string
      */
-    public function setPOA(\UpsFreeVendor\Ups\Entity\POA $poa)
+    public function setPOA(POA $poa)
     {
         $this->poa = $poa;
         return $this;

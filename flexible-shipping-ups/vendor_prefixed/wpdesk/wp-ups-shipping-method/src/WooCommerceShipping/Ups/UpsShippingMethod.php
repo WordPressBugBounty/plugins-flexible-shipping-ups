@@ -18,7 +18,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod;
 /**
  * UPS Shipping Method.
  */
-class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod implements \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasFreeShipping, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasCustomOrigin, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasRateCache
+class UpsShippingMethod extends ShippingMethod implements ShippingMethod\HasFreeShipping, ShippingMethod\HasCustomOrigin, ShippingMethod\HasRateCache
 {
     /**
      * Supports.
@@ -35,7 +35,7 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
      *
      * @param FieldApiStatusAjax $api_status_ajax_handler .
      */
-    public static function set_api_status_ajax_handler(\UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\ApiStatus\FieldApiStatusAjax $api_status_ajax_handler)
+    public static function set_api_status_ajax_handler(FieldApiStatusAjax $api_status_ajax_handler)
     {
         static::$api_status_ajax_handler = $api_status_ajax_handler;
     }
@@ -47,14 +47,14 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
      */
     private function prepare_description()
     {
-        if ('pl_PL' === \get_locale()) {
+        if ('pl_PL' === get_locale()) {
             $docs_link = 'https://octol.io/ups-method-docs-pl';
         } else {
             $docs_link = 'https://octol.io/ups-method-docs';
         }
-        return \sprintf(
+        return sprintf(
             // Translators: docs URL.
-            \__('Dynamically calculated UPS live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
+            __('Dynamically calculated UPS live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
             '<a target="_blank" href="' . $docs_link . '">',
             '</a>'
         );
@@ -72,8 +72,8 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
      */
     public function build_form_fields()
     {
-        $default_api_type_xml = empty($this->get_option(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::API_TYPE, '')) && !empty($this->get_option(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::USER_ID, ''));
-        $ups_settings_definition = new \UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsSettingsDefinitionWooCommerce($this->form_fields, $default_api_type_xml);
+        $default_api_type_xml = empty($this->get_option(UpsSettingsDefinition::API_TYPE, '')) && !empty($this->get_option(UpsSettingsDefinition::USER_ID, ''));
+        $ups_settings_definition = new UpsSettingsDefinitionWooCommerce($this->form_fields, $default_api_type_xml);
         $this->form_fields = $ups_settings_definition->get_form_fields();
         $this->instance_form_fields = $ups_settings_definition->get_instance_form_fields();
     }
@@ -84,15 +84,15 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
      */
     protected function create_metadata_builder()
     {
-        return new \UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsMetaDataBuilder($this);
+        return new UpsMetaDataBuilder($this);
     }
     /**
      * Prepare settings fields for display.
      */
     private function prepare_settings_fields_for_display()
     {
-        $this->instance_form_fields[\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::SERVICES]['options'] = \UpsFreeVendor\WPDesk\UpsShippingService\UpsServices::get_services_for_country($this->get_origin_country_code());
-        $this->form_fields[\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_SETTINGS_TITLE]['title'] = (new \UpsFreeVendor\WPDesk\WooCommerceShipping\CustomOrigin\CustomOriginFields($this instanceof \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\HasInstanceCustomOrigin))->get_custom_origin_section_title();
+        $this->instance_form_fields[UpsSettingsDefinition::SERVICES]['options'] = UpsServices::get_services_for_country($this->get_origin_country_code());
+        $this->form_fields[UpsSettingsDefinition::ORIGIN_SETTINGS_TITLE]['title'] = (new CustomOriginFields($this instanceof ShippingMethod\HasInstanceCustomOrigin))->get_custom_origin_section_title();
     }
     /**
      * Render shipping method settings.
@@ -129,18 +129,18 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
     {
         $country_code = '';
         if ($this->is_custom_origin()) {
-            $country_codes = \explode(':', $this->get_option(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::ORIGIN_COUNTRY, ''));
+            $country_codes = explode(':', $this->get_option(UpsSettingsDefinition::ORIGIN_COUNTRY, ''));
             $country_code = $country_codes[0];
         } else {
-            $woocommerce_default_country = \explode(':', \get_option('woocommerce_default_country', ''));
+            $woocommerce_default_country = explode(':', get_option('woocommerce_default_country', ''));
             if (!empty($woocommerce_default_country[0])) {
                 $country_code = $woocommerce_default_country[0];
             }
         }
-        $services_available = \UpsFreeVendor\WPDesk\UpsShippingService\UpsServices::get_services_for_country($country_code);
+        $services_available = UpsServices::get_services_for_country($country_code);
         $services = [];
         if ($get_current_services) {
-            $current_services = $this->get_instance_option(\UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition::SERVICES, []);
+            $current_services = $this->get_instance_option(UpsSettingsDefinition::SERVICES, []);
             foreach ($current_services as $service_code => $service) {
                 $services[$service_code] = $service;
             }
@@ -152,8 +152,8 @@ class UpsShippingMethod extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shippi
         }
         return $services;
     }
-    public function generate_oauth_html($key, $data) : string
+    public function generate_oauth_html($key, $data): string
     {
-        return (new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\OAuthField($key, $data, $this->get_field_key($key), new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption(), 'admin.php?page=wc-settings&tab=shipping&section=flexible_shipping_ups', (new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\OAuthUrl())->get_url()))->generate_oauth_html();
+        return (new OAuthField($key, $data, $this->get_field_key($key), new TokenOption(), 'admin.php?page=wc-settings&tab=shipping&section=flexible_shipping_ups', (new OAuthUrl())->get_url()))->generate_oauth_html();
     }
 }

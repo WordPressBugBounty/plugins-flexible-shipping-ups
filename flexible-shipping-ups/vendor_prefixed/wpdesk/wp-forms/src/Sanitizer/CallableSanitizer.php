@@ -3,7 +3,7 @@
 namespace UpsFreeVendor\WPDesk\Forms\Sanitizer;
 
 use UpsFreeVendor\WPDesk\Forms\Sanitizer;
-class CallableSanitizer implements \UpsFreeVendor\WPDesk\Forms\Sanitizer
+class CallableSanitizer implements Sanitizer
 {
     /** @var callable */
     private $callable;
@@ -11,8 +11,8 @@ class CallableSanitizer implements \UpsFreeVendor\WPDesk\Forms\Sanitizer
     {
         $this->callable = $callable;
     }
-    public function sanitize($value) : string
+    public function sanitize($value): string
     {
-        return \call_user_func($this->callable, $value);
+        return call_user_func($this->callable, $value);
     }
 }

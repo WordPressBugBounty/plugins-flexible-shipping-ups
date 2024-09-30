@@ -164,7 +164,7 @@ class UpdatedAddress
             }
             if (isset($response->AddressExtendedInformation)) {
                 foreach ($response->AddressExtendedInformation as $AddressExtendedInformation) {
-                    $this->AddressExtendedInformation[] = new \UpsFreeVendor\Ups\Entity\AddressExtendedInformation($AddressExtendedInformation);
+                    $this->AddressExtendedInformation[] = new AddressExtendedInformation($AddressExtendedInformation);
                 }
             }
         }

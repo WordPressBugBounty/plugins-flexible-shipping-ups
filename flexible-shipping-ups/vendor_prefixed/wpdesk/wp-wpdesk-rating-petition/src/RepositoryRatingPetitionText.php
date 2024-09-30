@@ -2,7 +2,7 @@
 
 namespace UpsFreeVendor\WPDesk\RepositoryRating;
 
-class RepositoryRatingPetitionText implements \UpsFreeVendor\WPDesk\RepositoryRating\PetitionText
+class RepositoryRatingPetitionText implements PetitionText
 {
     /**
      * @var string
@@ -36,14 +36,14 @@ class RepositoryRatingPetitionText implements \UpsFreeVendor\WPDesk\RepositoryRa
     /**
      * @inheritDoc
      */
-    public function get_petition_text() : string
+    public function get_petition_text(): string
     {
-        \ob_start();
+        ob_start();
         $plugin_author = $this->plugin_author;
         $plugin_title = $this->plugin_title;
         $rating_url = $this->rating_url;
         $text_align = $this->text_align;
         include __DIR__ . '/views/html-text-petition.php';
-        return \ob_get_clean();
+        return ob_get_clean();
     }
 }

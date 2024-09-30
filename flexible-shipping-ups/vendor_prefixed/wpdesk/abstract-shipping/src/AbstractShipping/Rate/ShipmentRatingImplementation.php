@@ -12,7 +12,7 @@ namespace UpsFreeVendor\WPDesk\AbstractShipping\Rate;
  *
  * @package WPDesk\AbstractShipping
  */
-class ShipmentRatingImplementation implements \UpsFreeVendor\WPDesk\AbstractShipping\Rate\ShipmentRating
+class ShipmentRatingImplementation implements ShipmentRating
 {
     /**
      * Rates.

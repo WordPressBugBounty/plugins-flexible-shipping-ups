@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Octolize\Tracker\OptInNotice;
 /**
  * Should display OR conditions.
  */
-class ShouldDisplayOrConditions implements \UpsFreeVendor\Octolize\Tracker\OptInNotice\ShouldDisplay
+class ShouldDisplayOrConditions implements ShouldDisplay
 {
     /**
      * @var ShouldDisplay[]
@@ -16,7 +16,7 @@ class ShouldDisplayOrConditions implements \UpsFreeVendor\Octolize\Tracker\OptIn
      *
      * @return void
      */
-    public function add_should_diaplay_condition(\UpsFreeVendor\Octolize\Tracker\OptInNotice\ShouldDisplay $should_display)
+    public function add_should_diaplay_condition(ShouldDisplay $should_display)
     {
         $this->conditions[] = $should_display;
     }

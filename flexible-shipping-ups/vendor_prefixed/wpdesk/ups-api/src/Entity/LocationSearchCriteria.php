@@ -6,7 +6,7 @@ use DOMDocument;
 use DOMElement;
 use Exception as BaseException;
 use UpsFreeVendor\Ups\NodeInterface;
-class LocationSearchCriteria implements \UpsFreeVendor\Ups\NodeInterface
+class LocationSearchCriteria implements NodeInterface
 {
     /**
      * @var AccessPointSearch
@@ -26,7 +26,7 @@ class LocationSearchCriteria implements \UpsFreeVendor\Ups\NodeInterface
     /**
      * @param AccessPointSearch $accessPointSearch
      */
-    public function setAccessPointSearch(\UpsFreeVendor\Ups\Entity\AccessPointSearch $accessPointSearch)
+    public function setAccessPointSearch(AccessPointSearch $accessPointSearch)
     {
         $this->accessPointSearch = $accessPointSearch;
     }
@@ -35,10 +35,10 @@ class LocationSearchCriteria implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('LocationSearchCriteria');
         if ($this->getAccessPointSearch()) {
@@ -65,7 +65,7 @@ class LocationSearchCriteria implements \UpsFreeVendor\Ups\NodeInterface
     {
         $maximumListSize = (int) $maximumListSize;
         if ($maximumListSize < 1 || $maximumListSize > 50) {
-            throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
+            throw new BaseException('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
         }
         $this->maximumListSize = $maximumListSize;
     }

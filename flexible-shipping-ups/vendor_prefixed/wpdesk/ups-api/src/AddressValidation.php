@@ -14,7 +14,7 @@ use UpsFreeVendor\Ups\Entity\AddressValidationResponse;
  *
  * This functionality is only available in USA, Puerto Rico & Canada.
  */
-class AddressValidation extends \UpsFreeVendor\Ups\Ups
+class AddressValidation extends Ups
 {
     const ENDPOINT = '/XAV';
     /**
@@ -57,7 +57,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -89,12 +89,12 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      *
      * @return stdClass|AddressValidationResponse
      */
-    public function validate(\UpsFreeVendor\Ups\Entity\Address $address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
+    public function validate(Address $address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
         if ($maxSuggestion > 50) {
             throw new \Exception('Maximum of 50 suggestions allowed');
         }
-        if (!\in_array($requestOption, \range(1, 3))) {
+        if (!in_array($requestOption, range(1, 3))) {
             throw new \Exception('Invalid request option supplied');
         }
         $this->address = $address;
@@ -105,14 +105,14 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
         $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         }
         if ($this->useAVResponseObject) {
             unset($response->Response);
-            $avResponse = new \UpsFreeVendor\Ups\Entity\AddressValidationResponse($response, $requestOption);
+            $avResponse = new AddressValidationResponse($response, $requestOption);
             return $avResponse;
         }
         return $this->formatResponse($response);
@@ -124,7 +124,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      */
     private function createRequest()
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $avRequest = $xml->appendChild($xml->createElement('AddressValidationRequest'));
         $avRequest->setAttribute('xml:lang', 'en-US');
@@ -177,7 +177,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      *
      * @return stdClass
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         return $this->convertXmlObject($response->AddressKeyFormat);
     }
@@ -187,7 +187,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -196,7 +196,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -213,7 +213,7 @@ class AddressValidation extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

@@ -4,17 +4,17 @@ namespace UpsFreeVendor\WPDesk\Forms\Field;
 
 use UpsFreeVendor\WPDesk\Forms\Sanitizer;
 use UpsFreeVendor\WPDesk\Forms\Sanitizer\TextFieldSanitizer;
-class HiddenField extends \UpsFreeVendor\WPDesk\Forms\Field\BasicField
+class HiddenField extends BasicField
 {
-    public function get_type() : string
+    public function get_type(): string
     {
         return 'hidden';
     }
-    public function get_sanitizer() : \UpsFreeVendor\WPDesk\Forms\Sanitizer
+    public function get_sanitizer(): Sanitizer
     {
-        return new \UpsFreeVendor\WPDesk\Forms\Sanitizer\TextFieldSanitizer();
+        return new TextFieldSanitizer();
     }
-    public function get_template_name() : string
+    public function get_template_name(): string
     {
         return 'input-hidden';
     }

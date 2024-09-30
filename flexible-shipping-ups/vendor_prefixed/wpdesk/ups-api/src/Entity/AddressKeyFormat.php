@@ -4,7 +4,7 @@ namespace UpsFreeVendor\Ups\Entity;
 
 use DOMDocument;
 use DOMElement;
-class AddressKeyFormat extends \UpsFreeVendor\Ups\Entity\Address
+class AddressKeyFormat extends Address
 {
     /**
      * @var string
@@ -41,10 +41,10 @@ class AddressKeyFormat extends \UpsFreeVendor\Ups\Entity\Address
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('AddressKeyFormat');
         if ($this->getConsigneeName()) {

@@ -12,13 +12,13 @@ class LabelResults
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->LabelImage = new \UpsFreeVendor\Ups\Entity\LabelImage();
+        $this->LabelImage = new LabelImage();
         if (null !== $response) {
             if (isset($response->TrackingNumber)) {
                 $this->TrackingNumber = $response->TrackingNumber;
             }
             if (isset($response->LabelImage)) {
-                $this->LabelImage = new \UpsFreeVendor\Ups\Entity\LabelImage($response->LabelImage);
+                $this->LabelImage = new LabelImage($response->LabelImage);
             }
         }
     }

@@ -22,7 +22,7 @@ use UpsFreeVendor\WPDesk\UpsShippingService\UpsServices;
 /**
  * Send request to UPS API for single rate.
  */
-class UpsSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSender
+class UpsSenderSingleRate extends UpsSender
 {
     const OZS = 'OZS';
     /**
@@ -40,7 +40,7 @@ class UpsSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsAp
      * @param bool            $is_testing Is testing?.
      * @param bool            $is_tax_enabled Is tax enabled?.
      */
-    public function __construct($access_key, $user_id, $password, $service_code, \UpsFreeVendor\Psr\Log\LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
+    public function __construct($access_key, $user_id, $password, $service_code, LoggerInterface $logger, $is_testing = \false, $is_tax_enabled = \true)
     {
         parent::__construct($access_key, $user_id, $password, $logger, $is_testing, $is_tax_enabled);
         $this->service_code = $service_code;
@@ -59,9 +59,9 @@ class UpsSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsAp
         }
         $shipment_total_weight = $request->getShipment()->getShipmentTotalWeight();
         if (null !== $shipment_total_weight) {
-            $current_unit = $shipment_total_weight->getUnitOfMeasurement()->getCode() === \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_LBS ? \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_LBS : \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_KG;
-            if (\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_LBS === $current_unit) {
-                $shipment_weight = (new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalWeight((float) $shipment_total_weight->getWeight(), $current_unit))->as_unit_rounded(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_OZ);
+            $current_unit = $shipment_total_weight->getUnitOfMeasurement()->getCode() === UnitOfMeasurement::UOM_LBS ? Weight::WEIGHT_UNIT_LBS : Weight::WEIGHT_UNIT_KG;
+            if (Weight::WEIGHT_UNIT_LBS === $current_unit) {
+                $shipment_weight = (new UniversalWeight((float) $shipment_total_weight->getWeight(), $current_unit))->as_unit_rounded(Weight::WEIGHT_UNIT_OZ);
                 $shipment_total_weight->setWeight($shipment_weight);
                 $shipment_total_weight->getUnitOfMeasurement()->setCode(self::OZS);
             }
@@ -77,9 +77,9 @@ class UpsSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsAp
         $weight = $package->getPackageWeight();
         if (null !== $weight) {
             $unit = $weight->getUnitOfMeasurement();
-            $current_unit = $unit->getCode() === \UpsFreeVendor\Ups\Entity\UnitOfMeasurement::UOM_LBS ? \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_LBS : \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_KG;
-            if (\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_LBS === $current_unit) {
-                $package_weight = (new \UpsFreeVendor\WPDesk\AbstractShipping\UnitConversion\UniversalWeight((float) $weight->getWeight(), $current_unit))->as_unit_rounded(\UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Weight::WEIGHT_UNIT_OZ);
+            $current_unit = $unit->getCode() === UnitOfMeasurement::UOM_LBS ? Weight::WEIGHT_UNIT_LBS : Weight::WEIGHT_UNIT_KG;
+            if (Weight::WEIGHT_UNIT_LBS === $current_unit) {
+                $package_weight = (new UniversalWeight((float) $weight->getWeight(), $current_unit))->as_unit_rounded(Weight::WEIGHT_UNIT_OZ);
                 $weight->setWeight($package_weight);
                 $unit->setCode(self::OZS);
                 $weight->setUnitOfMeasurement($unit);
@@ -97,22 +97,22 @@ class UpsSenderSingleRate extends \UpsFreeVendor\WPDesk\UpsShippingService\UpsAp
      * @throws \Exception .
      * @throws RateException .
      */
-    public function send(\UpsFreeVendor\Ups\Entity\RateRequest $request)
+    public function send(RateRequest $request)
     {
         $rate = $this->create_rate();
         try {
             $request->getShipment()->getService()->setCode($this->service_code);
-            if (\UpsFreeVendor\WPDesk\UpsShippingService\UpsServices::SUREPOST_LESS_THAN_1_LB === $this->service_code) {
+            if (UpsServices::SUREPOST_LESS_THAN_1_LB === $this->service_code) {
                 $this->convert_weight_to_ozs($request);
             }
             $reply = $rate->getRate($request);
-        } catch (\UpsFreeVendor\Ups\Exception\InvalidResponseException $e) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($e->getMessage(), ['exception' => $e->getCode()]);
+        } catch (InvalidResponseException $e) {
+            throw new RateException($e->getMessage(), ['exception' => $e->getCode()]);
             //phpcs:ignore
         }
-        $rate_interpretation = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation($reply, $this->is_tax_enabled());
+        $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled());
         if ($rate_interpretation->has_reply_error()) {
-            throw new \UpsFreeVendor\WPDesk\AbstractShipping\Exception\RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
+            throw new RateException($rate_interpretation->get_reply_message(), ['response' => $reply]);
             //phpcs:ignore
         }
         return $reply;

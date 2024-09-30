@@ -20,7 +20,7 @@ class BillThirdParty
      */
     public function __construct(\stdClass $attributes = null)
     {
-        $this->thirdPartyAddress = new \UpsFreeVendor\Ups\Entity\Address(isset($attributes->Address) ? $attributes->Address : null);
+        $this->thirdPartyAddress = new Address(isset($attributes->Address) ? $attributes->Address : null);
         $this->accountNumber = isset($attributes->AccountNumber) ? $attributes->AccountNumber : null;
     }
     /**
@@ -34,7 +34,7 @@ class BillThirdParty
      * @param Address $thirdPartyAddress
      * @return BillThirdParty
      */
-    public function setThirdPartyAddress(\UpsFreeVendor\Ups\Entity\Address $thirdPartyAddress = null)
+    public function setThirdPartyAddress(Address $thirdPartyAddress = null)
     {
         $this->thirdPartyAddress = $thirdPartyAddress;
         return $this;

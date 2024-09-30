@@ -6,7 +6,7 @@ use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
 use UpsFreeVendor\Ups\Entity\UnitOfMeasurement;
-class ShipmentTotalWeight implements \UpsFreeVendor\Ups\NodeInterface
+class ShipmentTotalWeight implements NodeInterface
 {
     /**
      * @var UnitOfMeasurement
@@ -20,7 +20,7 @@ class ShipmentTotalWeight implements \UpsFreeVendor\Ups\NodeInterface
     {
         if (null !== $response) {
             if (isset($response->unitOfMeasurement)) {
-                $this->setUnitOfMeasurement(new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement($response->unitOfMeasurement));
+                $this->setUnitOfMeasurement(new UnitOfMeasurement($response->unitOfMeasurement));
             }
             if (isset($response->Weight)) {
                 $this->setWeight($response->Weight);
@@ -32,10 +32,10 @@ class ShipmentTotalWeight implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('ShipmentTotalWeight');
         if ($this->getUnitOfMeasurement()) {
@@ -54,7 +54,7 @@ class ShipmentTotalWeight implements \UpsFreeVendor\Ups\NodeInterface
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
     }
@@ -70,7 +70,7 @@ class ShipmentTotalWeight implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setWeight($weight)
     {
-        if (!\is_numeric($weight)) {
+        if (!is_numeric($weight)) {
             throw new \Exception('Weight value should be a numeric value');
         }
         $this->weight = $weight;

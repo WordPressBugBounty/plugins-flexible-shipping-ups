@@ -4,7 +4,7 @@ namespace UpsFreeVendor\Ups\Entity;
 
 use DOMDocument;
 use DOMElement;
-class AddressArtifactFormat extends \UpsFreeVendor\Ups\Entity\Address
+class AddressArtifactFormat extends Address
 {
     /**
      * @var string
@@ -27,10 +27,10 @@ class AddressArtifactFormat extends \UpsFreeVendor\Ups\Entity\Address
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('AddressArtifactFormat');
         for ($i = 1; $i <= 3; $i++) {

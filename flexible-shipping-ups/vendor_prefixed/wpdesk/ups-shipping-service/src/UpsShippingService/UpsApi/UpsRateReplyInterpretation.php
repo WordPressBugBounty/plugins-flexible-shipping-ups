@@ -34,7 +34,7 @@ class UpsRateReplyInterpretation
      * @param RateResponse $rate_response  Rate response.
      * @param bool         $is_tax_enabled Is tax enabled.
      */
-    public function __construct(\UpsFreeVendor\Ups\Entity\RateResponse $rate_response, $is_tax_enabled)
+    public function __construct(RateResponse $rate_response, $is_tax_enabled)
     {
         $this->rate_response = $rate_response;
         $this->is_tax_enabled = $is_tax_enabled;
@@ -94,11 +94,11 @@ class UpsRateReplyInterpretation
      *
      * @return SingleRate
      */
-    protected function get_single_rate(\UpsFreeVendor\Ups\Entity\RatedShipment $rated_shipment)
+    protected function get_single_rate(RatedShipment $rated_shipment)
     {
-        $rate = new \UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate();
-        $charges = new \UpsFreeVendor\WPDesk\AbstractShipping\Rate\Money();
-        $currency_codes = new \UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsCurrencyCodesTranslator();
+        $rate = new SingleRate();
+        $charges = new Money();
+        $currency_codes = new UpsCurrencyCodesTranslator();
         $charges->currency = $currency_codes->translate_to_woocommerce_currency($rated_shipment->TotalCharges->CurrencyCode);
         // phpcs:ignore
         $charges->amount = $rated_shipment->TotalCharges->MonetaryValue;

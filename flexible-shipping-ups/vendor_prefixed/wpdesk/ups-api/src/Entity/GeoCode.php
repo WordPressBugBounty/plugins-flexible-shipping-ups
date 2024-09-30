@@ -4,14 +4,14 @@ namespace UpsFreeVendor\Ups\Entity;
 
 use DOMDocument;
 use UpsFreeVendor\Ups\NodeInterface;
-class GeoCode implements \UpsFreeVendor\Ups\NodeInterface
+class GeoCode implements NodeInterface
 {
     private $latitude;
     private $longitude;
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Geocode');
         $node->appendChild($document->createElement('Latitude', $this->getLatitude()));

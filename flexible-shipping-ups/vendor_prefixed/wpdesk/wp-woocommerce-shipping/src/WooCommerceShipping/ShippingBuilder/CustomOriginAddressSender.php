@@ -13,7 +13,7 @@ use UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address;
  *
  * @package WPDesk\ShippingBuilder\Address
  */
-class CustomOriginAddressSender implements \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingBuilder\AddressProvider
+class CustomOriginAddressSender implements AddressProvider
 {
     /**
      * @var Address;
@@ -31,7 +31,7 @@ class CustomOriginAddressSender implements \UpsFreeVendor\WPDesk\WooCommerceShip
      */
     public function __construct($address_line1, $address_line2, $city, $postal_code, $country_code, $state_code)
     {
-        $this->sender_address = new \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Address();
+        $this->sender_address = new Address();
         $this->sender_address->address_line1 = $address_line1;
         $this->sender_address->address_line2 = $address_line2;
         $this->sender_address->city = $city;

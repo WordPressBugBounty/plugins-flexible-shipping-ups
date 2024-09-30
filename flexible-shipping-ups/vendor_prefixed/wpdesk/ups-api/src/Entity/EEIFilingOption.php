@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class EEIFilingOption implements \UpsFreeVendor\Ups\NodeInterface
+class EEIFilingOption implements NodeInterface
 {
     const FO_SHIPPER = '1';
     // Shipper Filed
@@ -47,10 +47,10 @@ class EEIFilingOption implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setDescription($attributes->Description);
             }
             if (isset($attributes->UPSFiled)) {
-                $this->setUPSFiled(new \UpsFreeVendor\Ups\Entity\UPSFiled($attributes->UPSFiled));
+                $this->setUPSFiled(new UPSFiled($attributes->UPSFiled));
             }
             if (isset($attributes->ShipperFiled)) {
-                $this->setShipperFiled(new \UpsFreeVendor\Ups\Entity\ShipperFiled($attributes->ShipperFiled));
+                $this->setShipperFiled(new ShipperFiled($attributes->ShipperFiled));
             }
         }
     }
@@ -59,10 +59,10 @@ class EEIFilingOption implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('EEIFilingOption');
         $code = $this->getCode();
@@ -150,7 +150,7 @@ class EEIFilingOption implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setUPSFiled(\UpsFreeVendor\Ups\Entity\UPSFiled $upsFiled)
+    public function setUPSFiled(UPSFiled $upsFiled)
     {
         $this->upsFiled = $upsFiled;
         return $this;
@@ -167,7 +167,7 @@ class EEIFilingOption implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setShipperFiled(\UpsFreeVendor\Ups\Entity\ShipperFiled $shipperFiled)
+    public function setShipperFiled(ShipperFiled $shipperFiled)
     {
         $this->shipperFiled = $shipperFiled;
         return $this;

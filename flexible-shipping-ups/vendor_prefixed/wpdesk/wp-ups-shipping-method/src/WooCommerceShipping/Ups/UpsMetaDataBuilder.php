@@ -14,7 +14,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingBuilder\WooCommerceShipping
 /**
  * Can build UPS meta data.
  */
-class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingBuilder\WooCommerceShippingMetaDataBuilder
+class UpsMetaDataBuilder extends WooCommerceShippingMetaDataBuilder
 {
     const META_UPS_SERVICE_CODE = 'ups_service_code';
     const META_UPS_ACCESS_POINT = 'ups_access_point';
@@ -29,7 +29,7 @@ class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shipp
      *
      * @return array
      */
-    public function build_meta_data_for_rate(\UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate $rate, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    public function build_meta_data_for_rate(SingleRate $rate, Shipment $shipment)
     {
         $meta_data = parent::build_meta_data_for_rate($rate, $shipment);
         $meta_data = $this->add_ups_service_code_to_metadata($meta_data, $rate);
@@ -44,7 +44,7 @@ class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shipp
      *
      * @return array
      */
-    public function build_meta_data_for_rate_to_collection_point(\UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate $rate, $collection_point, \UpsFreeVendor\WPDesk\AbstractShipping\Shipment\Shipment $shipment)
+    public function build_meta_data_for_rate_to_collection_point(SingleRate $rate, $collection_point, Shipment $shipment)
     {
         $meta_data = parent::build_meta_data_for_rate_to_collection_point($rate, $collection_point, $shipment);
         $meta_data = $this->add_ups_service_code_to_metadata($meta_data, $rate);
@@ -57,7 +57,7 @@ class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shipp
      *
      * @return array
      */
-    public function build_meta_data_to_collection_point(\UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint $collection_point)
+    public function build_meta_data_to_collection_point(CollectionPoint $collection_point)
     {
         $meta_data = parent::build_meta_data_to_collection_point($collection_point);
         return $this->append_ups_access_point_data($meta_data, $collection_point);
@@ -70,7 +70,7 @@ class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shipp
      *
      * @return array
      */
-    private function append_ups_access_point_data(array $meta_data, \UpsFreeVendor\WPDesk\AbstractShipping\CollectionPoints\CollectionPoint $collection_point)
+    private function append_ups_access_point_data(array $meta_data, CollectionPoint $collection_point)
     {
         $meta_data[self::META_UPS_ACCESS_POINT] = $meta_data[self::COLLECTION_POINT_ID];
         $meta_data[self::META_UPS_ACCESS_POINT_ADDRESS] = $meta_data[self::COLLECTION_POINT_ADDRESS];
@@ -84,7 +84,7 @@ class UpsMetaDataBuilder extends \UpsFreeVendor\WPDesk\WooCommerceShipping\Shipp
      *
      * @return array
      */
-    private function add_ups_service_code_to_metadata(array $meta_data, \UpsFreeVendor\WPDesk\AbstractShipping\Rate\SingleRate $rate)
+    private function add_ups_service_code_to_metadata(array $meta_data, SingleRate $rate)
     {
         $meta_data[self::META_UPS_SERVICE_CODE] = $rate->service_type;
         return $meta_data;

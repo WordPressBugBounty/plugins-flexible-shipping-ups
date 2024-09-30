@@ -3,7 +3,7 @@
 namespace UpsFreeVendor\Ups\Entity;
 
 use DOMDocument;
-class AlternateDeliveryAddress extends \UpsFreeVendor\Ups\Entity\ShipTo
+class AlternateDeliveryAddress extends ShipTo
 {
     /**
      * @var
@@ -18,10 +18,10 @@ class AlternateDeliveryAddress extends \UpsFreeVendor\Ups\Entity\ShipTo
      *
      * @return \DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('AlternateDeliveryAddress');
         if ($this->getName()) {
@@ -62,8 +62,8 @@ class AlternateDeliveryAddress extends \UpsFreeVendor\Ups\Entity\ShipTo
      */
     public function setName($name)
     {
-        if (\strlen($name) > 35) {
-            $name = \substr($name, 0, 35);
+        if (strlen($name) > 35) {
+            $name = substr($name, 0, 35);
         }
         $this->name = $name;
     }

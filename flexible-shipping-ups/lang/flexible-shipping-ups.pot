@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the UPS Live Rates and Access Points plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: UPS Live Rates and Access Points 2.3.10\n"
+"Project-Id-Version: UPS Live Rates and Access Points 2.3.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-01T23:09:55+00:00\n"
+"POT-Creation-Date: 2024-09-27T07:31:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -385,19 +385,19 @@ msgstr ""
 msgid "Allow"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:107
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:105
 msgid "Thank you for updating %1$s!"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:107
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:105
 msgid "It is really important to keep the plugins up to date. We have implemented some improvements and new functionalities. Find out what has changed:"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:130
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:128
 msgid "I'm not interested"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:130
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:128
 msgid "Thanks for letting me know"
 msgstr ""
 
@@ -667,11 +667,11 @@ msgstr ""
 msgid "Error during refresh."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php:35
+#: vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php:40
 msgid "Successfully revoked UPS Authorization."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php:39
+#: vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php:43
 msgid "Error during revoke authorization."
 msgstr ""
 

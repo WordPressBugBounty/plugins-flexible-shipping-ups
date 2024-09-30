@@ -33,7 +33,7 @@ class PluginShippingDecisions
      * @param LoggerInterface $logger .
      *
      */
-    public function __construct(\UpsFreeVendor\WPDesk\AbstractShipping\ShippingService $service, \UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function __construct(ShippingService $service, LoggerInterface $logger)
     {
         $this->service = $service;
         $this->logger = $logger;
@@ -55,7 +55,7 @@ class PluginShippingDecisions
     /**
      * @param FieldApiStatusAjax $field_api_status_ajax
      */
-    public function set_field_api_status_ajax(\UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\ApiStatus\FieldApiStatusAjax $field_api_status_ajax)
+    public function set_field_api_status_ajax(FieldApiStatusAjax $field_api_status_ajax)
     {
         $this->field_api_status_ajax = $field_api_status_ajax;
     }

@@ -9,7 +9,7 @@ use UpsFreeVendor\Psr\Http\Message\StreamInterface;
  *
  * @final
  */
-class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
+class CachingStream implements StreamInterface
 {
     use StreamDecoratorTrait;
     /** @var StreamInterface Stream being wrapped */
@@ -22,10 +22,10 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
      * @param StreamInterface $stream Stream to cache. The cursor is assumed to be at the beginning of the stream.
      * @param StreamInterface $target Optionally specify where data is cached
      */
-    public function __construct(\UpsFreeVendor\Psr\Http\Message\StreamInterface $stream, \UpsFreeVendor\Psr\Http\Message\StreamInterface $target = null)
+    public function __construct(StreamInterface $stream, StreamInterface $target = null)
     {
         $this->remoteStream = $stream;
-        $this->stream = $target ?: new \UpsFreeVendor\GuzzleHttp\Psr7\Stream(\UpsFreeVendor\GuzzleHttp\Psr7\Utils::tryFopen('php://temp', 'r+'));
+        $this->stream = $target ?: new Stream(Utils::tryFopen('php://temp', 'r+'));
     }
     public function getSize()
     {
@@ -33,7 +33,7 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
         if (null === $remoteSize) {
             return null;
         }
-        return \max($this->stream->getSize(), $remoteSize);
+        return max($this->stream->getSize(), $remoteSize);
     }
     public function rewind()
     {
@@ -71,7 +71,7 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
     {
         // Perform a regular read on any previously read data from the buffer
         $data = $this->stream->read($length);
-        $remaining = $length - \strlen($data);
+        $remaining = $length - strlen($data);
         // More data was requested so read from the remote stream
         if ($remaining) {
             // If data was written to the buffer in a position that would have
@@ -80,9 +80,9 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
             // position. This mimics the behavior of other PHP stream wrappers.
             $remoteData = $this->remoteStream->read($remaining + $this->skipReadBytes);
             if ($this->skipReadBytes) {
-                $len = \strlen($remoteData);
-                $remoteData = \substr($remoteData, $this->skipReadBytes);
-                $this->skipReadBytes = \max(0, $this->skipReadBytes - $len);
+                $len = strlen($remoteData);
+                $remoteData = substr($remoteData, $this->skipReadBytes);
+                $this->skipReadBytes = max(0, $this->skipReadBytes - $len);
             }
             $data .= $remoteData;
             $this->stream->write($remoteData);
@@ -95,7 +95,7 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
         // to skip bytes from being read from the remote stream to emulate
         // other stream wrappers. Basically replacing bytes of data of a fixed
         // length.
-        $overflow = \strlen($string) + $this->tell() - $this->remoteStream->tell();
+        $overflow = strlen($string) + $this->tell() - $this->remoteStream->tell();
         if ($overflow > 0) {
             $this->skipReadBytes += $overflow;
         }
@@ -114,8 +114,8 @@ class CachingStream implements \UpsFreeVendor\Psr\Http\Message\StreamInterface
     }
     private function cacheEntireStream()
     {
-        $target = new \UpsFreeVendor\GuzzleHttp\Psr7\FnStream(['write' => 'strlen']);
-        \UpsFreeVendor\GuzzleHttp\Psr7\Utils::copyToStream($this, $target);
+        $target = new FnStream(['write' => 'strlen']);
+        Utils::copyToStream($this, $target);
         return $this->tell();
     }
 }

@@ -22,8 +22,8 @@ class LocatorRequest
     private $unitOfMeasurement;
     public function __construct()
     {
-        $this->setOriginAddress(new \UpsFreeVendor\Ups\Entity\OriginAddress());
-        $this->setTranslate(new \UpsFreeVendor\Ups\Entity\Translate());
+        $this->setOriginAddress(new OriginAddress());
+        $this->setTranslate(new Translate());
     }
     /**
      * @return LocationSearchCriteria
@@ -49,7 +49,7 @@ class LocatorRequest
     /**
      * @param mixed $originAddress
      */
-    public function setOriginAddress(\UpsFreeVendor\Ups\Entity\OriginAddress $originAddress)
+    public function setOriginAddress(OriginAddress $originAddress)
     {
         $this->originAddress = $originAddress;
     }
@@ -63,7 +63,7 @@ class LocatorRequest
     /**
      * @param mixed $translate
      */
-    public function setTranslate(\UpsFreeVendor\Ups\Entity\Translate $translate)
+    public function setTranslate(Translate $translate)
     {
         $this->translate = $translate;
     }
@@ -77,7 +77,7 @@ class LocatorRequest
     /**
      * @param mixed $unitOfMeasurement
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
     }

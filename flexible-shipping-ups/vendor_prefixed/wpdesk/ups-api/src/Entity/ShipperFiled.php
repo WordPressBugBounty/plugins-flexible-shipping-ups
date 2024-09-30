@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class ShipperFiled implements \UpsFreeVendor\Ups\NodeInterface
+class ShipperFiled implements NodeInterface
 {
     const SF_ITN = 'A';
     // Requires the ITN
@@ -56,10 +56,10 @@ class ShipperFiled implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('ShipperFiled');
         $code = $this->getCode();

@@ -21,11 +21,11 @@ class RatedShipment
     public $NegotiatedRates;
     public function __construct($response = null)
     {
-        $this->Service = new \UpsFreeVendor\Ups\Entity\Service();
-        $this->BillingWeight = new \UpsFreeVendor\Ups\Entity\BillingWeight();
-        $this->TransportationCharges = new \UpsFreeVendor\Ups\Entity\Charges();
-        $this->ServiceOptionsCharges = new \UpsFreeVendor\Ups\Entity\Charges();
-        $this->TotalCharges = new \UpsFreeVendor\Ups\Entity\Charges();
+        $this->Service = new Service();
+        $this->BillingWeight = new BillingWeight();
+        $this->TransportationCharges = new Charges();
+        $this->ServiceOptionsCharges = new Charges();
+        $this->TotalCharges = new Charges();
         $this->RatedPackage = [];
         $this->SurCharges = [];
         if (null !== $response) {
@@ -36,7 +36,7 @@ class RatedShipment
                 $this->RateShipmentWarning = $response->RatedShipmentWarning;
             }
             if (isset($response->BillingWeight)) {
-                $this->BillingWeight = new \UpsFreeVendor\Ups\Entity\BillingWeight($response->BillingWeight);
+                $this->BillingWeight = new BillingWeight($response->BillingWeight);
             }
             if (isset($response->GuaranteedDaysToDelivery)) {
                 $this->GuaranteedDaysToDelivery = $response->GuaranteedDaysToDelivery;
@@ -45,37 +45,37 @@ class RatedShipment
                 $this->ScheduledDeliveryTime = $response->ScheduledDeliveryTime;
             }
             if (isset($response->TransportationCharges)) {
-                $this->TransportationCharges = new \UpsFreeVendor\Ups\Entity\Charges($response->TransportationCharges);
+                $this->TransportationCharges = new Charges($response->TransportationCharges);
             }
             if (isset($response->ServiceOptionsCharges)) {
-                $this->ServiceOptionsCharges = new \UpsFreeVendor\Ups\Entity\Charges($response->ServiceOptionsCharges);
+                $this->ServiceOptionsCharges = new Charges($response->ServiceOptionsCharges);
             }
             if (isset($response->TotalCharges)) {
-                $this->TotalCharges = new \UpsFreeVendor\Ups\Entity\Charges($response->TotalCharges);
+                $this->TotalCharges = new Charges($response->TotalCharges);
             }
             if (isset($response->RatedPackage)) {
-                if (\is_array($response->RatedPackage)) {
+                if (is_array($response->RatedPackage)) {
                     foreach ($response->RatedPackage as $ratedPackage) {
-                        $this->RatedPackage[] = new \UpsFreeVendor\Ups\Entity\RatedPackage($ratedPackage);
+                        $this->RatedPackage[] = new RatedPackage($ratedPackage);
                     }
                 } else {
-                    $this->RatedPackage[] = new \UpsFreeVendor\Ups\Entity\RatedPackage($response->RatedPackage);
+                    $this->RatedPackage[] = new RatedPackage($response->RatedPackage);
                 }
             }
             if (isset($response->SurCharges)) {
-                if (\is_array($response->SurCharges)) {
+                if (is_array($response->SurCharges)) {
                     foreach ($response->SurCharges as $surCharges) {
-                        $this->SurCharges[] = new \UpsFreeVendor\Ups\Entity\Charges($surCharges);
+                        $this->SurCharges[] = new Charges($surCharges);
                     }
                 } else {
-                    $this->SurCharges[] = new \UpsFreeVendor\Ups\Entity\Charges($response->SurCharges);
+                    $this->SurCharges[] = new Charges($response->SurCharges);
                 }
             }
             if (isset($response->TimeInTransit)) {
-                $this->TimeInTransit = new \UpsFreeVendor\Ups\Entity\RateTimeInTransitResponse($response->TimeInTransit);
+                $this->TimeInTransit = new RateTimeInTransitResponse($response->TimeInTransit);
             }
             if (isset($response->NegotiatedRates)) {
-                $this->NegotiatedRates = new \UpsFreeVendor\Ups\Entity\NegotiatedRates($response->NegotiatedRates);
+                $this->NegotiatedRates = new NegotiatedRates($response->NegotiatedRates);
             }
         }
     }

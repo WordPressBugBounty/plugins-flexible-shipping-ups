@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class EmailMessage implements \UpsFreeVendor\Ups\NodeInterface
+class EmailMessage implements NodeInterface
 {
     /**
      * @var array
@@ -49,10 +49,10 @@ class EmailMessage implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('EMailMessage');
         foreach ($this->getEmailAddresses() as $email) {
@@ -92,7 +92,7 @@ class EmailMessage implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setEmailAddresses(array $emailAddresses)
     {
-        if (\count($emailAddresses) > 5) {
+        if (count($emailAddresses) > 5) {
             throw new \Exception('Maximum of 5 emailaddresses allowed');
         }
         $this->emailAddresses = $emailAddresses;
@@ -153,7 +153,7 @@ class EmailMessage implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setMemo($memo)
     {
-        if (\strlen($memo) > 50) {
+        if (strlen($memo) > 50) {
             throw new \Exception('Memo should maximum be 50 chars');
         }
         $this->memo = $memo;
@@ -172,7 +172,7 @@ class EmailMessage implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function setSubject($subject)
     {
-        if (\strlen($subject) > 50) {
+        if (strlen($subject) > 50) {
             throw new \Exception('Subject should maximum be 50 chars');
         }
         $this->subject = $subject;

@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class RateInformation implements \UpsFreeVendor\Ups\NodeInterface
+class RateInformation implements NodeInterface
 {
     /** @var bool */
     private $negotiatedRatesIndicator;
@@ -32,10 +32,10 @@ class RateInformation implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('RateInformation');
         if ($this->getNegotiatedRatesIndicator()) {

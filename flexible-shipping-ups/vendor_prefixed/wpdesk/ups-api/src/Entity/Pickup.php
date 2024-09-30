@@ -8,7 +8,7 @@ use UpsFreeVendor\Ups\NodeInterface;
 /**
  * @author mazzarito
  */
-class Pickup implements \UpsFreeVendor\Ups\NodeInterface
+class Pickup implements NodeInterface
 {
     /**
      * @var string
@@ -37,10 +37,10 @@ class Pickup implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Pickup');
         $node->appendChild($document->createElement('Date', $this->getDate()));

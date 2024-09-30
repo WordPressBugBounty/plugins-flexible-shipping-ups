@@ -36,11 +36,11 @@ class TimeInTransitRequest
     private $documentsOnlyIndicator = \false;
     public function __construct()
     {
-        $this->setTransitFrom(new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat());
-        $this->setTransitTo(new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat());
-        $this->setShipmentWeight(new \UpsFreeVendor\Ups\Entity\ShipmentWeight());
-        $this->setInvoiceLineTotal(new \UpsFreeVendor\Ups\Entity\InvoiceLineTotal());
-        $this->setPickupDate(new \DateTime());
+        $this->setTransitFrom(new AddressArtifactFormat());
+        $this->setTransitTo(new AddressArtifactFormat());
+        $this->setShipmentWeight(new ShipmentWeight());
+        $this->setInvoiceLineTotal(new InvoiceLineTotal());
+        $this->setPickupDate(new DateTime());
     }
     public function setDocumentsOnlyIndicator()
     {
@@ -56,7 +56,7 @@ class TimeInTransitRequest
     /**
      * @param DateTime $date
      */
-    public function setPickupDate(\DateTime $date)
+    public function setPickupDate(DateTime $date)
     {
         $this->pickupDate = $date;
     }
@@ -70,7 +70,7 @@ class TimeInTransitRequest
     /**
      * @param AddressArtifactFormat $address
      */
-    public function setTransitFrom(\UpsFreeVendor\Ups\Entity\AddressArtifactFormat $address)
+    public function setTransitFrom(AddressArtifactFormat $address)
     {
         $this->transitFrom = $address;
     }
@@ -84,7 +84,7 @@ class TimeInTransitRequest
     /**
      * @param AddressArtifactFormat $address
      */
-    public function setTransitTo(\UpsFreeVendor\Ups\Entity\AddressArtifactFormat $address)
+    public function setTransitTo(AddressArtifactFormat $address)
     {
         $this->transitTo = $address;
     }
@@ -98,7 +98,7 @@ class TimeInTransitRequest
     /**
      * @param ShipmentWeight $shipmentWeight
      */
-    public function setShipmentWeight(\UpsFreeVendor\Ups\Entity\ShipmentWeight $shipmentWeight)
+    public function setShipmentWeight(ShipmentWeight $shipmentWeight)
     {
         $this->shipmentWeight = $shipmentWeight;
     }
@@ -116,8 +116,8 @@ class TimeInTransitRequest
      */
     public function setTotalPackagesInShipment($amount)
     {
-        if (!\is_int($amount) || $amount < 0) {
-            throw new \Exception('Amount of packages should be integer and above 0');
+        if (!is_int($amount) || $amount < 0) {
+            throw new BaseException('Amount of packages should be integer and above 0');
         }
         $this->totalPackagesInShipment = $amount;
     }
@@ -131,7 +131,7 @@ class TimeInTransitRequest
     /**
      * @param InvoiceLineTotal $invoiceLineTotal
      */
-    public function setInvoiceLineTotal(\UpsFreeVendor\Ups\Entity\InvoiceLineTotal $invoiceLineTotal)
+    public function setInvoiceLineTotal(InvoiceLineTotal $invoiceLineTotal)
     {
         $this->invoiceLineTotal = $invoiceLineTotal;
     }

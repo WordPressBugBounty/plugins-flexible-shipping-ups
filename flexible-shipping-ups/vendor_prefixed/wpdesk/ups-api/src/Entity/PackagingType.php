@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class PackagingType implements \UpsFreeVendor\Ups\NodeInterface
+class PackagingType implements NodeInterface
 {
     const PT_UNKNOWN = '00';
     const PT_UPSLETTER = '01';
@@ -80,10 +80,10 @@ class PackagingType implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('PackagingType');
         $node->appendChild($document->createElement('Code', $this->getCode() ?? ''));

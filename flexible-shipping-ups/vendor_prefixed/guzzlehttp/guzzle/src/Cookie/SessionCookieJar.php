@@ -5,7 +5,7 @@ namespace UpsFreeVendor\GuzzleHttp\Cookie;
 /**
  * Persists cookies in the client session
  */
-class SessionCookieJar extends \UpsFreeVendor\GuzzleHttp\Cookie\CookieJar
+class SessionCookieJar extends CookieJar
 {
     /** @var string session key */
     private $sessionKey;
@@ -41,11 +41,11 @@ class SessionCookieJar extends \UpsFreeVendor\GuzzleHttp\Cookie\CookieJar
         $json = [];
         foreach ($this as $cookie) {
             /** @var SetCookie $cookie */
-            if (\UpsFreeVendor\GuzzleHttp\Cookie\CookieJar::shouldPersist($cookie, $this->storeSessionCookies)) {
+            if (CookieJar::shouldPersist($cookie, $this->storeSessionCookies)) {
                 $json[] = $cookie->toArray();
             }
         }
-        $_SESSION[$this->sessionKey] = \json_encode($json);
+        $_SESSION[$this->sessionKey] = json_encode($json);
     }
     /**
      * Load the contents of the client session into the data array
@@ -55,12 +55,12 @@ class SessionCookieJar extends \UpsFreeVendor\GuzzleHttp\Cookie\CookieJar
         if (!isset($_SESSION[$this->sessionKey])) {
             return;
         }
-        $data = \json_decode($_SESSION[$this->sessionKey], \true);
-        if (\is_array($data)) {
+        $data = json_decode($_SESSION[$this->sessionKey], \true);
+        if (is_array($data)) {
             foreach ($data as $cookie) {
-                $this->setCookie(new \UpsFreeVendor\GuzzleHttp\Cookie\SetCookie($cookie));
+                $this->setCookie(new SetCookie($cookie));
             }
-        } elseif (\strlen($data)) {
+        } elseif (strlen($data)) {
             throw new \RuntimeException("Invalid cookie data");
         }
     }

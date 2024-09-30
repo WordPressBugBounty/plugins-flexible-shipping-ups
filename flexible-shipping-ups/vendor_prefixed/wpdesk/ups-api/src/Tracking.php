@@ -11,7 +11,7 @@ use DateTime;
 /**
  * Tracking API Wrapper.
  */
-class Tracking extends \UpsFreeVendor\Ups\Ups
+class Tracking extends Ups
 {
     const ENDPOINT = '/Track';
     /**
@@ -66,7 +66,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -121,7 +121,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      * @param DateTime $beginDate
      *
      */
-    public function setBeginDate(\DateTime $beginDate)
+    public function setBeginDate(DateTime $beginDate)
     {
         $this->beginDate = $beginDate;
     }
@@ -131,7 +131,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      * @param DateTime $endDate
      *
      */
-    public function setEndDate(\DateTime $endDate)
+    public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
     }
@@ -144,10 +144,10 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
         $this->response = $this->getRequest()->request($this->createAccess(), $this->createRequest(), $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         }
         return $this->formatResponse($response);
     }
@@ -160,57 +160,57 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
     {
         $patterns = [
             // UPS Mail Innovations tracking numbers
-            '/^MI\\d{6}\\d{1,22}$/',
+            '/^MI\d{6}\d{1,22}$/',
             // MI 000000 00000000+
             // USPS - Certified Mail
-            '/^94071\\d{17}$/',
+            '/^94071\d{17}$/',
             // 9407 1000 0000 0000 0000 00
-            '/^7\\d{19}$/',
+            '/^7\d{19}$/',
             // 7000 0000 0000 0000 0000
             // USPS - Collect on Delivery
-            '/^93033\\d{17}$/',
+            '/^93033\d{17}$/',
             // 9303 3000 0000 0000 0000 00
-            '/^M\\d{9}$/',
+            '/^M\d{9}$/',
             // M000 0000 00
             // USPS - Global Express Guaranteed
-            '/^82\\d{10}$/',
+            '/^82\d{10}$/',
             // 82 000 000 00
             // USPS - Priority Mail Express International
-            '/^EC\\d{9}US$/',
+            '/^EC\d{9}US$/',
             // EC 000 000 000 US
             // USPS Innovations Expedited
-            '/^927\\d{23}$/',
+            '/^927\d{23}$/',
             // 9270 8900 8900 8900 8900 8900 00
             // USPS - Priority Mail Express
-            '/^927\\d{19}$/',
+            '/^927\d{19}$/',
             // 9270 1000 0000 0000 0000 00
-            '/^EA\\d{9}US$/',
+            '/^EA\d{9}US$/',
             // EA 000 000 000 US
             // USPS - Priority Mail International
-            '/^CP\\d{9}US$/',
+            '/^CP\d{9}US$/',
             // CP 000 000 000 US
             // USPS - Priority Mail
-            '/^92055\\d{17}$/',
+            '/^92055\d{17}$/',
             // 9205 5000 0000 0000 0000 00
-            '/^14\\d{18}$/',
+            '/^14\d{18}$/',
             // 1400 0000 0000 0000 0000
             // USPS - Registered Mail
-            '/^92088\\d{17}$/',
+            '/^92088\d{17}$/',
             // 9208 8000 0000 0000 0000 00
-            '/^RA\\d{9}US$/',
+            '/^RA\d{9}US$/',
             // RA 000 000 000 US
             // USPS - Signature Confirmation
-            '/^9202\\d{16}US$/',
+            '/^9202\d{16}US$/',
             // 9202 1000 0000 0000 0000 00
-            '/^23\\d{16}US$/',
+            '/^23\d{16}US$/',
             // 2300 0000 0000 0000 0000
             // USPS - Tracking
-            '/^94\\d{20}$/',
+            '/^94\d{20}$/',
             // 9400 1000 0000 0000 0000 00
-            '/^03\\d{18}$/',
+            '/^03\d{18}$/',
         ];
         foreach ($patterns as $pattern) {
-            if (\preg_match($pattern, $this->trackingNumber)) {
+            if (preg_match($pattern, $this->trackingNumber)) {
                 return \true;
             }
         }
@@ -223,7 +223,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      */
     private function createRequest()
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $trackRequest = $xml->appendChild($xml->createElement('TrackRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
@@ -267,11 +267,11 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      *
      * @return stdClass
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         if ($this->allowMultipleShipments) {
             $response = $this->convertXmlObject($response);
-            if (!\is_array($response->Shipment)) {
+            if (!is_array($response->Shipment)) {
                 $response->Shipment = [$response->Shipment];
             }
             return $response;
@@ -284,7 +284,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -293,7 +293,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -310,7 +310,7 @@ class Tracking extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

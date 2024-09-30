@@ -19,10 +19,10 @@ trait EstimatedArrivalTrait
     {
         if (null !== $response) {
             if (isset($response->Arrival)) {
-                $this->Arrival = new \UpsFreeVendor\Ups\Entity\Arrival($response->Arrival);
+                $this->Arrival = new Arrival($response->Arrival);
             }
             if (isset($response->Pickup)) {
-                $this->Pickup = new \UpsFreeVendor\Ups\Entity\Pickup($response->Pickup);
+                $this->Pickup = new Pickup($response->Pickup);
             }
             if (isset($response->HolidayCount)) {
                 $this->HolidayCount = $response->HolidayCount;

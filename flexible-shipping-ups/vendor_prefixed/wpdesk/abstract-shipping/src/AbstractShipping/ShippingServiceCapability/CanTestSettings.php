@@ -22,7 +22,7 @@ interface CanTestSettings
      * @param LoggerInterface $logger .
      * @return string
      */
-    public function check_connection(\UpsFreeVendor\WPDesk\AbstractShipping\Settings\SettingsValues $settings, \UpsFreeVendor\Psr\Log\LoggerInterface $logger);
+    public function check_connection(SettingsValues $settings, LoggerInterface $logger);
     /**
      * Returns field ID after which API Status field should be added.
      *

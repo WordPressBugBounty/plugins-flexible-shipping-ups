@@ -16,7 +16,7 @@ final class UriComparator
      *
      * @return bool
      */
-    public static function isCrossOrigin(\UpsFreeVendor\Psr\Http\Message\UriInterface $original, \UpsFreeVendor\Psr\Http\Message\UriInterface $modified)
+    public static function isCrossOrigin(UriInterface $original, UriInterface $modified)
     {
         if (\strcasecmp($original->getHost(), $modified->getHost()) !== 0) {
             return \true;
@@ -32,7 +32,7 @@ final class UriComparator
     /**
      * @return int
      */
-    private static function computePort(\UpsFreeVendor\Psr\Http\Message\UriInterface $uri)
+    private static function computePort(UriInterface $uri)
     {
         $port = $uri->getPort();
         if (null !== $port) {

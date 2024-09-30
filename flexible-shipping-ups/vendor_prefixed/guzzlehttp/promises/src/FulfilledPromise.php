@@ -8,12 +8,12 @@ namespace UpsFreeVendor\GuzzleHttp\Promise;
  * Thenning off of this promise will invoke the onFulfilled callback
  * immediately and ignore other callbacks.
  */
-class FulfilledPromise implements \UpsFreeVendor\GuzzleHttp\Promise\PromiseInterface
+class FulfilledPromise implements PromiseInterface
 {
     private $value;
     public function __construct($value)
     {
-        if (\is_object($value) && \method_exists($value, 'then')) {
+        if (is_object($value) && method_exists($value, 'then')) {
             throw new \InvalidArgumentException('You cannot create a FulfilledPromise with a promise.');
         }
         $this->value = $value;
@@ -24,11 +24,11 @@ class FulfilledPromise implements \UpsFreeVendor\GuzzleHttp\Promise\PromiseInter
         if (!$onFulfilled) {
             return $this;
         }
-        $queue = \UpsFreeVendor\GuzzleHttp\Promise\Utils::queue();
-        $p = new \UpsFreeVendor\GuzzleHttp\Promise\Promise([$queue, 'run']);
+        $queue = Utils::queue();
+        $p = new Promise([$queue, 'run']);
         $value = $this->value;
-        $queue->add(static function () use($p, $value, $onFulfilled) {
-            if (\UpsFreeVendor\GuzzleHttp\Promise\Is::pending($p)) {
+        $queue->add(static function () use ($p, $value, $onFulfilled) {
+            if (Is::pending($p)) {
                 try {
                     $p->resolve($onFulfilled($value));
                 } catch (\Throwable $e) {

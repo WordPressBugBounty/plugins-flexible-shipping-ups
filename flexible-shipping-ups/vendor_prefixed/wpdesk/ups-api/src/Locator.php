@@ -12,7 +12,7 @@ use UpsFreeVendor\Ups\Entity\LocatorRequest;
  *
  * @author Stefan Doorn <stefan@efectos.nl>
  */
-class Locator extends \UpsFreeVendor\Ups\Ups
+class Locator extends Ups
 {
     private $request;
     const ENDPOINT = '/Locator';
@@ -33,14 +33,14 @@ class Locator extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface $request
      * @param LoggerInterface $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
         }
         parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
-    public function getLocations(\UpsFreeVendor\Ups\Entity\LocatorRequest $request, $requestOption = self::OPTION_UPS_ACCESS_POINT_LOCATIONS)
+    public function getLocations(LocatorRequest $request, $requestOption = self::OPTION_UPS_ACCESS_POINT_LOCATIONS)
     {
         return $this->sendRequest($request, $requestOption);
     }
@@ -55,16 +55,16 @@ class Locator extends \UpsFreeVendor\Ups\Ups
      *
      * @return \stdClass
      */
-    private function sendRequest(\UpsFreeVendor\Ups\Entity\LocatorRequest $request, $requestOption)
+    private function sendRequest(LocatorRequest $request, $requestOption)
     {
         $request = $this->createRequest($request, $requestOption);
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response);
         }
@@ -77,9 +77,9 @@ class Locator extends \UpsFreeVendor\Ups\Ups
      *
      * @return string
      */
-    private function createRequest(\UpsFreeVendor\Ups\Entity\LocatorRequest $locatorRequest, $requestOption)
+    private function createRequest(LocatorRequest $locatorRequest, $requestOption)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $trackRequest = $xml->appendChild($xml->createElement('LocatorRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
@@ -102,7 +102,7 @@ class Locator extends \UpsFreeVendor\Ups\Ups
         }
         return $xml->saveXML();
     }
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         unset($response->Response);
         return $this->convertXmlObject($response);
@@ -113,7 +113,7 @@ class Locator extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -122,7 +122,7 @@ class Locator extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -139,7 +139,7 @@ class Locator extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

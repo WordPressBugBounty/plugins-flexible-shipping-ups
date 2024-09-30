@@ -33,10 +33,10 @@ echo \esc_url(\admin_url('admin-ajax.php'));
 				type: 'POST',
 				data: {
 					action: '<?php 
-echo \esc_js(\UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\AjaxActions::AJAX_ACTION);
+echo \esc_js(AjaxActions::AJAX_ACTION);
 ?>',
 					security: '<?php 
-echo \wp_create_nonce(\UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\AjaxActions::AJAX_ACTION);
+echo \wp_create_nonce(AjaxActions::AJAX_ACTION);
 ?>'
 				}
 			} );

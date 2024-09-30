@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Address implements \UpsFreeVendor\Ups\NodeInterface
+class Address implements NodeInterface
 {
     /** @deprecated */
     public $AddressLine1;
@@ -222,7 +222,7 @@ class Address implements \UpsFreeVendor\Ups\NodeInterface
             if (isset($attributes->AddressExtendedInformation)) {
                 $addressExtendedInformation = $this->getAddressExtendedInformation();
                 foreach ($attributes->AddressExtendedInformation as $item) {
-                    $addressExtendedInformation[] = new \UpsFreeVendor\Ups\Entity\ServiceSummary($item);
+                    $addressExtendedInformation[] = new ServiceSummary($item);
                 }
                 $this->setAddressExtendedInformation($addressExtendedInformation);
             }
@@ -233,10 +233,10 @@ class Address implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Address');
         if ($this->getAddressLine1()) {

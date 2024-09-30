@@ -15,7 +15,7 @@ use UpsFreeVendor\Ups\Entity\ShipmentRequestReceiptSpecification;
  * Package Shipping API Wrapper
  * Based on UPS Developer Guide, dated: 31 Dec 2012.
  */
-class Shipping extends \UpsFreeVendor\Ups\Ups
+class Shipping extends Ups
 {
     const REQ_VALIDATE = 'validate';
     const REQ_NONVALIDATE = 'nonvalidate';
@@ -44,7 +44,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -63,16 +63,16 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      *
      * @return \stdClass
      */
-    public function confirm($validation, \UpsFreeVendor\Ups\Entity\Shipment $shipment, \UpsFreeVendor\Ups\Entity\ShipmentRequestLabelSpecification $labelSpec = null, \UpsFreeVendor\Ups\Entity\ShipmentRequestReceiptSpecification $receiptSpec = null)
+    public function confirm($validation, Shipment $shipment, ShipmentRequestLabelSpecification $labelSpec = null, ShipmentRequestReceiptSpecification $receiptSpec = null)
     {
         $request = $this->createConfirmRequest($validation, $shipment, $labelSpec, $receiptSpec);
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipConfirmEndpoint));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response);
         }
@@ -87,9 +87,9 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      *
      * @return string
      */
-    private function createConfirmRequest($validation, \UpsFreeVendor\Ups\Entity\Shipment $shipment, \UpsFreeVendor\Ups\Entity\ShipmentRequestLabelSpecification $labelSpec = null, \UpsFreeVendor\Ups\Entity\ShipmentRequestReceiptSpecification $receiptSpec = null)
+    private function createConfirmRequest($validation, Shipment $shipment, ShipmentRequestLabelSpecification $labelSpec = null, ShipmentRequestReceiptSpecification $receiptSpec = null)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         // Page 45
         $container = $xml->appendChild($xml->createElement('ShipmentConfirmRequest'));
@@ -153,7 +153,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
         }
         $addressNode = $shipment->getShipTo()->getAddress()->toNode($xml);
         if ($shipment->getShipTo()->getLocationID()) {
-            $addressNode->appendChild($xml->createElement('LocationID', \strtoupper($shipment->getShipTo()->getLocationID())));
+            $addressNode->appendChild($xml->createElement('LocationID', strtoupper($shipment->getShipTo()->getLocationID())));
         }
         $shipToNode->appendChild($addressNode);
         if ($shipment->getShipFrom()) {
@@ -354,10 +354,10 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipAcceptEndpoint));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response->ShipmentResults);
         }
@@ -371,7 +371,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      */
     private function createAcceptRequest($shipmentDigest)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $container = $xml->appendChild($xml->createElement('ShipmentAcceptRequest'));
         $request = $container->appendChild($xml->createElement('Request'));
@@ -393,14 +393,14 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      */
     public function void($shipmentData)
     {
-        if (\is_array($shipmentData) && !isset($shipmentData['shipmentId'])) {
-            throw new \InvalidArgumentException('$shipmentData parameter is required to contain a key `shipmentId`.');
+        if (is_array($shipmentData) && !isset($shipmentData['shipmentId'])) {
+            throw new InvalidArgumentException('$shipmentData parameter is required to contain a key `shipmentId`.');
         }
         $request = $this->createVoidRequest($shipmentData);
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->voidEndpoint));
         $response = $this->response->getResponse();
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             unset($response->Response);
             return $this->formatResponse($response);
@@ -415,21 +415,21 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      */
     private function createVoidRequest($shipmentData)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $container = $xml->appendChild($xml->createElement('VoidShipmentRequest'));
         $request = $container->appendChild($xml->createElement('Request'));
         $node = $xml->importNode($this->createTransactionNode(), \true);
         $request->appendChild($node);
         $request->appendChild($xml->createElement('RequestAction', '1'));
-        if (\is_string($shipmentData)) {
-            $container->appendChild($xml->createElement('ShipmentIdentificationNumber', \strtoupper($shipmentData)));
+        if (is_string($shipmentData)) {
+            $container->appendChild($xml->createElement('ShipmentIdentificationNumber', strtoupper($shipmentData)));
         } else {
             $expanded = $container->appendChild($xml->createElement('ExpandedVoidShipment'));
-            $expanded->appendChild($xml->createElement('ShipmentIdentificationNumber', \strtoupper($shipmentData['shipmentId'])));
-            if (\array_key_exists('trackingNumbers', $shipmentData)) {
+            $expanded->appendChild($xml->createElement('ShipmentIdentificationNumber', strtoupper($shipmentData['shipmentId'])));
+            if (array_key_exists('trackingNumbers', $shipmentData)) {
                 foreach ($shipmentData['trackingNumbers'] as $tn) {
-                    $expanded->appendChild($xml->createElement('TrackingNumber', \strtoupper($tn)));
+                    $expanded->appendChild($xml->createElement('TrackingNumber', strtoupper($tn)));
                 }
             }
         }
@@ -451,12 +451,12 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      */
     public function recoverLabel($trackingData, $labelSpecification = null, $labelDelivery = null, $translate = null)
     {
-        if (\is_array($trackingData)) {
+        if (is_array($trackingData)) {
             if (!isset($trackingData['value'])) {
-                throw new \InvalidArgumentException('$trackingData parameter is required to contain `value`.');
+                throw new InvalidArgumentException('$trackingData parameter is required to contain `value`.');
             }
             if (!isset($trackingData['shipperNumber'])) {
-                throw new \InvalidArgumentException('$trackingData parameter is required to contain `shipperNumber`.');
+                throw new InvalidArgumentException('$trackingData parameter is required to contain `shipperNumber`.');
             }
         }
         if (!empty($translate)) {
@@ -470,7 +470,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
         $request = $this->createRecoverLabelRequest($trackingData, $labelSpecification, $labelDelivery, $translate);
         $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->recoverLabelEndpoint));
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             unset($response->Response);
             return $this->formatResponse($response);
@@ -488,16 +488,16 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      */
     private function createRecoverLabelRequest($trackingData, $labelSpecificationOpts = null, $labelDeliveryOpts = null, $translateOpts = null)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $container = $xml->appendChild($xml->createElement('LabelRecoveryRequest'));
         $request = $container->appendChild($xml->createElement('Request'));
         $node = $xml->importNode($this->createTransactionNode(), \true);
         $request->appendChild($node);
         $request->appendChild($xml->createElement('RequestAction', 'LabelRecovery'));
-        if (\is_string($trackingData)) {
+        if (is_string($trackingData)) {
             $container->appendChild($xml->createElement('TrackingNumber', $trackingData));
-        } elseif (\is_array($trackingData)) {
+        } elseif (is_array($trackingData)) {
             $referenceNumber = $container->appendChild($xml->createElement('ReferenceNumber'));
             $referenceNumber->appendChild($xml->createElement('Value', $trackingData['value']));
             $container->appendChild($xml->createElement('ShipperNumber', $trackingData['shipperNumber']));
@@ -531,7 +531,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      *
      * @return \stdClass
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         return $this->convertXmlObject($response);
     }
@@ -541,7 +541,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -550,7 +550,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -567,7 +567,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;
@@ -576,9 +576,9 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      * @param ShipmentRequestReceiptSpecification $receiptSpec
      * @return DOMNode
      */
-    private function compileReceiptSpecificationNode(\UpsFreeVendor\Ups\Entity\ShipmentRequestReceiptSpecification $receiptSpec)
+    private function compileReceiptSpecificationNode(ShipmentRequestReceiptSpecification $receiptSpec)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $receiptSpecNode = $xml->appendChild($xml->createElement('ReceiptSpecification'));
         $imageFormatNode = $receiptSpecNode->appendChild($xml->createElement('ImageFormat'));
@@ -592,9 +592,9 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
      * @param ShipmentRequestLabelSpecification $labelSpec
      * @return DOMNode
      */
-    private function compileLabelSpecificationNode(\UpsFreeVendor\Ups\Entity\ShipmentRequestLabelSpecification $labelSpec)
+    private function compileLabelSpecificationNode(ShipmentRequestLabelSpecification $labelSpec)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $labelSpecNode = $xml->appendChild($xml->createElement('LabelSpecification'));
         $printMethodNode = $labelSpecNode->appendChild($xml->createElement('LabelPrintMethod'));
@@ -606,7 +606,7 @@ class Shipping extends \UpsFreeVendor\Ups\Ups
             $labelSpecNode->appendChild($xml->createElement('HTTPUserAgent', $labelSpec->getHttpUserAgent()));
         }
         //Label print method is required only for GIF label formats
-        if ($labelSpec->getPrintMethodCode() == \UpsFreeVendor\Ups\Entity\ShipmentRequestLabelSpecification::IMG_FORMAT_CODE_GIF) {
+        if ($labelSpec->getPrintMethodCode() == ShipmentRequestLabelSpecification::IMG_FORMAT_CODE_GIF) {
             $imageFormatNode = $labelSpecNode->appendChild($xml->createElement('LabelImageFormat'));
             $imageFormatNode->appendChild($xml->createElement('Code', $labelSpec->getImageFormatCode()));
             if ($labelSpec->getImageFormatDescription()) {

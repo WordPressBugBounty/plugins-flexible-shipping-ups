@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class COD implements \UpsFreeVendor\Ups\NodeInterface
+class COD implements NodeInterface
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class COD implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function __construct($response = null)
     {
-        $this->CODAmount = new \UpsFreeVendor\Ups\Entity\CODAmount();
+        $this->CODAmount = new CODAmount();
         if (null !== $response) {
             if (isset($response->CODCode)) {
                 $this->CODCode = $response->CODCode;
@@ -34,7 +34,7 @@ class COD implements \UpsFreeVendor\Ups\NodeInterface
                 $this->CODFundsCode = $response->CODFundsCode;
             }
             if (isset($response->CODAmount)) {
-                $this->CODAmount = new \UpsFreeVendor\Ups\Entity\CODAmount($response->CODAmount);
+                $this->CODAmount = new CODAmount($response->CODAmount);
             }
         }
     }
@@ -42,10 +42,10 @@ class COD implements \UpsFreeVendor\Ups\NodeInterface
      * @param DOMDocument|null $document
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('COD');
         if ($this->getCODCode()) {
@@ -102,7 +102,7 @@ class COD implements \UpsFreeVendor\Ups\NodeInterface
      * @param CODAmount $CODAmount
      * @return COD
      */
-    public function setCODAmount(\UpsFreeVendor\Ups\Entity\CODAmount $CODAmount)
+    public function setCODAmount(CODAmount $CODAmount)
     {
         $this->CODAmount = $CODAmount;
         return $this;

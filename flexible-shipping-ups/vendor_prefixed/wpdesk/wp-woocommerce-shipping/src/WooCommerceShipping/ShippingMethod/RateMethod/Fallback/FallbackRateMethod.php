@@ -11,7 +11,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\RateMetho
  *
  * @package WPDesk\WooCommerceShipping\ShippingMethod
  */
-class FallbackRateMethod implements \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\RateMethod
+class FallbackRateMethod implements RateMethod
 {
     const FIELD_ENABLE_FALLBACK = 'fallback';
     const FIELD_FALLBACK_COST = 'fallback_cost';
@@ -48,15 +48,15 @@ class FallbackRateMethod implements \UpsFreeVendor\WPDesk\WooCommerceShipping\Sh
      *
      * @return void
      */
-    public function handle_rates(\WC_Shipping_Method $method, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\ErrorLogCatcher $logger, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingBuilder\WooCommerceShippingMetaDataBuilder $metadata_builder, \UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingBuilder\WooCommerceShippingBuilder $shipment_builder)
+    public function handle_rates(\WC_Shipping_Method $method, ErrorLogCatcher $logger, WooCommerceShippingMetaDataBuilder $metadata_builder, WooCommerceShippingBuilder $shipment_builder)
     {
         if (empty($method->rates) && !empty('yes' === $method->get_option(self::FIELD_ENABLE_FALLBACK, 'no'))) {
-            $fallback_reason = \__('There was no valid services available.', 'flexible-shipping-ups');
+            $fallback_reason = __('There was no valid services available.', 'flexible-shipping-ups');
             if ($logger->was_error()) {
                 $fallback_reason = $logger->get_last_error_message();
             }
-            $logger->info(\sprintf(\__('Fallback rate added with reason: %1$s', 'flexible-shipping-ups'), $fallback_reason));
-            $meta_data = (array) \apply_filters($method->id . '/rate/meta_data', [self::META_DATA_KEY => $fallback_reason], $method);
+            $logger->info(sprintf(__('Fallback rate added with reason: %1$s', 'flexible-shipping-ups'), $fallback_reason));
+            $meta_data = (array) apply_filters($method->id . '/rate/meta_data', [self::META_DATA_KEY => $fallback_reason], $method);
             $method->add_rate(['id' => $method->id . ':' . $method->instance_id . ':fallback', 'label' => $method->title, 'cost' => $method->get_option(self::FIELD_FALLBACK_COST), 'sort' => 0, 'meta_data' => $meta_data]);
         }
     }

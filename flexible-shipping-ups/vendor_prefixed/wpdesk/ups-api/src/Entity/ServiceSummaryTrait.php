@@ -29,14 +29,14 @@ trait ServiceSummaryTrait
      */
     public function build(\stdClass $response = null)
     {
-        $this->setService(new \UpsFreeVendor\Ups\Entity\Service());
-        $this->setGuaranteed(new \UpsFreeVendor\Ups\Entity\Guaranteed());
+        $this->setService(new Service());
+        $this->setGuaranteed(new Guaranteed());
         if (null !== $response) {
             if (isset($response->Service)) {
-                $this->setService(new \UpsFreeVendor\Ups\Entity\Service($response->Service));
+                $this->setService(new Service($response->Service));
             }
             if (isset($response->Guaranteed)) {
-                $this->setGuaranteed(new \UpsFreeVendor\Ups\Entity\Guaranteed($response->Guaranteed));
+                $this->setGuaranteed(new Guaranteed($response->Guaranteed));
             }
         }
     }
@@ -50,7 +50,7 @@ trait ServiceSummaryTrait
     /**
      * @param Service $service
      */
-    public function setService(\UpsFreeVendor\Ups\Entity\Service $service)
+    public function setService(Service $service)
     {
         $this->Service = $service;
         $this->service = $service;
@@ -65,7 +65,7 @@ trait ServiceSummaryTrait
     /**
      * @param $guaranteed
      */
-    public function setGuaranteed(\UpsFreeVendor\Ups\Entity\Guaranteed $guaranteed)
+    public function setGuaranteed(Guaranteed $guaranteed)
     {
         $this->Guaranteed = $guaranteed;
         $this->guaranteed = $guaranteed;

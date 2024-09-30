@@ -5,7 +5,7 @@ namespace UpsFreeVendor\WPDesk\ShowDecision;
 /**
  * Show when pages associated with given post type is displayed.
  */
-class PostTypeStrategy implements \UpsFreeVendor\WPDesk\ShowDecision\ShouldShowStrategy
+class PostTypeStrategy implements ShouldShowStrategy
 {
     /** @var string */
     private $post_type;
@@ -28,7 +28,7 @@ class PostTypeStrategy implements \UpsFreeVendor\WPDesk\ShowDecision\ShouldShowS
     private function is_current_post_type_automation()
     {
         if (isset($_GET['post'])) {
-            $post = \get_post((int) $_GET['post']);
+            $post = get_post((int) $_GET['post']);
             if ($post instanceof \WP_Post) {
                 return $post->post_type === $this->post_type;
             }

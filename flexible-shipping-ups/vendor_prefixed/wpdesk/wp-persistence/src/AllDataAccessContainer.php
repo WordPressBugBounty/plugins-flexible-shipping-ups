@@ -8,12 +8,12 @@ use UpsFreeVendor\Psr\Container\ContainerInterface;
  *
  * @package WPDesk\Persistence
  */
-interface AllDataAccessContainer extends \UpsFreeVendor\Psr\Container\ContainerInterface
+interface AllDataAccessContainer extends ContainerInterface
 {
     /**
      * Get all values.
      *
      * @return array
      */
-    public function get_all() : array;
+    public function get_all(): array;
 }

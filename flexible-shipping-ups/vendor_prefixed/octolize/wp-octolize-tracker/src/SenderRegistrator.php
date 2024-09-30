@@ -6,7 +6,7 @@ use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 /**
  * Can create and register sender in filter.
  */
-class SenderRegistrator implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable
+class SenderRegistrator implements Hookable
 {
     /**
      * @var string
@@ -24,13 +24,13 @@ class SenderRegistrator implements \UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Ho
      */
     public function hooks()
     {
-        \add_filter('wpdesk/tracker/sender/' . $this->plugin_slug, [$this, 'create_sender']);
+        add_filter('wpdesk/tracker/sender/' . $this->plugin_slug, [$this, 'create_sender']);
     }
     /**
      * @return SenderToOctolize
      */
     public function create_sender()
     {
-        return new \UpsFreeVendor\Octolize\Tracker\SenderToOctolize();
+        return new SenderToOctolize();
     }
 }

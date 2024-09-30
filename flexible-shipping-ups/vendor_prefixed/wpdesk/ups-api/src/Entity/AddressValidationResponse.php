@@ -29,7 +29,7 @@ class AddressValidationResponse
      */
     public function noCandidates()
     {
-        if (\UpsFreeVendor\Ups\AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
             throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
         }
         return isset($this->response->NoCandidatesIndicator);
@@ -43,7 +43,7 @@ class AddressValidationResponse
      */
     public function isValid()
     {
-        if (\UpsFreeVendor\Ups\AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
             return $this->response->AddressClassification->Code > 0;
         }
         return isset($this->response->ValidAddressIndicator);
@@ -58,7 +58,7 @@ class AddressValidationResponse
      */
     public function isAmbiguous()
     {
-        if (\UpsFreeVendor\Ups\AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
             throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
         }
         return isset($this->response->AmbiguousAddressIndicator);
@@ -69,10 +69,10 @@ class AddressValidationResponse
      */
     public function getAddressClassification()
     {
-        if ($this->requestAction < \UpsFreeVendor\Ups\AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
+        if ($this->requestAction < AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
             throw new \BadMethodCallException('Address Classification was not requested.');
         }
-        return new \UpsFreeVendor\Ups\Entity\AddressValidation\AddressClassification($this->response->AddressClassification);
+        return new AddressClassification($this->response->AddressClassification);
     }
     /**
      * @return array
@@ -84,7 +84,7 @@ class AddressValidationResponse
         }
         $candidates = [];
         foreach ($this->response->AddressKeyFormat as $address) {
-            $candidates[] = new \UpsFreeVendor\Ups\Entity\AddressValidation\AVAddress($address);
+            $candidates[] = new AVAddress($address);
         }
         return $candidates;
     }
@@ -93,9 +93,9 @@ class AddressValidationResponse
      */
     public function getValidatedAddress()
     {
-        if ($this->requestAction == \UpsFreeVendor\Ups\AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
+        if ($this->requestAction == AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
             throw new \BadMethodCallException('Only Address Classification was requested. There is no address.');
         }
-        return new \UpsFreeVendor\Ups\Entity\AddressValidation\AVAddress($this->response->AddressKeyFormat);
+        return new AVAddress($this->response->AddressKeyFormat);
     }
 }

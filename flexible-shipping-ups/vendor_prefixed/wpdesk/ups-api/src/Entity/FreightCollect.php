@@ -24,7 +24,7 @@ class FreightCollect
             $this->setAccountNumber($attributes->AccountNumber);
         }
         if (isset($attributes->BillReceiverAddress)) {
-            $this->setBillReceiverAddress(new \UpsFreeVendor\Ups\Entity\Address($attributes->BillReceiverAddress));
+            $this->setBillReceiverAddress(new Address($attributes->BillReceiverAddress));
         }
     }
     /**
@@ -54,7 +54,7 @@ class FreightCollect
      * @param Address $address
      * @return FreightCollect
      */
-    public function setBillReceiverAddress(\UpsFreeVendor\Ups\Entity\Address $address = null)
+    public function setBillReceiverAddress(Address $address = null)
     {
         $this->billReceiverAddress = $address;
         return $this;

@@ -12,7 +12,7 @@ use UpsFreeVendor\Ups\Entity\LabelRecoveryResponse;
  *
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
-class LabelRecovery extends \UpsFreeVendor\Ups\Ups
+class LabelRecovery extends Ups
 {
     const ENDPOINT = '/LabelRecovery';
     /**
@@ -41,7 +41,7 @@ class LabelRecovery extends \UpsFreeVendor\Ups\Ups
         $request = $this->createRequest($labelRecoveryRequest);
         $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response);
         }
@@ -55,7 +55,7 @@ class LabelRecovery extends \UpsFreeVendor\Ups\Ups
      */
     private function createRequest($labelRecoveryRequest)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $trackRequest = $xml->appendChild($xml->createElement('LabelRecoveryRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
@@ -103,11 +103,11 @@ class LabelRecovery extends \UpsFreeVendor\Ups\Ups
      *
      * @return LabelRecoveryResponse
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
         $result = $this->convertXmlObject($response);
-        return new \UpsFreeVendor\Ups\Entity\LabelRecoveryResponse($result);
+        return new LabelRecoveryResponse($result);
     }
 }

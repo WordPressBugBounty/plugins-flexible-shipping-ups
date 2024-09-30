@@ -15,7 +15,7 @@ use UpsFreeVendor\Ups\Entity\Shipment;
  *
  * @author Michael Williams <michael.williams@limelyte.com>
  */
-class Rate extends \UpsFreeVendor\Ups\Ups
+class Rate extends Ups
 {
     const ENDPOINT = '/Rate';
     /**
@@ -40,9 +40,9 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      */
     public function shopRates($rateRequest)
     {
-        if ($rateRequest instanceof \UpsFreeVendor\Ups\Entity\Shipment) {
+        if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
-            $rateRequest = new \UpsFreeVendor\Ups\Entity\RateRequest();
+            $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
         }
         $this->requestOption = 'Shop';
@@ -57,9 +57,9 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      */
     public function getRate($rateRequest)
     {
-        if ($rateRequest instanceof \UpsFreeVendor\Ups\Entity\Shipment) {
+        if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
-            $rateRequest = new \UpsFreeVendor\Ups\Entity\RateRequest();
+            $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
         }
         $this->requestOption = 'Rate';
@@ -75,16 +75,16 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      *
      * @return RateResponse
      */
-    protected function sendRequest(\UpsFreeVendor\Ups\Entity\RateRequest $rateRequest)
+    protected function sendRequest(RateRequest $rateRequest)
     {
         $request = $this->createRequest($rateRequest);
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response);
         }
@@ -96,10 +96,10 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      *
      * @return string
      */
-    private function createRequest(\UpsFreeVendor\Ups\Entity\RateRequest $rateRequest)
+    private function createRequest(RateRequest $rateRequest)
     {
         $shipment = $rateRequest->getShipment();
-        $document = $xml = new \DOMDocument();
+        $document = $xml = new DOMDocument();
         $xml->formatOutput = \true;
         /** @var DOMElement $trackRequest */
         $trackRequest = $xml->appendChild($xml->createElement('RatingServiceSelectionRequest'));
@@ -110,7 +110,7 @@ class Rate extends \UpsFreeVendor\Ups\Ups
         $request->appendChild($xml->createElement('RequestAction', 'Rate'));
         $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
         $pickupType = $rateRequest->getPickupType();
-        if ($pickupType instanceof \UpsFreeVendor\Ups\Entity\PickupType) {
+        if ($pickupType instanceof PickupType) {
             $trackRequest->appendChild($pickupType->toNode($document));
         }
         $customerClassification = $rateRequest->getCustomerClassification();
@@ -175,12 +175,12 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      *
      * @return RateResponse
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
         $result = $this->convertXmlObject($response);
-        return new \UpsFreeVendor\Ups\Entity\RateResponse($result);
+        return new RateResponse($result);
     }
     /**
      * @return RequestInterface
@@ -188,7 +188,7 @@ class Rate extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -197,7 +197,7 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -214,7 +214,7 @@ class Rate extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

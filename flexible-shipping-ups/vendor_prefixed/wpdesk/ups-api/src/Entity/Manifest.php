@@ -39,31 +39,31 @@ class Manifest
     public $UAPAddress;
     public function __construct($response = null)
     {
-        $this->Shipper = new \UpsFreeVendor\Ups\Entity\Shipper();
-        $this->ReferenceNumber = new \UpsFreeVendor\Ups\Entity\ReferenceNumber();
-        $this->Service = new \UpsFreeVendor\Ups\Entity\Service();
-        $this->ShipmentServiceOptions = new \UpsFreeVendor\Ups\Entity\ShipmentServiceOptions();
-        $this->CustomsValue = new \UpsFreeVendor\Ups\Entity\CustomsValue();
-        $this->BillToAccount = new \UpsFreeVendor\Ups\Entity\BillToAccount();
-        $this->UAPAddress = new \UpsFreeVendor\Ups\Entity\Address();
+        $this->Shipper = new Shipper();
+        $this->ReferenceNumber = new ReferenceNumber();
+        $this->Service = new Service();
+        $this->ShipmentServiceOptions = new ShipmentServiceOptions();
+        $this->CustomsValue = new CustomsValue();
+        $this->BillToAccount = new BillToAccount();
+        $this->UAPAddress = new Address();
         if (null !== $response) {
             if (isset($response->Shipper)) {
-                $this->Shipper = new \UpsFreeVendor\Ups\Entity\Shipper($response->Shipper);
+                $this->Shipper = new Shipper($response->Shipper);
             }
             if (isset($response->ShipTo)) {
-                $this->ShipTo = new \UpsFreeVendor\Ups\Entity\ShipTo($response->ShipTo);
+                $this->ShipTo = new ShipTo($response->ShipTo);
             }
             if (isset($response->ReferenceNumber)) {
-                if (\is_array($response->ReferenceNumber)) {
+                if (is_array($response->ReferenceNumber)) {
                     foreach ($response->ReferenceNumber as $ReferenceNumber) {
-                        $this->ReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\ReferenceNumber($ReferenceNumber);
+                        $this->ReferenceNumber[] = new ReferenceNumber($ReferenceNumber);
                     }
                 } else {
-                    $this->ReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\ReferenceNumber($response->ReferenceNumber);
+                    $this->ReferenceNumber[] = new ReferenceNumber($response->ReferenceNumber);
                 }
             }
             if (isset($response->Service)) {
-                $this->Service = new \UpsFreeVendor\Ups\Entity\Service($response->Service);
+                $this->Service = new Service($response->Service);
             }
             if (isset($response->PickupDate)) {
                 $this->PickupDate = $response->PickupDate;
@@ -78,16 +78,16 @@ class Manifest
                 $this->DocumentsOnly = $response->DocumentsOnly;
             }
             if (isset($response->Package)) {
-                if (\is_array($response->Package)) {
+                if (is_array($response->Package)) {
                     foreach ($response->Package as $Package) {
-                        $this->Package[] = new \UpsFreeVendor\Ups\Entity\Package($Package);
+                        $this->Package[] = new Package($Package);
                     }
                 } else {
-                    $this->Package[] = new \UpsFreeVendor\Ups\Entity\Package($response->Package);
+                    $this->Package[] = new Package($response->Package);
                 }
             }
             if (isset($response->ShipmentServiceOptions)) {
-                $this->ShipmentServiceOptions = new \UpsFreeVendor\Ups\Entity\ShipmentServiceOptions($response->ShipmentServiceOptions);
+                $this->ShipmentServiceOptions = new ShipmentServiceOptions($response->ShipmentServiceOptions);
             }
             if (isset($response->ManufactureCountry)) {
                 $this->ManufactureCountry = $response->ManufactureCountry;
@@ -96,7 +96,7 @@ class Manifest
                 $this->HarmonizedCode = $response->HarmonizedCode;
             }
             if (isset($response->CustomsValue)) {
-                $this->CustomsValue = new \UpsFreeVendor\Ups\Entity\CustomsValue($response->CustomsValue);
+                $this->CustomsValue = new CustomsValue($response->CustomsValue);
             }
             if (isset($response->SpecialInstructions)) {
                 $this->SpecialInstructions = $response->SpecialInstructions;
@@ -105,7 +105,7 @@ class Manifest
                 $this->ShipmentChargeType = $response->ShipmentChargeType;
             }
             if (isset($response->BillToAccount)) {
-                $this->BillToAccount = new \UpsFreeVendor\Ups\Entity\BillToAccount($response->BillToAccount);
+                $this->BillToAccount = new BillToAccount($response->BillToAccount);
             }
             if (isset($response->ConsigneeBillIndicator)) {
                 $this->ConsigneeBillIndicator = $response->ConsigneeBillIndicator;
@@ -156,7 +156,7 @@ class Manifest
                 $this->HoldForPickupAtUPSAccessPoint = $response->HoldForPickupAtUPSAccessPoint;
             }
             if (isset($response->UAPAddress)) {
-                $this->UAPAddress = new \UpsFreeVendor\Ups\Entity\Address($response->UAPAddress);
+                $this->UAPAddress = new Address($response->UAPAddress);
             }
         }
     }

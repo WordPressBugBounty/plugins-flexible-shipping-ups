@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class ReturnService implements \UpsFreeVendor\Ups\NodeInterface
+class ReturnService implements NodeInterface
 {
     const PRINT_AND_MAIL_PNM = 2;
     const RETURN_SERVICE_1_ATTEMPT_RS1 = 3;
@@ -51,10 +51,10 @@ class ReturnService implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('ReturnService');
         $node->appendChild($document->createElement('Code', $this->getCode()));

@@ -35,21 +35,21 @@ class Rate
         $this->is_tax_enabled = $is_tax_enabled;
         $this->time_in_transit = $time_in_transit;
     }
-    public function shopRates(\UpsFreeVendor\Ups\Entity\RateRequest $rate_request) : \UpsFreeVendor\Ups\Entity\RateResponse
+    public function shopRates(RateRequest $rate_request): RateResponse
     {
         $this->client->setLogger($this->logger);
         $response = $this->client->rating('Shop', $this->prepare_payload($rate_request), $this->time_in_transit ? 'timeintransit' : '');
-        return new \UpsFreeVendor\Ups\Entity\RateResponse($this->prepare_response($response->RateResponse));
+        return new RateResponse($this->prepare_response($response->RateResponse));
     }
-    public function getRate(\UpsFreeVendor\Ups\Entity\RateRequest $rate_request) : \UpsFreeVendor\Ups\Entity\RateResponse
+    public function getRate(RateRequest $rate_request): RateResponse
     {
         $this->client->setLogger($this->logger);
         $response = $this->client->rating('Rate', $this->prepare_payload($rate_request));
-        return new \UpsFreeVendor\Ups\Entity\RateResponse($this->prepare_response($response->RateResponse));
+        return new RateResponse($this->prepare_response($response->RateResponse));
     }
-    private function prepare_response(\stdClass $response) : \stdClass
+    private function prepare_response(\stdClass $response): \stdClass
     {
-        if (!\is_array($response->RatedShipment)) {
+        if (!is_array($response->RatedShipment)) {
             $response->RatedShipment = [$response->RatedShipment];
         }
         foreach ($response->RatedShipment as $key => $shipment) {
@@ -61,7 +61,7 @@ class Rate
         }
         return $response;
     }
-    private function prepare_payload(\UpsFreeVendor\Ups\Entity\RateRequest $rate_request) : array
+    private function prepare_payload(RateRequest $rate_request): array
     {
         $payload = ['RateRequest' => $this->prepare_object_properties($rate_request)];
         $payload['RateRequest']['Shipment']['Package'] = $payload['RateRequest']['Shipment']['Packages'];
@@ -72,7 +72,7 @@ class Rate
         $payload = $this->prepare_declared_value($payload);
         return $payload;
     }
-    private function prepare_declared_value(array $payload) : array
+    private function prepare_declared_value(array $payload): array
     {
         foreach ($payload['RateRequest']['Shipment']['Package'] as $key => $package) {
             if (isset($payload['RateRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['InsuredValue'])) {
@@ -81,7 +81,7 @@ class Rate
         }
         return $payload;
     }
-    private function prepare_delivery_confirmation(array $payload) : array
+    private function prepare_delivery_confirmation(array $payload): array
     {
         if (isset($payload['RateRequest']['Shipment']['ShipmentServiceOptions']['DeliveryConfirmation']['DcisType'])) {
             $payload['RateRequest']['Shipment']['ShipmentServiceOptions']['DeliveryConfirmation']['DCISType'] = (string) $payload['RateRequest']['Shipment']['ShipmentServiceOptions']['DeliveryConfirmation']['DcisType'];
@@ -95,7 +95,7 @@ class Rate
         }
         return $payload;
     }
-    private function prepare_negotiated_rates(array $payload) : array
+    private function prepare_negotiated_rates(array $payload): array
     {
         if (isset($payload['RateRequest']['Shipment']['RateInformation'], $payload['RateRequest']['Shipment']['RateInformation']['NegotiatedRatesIndicator'])) {
             $payload['RateRequest']['Shipment']['ShipmentRatingOptions'] = $payload['RateRequest']['Shipment']['ShipmentRatingOptions'] ?? [];

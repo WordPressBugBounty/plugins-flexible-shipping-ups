@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Octolize\Tracker\OptInNotice;
 /**
  * Should display always.
  */
-class ShouldDisplayAlways implements \UpsFreeVendor\Octolize\Tracker\OptInNotice\ShouldDisplay
+class ShouldDisplayAlways implements ShouldDisplay
 {
     /**
      * @inheritDoc

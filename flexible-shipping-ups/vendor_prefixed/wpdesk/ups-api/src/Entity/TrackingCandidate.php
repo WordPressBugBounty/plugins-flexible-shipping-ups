@@ -23,7 +23,7 @@ class TrackingCandidate
             $this->DestinationCountryCode = $response->DestinationCountryCode;
         }
         if (isset($response->PickupDateRange)) {
-            $this->PickupDateRange = new \UpsFreeVendor\Ups\Entity\PickupDateRange($response->PickupDateRange);
+            $this->PickupDateRange = new PickupDateRange($response->PickupDateRange);
         }
     }
 }

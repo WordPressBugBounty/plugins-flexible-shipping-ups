@@ -8,9 +8,9 @@ use UpsFreeVendor\Psr\Http\Message\RequestInterface;
  *
  * Note that no response is present for a ConnectException
  */
-class ConnectException extends \UpsFreeVendor\GuzzleHttp\Exception\RequestException
+class ConnectException extends RequestException
 {
-    public function __construct($message, \UpsFreeVendor\Psr\Http\Message\RequestInterface $request, \Exception $previous = null, array $handlerContext = [])
+    public function __construct($message, RequestInterface $request, \Exception $previous = null, array $handlerContext = [])
     {
         parent::__construct($message, $request, null, $previous, $handlerContext);
     }

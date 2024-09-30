@@ -15,12 +15,12 @@ class QuantumViewEvents
             }
         }
         if (isset($response->SubscriptionEvents)) {
-            if (\is_array($response->SubscriptionEvents)) {
+            if (is_array($response->SubscriptionEvents)) {
                 foreach ($response->SubscriptionEvents as $SubscriptionEvents) {
-                    $this->SubscriptionEvents[] = new \UpsFreeVendor\Ups\Entity\SubscriptionEvents($SubscriptionEvents);
+                    $this->SubscriptionEvents[] = new SubscriptionEvents($SubscriptionEvents);
                 }
             } else {
-                $this->SubscriptionEvents[] = new \UpsFreeVendor\Ups\Entity\SubscriptionEvents($response->SubscriptionEvents);
+                $this->SubscriptionEvents[] = new SubscriptionEvents($response->SubscriptionEvents);
             }
         }
     }

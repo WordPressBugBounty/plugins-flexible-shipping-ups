@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class PickupType implements \UpsFreeVendor\Ups\NodeInterface
+class PickupType implements NodeInterface
 {
     const PKT_DAILY = '01';
     const PKT_CUSTOMERCOUNTER = '03';
@@ -30,10 +30,10 @@ class PickupType implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('PickupType');
         $node->appendChild($document->createElement('Code', $this->getCode() ?? ''));

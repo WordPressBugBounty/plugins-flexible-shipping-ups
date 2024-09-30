@@ -16,33 +16,33 @@ class SubscriptionFile
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->StatusType = new \UpsFreeVendor\Ups\Entity\StatusType();
-        $this->Manifest = new \UpsFreeVendor\Ups\Entity\Manifest();
-        $this->Origin = new \UpsFreeVendor\Ups\Entity\Origin();
-        $this->Exception = new \UpsFreeVendor\Ups\Entity\Exception();
-        $this->Delivery = new \UpsFreeVendor\Ups\Entity\Delivery();
-        $this->Generic = new \UpsFreeVendor\Ups\Entity\Generic();
+        $this->StatusType = new StatusType();
+        $this->Manifest = new Manifest();
+        $this->Origin = new Origin();
+        $this->Exception = new Exception();
+        $this->Delivery = new Delivery();
+        $this->Generic = new Generic();
         if (null !== $response) {
             if (isset($response->FileName)) {
                 $this->FileName = $response->FileName;
             }
             if (isset($response->StatusType)) {
-                $this->StatusType = new \UpsFreeVendor\Ups\Entity\StatusType($response->StatusType);
+                $this->StatusType = new StatusType($response->StatusType);
             }
             if (isset($response->Manifest)) {
-                $this->Manifest = new \UpsFreeVendor\Ups\Entity\Manifest($response->Manifest);
+                $this->Manifest = new Manifest($response->Manifest);
             }
             if (isset($response->Origin)) {
-                $this->Origin = new \UpsFreeVendor\Ups\Entity\Origin($response->Origin);
+                $this->Origin = new Origin($response->Origin);
             }
             if (isset($response->Exception)) {
-                $this->Exception = new \UpsFreeVendor\Ups\Entity\Exception($response->Exception);
+                $this->Exception = new Exception($response->Exception);
             }
             if (isset($response->Delivery)) {
-                $this->Delivery = new \UpsFreeVendor\Ups\Entity\Delivery($response->Delivery);
+                $this->Delivery = new Delivery($response->Delivery);
             }
             if (isset($response->Generic)) {
-                $this->Generic = new \UpsFreeVendor\Ups\Entity\Generic($response->Generic);
+                $this->Generic = new Generic($response->Generic);
             }
         }
     }

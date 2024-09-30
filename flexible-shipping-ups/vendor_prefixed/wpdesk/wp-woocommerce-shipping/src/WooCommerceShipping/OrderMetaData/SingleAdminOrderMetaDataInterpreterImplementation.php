@@ -10,7 +10,7 @@ namespace UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData;
 /**
  * Can interpret meta data from WooCommerce order shipping on admin.
  */
-class SingleAdminOrderMetaDataInterpreterImplementation implements \UpsFreeVendor\WPDesk\WooCommerceShipping\OrderMetaData\SingleAdminOrderMetaDataInterpreter
+class SingleAdminOrderMetaDataInterpreterImplementation implements SingleAdminOrderMetaDataInterpreter
 {
     use AdminMetaDataUnchangedTrait;
     /**

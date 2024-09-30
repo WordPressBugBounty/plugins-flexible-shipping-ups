@@ -12,7 +12,7 @@ namespace UpsFreeVendor\WPDesk\AbstractShipping\Exception;
  *
  * @package WPDesk\AbstractShipping\Exception
  */
-class RateException extends \RuntimeException implements \UpsFreeVendor\WPDesk\AbstractShipping\Exception\ShippingException
+class RateException extends \RuntimeException implements ShippingException
 {
     /**
      * Context.

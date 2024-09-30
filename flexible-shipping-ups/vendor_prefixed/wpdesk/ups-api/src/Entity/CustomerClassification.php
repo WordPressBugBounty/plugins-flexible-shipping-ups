@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class CustomerClassification implements \UpsFreeVendor\Ups\NodeInterface
+class CustomerClassification implements NodeInterface
 {
     const RT_SHIPPER = '00';
     const RT_DAILY = '01';
@@ -22,10 +22,10 @@ class CustomerClassification implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('CustomerClassification');
         $node->appendChild($document->createElement('Code', $this->getCode()));

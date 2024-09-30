@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Shipper implements \UpsFreeVendor\Ups\NodeInterface
+class Shipper implements NodeInterface
 {
     /**
      * @var string
@@ -48,7 +48,7 @@ class Shipper implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function __construct($attributes = null)
     {
-        $this->address = new \UpsFreeVendor\Ups\Entity\Address();
+        $this->address = new Address();
         if (null !== $attributes) {
             if (isset($attributes->Name)) {
                 $this->setName($attributes->Name);
@@ -75,7 +75,7 @@ class Shipper implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setEmailAddress($attributes->EMailAddress);
             }
             if (isset($attributes->Address)) {
-                $this->setAddress(new \UpsFreeVendor\Ups\Entity\Address($attributes->Address));
+                $this->setAddress(new Address($attributes->Address));
             }
         }
     }
@@ -84,10 +84,10 @@ class Shipper implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('Shipper');
         $shipperName = $this->getName();
@@ -116,7 +116,7 @@ class Shipper implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Shipper
      */
-    public function setAddress(\UpsFreeVendor\Ups\Entity\Address $address)
+    public function setAddress(Address $address)
     {
         $this->address = $address;
         return $this;

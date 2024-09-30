@@ -8,7 +8,7 @@ use UpsFreeVendor\Psr\Log\LoggerAwareInterface;
 use UpsFreeVendor\Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use stdClass;
-abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
+abstract class Ups implements LoggerAwareInterface
 {
     const PRODUCTION_BASE_URL = 'https://onlinetools.ups.com/ups.app/xml';
     const INTEGRATION_BASE_URL = 'https://wwwcie.ups.com/ups.app/xml';
@@ -61,7 +61,7 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, LoggerInterface $logger = null)
     {
         $this->accessKey = $accessKey;
         $this->userId = $userId;
@@ -81,7 +81,7 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(\UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -101,10 +101,10 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      */
     public function formatDateTime($timestamp)
     {
-        if (!\is_numeric($timestamp)) {
-            $timestamp = \strtotime($timestamp);
+        if (!is_numeric($timestamp)) {
+            $timestamp = strtotime($timestamp);
         }
-        return \date('YmdHis', $timestamp);
+        return date('YmdHis', $timestamp);
     }
     /**
      * Create the access request.
@@ -113,7 +113,7 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      */
     protected function createAccess()
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         // Create the AccessRequest element
         $accessRequest = $xml->appendChild($xml->createElement('AccessRequest'));
@@ -131,7 +131,7 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      */
     protected function createTransactionNode()
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
         if (null !== $this->context) {
@@ -154,13 +154,13 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      */
     protected function request($access, $request, $endpointurl)
     {
-        $requestInstance = new \UpsFreeVendor\Ups\Request($this->logger);
+        $requestInstance = new Request($this->logger);
         $response = $requestInstance->request($access, $request, $endpointurl);
-        if ($response->getResponse() instanceof \SimpleXMLElement) {
+        if ($response->getResponse() instanceof SimpleXMLElement) {
             $this->response = $response->getResponse();
             return $response->getResponse();
         }
-        throw new \Exception('Failure: Response is invalid.');
+        throw new Exception('Failure: Response is invalid.');
     }
     /**
      * Convert XMLSimpleObject to stdClass object.
@@ -169,9 +169,9 @@ abstract class Ups implements \UpsFreeVendor\Psr\Log\LoggerAwareInterface
      *
      * @return stdClass
      */
-    protected function convertXmlObject(\SimpleXMLElement $xmlObject)
+    protected function convertXmlObject(SimpleXMLElement $xmlObject)
     {
-        return \json_decode(\json_encode($xmlObject));
+        return json_decode(json_encode($xmlObject));
     }
     /**
      * Compiles the final endpoint URL for the request.

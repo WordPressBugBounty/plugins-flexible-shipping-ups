@@ -12,9 +12,9 @@ class LabelRecoveryRequest
     public $ShipperNumber;
     public function __construct()
     {
-        $this->LabelSpecification = new \UpsFreeVendor\Ups\Entity\LabelSpecification();
-        $this->Translate = new \UpsFreeVendor\Ups\Entity\Translate();
-        $this->LabelDelivery = new \UpsFreeVendor\Ups\Entity\LabelDelivery();
-        $this->ReferenceNumber = new \UpsFreeVendor\Ups\Entity\ReferenceNumber();
+        $this->LabelSpecification = new LabelSpecification();
+        $this->Translate = new Translate();
+        $this->LabelDelivery = new LabelDelivery();
+        $this->ReferenceNumber = new ReferenceNumber();
     }
 }

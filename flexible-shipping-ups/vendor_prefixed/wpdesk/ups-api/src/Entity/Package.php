@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class Package implements \UpsFreeVendor\Ups\NodeInterface
+class Package implements NodeInterface
 {
     const PKG_OVERSIZE1 = '1';
     const PKG_OVERSIZE2 = '2';
@@ -67,29 +67,29 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function __construct($attributes = null)
     {
-        $this->setPackagingType(new \UpsFreeVendor\Ups\Entity\PackagingType(isset($attributes->PackagingType) ? $attributes->PackagingType : null));
-        $this->setReferenceNumber(new \UpsFreeVendor\Ups\Entity\ReferenceNumber());
-        $this->setReferenceNumber2(new \UpsFreeVendor\Ups\Entity\ReferenceNumber());
-        $this->setPackageWeight(new \UpsFreeVendor\Ups\Entity\PackageWeight());
-        $this->setPackageServiceOptions(new \UpsFreeVendor\Ups\Entity\PackageServiceOptions());
+        $this->setPackagingType(new PackagingType(isset($attributes->PackagingType) ? $attributes->PackagingType : null));
+        $this->setReferenceNumber(new ReferenceNumber());
+        $this->setReferenceNumber2(new ReferenceNumber());
+        $this->setPackageWeight(new PackageWeight());
+        $this->setPackageServiceOptions(new PackageServiceOptions());
         if (null !== $attributes) {
             if (isset($attributes->PackageWeight)) {
-                $this->setPackageWeight(new \UpsFreeVendor\Ups\Entity\PackageWeight($attributes->PackageWeight));
+                $this->setPackageWeight(new PackageWeight($attributes->PackageWeight));
             }
             if (isset($attributes->Description)) {
                 $this->setDescription($attributes->Description);
             }
             if (isset($attributes->PackageServiceOptions)) {
-                $this->setPackageServiceOptions(new \UpsFreeVendor\Ups\Entity\PackageServiceOptions($attributes->PackageServiceOptions));
+                $this->setPackageServiceOptions(new PackageServiceOptions($attributes->PackageServiceOptions));
             }
             if (isset($attributes->UPSPremiumCareIndicator)) {
                 $this->setUpsPremiumCareIndicator($attributes->UPSPremiumCareIndicator);
             }
             if (isset($attributes->ReferenceNumber)) {
-                $this->setReferenceNumber(new \UpsFreeVendor\Ups\Entity\ReferenceNumber($attributes->ReferenceNumber));
+                $this->setReferenceNumber(new ReferenceNumber($attributes->ReferenceNumber));
             }
             if (isset($attributes->ReferenceNumber2)) {
-                $this->setReferenceNumber2(new \UpsFreeVendor\Ups\Entity\ReferenceNumber($attributes->ReferenceNumber2));
+                $this->setReferenceNumber2(new ReferenceNumber($attributes->ReferenceNumber2));
             }
             if (isset($attributes->TrackingNumber)) {
                 $this->setTrackingNumber($attributes->TrackingNumber);
@@ -98,16 +98,16 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setLargePackage($attributes->LargePackage);
             }
             if (isset($attributes->Dimensions)) {
-                $this->setDimensions(new \UpsFreeVendor\Ups\Entity\Dimensions($attributes->Dimensions));
+                $this->setDimensions(new Dimensions($attributes->Dimensions));
             }
             if (isset($attributes->Activity)) {
                 $activities = $this->getActivities();
-                if (\is_array($attributes->Activity)) {
+                if (is_array($attributes->Activity)) {
                     foreach ($attributes->Activity as $Activity) {
-                        $activities[] = new \UpsFreeVendor\Ups\Entity\Activity($Activity);
+                        $activities[] = new Activity($Activity);
                     }
                 } else {
-                    $activities[] = new \UpsFreeVendor\Ups\Entity\Activity($attributes->Activity);
+                    $activities[] = new Activity($attributes->Activity);
                 }
                 $this->setActivities($activities);
             }
@@ -118,10 +118,10 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $packageNode = $document->createElement('Package');
         if ($this->getDescription()) {
@@ -144,10 +144,10 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
         if ($this->getSimpleRate()) {
             $packageNode->appendChild($this->getSimpleRate()->toNode($document));
         }
-        if ($this->getReferenceNumber() && !\is_null($this->getReferenceNumber()->getCode()) && !\is_null($this->getReferenceNumber()->getValue())) {
+        if ($this->getReferenceNumber() && !is_null($this->getReferenceNumber()->getCode()) && !is_null($this->getReferenceNumber()->getValue())) {
             $packageNode->appendChild($this->getReferenceNumber()->toNode($document));
         }
-        if ($this->getReferenceNumber2() && !\is_null($this->getReferenceNumber2()->getCode()) && !\is_null($this->getReferenceNumber2()->getValue())) {
+        if ($this->getReferenceNumber2() && !is_null($this->getReferenceNumber2()->getCode()) && !is_null($this->getReferenceNumber2()->getValue())) {
             $packageNode->appendChild($this->getReferenceNumber2()->toNode($document));
         }
         return $packageNode;
@@ -198,7 +198,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setDimensions(\UpsFreeVendor\Ups\Entity\Dimensions $dimensions)
+    public function setDimensions(Dimensions $dimensions)
     {
         $this->dimensions = $dimensions;
         return $this;
@@ -232,7 +232,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setPackageServiceOptions(\UpsFreeVendor\Ups\Entity\PackageServiceOptions $packageServiceOptions)
+    public function setPackageServiceOptions(PackageServiceOptions $packageServiceOptions)
     {
         $this->packageServiceOptions = $packageServiceOptions;
         return $this;
@@ -249,7 +249,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setSimpleRate(\UpsFreeVendor\Ups\Entity\SimpleRate $simpleRate)
+    public function setSimpleRate(SimpleRate $simpleRate)
     {
         $this->simpleRate = $simpleRate;
         return $this;
@@ -266,7 +266,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setPackageWeight(\UpsFreeVendor\Ups\Entity\PackageWeight $packageWeight)
+    public function setPackageWeight(PackageWeight $packageWeight)
     {
         $this->packageWeight = $packageWeight;
         return $this;
@@ -283,7 +283,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setPackagingType(\UpsFreeVendor\Ups\Entity\PackagingType $packagingType)
+    public function setPackagingType(PackagingType $packagingType)
     {
         $this->packagingType = $packagingType;
         return $this;
@@ -300,7 +300,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setReferenceNumber(\UpsFreeVendor\Ups\Entity\ReferenceNumber $referenceNumber)
+    public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
         return $this;
@@ -321,7 +321,7 @@ class Package implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return Package
      */
-    public function setReferenceNumber2(\UpsFreeVendor\Ups\Entity\ReferenceNumber $referenceNumber)
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
     {
         $this->referenceNumber2 = $referenceNumber;
         return $this;

@@ -21,10 +21,10 @@ class FreightCharges extends \UpsFreeVendor\Ups\Entity\FreightCharges
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('FreightCharges');
         $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));

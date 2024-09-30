@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class PackageWeight implements \UpsFreeVendor\Ups\NodeInterface
+class PackageWeight implements NodeInterface
 {
     /** @deprecated */
     public $UnitOfMeasurement;
@@ -21,7 +21,7 @@ class PackageWeight implements \UpsFreeVendor\Ups\NodeInterface
     private $weight;
     public function __construct($attributes = null)
     {
-        $this->setUnitOfMeasurement(new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement(isset($attributes->UnitOfMeasurement) ? $attributes->UnitOfMeasurement : null));
+        $this->setUnitOfMeasurement(new UnitOfMeasurement(isset($attributes->UnitOfMeasurement) ? $attributes->UnitOfMeasurement : null));
         if (isset($attributes->Weight)) {
             $this->setWeight($attributes->Weight);
         }
@@ -31,10 +31,10 @@ class PackageWeight implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('PackageWeight');
         $node->appendChild($document->createElement('Weight', $this->getWeight()));
@@ -53,7 +53,7 @@ class PackageWeight implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setUnitOfMeasurement(\UpsFreeVendor\Ups\Entity\UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->UnitOfMeasurement = $unitOfMeasurement;
         $this->unitOfMeasurement = $unitOfMeasurement;

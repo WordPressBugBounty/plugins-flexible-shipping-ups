@@ -9,7 +9,7 @@ use UpsFreeVendor\Psr\Http\Message\UriInterface;
 /**
  * PSR-7 request implementation.
  */
-class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
+class Request implements RequestInterface
 {
     use MessageTrait;
     /** @var string */
@@ -28,10 +28,10 @@ class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
     public function __construct($method, $uri, array $headers = [], $body = null, $version = '1.1')
     {
         $this->assertMethod($method);
-        if (!$uri instanceof \UpsFreeVendor\Psr\Http\Message\UriInterface) {
-            $uri = new \UpsFreeVendor\GuzzleHttp\Psr7\Uri($uri);
+        if (!$uri instanceof UriInterface) {
+            $uri = new Uri($uri);
         }
-        $this->method = \strtoupper($method);
+        $this->method = strtoupper($method);
         $this->uri = $uri;
         $this->setHeaders($headers);
         $this->protocol = $version;
@@ -39,7 +39,7 @@ class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
             $this->updateHostFromUri();
         }
         if ($body !== '' && $body !== null) {
-            $this->stream = \UpsFreeVendor\GuzzleHttp\Psr7\Utils::streamFor($body);
+            $this->stream = Utils::streamFor($body);
         }
     }
     public function getRequestTarget()
@@ -58,8 +58,8 @@ class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
     }
     public function withRequestTarget($requestTarget)
     {
-        if (\preg_match('#\\s#', $requestTarget)) {
-            throw new \InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
+        if (preg_match('#\s#', $requestTarget)) {
+            throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
         }
         $new = clone $this;
         $new->requestTarget = $requestTarget;
@@ -73,14 +73,14 @@ class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
     {
         $this->assertMethod($method);
         $new = clone $this;
-        $new->method = \strtoupper($method);
+        $new->method = strtoupper($method);
         return $new;
     }
     public function getUri()
     {
         return $this->uri;
     }
-    public function withUri(\UpsFreeVendor\Psr\Http\Message\UriInterface $uri, $preserveHost = \false)
+    public function withUri(UriInterface $uri, $preserveHost = \false)
     {
         if ($uri === $this->uri) {
             return $this;
@@ -113,7 +113,7 @@ class Request implements \UpsFreeVendor\Psr\Http\Message\RequestInterface
     }
     private function assertMethod($method)
     {
-        if (!\is_string($method) || $method === '') {
+        if (!is_string($method) || $method === '') {
             throw new \InvalidArgumentException('Method must be a non-empty string.');
         }
     }

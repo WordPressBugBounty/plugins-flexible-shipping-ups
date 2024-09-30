@@ -6,7 +6,7 @@ use UpsFreeVendor\Octolize\Ups\RestApi\RestApiToken as UpsRestApiToken;
 use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Actions\RefreshToken;
 use UpsFreeVendor\Psr\Log\LoggerInterface;
 use UpsFreeVendor\WPDesk\Mutex\WordpressMySQLLockMutex;
-class RestApiToken implements \UpsFreeVendor\Octolize\Ups\RestApi\RestApiToken
+class RestApiToken implements UpsRestApiToken
 {
     private const LOCK_NAME = 'ups_refresh_token';
     /**
@@ -20,20 +20,20 @@ class RestApiToken implements \UpsFreeVendor\Octolize\Ups\RestApi\RestApiToken
     /**
      * @var LoggerInterface
      */
-    private \UpsFreeVendor\Psr\Log\LoggerInterface $logger;
-    public function __construct(\UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption $token_option, \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Actions\RefreshToken $refresh_token_action, \UpsFreeVendor\Psr\Log\LoggerInterface $logger)
+    private LoggerInterface $logger;
+    public function __construct(TokenOption $token_option, RefreshToken $refresh_token_action, LoggerInterface $logger)
     {
         $this->token_option = $token_option;
         $this->refresh_token_action = $refresh_token_action;
         $this->logger = $logger;
     }
-    public function get_token() : string
+    public function get_token(): string
     {
         if (empty($this->token_option->get_access_token())) {
             return '';
         }
         if ($this->token_option->is_token_expired()) {
-            $mutex = new \UpsFreeVendor\WPDesk\Mutex\WordpressMySQLLockMutex(self::LOCK_NAME);
+            $mutex = new WordpressMySQLLockMutex(self::LOCK_NAME);
             if ($mutex->acquireLock()) {
                 try {
                     $this->token_option->get_access_token();

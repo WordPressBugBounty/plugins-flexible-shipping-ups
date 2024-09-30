@@ -22,7 +22,7 @@ class RefreshToken
      * @var bool
      */
     private $is_testing;
-    public function __construct(\UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption $token_option, string $oauth_url, string $app = 'live_rates', bool $is_testing = \false)
+    public function __construct(TokenOption $token_option, string $oauth_url, string $app = 'live_rates', bool $is_testing = \false)
     {
         $this->token_option = $token_option;
         $this->oauth_url = $oauth_url;
@@ -32,21 +32,21 @@ class RefreshToken
     public function handle()
     {
         $response = $this->request_token_refresh();
-        if (\is_wp_error($response)) {
-            throw new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Exceptions\RefreshTokenException($response->get_error_message());
+        if (is_wp_error($response)) {
+            throw new RefreshTokenException($response->get_error_message());
         } else {
-            $response_body = \json_decode(\wp_remote_retrieve_body($response), \true);
+            $response_body = json_decode(wp_remote_retrieve_body($response), \true);
             if (isset($response_body['status'])) {
                 $status = $response_body['status'];
                 if ($status === 'error') {
-                    throw new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Exceptions\RefreshTokenException($response_body['message']);
+                    throw new RefreshTokenException($response_body['message']);
                 } else {
                     $token = $response_body['token'];
                     $this->token_option->set($token);
                     $this->token_option->update_issued_at_to_current_time_and_set_expires_at();
                 }
             } else {
-                throw new \UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Exceptions\RefreshTokenException(\__('Error during refresh.', 'flexible-shipping-ups'));
+                throw new RefreshTokenException(__('Error during refresh.', 'flexible-shipping-ups'));
             }
         }
     }
@@ -55,6 +55,6 @@ class RefreshToken
      */
     public function request_token_refresh()
     {
-        return \wp_remote_post(\sprintf('%s/refresh-token.php?app=%s&test_api=%s', $this->oauth_url, $this->app, $this->is_testing ? '1' : ''), ['body' => ['refresh_token' => $this->token_option->get_refresh_token()]]);
+        return wp_remote_post(sprintf('%s/refresh-token.php?app=%s&test_api=%s', $this->oauth_url, $this->app, $this->is_testing ? '1' : ''), ['body' => ['refresh_token' => $this->token_option->get_refresh_token()]]);
     }
 }

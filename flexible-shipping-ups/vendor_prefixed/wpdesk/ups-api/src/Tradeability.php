@@ -12,7 +12,7 @@ use UpsFreeVendor\Ups\Entity\Tradeability\LandedCostRequest;
  *
  * @author Stefan Doorn <stefan@efectos.nl>
  */
-class Tradeability extends \UpsFreeVendor\Ups\Ups
+class Tradeability extends Ups
 {
     /**
      *
@@ -42,7 +42,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -54,7 +54,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
      * @return SimpleXmlElement
      * @throws Exception
      */
-    public function getLandedCosts(\UpsFreeVendor\Ups\Entity\Tradeability\LandedCostRequest $request)
+    public function getLandedCosts(LandedCostRequest $request)
     {
         $request = $this->createRequestLandedCost($request);
         $response = $this->sendRequest($request, self::ENDPOINT_LANDEDCOST, 'ProcessLCRequest', 'LandedCost');
@@ -70,9 +70,9 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
      *
      * @return string
      */
-    private function createRequestLandedCost(\UpsFreeVendor\Ups\Entity\Tradeability\LandedCostRequest $landedCostRequest)
+    private function createRequestLandedCost(LandedCostRequest $landedCostRequest)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $tradeabilityRequest = $xml->appendChild($xml->createElement('LandedCostRequest'));
         $tradeabilityRequest->setAttribute('xml:lang', 'en-US');
@@ -103,7 +103,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl, $operation, $wsdl);
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
         return $this->formatResponse($response);
     }
@@ -113,7 +113,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\SoapRequest($this->logger);
+            $this->request = new SoapRequest($this->logger);
         }
         return $this->request;
     }
@@ -122,7 +122,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -134,7 +134,7 @@ class Tradeability extends \UpsFreeVendor\Ups\Ups
      *
      * @return \stdClass
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         return $this->convertXmlObject($response->Body);
     }

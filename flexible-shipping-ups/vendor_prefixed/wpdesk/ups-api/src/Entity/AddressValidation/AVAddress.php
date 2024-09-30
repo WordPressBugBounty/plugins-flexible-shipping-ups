@@ -65,11 +65,11 @@ class AVAddress
         if ($xmlDoc->count() == 0) {
             throw new \InvalidArgumentException(__METHOD__ . ': The passed object does not have any child nodes.');
         }
-        $this->addressClassification = isset($xmlDoc->AddressClassification) ? new \UpsFreeVendor\Ups\Entity\AddressValidation\AddressClassification($xmlDoc->AddressClassification) : null;
+        $this->addressClassification = isset($xmlDoc->AddressClassification) ? new AddressClassification($xmlDoc->AddressClassification) : null;
         $this->consigneeName = isset($xmlDoc->ConsigneeName) ? (string) $xmlDoc->ConsigneeName : '';
         $this->buildingName = isset($xmlDoc->BuildingName) ? (string) $xmlDoc->BuildingName : '';
         if (isset($xmlDoc->AddressLine)) {
-            for ($i = 0, $len = \count($xmlDoc->AddressLine); $i < $len; $i++) {
+            for ($i = 0, $len = count($xmlDoc->AddressLine); $i < $len; $i++) {
                 $var = 'addressLine' . ($i > 0 ? $i + 1 : '');
                 $this->{$var} = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
             }

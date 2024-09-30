@@ -10,7 +10,7 @@ use UpsFreeVendor\Ups\NodeInterface;
  * @package Ups\Entity
  */
 // @todo Refactor to private properties
-class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
+class ShipmentServiceOptions implements NodeInterface
 {
     /**
      * @var
@@ -73,7 +73,7 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function __construct($response = null)
     {
-        $this->CallTagARS = new \UpsFreeVendor\Ups\Entity\CallTagARS();
+        $this->CallTagARS = new CallTagARS();
         if (null !== $response) {
             if (isset($response->SaturdayPickup)) {
                 $this->SaturdayPickup = $response->SaturdayPickup;
@@ -85,10 +85,10 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
                 $this->COD = $response->COD;
             }
             if (isset($response->AccessPointCOD)) {
-                $this->setAccessPointCOD(new \UpsFreeVendor\Ups\Entity\AccessPointCOD($response->AccessPointCOD));
+                $this->setAccessPointCOD(new AccessPointCOD($response->AccessPointCOD));
             }
             if (isset($response->CallTagARS)) {
-                $this->CallTagARS = new \UpsFreeVendor\Ups\Entity\CallTagARS($response->CallTagARS);
+                $this->CallTagARS = new CallTagARS($response->CallTagARS);
             }
             if (isset($response->NegotiatedRatesIndicator)) {
                 $this->NegotiatedRatesIndicator = $response->NegotiatedRatesIndicator;
@@ -109,10 +109,10 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setDeliveryConfirmation($response->DeliveryConfirmation);
             }
             if (isset($response->LabelMethod)) {
-                $this->setLabelMethod(new \UpsFreeVendor\Ups\Entity\LabelMethod($response->LabelMethod));
+                $this->setLabelMethod(new LabelMethod($response->LabelMethod));
             }
             if (isset($response->EMailMessage)) {
-                $this->setEMailMessage(new \UpsFreeVendor\Ups\Entity\EMailMessage($response->EMailMessage));
+                $this->setEMailMessage(new EMailMessage($response->EMailMessage));
             }
         }
     }
@@ -121,10 +121,10 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('ShipmentServiceOptions');
         if (isset($this->DirectDeliveryOnlyIndicator)) {
@@ -199,7 +199,7 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      * @param InternationalForms $data
      * @return $this
      */
-    public function setInternationalForms(\UpsFreeVendor\Ups\Entity\InternationalForms $data)
+    public function setInternationalForms(InternationalForms $data)
     {
         $this->internationalForms = $data;
         return $this;
@@ -215,7 +215,7 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      * @param LabelMethod $data
      * @return $this
      */
-    public function setLabelMethod(\UpsFreeVendor\Ups\Entity\LabelMethod $data)
+    public function setLabelMethod(LabelMethod $data)
     {
         $this->labelMethod = $data;
         return $this;
@@ -231,7 +231,7 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      * @param LabelDelivery $data
      * @return $this
      */
-    public function setLabelDelivery(\UpsFreeVendor\Ups\Entity\LabelDelivery $data)
+    public function setLabelDelivery(LabelDelivery $data)
     {
         $this->labelDelivery = $data;
         return $this;
@@ -250,10 +250,10 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function addNotification(\UpsFreeVendor\Ups\Entity\Notification $notification)
+    public function addNotification(Notification $notification)
     {
         $this->notifications[] = $notification;
-        if (\count($this->notifications) > 3) {
+        if (count($this->notifications) > 3) {
             throw new \Exception('Maximum 3 notifications allowed');
         }
         return $this;
@@ -365,7 +365,7 @@ class ShipmentServiceOptions implements \UpsFreeVendor\Ups\NodeInterface
      * @param DeliveryConfirmation $deliveryConfirmation
      * @return ShipmentServiceOptions
      */
-    public function setDeliveryConfirmation(\UpsFreeVendor\Ups\Entity\DeliveryConfirmation $deliveryConfirmation)
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
     {
         $this->deliveryConfirmation = $deliveryConfirmation;
         return $this;

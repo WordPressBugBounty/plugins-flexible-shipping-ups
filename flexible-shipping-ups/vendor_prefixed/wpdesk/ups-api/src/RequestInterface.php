@@ -8,7 +8,7 @@ interface RequestInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function __construct(\UpsFreeVendor\Psr\Log\LoggerInterface $logger = null);
+    public function __construct(LoggerInterface $logger = null);
     /**
      * @param string $access The access request xml
      * @param string $request The request xml

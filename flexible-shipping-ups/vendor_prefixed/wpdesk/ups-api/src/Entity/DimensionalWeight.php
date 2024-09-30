@@ -11,6 +11,6 @@ class DimensionalWeight
     public $Weight;
     public function __construct()
     {
-        $this->UnitOfMeasurement = new \UpsFreeVendor\Ups\Entity\UnitOfMeasurement();
+        $this->UnitOfMeasurement = new UnitOfMeasurement();
     }
 }

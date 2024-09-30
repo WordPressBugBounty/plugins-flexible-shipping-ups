@@ -29,19 +29,19 @@ class PaymentInformation
     {
         switch ($type) {
             case self::TYPE_PREPAID:
-                $this->prepaid = new \UpsFreeVendor\Ups\Entity\Prepaid($attributes);
+                $this->prepaid = new Prepaid($attributes);
                 break;
             case self::TYPE_BILL_THIRD_PARTY:
-                $this->billThirdParty = new \UpsFreeVendor\Ups\Entity\BillThirdParty($attributes);
+                $this->billThirdParty = new BillThirdParty($attributes);
                 break;
             case self::TYPE_FREIGHT_COLLECT:
-                $this->freightCollect = new \UpsFreeVendor\Ups\Entity\FreightCollect($attributes);
+                $this->freightCollect = new FreightCollect($attributes);
                 break;
             case self::TYPE_CONSIGNEE_BILLED:
                 $this->consigneeBilled = \true;
                 break;
             default:
-                throw new \LogicException(\sprintf('Unknown PaymentInformation type requested: "%s"', $type));
+                throw new LogicException(sprintf('Unknown PaymentInformation type requested: "%s"', $type));
         }
     }
     /**
@@ -55,7 +55,7 @@ class PaymentInformation
      * @param Prepaid $prepaid
      * @return PaymentInformation
      */
-    public function setPrepaid(\UpsFreeVendor\Ups\Entity\Prepaid $prepaid = null)
+    public function setPrepaid(Prepaid $prepaid = null)
     {
         $this->prepaid = $prepaid;
         return $this;
@@ -71,7 +71,7 @@ class PaymentInformation
      * @param BillThirdParty $billThirdParty
      * @return PaymentInformation
      */
-    public function setBillThirdParty(\UpsFreeVendor\Ups\Entity\BillThirdParty $billThirdParty = null)
+    public function setBillThirdParty(BillThirdParty $billThirdParty = null)
     {
         $this->billThirdParty = $billThirdParty;
         return $this;
@@ -87,7 +87,7 @@ class PaymentInformation
      * @param FreightCollect $freightCollect
      * @return PaymentInformation
      */
-    public function setFreightCollect(\UpsFreeVendor\Ups\Entity\FreightCollect $freightCollect = null)
+    public function setFreightCollect(FreightCollect $freightCollect = null)
     {
         $this->freightCollect = $freightCollect;
         return $this;

@@ -49,7 +49,7 @@ class RateTimeInTransitResponse
                 $this->Disclaimer = $response->Disclaimer;
             }
             if (isset($response->ServiceSummary)) {
-                $this->ServiceSummary = new \UpsFreeVendor\Ups\Entity\RateTimeInTransit\ServiceSummary($response->ServiceSummary);
+                $this->ServiceSummary = new RateTimeInTransitServiceSummary($response->ServiceSummary);
             }
         }
     }

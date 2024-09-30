@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class InvoiceLineTotal implements \UpsFreeVendor\Ups\NodeInterface
+class InvoiceLineTotal implements NodeInterface
 {
     private $currencyCode;
     private $monetaryValue;
@@ -25,10 +25,10 @@ class InvoiceLineTotal implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('InvoiceLineTotal');
         if ($this->getCurrencyCode()) {
@@ -51,7 +51,7 @@ class InvoiceLineTotal implements \UpsFreeVendor\Ups\NodeInterface
     }
     public function setMonetaryValue($var)
     {
-        if (!\is_numeric($var)) {
+        if (!is_numeric($var)) {
             throw new \Exception('Monetary value should be a numeric value');
         }
         $this->monetaryValue = $var;

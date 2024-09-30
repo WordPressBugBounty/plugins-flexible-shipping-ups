@@ -98,10 +98,10 @@ class Shipment
     private $deliveryTimeInformation;
     public function __construct()
     {
-        $this->setShipper(new \UpsFreeVendor\Ups\Entity\Shipper());
-        $this->setShipTo(new \UpsFreeVendor\Ups\Entity\ShipTo());
-        $this->setShipmentServiceOptions(new \UpsFreeVendor\Ups\Entity\ShipmentServiceOptions());
-        $this->setService(new \UpsFreeVendor\Ups\Entity\Service());
+        $this->setShipper(new Shipper());
+        $this->setShipTo(new ShipTo());
+        $this->setShipmentServiceOptions(new ShipmentServiceOptions());
+        $this->setService(new Service());
         $this->rateInformation = null;
     }
     /**
@@ -114,7 +114,7 @@ class Shipment
     /**
      * @param ShipmentIndicationType $shipmentIndicationType
      */
-    public function setShipmentIndicationType(\UpsFreeVendor\Ups\Entity\ShipmentIndicationType $shipmentIndicationType)
+    public function setShipmentIndicationType(ShipmentIndicationType $shipmentIndicationType)
     {
         $this->shipmentIndicationType = $shipmentIndicationType;
     }
@@ -128,7 +128,7 @@ class Shipment
     /**
      * @param AlternateDeliveryAddress $alternateDeliveryAddress
      */
-    public function setAlternateDeliveryAddress(\UpsFreeVendor\Ups\Entity\AlternateDeliveryAddress $alternateDeliveryAddress)
+    public function setAlternateDeliveryAddress(AlternateDeliveryAddress $alternateDeliveryAddress)
     {
         $this->alternateDeliveryAddress = $alternateDeliveryAddress;
     }
@@ -137,7 +137,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function addPackage(\UpsFreeVendor\Ups\Entity\Package $package)
+    public function addPackage(Package $package)
     {
         $packages = $this->getPackages();
         $packages[] = $package;
@@ -166,7 +166,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setReferenceNumber(\UpsFreeVendor\Ups\Entity\ReferenceNumber $referenceNumber)
+    public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
         return $this;
@@ -176,7 +176,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setReferenceNumber2(\UpsFreeVendor\Ups\Entity\ReferenceNumber $referenceNumber)
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
     {
         $this->referenceNumber2 = $referenceNumber;
         return $this;
@@ -241,7 +241,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setService(\UpsFreeVendor\Ups\Entity\Service $service)
+    public function setService(Service $service)
     {
         $this->service = $service;
         return $this;
@@ -258,7 +258,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setReturnService(\UpsFreeVendor\Ups\Entity\ReturnService $returnService)
+    public function setReturnService(ReturnService $returnService)
     {
         $this->returnService = $returnService;
         return $this;
@@ -275,7 +275,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setShipFrom(\UpsFreeVendor\Ups\Entity\ShipFrom $shipFrom)
+    public function setShipFrom(ShipFrom $shipFrom)
     {
         $this->shipFrom = $shipFrom;
         return $this;
@@ -292,7 +292,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setShipTo(\UpsFreeVendor\Ups\Entity\ShipTo $shipTo)
+    public function setShipTo(ShipTo $shipTo)
     {
         $this->shipTo = $shipTo;
         return $this;
@@ -309,7 +309,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setSoldTo(\UpsFreeVendor\Ups\Entity\SoldTo $soldTo)
+    public function setSoldTo(SoldTo $soldTo)
     {
         $this->soldTo = $soldTo;
         return $this;
@@ -326,7 +326,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setShipmentServiceOptions(\UpsFreeVendor\Ups\Entity\ShipmentServiceOptions $shipmentServiceOptions)
+    public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions)
     {
         $this->shipmentServiceOptions = $shipmentServiceOptions;
         return $this;
@@ -343,7 +343,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setShipper(\UpsFreeVendor\Ups\Entity\Shipper $shipper)
+    public function setShipper(Shipper $shipper)
     {
         $this->shipper = $shipper;
         return $this;
@@ -360,7 +360,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setPaymentInformation(\UpsFreeVendor\Ups\Entity\PaymentInformation $paymentInformation)
+    public function setPaymentInformation(PaymentInformation $paymentInformation)
     {
         $this->paymentInformation = $paymentInformation;
         return $this;
@@ -377,7 +377,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setItemizedPaymentInformation(\UpsFreeVendor\Ups\Entity\ItemizedPaymentInformation $itemizedPaymentInformation)
+    public function setItemizedPaymentInformation(ItemizedPaymentInformation $itemizedPaymentInformation)
     {
         $this->itemizedPaymentInformation = $itemizedPaymentInformation;
         return $this;
@@ -387,7 +387,7 @@ class Shipment
      */
     public function showNegotiatedRates()
     {
-        $this->rateInformation = new \UpsFreeVendor\Ups\Entity\RateInformation();
+        $this->rateInformation = new RateInformation();
         $this->rateInformation->setNegotiatedRatesIndicator(\true);
     }
     /**
@@ -402,7 +402,7 @@ class Shipment
      *
      * @return Shipment
      */
-    public function setRateInformation(\UpsFreeVendor\Ups\Entity\RateInformation $rateInformation)
+    public function setRateInformation(RateInformation $rateInformation)
     {
         $this->rateInformation = $rateInformation;
         return $this;
@@ -450,7 +450,7 @@ class Shipment
      * @param InvoiceLineTotal $invoiceLineTotal
      * @return Shipment
      */
-    public function setInvoiceLineTotal(\UpsFreeVendor\Ups\Entity\InvoiceLineTotal $invoiceLineTotal)
+    public function setInvoiceLineTotal(InvoiceLineTotal $invoiceLineTotal)
     {
         $this->invoiceLineTotal = $invoiceLineTotal;
         return $this;
@@ -481,7 +481,7 @@ class Shipment
     /**
      * @param DeliveryTimeInformation $deliveryTimeInformation
      */
-    public function setDeliveryTimeInformation(\UpsFreeVendor\Ups\Entity\DeliveryTimeInformation $deliveryTimeInformation)
+    public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation)
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
@@ -495,7 +495,7 @@ class Shipment
     /**
      * @param ShipmentTotalWeight $shipmentTotalWeight
      */
-    public function setShipmentTotalWeight(\UpsFreeVendor\Ups\Entity\ShipmentTotalWeight $shipmentTotalWeight)
+    public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
     }

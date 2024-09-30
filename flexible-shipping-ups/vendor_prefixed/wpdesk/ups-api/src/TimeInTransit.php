@@ -13,7 +13,7 @@ use UpsFreeVendor\Ups\Entity\TimeInTransitResponse;
  *
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
-class TimeInTransit extends \UpsFreeVendor\Ups\Ups
+class TimeInTransit extends Ups
 {
     private $request;
     const ENDPOINT = '/TimeInTransit';
@@ -25,7 +25,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      * @param RequestInterface|null $request
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, \UpsFreeVendor\Ups\RequestInterface $request = null, \UpsFreeVendor\Psr\Log\LoggerInterface $logger = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = \false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -39,7 +39,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return TimeInTransitResponse
      */
-    public function getTimeInTransit(\UpsFreeVendor\Ups\Entity\TimeInTransitRequest $shipment)
+    public function getTimeInTransit(TimeInTransitRequest $shipment)
     {
         return $this->sendRequest($shipment);
     }
@@ -53,16 +53,16 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return TimeInTransitResponse
      */
-    private function sendRequest(\UpsFreeVendor\Ups\Entity\TimeInTransitRequest $timeInTransitRequest)
+    private function sendRequest(TimeInTransitRequest $timeInTransitRequest)
     {
         $request = $this->createRequest($timeInTransitRequest);
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
         if (null === $response) {
-            throw new \Exception('Failure (0): Unknown error', 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
-        if ($response instanceof \SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new \Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception("Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", (int) $response->Response->Error->ErrorCode);
         } else {
             return $this->formatResponse($response);
         }
@@ -74,9 +74,9 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return string
      */
-    private function createRequest(\UpsFreeVendor\Ups\Entity\TimeInTransitRequest $timeInTransitRequest)
+    private function createRequest(TimeInTransitRequest $timeInTransitRequest)
     {
-        $xml = new \DOMDocument();
+        $xml = new DOMDocument();
         $xml->formatOutput = \true;
         $trackRequest = $xml->appendChild($xml->createElement('TimeInTransitRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
@@ -123,7 +123,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return TimeInTransitResponse
      */
-    private function formatResponse(\SimpleXMLElement $response)
+    private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
@@ -132,7 +132,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
         if (isset($result->TransitResponse->ServiceSummary->Service)) {
             $result->TransitResponse->ServiceSummary = array($result->TransitResponse->ServiceSummary);
         }
-        return new \UpsFreeVendor\Ups\Entity\TimeInTransitResponse($result->TransitResponse);
+        return new TimeInTransitResponse($result->TransitResponse);
     }
     /**
      * @return RequestInterface
@@ -140,7 +140,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new \UpsFreeVendor\Ups\Request($this->logger);
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }
@@ -149,7 +149,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setRequest(\UpsFreeVendor\Ups\RequestInterface $request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
@@ -166,7 +166,7 @@ class TimeInTransit extends \UpsFreeVendor\Ups\Ups
      *
      * @return $this
      */
-    public function setResponse(\UpsFreeVendor\Ups\ResponseInterface $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;

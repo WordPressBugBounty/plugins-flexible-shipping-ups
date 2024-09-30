@@ -14,7 +14,7 @@ class UnitOfMeasurement extends \UpsFreeVendor\Ups\Entity\UnitOfMeasurement
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null !== $document) {
             $node = $document->createElement('UnitOfMeasure');
@@ -24,6 +24,6 @@ class UnitOfMeasurement extends \UpsFreeVendor\Ups\Entity\UnitOfMeasurement
             }
             return $node;
         }
-        return new \DOMElement('UnitOfMeasure');
+        return new DOMElement('UnitOfMeasure');
     }
 }

@@ -5,7 +5,7 @@ namespace UpsFreeVendor\Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use UpsFreeVendor\Ups\NodeInterface;
-class ShipTo implements \UpsFreeVendor\Ups\NodeInterface
+class ShipTo implements NodeInterface
 {
     /** @deprecated */
     public $LocationID;
@@ -80,7 +80,7 @@ class ShipTo implements \UpsFreeVendor\Ups\NodeInterface
      */
     public function __construct(\stdClass $attributes = null)
     {
-        $this->address = new \UpsFreeVendor\Ups\Entity\Address();
+        $this->address = new Address();
         if (null !== $attributes) {
             if (isset($attributes->LocationID)) {
                 $this->setLocationId($attributes->LocationID);
@@ -113,7 +113,7 @@ class ShipTo implements \UpsFreeVendor\Ups\NodeInterface
                 $this->setEmailAddress($attributes->EMailAddress);
             }
             if (isset($attributes->Address)) {
-                $this->setAddress(new \UpsFreeVendor\Ups\Entity\Address($attributes->Address));
+                $this->setAddress(new Address($attributes->Address));
             }
         }
     }
@@ -122,10 +122,10 @@ class ShipTo implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(\DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
-            $document = new \DOMDocument();
+            $document = new DOMDocument();
         }
         $node = $document->createElement('ShipTo');
         $node->appendChild($document->createElement('Name', $this->getName() ?? ''));
@@ -163,7 +163,7 @@ class ShipTo implements \UpsFreeVendor\Ups\NodeInterface
      *
      * @return $this
      */
-    public function setAddress(\UpsFreeVendor\Ups\Entity\Address $address)
+    public function setAddress(Address $address)
     {
         $this->Address = $address;
         $this->address = $address;

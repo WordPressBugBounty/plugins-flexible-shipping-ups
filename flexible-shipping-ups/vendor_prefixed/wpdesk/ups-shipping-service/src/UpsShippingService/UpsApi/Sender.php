@@ -21,5 +21,5 @@ interface Sender
      *
      * @return RateResponse
      */
-    public function send(\UpsFreeVendor\Ups\Entity\RateRequest $request);
+    public function send(RateRequest $request);
 }

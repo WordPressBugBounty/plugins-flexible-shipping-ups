@@ -49,20 +49,20 @@ class TimeInTransitResponse
      */
     public function __construct(\stdClass $response = null)
     {
-        $this->TransitFrom = new \UpsFreeVendor\Ups\Entity\Address();
-        $this->TransitTo = new \UpsFreeVendor\Ups\Entity\Address();
-        $this->ShipmentWeight = new \UpsFreeVendor\Ups\Entity\ShipmentWeight();
-        $this->InvoiceLineTotal = new \UpsFreeVendor\Ups\Entity\Charges();
+        $this->TransitFrom = new Address();
+        $this->TransitTo = new Address();
+        $this->ShipmentWeight = new ShipmentWeight();
+        $this->InvoiceLineTotal = new Charges();
         $this->ServiceSummary = [];
         if (null !== $response) {
             if (isset($response->PickupDate)) {
                 $this->PickupDate = $response->PickupDate;
             }
             if (isset($response->TransitFrom->AddressArtifactFormat)) {
-                $this->TransitFrom = new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat($response->TransitFrom->AddressArtifactFormat);
+                $this->TransitFrom = new AddressArtifactFormat($response->TransitFrom->AddressArtifactFormat);
             }
             if (isset($response->TransitTo->AddressArtifactFormat)) {
-                $this->TransitTo = new \UpsFreeVendor\Ups\Entity\AddressArtifactFormat($response->TransitTo->AddressArtifactFormat);
+                $this->TransitTo = new AddressArtifactFormat($response->TransitTo->AddressArtifactFormat);
             }
             if (isset($response->DocumentsOnlyIndicator)) {
                 $this->DocumentsOnlyIndicator = $response->DocumentsOnlyIndicator;
@@ -71,17 +71,17 @@ class TimeInTransitResponse
                 $this->AutoDutyCode = $response->AutoDutyCode;
             }
             if (isset($response->ShipmentWeight)) {
-                $this->ShipmentWeight = new \UpsFreeVendor\Ups\Entity\ShipmentWeight($response->ShipmentWeight);
+                $this->ShipmentWeight = new ShipmentWeight($response->ShipmentWeight);
             }
             if (isset($response->InvoiceLineTotal)) {
-                $this->InvoiceLineTotal = new \UpsFreeVendor\Ups\Entity\Charges($response->InvoiceLineTotal);
+                $this->InvoiceLineTotal = new Charges($response->InvoiceLineTotal);
             }
             if (isset($response->Disclaimer)) {
                 $this->Disclaimer = $response->Disclaimer;
             }
             if (isset($response->ServiceSummary)) {
                 foreach ($response->ServiceSummary as $serviceSummary) {
-                    $this->ServiceSummary[] = new \UpsFreeVendor\Ups\Entity\ServiceSummary($serviceSummary);
+                    $this->ServiceSummary[] = new ServiceSummary($serviceSummary);
                 }
             }
             if (isset($response->MaximumListSize)) {

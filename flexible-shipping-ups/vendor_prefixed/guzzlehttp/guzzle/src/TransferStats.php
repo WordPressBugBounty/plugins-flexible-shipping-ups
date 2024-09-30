@@ -23,7 +23,7 @@ final class TransferStats
      * @param mixed                  $handlerErrorData Handler error data.
      * @param array                  $handlerStats     Handler specific stats.
      */
-    public function __construct(\UpsFreeVendor\Psr\Http\Message\RequestInterface $request, \UpsFreeVendor\Psr\Http\Message\ResponseInterface $response = null, $transferTime = null, $handlerErrorData = null, $handlerStats = [])
+    public function __construct(RequestInterface $request, ResponseInterface $response = null, $transferTime = null, $handlerErrorData = null, $handlerStats = [])
     {
         $this->request = $request;
         $this->response = $response;

@@ -16,27 +16,27 @@ class Origin
     public $ScheduledDeliveryTime;
     public function __construct($response = null)
     {
-        $this->PackageReferenceNumber = new \UpsFreeVendor\Ups\Entity\PackageReferenceNumber();
-        $this->ShipmentReferenceNumber = new \UpsFreeVendor\Ups\Entity\ShipmentReferenceNumber();
-        $this->ActivityLocation = new \UpsFreeVendor\Ups\Entity\ActivityLocation();
-        $this->BillToAccount = new \UpsFreeVendor\Ups\Entity\BillToAccount();
+        $this->PackageReferenceNumber = new PackageReferenceNumber();
+        $this->ShipmentReferenceNumber = new ShipmentReferenceNumber();
+        $this->ActivityLocation = new ActivityLocation();
+        $this->BillToAccount = new BillToAccount();
         if (null !== $response) {
             if (isset($response->PackageReferenceNumber)) {
-                if (\is_array($response->PackageReferenceNumber)) {
+                if (is_array($response->PackageReferenceNumber)) {
                     foreach ($response->PackageReferenceNumber as $PackageReferenceNumber) {
-                        $this->PackageReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\PackageReferenceNumber($PackageReferenceNumber);
+                        $this->PackageReferenceNumber[] = new PackageReferenceNumber($PackageReferenceNumber);
                     }
                 } else {
-                    $this->PackageReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\PackageReferenceNumber($response->PackageReferenceNumber);
+                    $this->PackageReferenceNumber[] = new PackageReferenceNumber($response->PackageReferenceNumber);
                 }
             }
             if (isset($response->ShipmentReferenceNumber)) {
-                if (\is_array($response->ShipmentReferenceNumber)) {
+                if (is_array($response->ShipmentReferenceNumber)) {
                     foreach ($response->ShipmentReferenceNumber as $ShipmentReferenceNumber) {
-                        $this->ShipmentReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\ShipmentReferenceNumber($ShipmentReferenceNumber);
+                        $this->ShipmentReferenceNumber[] = new ShipmentReferenceNumber($ShipmentReferenceNumber);
                     }
                 } else {
-                    $this->ShipmentReferenceNumber[] = new \UpsFreeVendor\Ups\Entity\ShipmentReferenceNumber($response->ShipmentReferenceNumber);
+                    $this->ShipmentReferenceNumber[] = new ShipmentReferenceNumber($response->ShipmentReferenceNumber);
                 }
             }
             if (isset($response->ShipperNumber)) {
@@ -52,10 +52,10 @@ class Origin
                 $this->Time = $response->Time;
             }
             if (isset($response->ActivityLocation)) {
-                $this->ActivityLocation = new \UpsFreeVendor\Ups\Entity\ActivityLocation($response->ActivityLocation);
+                $this->ActivityLocation = new ActivityLocation($response->ActivityLocation);
             }
             if (isset($response->BillToAccount)) {
-                $this->BillToAccount = new \UpsFreeVendor\Ups\Entity\BillToAccount($response->BillToAccount);
+                $this->BillToAccount = new BillToAccount($response->BillToAccount);
             }
             if (isset($response->ScheduledDeliveryDate)) {
                 $this->ScheduledDeliveryDate = $response->ScheduledDeliveryDate;

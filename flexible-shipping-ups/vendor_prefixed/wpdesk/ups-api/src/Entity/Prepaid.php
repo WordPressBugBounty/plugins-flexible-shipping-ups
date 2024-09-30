@@ -18,7 +18,7 @@ class Prepaid
     private $billShipper;
     public function __construct($attributes = null)
     {
-        $this->setBillShipper(new \UpsFreeVendor\Ups\Entity\BillShipper($attributes));
+        $this->setBillShipper(new BillShipper($attributes));
     }
     /**
      * @return BillShipper
