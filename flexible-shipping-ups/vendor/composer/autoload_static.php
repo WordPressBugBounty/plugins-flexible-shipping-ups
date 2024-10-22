@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcf44bfa4eb867311840d918249ddf240
+class ComposerStaticInit0cc38a2156a862ee8aebca9dd0ffe85f
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -240,6 +240,7 @@ class ComposerStaticInitcf44bfa4eb867311840d918249ddf240
         'UpsFreeVendor\\Octolize\\Onboarding\\OnboardingShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/OnboardingShouldShowStrategy.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\OnboardingStep' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/OnboardingStep.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\OnboardingTrackerData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/OnboardingTrackerData.php',
+        'UpsFreeVendor\\Octolize\\Onboarding\\PluginUpgrade\\MessageFactory\\LiveRatesFsRulesTable' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/MessageFactory/LiveRatesFsRulesTable.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\PluginUpgrade\\PluginUpgradeAjax' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeAjax.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\PluginUpgrade\\PluginUpgradeMessage' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeMessage.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\PluginUpgrade\\PluginUpgradeOnboardingFactory' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php',
@@ -772,6 +773,7 @@ class ComposerStaticInitcf44bfa4eb867311840d918249ddf240
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\RateMethod\\FlatRateRateMethod\\CollectionPointFlatRateRateMethod' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/RateMethod/CollectionPointFlatRate/CollectionPointFlatRateRateMethod.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\RateMethod\\RateMethod' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/RateMethod/RateMethod.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\RateMethod\\Standard\\StandardServiceRateMethod' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/RateMethod/Standard/StandardServiceRateMethod.php',
+        'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\RulesTableAdv' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/RulesTableAdv.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\Traits\\CollectionPointFlatRateTrait' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/Traits/CollectionPointFlatRateTrait.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\Traits\\DeliveryDatesTrait' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/Traits/DeliveryDatesTrait.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\ShippingMethod\\Traits\\HandlingFeesTrait' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/ShippingMethod/Traits/HandlingFeesTrait.php',
@@ -849,6 +851,7 @@ class ComposerStaticInitcf44bfa4eb867311840d918249ddf240
         'WPDesk\\FlexibleShippingUps\\Plugin' => __DIR__ . '/../..' . '/src/Plugin/Plugin.php',
         'WPDesk\\FlexibleShippingUps\\PluginLinks' => __DIR__ . '/../..' . '/src/Plugin/PluginLinks.php',
         'WPDesk\\FlexibleShippingUps\\RateNotice' => __DIR__ . '/../..' . '/src/Plugin/RateNotice.php',
+        'WPDesk\\FlexibleShippingUps\\UpgradeOnboarding' => __DIR__ . '/../..' . '/src/Plugin/UpgradeOnboarding.php',
         'WPDesk\\FlexibleShippingUps\\UpsFreeShippingService\\Field\\DatesAndTimesSettingsDefinitionDecorator' => __DIR__ . '/../..' . '/src/Plugin/UpsFreeShippingService/Field/DatesAndTimesSettingsDefinitionDecorator.php',
         'WPDesk\\FlexibleShippingUps\\UpsFreeShippingService\\Field\\DeliveryConfirmationSettingsDefinitionDecorator' => __DIR__ . '/../..' . '/src/Plugin/UpsFreeShippingService/Field/DeliveryConfirmationSettingsDefinitionDecorator.php',
         'WPDesk\\FlexibleShippingUps\\UpsFreeShippingService\\Field\\DestinationAddressTypeSettingsDefinitionDecorator' => __DIR__ . '/../..' . '/src/Plugin/UpsFreeShippingService/Field/DestinationAddressTypeSettingsDefinitionDecorator.php',
@@ -869,9 +872,9 @@ class ComposerStaticInitcf44bfa4eb867311840d918249ddf240
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcf44bfa4eb867311840d918249ddf240::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcf44bfa4eb867311840d918249ddf240::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcf44bfa4eb867311840d918249ddf240::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0cc38a2156a862ee8aebca9dd0ffe85f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0cc38a2156a862ee8aebca9dd0ffe85f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0cc38a2156a862ee8aebca9dd0ffe85f::$classMap;
 
         }, null, ClassLoader::class);
     }

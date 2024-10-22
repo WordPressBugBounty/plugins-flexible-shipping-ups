@@ -3,13 +3,13 @@
  * Plugin Name: UPS Live Rates and Access Points
  * Plugin URI: https://wordpress.org/plugins/flexible-shipping-ups/
  * Description: UPS WooCommerce shipping methods with real-time calculated shipping rates based on the established UPS API connection.
- * Version: 2.3.11
+ * Version: 3.0.0
  * Author: Octolize
  * Author URI: https://octol.io/ups-author
  * Text Domain: flexible-shipping-ups
  * Domain Path: /lang/
  * Requires at least: 6.4
- * Tested up to: 6.6
+ * Tested up to: 6.7
  * WC requires at least: 9.0
  * WC tested up to: 9.4
  * Requires PHP: 7.4
@@ -36,7 +36,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /* THIS VARIABLE CAN BE CHANGED AUTOMATICALLY */
-$plugin_version = '2.3.11';
+$plugin_version = '3.0.0';
 
 $plugin_name        = 'Flexible Shipping UPS';
 $plugin_class_name  = '\WPDesk\FlexibleShippingUps\Plugin';

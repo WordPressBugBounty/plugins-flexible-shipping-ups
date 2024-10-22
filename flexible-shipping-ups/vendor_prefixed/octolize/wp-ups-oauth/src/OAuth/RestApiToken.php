@@ -36,7 +36,7 @@ class RestApiToken implements UpsRestApiToken
             $mutex = new WordpressMySQLLockMutex(self::LOCK_NAME);
             if ($mutex->acquireLock()) {
                 try {
-                    $this->token_option->get_access_token();
+                    $this->token_option->clear_wp_cache();
                     if ($this->token_option->is_token_expired()) {
                         $this->refresh_token_action->handle();
                         $this->logger->debug('Token refreshed', ['token' => $this->token_option->get_access_token()]);

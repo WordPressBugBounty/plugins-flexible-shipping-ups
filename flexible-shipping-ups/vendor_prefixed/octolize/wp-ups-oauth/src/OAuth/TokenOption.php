@@ -4,7 +4,8 @@ namespace UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth;
 
 class TokenOption
 {
-    const TIME_BUFFER_SECONDS = 0;
+    private const TIME_BUFFER_SECONDS = 0;
+    private const EXPIRES_DIVIDER = 1.5;
     private $option_name;
     private $is_testing;
     public function __construct(string $option_name = 'fs_ups_token', bool $is_testing = \false)
@@ -21,14 +22,13 @@ class TokenOption
     }
     public function get()
     {
-        $this->clear_wp_cache();
         $token = json_decode(get_option($this->get_option_name(), '[]'), \true);
         if ($this->token_is_valid($token)) {
             return $token;
         }
         return [];
     }
-    private function clear_wp_cache()
+    public function clear_wp_cache()
     {
         wp_cache_delete($this->get_option_name(), 'options');
     }
@@ -57,22 +57,22 @@ class TokenOption
     }
     public function set(array $token)
     {
-        $this->clear_wp_cache();
         if (!update_option($this->get_option_name(), json_encode($token), \false)) {
             $this->clear_wp_cache();
             update_option($this->get_option_name(), json_encode($token), \false);
         }
+        $this->clear_wp_cache();
     }
     public function update_issued_at_to_current_time_and_set_expires_at()
     {
         $token = $this->get();
-        $token['issued_at'] = (time() - self::TIME_BUFFER_SECONDS) * 1000;
+        $token['issued_at'] = time() - self::TIME_BUFFER_SECONDS;
         $token['expires_at'] = $this->calculate_expires_at(time(), (int) $token['expires_in']);
         $this->set($token);
     }
     public function is_token_expired(): bool
     {
-        return $this->get_expires_at() < time();
+        return $this->get_expires_at() <= time();
     }
     public function get_access_token(): string
     {
@@ -87,12 +87,12 @@ class TokenOption
     public function get_expires_in(): int
     {
         $token = $this->get();
-        return (int) $token['expires_in'];
+        return (int) $token['expires_in'] ?? 0;
     }
     public function get_issued_at(): int
     {
         $token = $this->get();
-        return (int) round($token['issued_at'] / 1000);
+        return (int) round($token['issued_at'] ?? time());
     }
     public function get_expires_at(): int
     {
@@ -101,7 +101,7 @@ class TokenOption
     }
     private function calculate_expires_at(int $issued_at, int $expires_in): int
     {
-        return (int) floor($issued_at + $expires_in / 2);
+        return (int) floor($issued_at + $expires_in / self::EXPIRES_DIVIDER);
     }
     public function get_token_payload($access_token = null): array
     {

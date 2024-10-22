@@ -34,7 +34,7 @@ class Ajax implements Hookable
     }
     public function delete_oauth_data()
     {
-        if (wp_verify_nonce($_REQUEST['security'], OAuthField::NONCE_ACTION)) {
+        if (wp_verify_nonce($_REQUEST['security'], OAuthField::NONCE_ACTION) && current_user_can('manage_woocommerce')) {
             $this->token_option->set([]);
             $status = 'success';
             $message = __('Successfully revoked UPS Authorization.', 'flexible-shipping-ups');
@@ -44,6 +44,8 @@ class Ajax implements Hookable
         }
         $security = wp_create_nonce(OAuthField::NONCE_ACTION . $message);
         wp_safe_redirect(admin_url($this->settings_url . '&app=' . $this->app . '&ups-oauth-status=' . $status . '&message=' . urlencode($message) . '&security=' . urlencode($security)));
-        die;
+        if (defined('DOING_AJAX') && \DOING_AJAX) {
+            die;
+        }
     }
 }

@@ -200,6 +200,8 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 
 		$this->init_checkout_blocks();
 
+		( new UpgradeOnboarding( $this->plugin_info ) )->init_upgrade_onboarding();
+
 		$this->hooks();
 	}
 
