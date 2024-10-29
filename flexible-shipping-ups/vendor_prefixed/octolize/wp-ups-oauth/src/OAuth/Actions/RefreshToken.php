@@ -9,19 +9,19 @@ class RefreshToken
     /**
      * @var TokenOption
      */
-    private $token_option;
+    private TokenOption $token_option;
     /**
      * @var string
      */
-    private $oauth_url;
+    private string $oauth_url;
     /**
      * @var string
      */
-    private $app;
+    private string $app;
     /**
      * @var bool
      */
-    private $is_testing;
+    private bool $is_testing;
     public function __construct(TokenOption $token_option, string $oauth_url, string $app = 'live_rates', bool $is_testing = \false)
     {
         $this->token_option = $token_option;

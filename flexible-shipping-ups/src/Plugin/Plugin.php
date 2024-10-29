@@ -153,6 +153,8 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 			new HookableObjects(
 				$oauth_url,
 				$token_option,
+				$rest_api_token,
+				$this->logger,
 				'admin.php?page=wc-settings&tab=shipping&section=' . UpsShippingService::UNIQUE_ID
 			)
 		);

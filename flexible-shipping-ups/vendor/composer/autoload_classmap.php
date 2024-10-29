@@ -266,6 +266,7 @@ return array(
     'UpsFreeVendor\\Octolize\\Ups\\RestApi\\Shipping' => $baseDir . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/Shipping.php',
     'UpsFreeVendor\\Octolize\\Ups\\RestApi\\UpsRestApiSender' => $baseDir . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/UpsRestApiSender.php',
     'UpsFreeVendor\\Octolize\\Ups\\RestApi\\UpsRestApiSenderSingleRate' => $baseDir . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/UpsRestApiSenderSingleRate.php',
+    'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\ActionScheduler\\RefreshTokenActionScheduler' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/ActionScheduler/RefreshTokenActionScheduler.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\CreateToken' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/CreateToken.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshToken' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshToken.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Ajax' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php',

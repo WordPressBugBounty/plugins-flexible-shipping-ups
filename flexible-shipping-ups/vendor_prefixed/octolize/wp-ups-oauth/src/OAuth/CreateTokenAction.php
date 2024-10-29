@@ -43,8 +43,9 @@ class CreateTokenAction implements Hookable
             $code = wc_clean($_GET['ups-oauth-code']);
             try {
                 $create_token = new CreateToken($code, $this->token_option, $this->oauth_url, $this->app, $this->test_api);
-                new Notice(__('Successfully authorized.', 'flexible-shipping-ups'), Notice::NOTICE_TYPE_SUCCESS);
                 $create_token->handle();
+                new Notice(__('Successfully authorized.', 'flexible-shipping-ups'), Notice::NOTICE_TYPE_SUCCESS);
+                do_action('flexible_shipping_ups_token_created');
             } catch (CreateTokenException $e) {
                 new Notice($e->getMessage(), Notice::NOTICE_TYPE_ERROR);
             }

@@ -70,6 +70,10 @@ trait SettingsTrait
      */
     public function get_form_fields()
     {
+        $allowed_shipping_methods_global_settings = apply_filters('flexible-shipping/integration/allowed-shipping-methods-global-settings', []);
+        if (in_array($this->id, $allowed_shipping_methods_global_settings, \true)) {
+            return $this->prepare_custom_field_types($this->append_advert_fields(parent::get_form_fields()));
+        }
         return $this->prepare_custom_field_types(parent::get_form_fields());
     }
     /**
@@ -334,7 +338,7 @@ trait SettingsTrait
         if ($this->instance_id) {
             $settings_html = $this->generate_settings_html($this->append_flexible_shipping_rules_table_description($this->get_instance_form_fields()), \false);
         } else {
-            $settings_html = $this->generate_settings_html($this->get_form_fields(), \false);
+            $settings_html = $this->generate_settings_html($this->append_flexible_shipping_rules_table_description($this->get_form_fields()), \false);
         }
         $service_id = $this->id;
         include __DIR__ . '/view/shipping-method-settings-html.php';

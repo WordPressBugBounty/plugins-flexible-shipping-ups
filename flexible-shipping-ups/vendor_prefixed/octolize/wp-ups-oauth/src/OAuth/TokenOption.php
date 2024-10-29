@@ -6,8 +6,9 @@ class TokenOption
 {
     private const TIME_BUFFER_SECONDS = 0;
     private const EXPIRES_DIVIDER = 1.5;
-    private $option_name;
-    private $is_testing;
+    const ERROR_COUNT = 'error_count';
+    private string $option_name;
+    private bool $is_testing;
     public function __construct(string $option_name = 'fs_ups_token', bool $is_testing = \false)
     {
         $this->option_name = $option_name;
@@ -107,5 +108,23 @@ class TokenOption
     {
         [$header, $payload, $signature] = explode(".", $access_token ?? $this->get_access_token());
         return json_decode(base64_decode($payload), \true);
+    }
+    public function increase_error_count(): void
+    {
+        $token = $this->get();
+        $token[self::ERROR_COUNT] = $this->get_error_count() + 1;
+        $this->set($token);
+    }
+    public function get_error_count(): int
+    {
+        $token = $this->get();
+        return (int) ($token[self::ERROR_COUNT] ?? 0);
+    }
+    public function increase_expiration_time_according_to_error_count(): void
+    {
+        $token = $this->get();
+        $expires_in = min((int) ($token[self::ERROR_COUNT] ?? 0) * 60, 600);
+        $token['expires_at'] = $this->calculate_expires_at(time(), $expires_in);
+        $this->set($token);
     }
 }
