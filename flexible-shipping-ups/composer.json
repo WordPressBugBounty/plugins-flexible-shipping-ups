@@ -50,7 +50,7 @@
 		"wpdesk/wp-notice": "^3.1",
 		"wpdesk/wp-persistence": "^3.0.2",
 		"wpdesk/wp-plugin-flow-free": "^1.0.2",
-		"wpdesk/wp-ups-shipping-method": "^3.3.0",
+		"wpdesk/wp-ups-shipping-method": "^3.6.0",
 		"wpdesk/wp-woocommerce-shipping": "^3.30.0",
 		"wpdesk/wp-wpdesk-composer": "^3",
 		"wpdesk/wp-wpdesk-rating-petition": "^1.1"

@@ -4,7 +4,7 @@ Donate link: https://wordpress.org/plugins/flexible-shipping-ups/
 Tags: ups shipping, woocommerce ups, ups api, ups calculator, ups access points
 Requires at least: 4.5
 Tested up to: 6.7
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -93,6 +93,10 @@ or
 
 The UPS WooCommerce Live Rates plugin is constantly being developed by Octolize. Our plugins are used by **over 250,000 WooCommerce stores worldwide**. Over the years we proved to have become not only the authors of stable and high-quality plugins, but also as a team providing excellent technical support. Join the community of our satisfied plugins’ users. Bet on quality and let our plugins do the rest.
 
+= Power of Table Rate =
+
+The UPS WooCommerce Live Rates plugin is now compatible with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/) - the most powerful Table Rate shipping plugin for WooCommerce. This provides greater control over delivery costs and allows you to take advantage of both live rates and condition-based shipping costs. You can now combine rates returned by UPS WooCommerce Live Rates with cost calculated based on price and weight. Moreover, when using [Flexible Shipping PRO](https://octol.io/fs-repo-up), you get access to 15+ conditions, such as shipping class or product categories. Try for free with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/)!
+
 = Conditional Shipping Methods =
 
 Extend the default functionalities and **conditionally display or hide the UPS shipping methods** in your WooCommerce store with Conditional Shipping Methods plugin. Define the rules when the specific shipping methods should be available to pick by your customers and when not to.
@@ -169,6 +173,10 @@ Sometimes API doesn’t respond or return an error. In that case, the UPS shippi
 7. UPS Live Rates and Access Points in the checkout
 
 == Changelog ==
+
+= 3.2.0 - 2024-11-12 =
+* Added Client Credentials Flow support in REST API
+* Fixed Debug mode logs
 
 = 3.1.0 - 2024-10-29 =
 * Added Action Scheduler in token refresh process

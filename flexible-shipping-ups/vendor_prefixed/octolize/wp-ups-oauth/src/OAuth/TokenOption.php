@@ -88,7 +88,7 @@ class TokenOption
     public function get_expires_in(): int
     {
         $token = $this->get();
-        return (int) $token['expires_in'] ?? 0;
+        return (int) ($token['expires_in'] ?? 0);
     }
     public function get_issued_at(): int
     {

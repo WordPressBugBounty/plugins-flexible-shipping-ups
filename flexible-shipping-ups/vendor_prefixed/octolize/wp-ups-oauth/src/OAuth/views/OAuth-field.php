@@ -12,6 +12,7 @@ namespace UpsFreeVendor;
  * @var string $field_class
  * @var \Octolize\WooCommerceShipping\Ups\OAuth\TokenOption $token_option
  */
+use UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition;
 ?>
 <tr valign="top">
 	<th scope="row" class="titledesc">
@@ -23,14 +24,19 @@ echo \wp_kses_post($this->data['title']);
 	</th>
 	<td class="forminp">
 		<?php 
-if (empty($token_option->get())) {
+if (empty($token_option->get_refresh_token())) {
     ?>
-			<a href="<?php 
+			<button
+				data-href="<?php 
     echo \esc_url($authorize_action);
-    ?>" type="submit"
-			   class="button button-primary"><?php 
+    ?>"
+				id="<?php 
+    echo \esc_attr($this->field_key) . '_authorize';
+    ?>"
+				class="button button-primary ups-oauth-button"
+			><?php 
     echo \esc_html(\__('Authorize', 'flexible-shipping-ups'));
-    ?></a>
+    ?></button>
 			<p class="description">
 				<?php 
     echo \esc_html(\__('Clicking the button will open up the UPS website. Please provide your credentials and mark the checkbox to connect our plugin with your UPS account.', 'flexible-shipping-ups'));
@@ -39,12 +45,17 @@ if (empty($token_option->get())) {
 		<?php 
 } else {
     ?>
-			<a href="<?php 
+			<button
+				data-href="<?php 
     echo \esc_url($revoke_action);
-    ?>" type="submit"
-			   class="button"><?php 
+    ?>"
+			    id="<?php 
+    echo \esc_attr($this->field_key) . '_revoke';
+    ?>"
+			    class="button ups-oauth-button"
+			><?php 
     echo \esc_html(\__('Revoke', 'flexible-shipping-ups'));
-    ?></a>
+    ?></button>
 			<p class="description">
 				<?php 
     echo \esc_html(\__('Clicking the button will disconnect your UPS account from our plugin.', 'flexible-shipping-ups'));
@@ -78,6 +89,24 @@ echo \esc_attr($field_key);
 echo \esc_attr($value);
 ?>"/>
 		</fieldset>
+		<script>
+			jQuery(document).ready(function () {
+				let changed = false;
+				jQuery('select').change(function () {
+					changed = true;
+				});
+				jQuery(document).on('click', '.ups-oauth-button', function (e) {
+					if (changed) {
+						alert('<?php 
+echo \esc_js(\__('You have unsaved changes. Save them first.', 'flexible-shipping-ups'));
+?>');
+					} else {
+						window.location.href = jQuery(this).data('href');
+					}
+					e.preventDefault();
+				});
+			});
+		</script>
 	</td>
 </tr>
 <?php 

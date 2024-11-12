@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc36e46b7475e351e0999492451317a34
+class ComposerStaticInit847300f0ed854822859268bf17aaf552
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -284,6 +284,9 @@ class ComposerStaticInitc36e46b7475e351e0999492451317a34
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\ActionScheduler\\RefreshTokenActionScheduler' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/ActionScheduler/RefreshTokenActionScheduler.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\CreateToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/CreateToken.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshToken.php',
+        'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenFactory' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenFactory.php',
+        'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithCredentials' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithCredentials.php',
+        'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithRefreshToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithRefreshToken.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Ajax' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\CreateTokenAction' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/CreateTokenAction.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Exceptions\\CreateTokenException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Exceptions/CreateTokenException.php',
@@ -294,6 +297,7 @@ class ComposerStaticInitc36e46b7475e351e0999492451317a34
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\OAuthField' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/OAuthField.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\OAuthUrl' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/OAuthUrl.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\RestApiToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/RestApiToken.php',
+        'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\RestApiTokenFactory' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/RestApiTokenFactory.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\TokenOption' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/TokenOption.php',
         'UpsFreeVendor\\Psr\\Clock\\ClockInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/clock/src/ClockInterface.php',
         'UpsFreeVendor\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/container/src/ContainerExceptionInterface.php',
@@ -873,9 +877,9 @@ class ComposerStaticInitc36e46b7475e351e0999492451317a34
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc36e46b7475e351e0999492451317a34::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc36e46b7475e351e0999492451317a34::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc36e46b7475e351e0999492451317a34::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit847300f0ed854822859268bf17aaf552::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit847300f0ed854822859268bf17aaf552::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit847300f0ed854822859268bf17aaf552::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -13,6 +13,7 @@ use UpsFreeVendor\Octolize\ShippingExtensions\ShippingExtensions;
 use UpsFreeVendor\Octolize\Tracker\DeactivationTracker\OctolizeReasonsFactory;
 use UpsFreeVendor\Octolize\Tracker\TrackerInitializer;
 use UpsFreeVendor\Octolize\Ups\RestApi\RestApiClient;
+use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\RestApiTokenFactory;
 use UpsFreeVendor\Psr\Log\LoggerAwareInterface;
 use UpsFreeVendor\Psr\Log\LoggerAwareTrait;
 use UpsFreeVendor\Psr\Log\NullLogger;
@@ -45,10 +46,6 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\ApiStatus\FieldApiStat
 use UpsFreeVendor\WPDesk\WooCommerceShipping\PluginShippingDecisions;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\CollectionPoint\CollectionPointRateMethod;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings;
-use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\Actions\RefreshToken;
-use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\HookableObjects;
-use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\OAuthUrl;
-use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\RestApiToken;
 use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ThirdParty\Germanized\TaxSettingsNotice;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\AjaxActions;
@@ -145,20 +142,14 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		$this->init_renderer();
 
 		// REST API.
-		$token_option          = $this->get_token_option();
-		$refresh_token_action  = new RefreshToken( $token_option, (new OAuthUrl())->get_url() );
-		$rest_api_token        = new RestApiToken( $token_option, $refresh_token_action, $this->logger );
-		$oauth_url             = new OAuthUrl();
-		$this->add_hookable(
-			new HookableObjects(
-				$oauth_url,
-				$token_option,
-				$rest_api_token,
-				$this->logger,
-				'admin.php?page=wc-settings&tab=shipping&section=' . UpsShippingService::UNIQUE_ID
-			)
+		$rest_api_token        = ( new RestApiTokenFactory() )->create(
+			$settings[ UpsSettingsDefinition::AUTHORIZATION_TYPE ] ?? UpsSettingsDefinition::AUTH_CODE,
+			$settings[ UpsSettingsDefinition::CLIENT_ID ] ?? '',
+			$settings[ UpsSettingsDefinition::CLIENT_SECRET ] ?? '',
+			$this->logger
 		);
 		$this->rest_api_client = RestApiClient::create( $rest_api_token );
+
 		$this->init_ups_services( $this->rest_api_client );
 
 		$this->add_hookable( new ActivationDate() );

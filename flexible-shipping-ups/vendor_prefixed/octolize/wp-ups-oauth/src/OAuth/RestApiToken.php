@@ -25,7 +25,7 @@ class RestApiToken implements UpsRestApiToken
     /**
      * @var RefreshTokenActionScheduler|null
      */
-    private $refresh_token_action_scheduler;
+    private ?RefreshTokenActionScheduler $refresh_token_action_scheduler;
     public function __construct(TokenOption $token_option, RefreshToken $refresh_token_action, LoggerInterface $logger)
     {
         $this->token_option = $token_option;
@@ -38,9 +38,6 @@ class RestApiToken implements UpsRestApiToken
     }
     public function get_token(): string
     {
-        if (empty($this->token_option->get_access_token())) {
-            return '';
-        }
         if ($this->token_option->is_token_expired()) {
             $this->refresh_token();
         }
@@ -53,7 +50,7 @@ class RestApiToken implements UpsRestApiToken
             try {
                 $this->token_option->clear_wp_cache();
                 if ($force_refresh || $this->token_option->is_token_expired()) {
-                    $this->refresh_token_action->handle();
+                    $this->refresh_token_action->refresh();
                     $this->logger->debug('Token refreshed', ['token' => $this->token_option->get_access_token()]);
                     do_action('flexible_shipping_ups_token_refreshed');
                 } else {
