@@ -119,9 +119,14 @@ final class PluginBootstrap
         if (method_exists($plugin_info, 'get_language_dir')) {
             $lang_dir = $plugin_info->get_language_dir();
         }
-        add_action('init', function () use ($plugin_info, $lang_dir) {
-            \load_plugin_textdomain($plugin_info->get_text_domain(), '', basename($plugin_info->get_plugin_dir()) . "/{$lang_dir}/");
-        });
+        $text_domain = $plugin_info->get_text_domain();
+        add_filter('doing_it_wrong_trigger_error', function ($doing_it_wrong, $function, $message, $version) use ($text_domain) {
+            if (wp_get_environment_type() === 'production' && $function === '_load_textdomain_just_in_time' && strpos($message, '<code>' . $text_domain . '</code>') !== \false) {
+                return \false;
+            }
+            return $doing_it_wrong;
+        }, 10, 4);
+        \load_plugin_textdomain($plugin_info->get_text_domain(), \false, basename($plugin_info->get_plugin_dir()) . "/{$lang_dir}/");
     }
     /**
      * Factory method creates requirement checker to run the checks

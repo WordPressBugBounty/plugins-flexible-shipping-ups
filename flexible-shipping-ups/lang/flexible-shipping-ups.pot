@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the UPS Live Rates and Access Points plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: UPS Live Rates and Access Points 3.2.0\n"
+"Project-Id-Version: UPS Live Rates and Access Points 3.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-12T20:33:54+00:00\n"
+"POT-Creation-Date: 2024-12-10T14:11:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -86,46 +86,46 @@ msgstr ""
 msgid "\"Flexible Shipping UPS PRO\" plugin version %1$s cannot run with this version of \"Flexible Shipping for UPS\" plugin. %2$sPlease update \"Flexible Shipping UPS PRO\" plugin to the newest version!%3$s"
 msgstr ""
 
-#: src/Plugin/Plugin.php:227
+#: src/Plugin/Plugin.php:241
 #: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:60
 #: build/point-selection-block-frontend.js:1
 #: build/point-selection-block.js:1
 msgid "Select pickup point"
 msgstr ""
 
-#: src/Plugin/Plugin.php:287
+#: src/Plugin/Plugin.php:302
 msgid "Flexible Shipping UPS PRO"
 msgstr ""
 
-#: src/Plugin/Plugin.php:391
+#: src/Plugin/Plugin.php:402
 #: vendor_prefixed/wpdesk/wp-ups-shipping-method/src/WooCommerceShipping/Ups/UpsAdminOrderMetaDataDisplay.php:36
 msgid "UPS Access Point"
 msgstr ""
 
-#: src/Plugin/Plugin.php:392
+#: src/Plugin/Plugin.php:403
 msgid "Access point unavailable for selected shipping address!"
 msgstr ""
 
-#: src/Plugin/Plugin.php:393
+#: src/Plugin/Plugin.php:404
 msgid "The closest point based on the billing address or shipping address."
 msgstr ""
 
-#: src/Plugin/Plugin.php:487
-#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:198
+#: src/Plugin/Plugin.php:498
+#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:188
 msgid "Settings"
 msgstr ""
 
-#: src/Plugin/Plugin.php:492
+#: src/Plugin/Plugin.php:503
 msgid "Buy PRO"
 msgstr ""
 
 #: src/Plugin/PluginLinks.php:26
-#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:194
+#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:184
 msgid "Docs"
 msgstr ""
 
 #: src/Plugin/PluginLinks.php:27
-#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:191
+#: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:181
 msgid "Support"
 msgstr ""
 
@@ -403,19 +403,19 @@ msgstr ""
 msgid "The new feature allows you to combine Live Rates and Table Rate, providing the ability to use automatically calculated Live Rates while also adjusting shipping costs using Table Rate with the free version of %1$sFlexible Shipping%2$s or %3$sFlexible Shipping PRO%4$s.%5$sThis way, you can now have greater control over the final delivery cost, precisely defining additional charges or discounts for each shipping method."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:105
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:107
 msgid "Thank you for updating %1$s!"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:105
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:107
 msgid "It is really important to keep the plugins up to date. We have implemented some improvements and new functionalities. Find out what has changed:"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:128
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:130
 msgid "I'm not interested"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:128
+#: vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeOnboardingFactory.php:130
 msgid "Thanks for letting me know"
 msgstr ""
 

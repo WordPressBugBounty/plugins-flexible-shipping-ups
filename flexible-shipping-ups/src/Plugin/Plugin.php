@@ -46,7 +46,6 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\ApiStatus\FieldApiStat
 use UpsFreeVendor\WPDesk\WooCommerceShipping\PluginShippingDecisions;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod\RateMethod\CollectionPoint\CollectionPointRateMethod;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings;
-use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ThirdParty\Germanized\TaxSettingsNotice;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\AjaxActions;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\UpsLabels;
@@ -141,6 +140,8 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 
 		$this->init_renderer();
 
+		$settings = $this->get_global_ups_settings();
+
 		// REST API.
 		$rest_api_token        = ( new RestApiTokenFactory() )->create(
 			$settings[ UpsSettingsDefinition::AUTHORIZATION_TYPE ] ?? UpsSettingsDefinition::AUTH_CODE,
@@ -167,13 +168,18 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 
 		$this->add_hookable( new \WPDesk\FlexibleShippingUps\Assets( trailingslashit( $this->get_plugin_url() . '/assets/dist/' ), $this->scripts_version ) );
 
-		$admin_meta_data_interpreter = new UpsAdminOrderMetaDataDisplay();
-		$admin_meta_data_interpreter->init_interpreters();
-		$this->add_hookable( $admin_meta_data_interpreter );
+		add_action(
+			'init',
+			function () {
+				$admin_meta_data_interpreter = new UpsAdminOrderMetaDataDisplay();
+				$admin_meta_data_interpreter->init_interpreters();
+				$admin_meta_data_interpreter->hooks();
 
-		$meta_data_interpreter = new UpsFrontOrderMetaDataDisplay( $this->renderer );
-		$meta_data_interpreter->init_interpreters();
-		$this->add_hookable( $meta_data_interpreter );
+				$meta_data_interpreter = new UpsFrontOrderMetaDataDisplay( $this->renderer );
+				$meta_data_interpreter->init_interpreters();
+				$meta_data_interpreter->hooks();
+			}
+		);
 
 		$this->add_hookable( new ActivePayments\Integration( UpsShippingService::UNIQUE_ID ) );
 
@@ -183,17 +189,21 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 
 		$this->add_hookable( new PluginLinks( $this->get_plugin_file_path() ) );
 
-		$brand_assets_url = $this->get_plugin_assets_url() . '../vendor_prefixed/octolize/wp-octolize-brand-assets/assets/';
-		$this->add_hookable( new ProPluginMetaBox( $brand_assets_url ) );
+		add_action( 'admin_init', function () {
+			$brand_assets_url = $this->get_plugin_assets_url() . '../vendor_prefixed/octolize/wp-octolize-brand-assets/assets/';
+			( new ProPluginMetaBox( $brand_assets_url ) )->hooks();
+		} );
 
 		$this->add_hookable( new UpsLabels() );
 		$this->add_hookable( new AjaxActions() );
 
-		$this->init_tracker();
+		add_action( 'init', [ $this, 'init_tracker' ] );
 
 		$this->init_checkout_blocks();
 
-		( new UpgradeOnboarding( $this->plugin_info ) )->init_upgrade_onboarding();
+		add_action( 'init', function () {
+			( new UpgradeOnboarding( $this->plugin_info ) )->init_upgrade_onboarding();
+		} );
 
 		$this->hooks();
 	}
@@ -223,8 +233,14 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 			$this->plugin_path,
 			$this->get_plugin_file_path()
 		) )->hooks();
-		// Dummy texts.
-		__( 'Select pickup point', 'flexible-shipping-ups' );
+
+		add_action(
+			'init',
+			function () {
+				// Dummy texts.
+				__( 'Select pickup point', 'flexible-shipping-ups' );
+			}
+		);
 	}
 
 	/**
@@ -277,18 +293,17 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 	 * @internal
 	 */
 	public function init_tracker() {
-		$this->add_hookable(
-			TrackerInitializer::create_from_plugin_info_for_shipping_method(
-				$this->plugin_info,
-				UpsShippingService::UNIQUE_ID,
-				new OctolizeReasonsFactory(
-					'https://octol.io/ups-docs-exit-pop-up',
-					'https://octol.io/ups-support-forum-exit-pop-up',
-					__( 'Flexible Shipping UPS PRO', 'flexible-shipping-ups' ),
-					'https://octol.io/ups-contact-exit-pop-up'
-				)
-		) );
-		$this->add_hookable( new Tracker() );
+		( TrackerInitializer::create_from_plugin_info_for_shipping_method(
+			$this->plugin_info,
+			UpsShippingService::UNIQUE_ID,
+			new OctolizeReasonsFactory(
+				'https://octol.io/ups-docs-exit-pop-up',
+				'https://octol.io/ups-support-forum-exit-pop-up',
+				__( 'Flexible Shipping UPS PRO', 'flexible-shipping-ups' ),
+				'https://octol.io/ups-contact-exit-pop-up'
+			)
+		) )->hooks();
+		( new Tracker() )->hooks();
 	}
 
 	/**
@@ -354,10 +369,6 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		}
 
 		return $this->ups_shipping_service;
-	}
-
-	private function get_token_option(): TokenOption {
-		return new TokenOption();
 	}
 
 	/**

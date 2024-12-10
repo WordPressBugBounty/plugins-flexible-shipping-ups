@@ -100,6 +100,10 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
                 $payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['DeliveryConfirmation']['DCISType'] = (string) $package['PackageServiceOptions']['DeliveryConfirmation']['DcisType'];
                 unset($payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['DeliveryConfirmation']['DcisType']);
             }
+            if (isset($payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['InsuredValue'])) {
+                $payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['DeclaredValue'] = $payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['InsuredValue'];
+                unset($payload['ShipmentRequest']['Shipment']['Package'][$key]['PackageServiceOptions']['InsuredValue']);
+            }
         }
         return $payload;
     }
