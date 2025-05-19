@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit847300f0ed854822859268bf17aaf552
+class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -217,11 +217,21 @@ class ComposerStaticInit847300f0ed854822859268bf17aaf552
         'UpsFreeVendor\\Monolog\\SignalHandler' => __DIR__ . '/../..' . '/vendor_prefixed/monolog/monolog/src/Monolog/SignalHandler.php',
         'UpsFreeVendor\\Monolog\\Test\\TestCase' => __DIR__ . '/../..' . '/vendor_prefixed/monolog/monolog/src/Monolog/Test/TestCase.php',
         'UpsFreeVendor\\Monolog\\Utils' => __DIR__ . '/../..' . '/vendor_prefixed/monolog/monolog/src/Monolog/Utils.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\CheckoutIntegration' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/CheckoutIntegration.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\IntegrationData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/IntegrationData.php',
         'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\CheckoutIntegration' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/CheckoutIntegration.php',
         'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\IntegrationData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/IntegrationData.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\InvalidPickupPointException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/InvalidPickupPointException.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\MapPickupPoint\\MapCheckoutIntegration' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/MapPickupPoint/MapCheckoutIntegration.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\MapPickupPoint\\MapIntegrationData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/MapPickupPoint/MapIntegrationData.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\MapPickupPoint\\MapRegistrator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/MapPickupPoint/MapRegistrator.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\MapPickupPoint\\MapStoreEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/MapPickupPoint/MapStoreEndpoint.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\MapPickupPoint\\ShippingRateMetaData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/MapPickupPoint/ShippingRateMetaData.php',
         'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\Registrator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/Registrator.php',
         'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\SelectPickupPointException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/SelectPickupPointException.php',
         'UpsFreeVendor\\Octolize\\Blocks\\PickupPoint\\StoreEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\Registrator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/Registrator.php',
+        'UpsFreeVendor\\Octolize\\Blocks\\StoreEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/StoreEndpoint.php',
         'UpsFreeVendor\\Octolize\\Brand\\Assets\\AdminAssets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/Assets/AdminAssets.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ConstantShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ConstantShouldShowStrategy.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\SettingsSidebar' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/SettingsSidebar.php',
@@ -550,6 +560,7 @@ class ComposerStaticInit847300f0ed854822859268bf17aaf552
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\SubmitField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/SubmitField.php',
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\TextAreaField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TextAreaField.php',
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\TimepickerField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TimepickerField.php',
+        'UpsFreeVendor\\WPDesk\\Forms\\Field\\ToggleField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/ToggleField.php',
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\Traits\\HtmlAttributes' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/Traits/HtmlAttributes.php',
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\WPEditorField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WPEditorField.php',
         'UpsFreeVendor\\WPDesk\\Forms\\Field\\WooSelect' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WooSelect.php',
@@ -877,9 +888,9 @@ class ComposerStaticInit847300f0ed854822859268bf17aaf552
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit847300f0ed854822859268bf17aaf552::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit847300f0ed854822859268bf17aaf552::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit847300f0ed854822859268bf17aaf552::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$classMap;
 
         }, null, ClassLoader::class);
     }

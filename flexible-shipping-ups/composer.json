@@ -37,7 +37,7 @@
 	"require-dev": {
 		"10up/wp_mock": "*",
 		"mockery/mockery": "*",
-		"octolize/octolize-pickup-point-checkout-blocks": "^1.2",
+		"octolize/octolize-pickup-point-checkout-blocks": "^2",
 		"octolize/wp-octolize-brand-assets": "^1.3",
 		"octolize/wp-octolize-tracker": "^1.3.2",
 		"octolize/wp-onboarding": "^1.8",

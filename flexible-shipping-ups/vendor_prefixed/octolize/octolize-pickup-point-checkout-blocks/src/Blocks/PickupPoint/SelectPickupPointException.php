@@ -4,8 +4,8 @@ namespace UpsFreeVendor\Octolize\Blocks\PickupPoint;
 
 class SelectPickupPointException extends \Exception
 {
-    public function __construct()
+    public function __construct($message = null)
     {
-        parent::__construct(__('Please select a pickup point.', 'flexible-shipping-ups'));
+        parent::__construct($message ?? __('Please select a pickup point.', 'flexible-shipping-ups'));
     }
 }

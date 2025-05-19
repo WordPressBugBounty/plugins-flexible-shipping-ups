@@ -9,7 +9,7 @@ use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable;
  */
 class StoreEndpoint implements Hookable
 {
-    private static string $integration_name;
+    protected static string $integration_name;
     private static string $field_name;
     public function __construct(string $integration_name, string $field_name)
     {
@@ -41,6 +41,10 @@ class StoreEndpoint implements Hookable
         if ($customer_id !== 0) {
             update_user_meta($customer_id, self::$field_name, $value);
         }
+        $session = WC()->session;
+        if ($session) {
+            $session->set(self::$field_name, $value);
+        }
     }
     public static function data_callback(): array
     {
@@ -53,7 +57,7 @@ class StoreEndpoint implements Hookable
             $user_id = get_current_user_id();
             $point_id = get_user_meta($user_id, static::$field_name, \true) ?: '';
         }
-        return [static::$field_name => $point_id, 'default_options' => apply_filters('octolize-pickup-point-blocks-' . self::$integration_name . '-default_options', [['label' => __('Please enter at least 3 characters', 'flexible-shipping-ups'), 'value' => '']], $point_id)];
+        return apply_filters('octolize-pickup-point-blocks-' . self::$integration_name . '-data', [static::$field_name => $point_id, 'default_options' => apply_filters('octolize-pickup-point-blocks-' . self::$integration_name . '-default_options', [['label' => __('Please enter at least 3 characters', 'flexible-shipping-ups'), 'value' => '']], $point_id), 'field_label' => __('Selected pickup point', 'flexible-shipping-ups'), 'button_label' => __('Select from map', 'flexible-shipping-ups')]);
     }
     public static function schema_callback(): array
     {

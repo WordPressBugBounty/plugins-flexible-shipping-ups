@@ -1,16 +1,24 @@
-import { useEffect, useState, useCallback } from '@wordpress/element';
-import { ComboboxControl } from '@wordpress/components';
+import { useEffect, useState, useCallback, useRef } from '@wordpress/element';
+import { ComboboxControl, TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch, select } from '@wordpress/data';
-import { useRef } from '@wordpress/element';
-import { isObject } from 'lodash';
-import { debounce } from 'lodash';
+import { isObject, debounce } from 'lodash';
+import { Fragment } from "react";
 
 import { defaultOptions } from "./default-options";
 import { loadOptions } from './load-options.js';
 import { prepareFormData } from "./prepare-form-data";
 
-export const PickupPointBlock = ( { checkoutExtensionData, cart, metadata, showFieldCallback, requiredFieldCallback, formDataCallback } ) => {
+const PickupPointBlock = (
+	{
+		checkoutExtensionData,
+		cart,
+		metadata,
+		showFieldCallback,
+		requiredFieldCallback,
+		formDataCallback,
+		selectPointFromMapCallback
+	} ) => {
 
 	const controlRef = useRef();
 
@@ -70,6 +78,9 @@ export const PickupPointBlock = ( { checkoutExtensionData, cart, metadata, showF
 		setPointId,
 	] = useState( wcSettings.checkoutData.extensions[ settings.integrationName ][ settings.fieldName ] ?? '' );
 
+	const [disableListSelection, setDisableListSelection ] = useState( wcSettings.checkoutData.extensions[ settings.integrationName ]['disable_list_selection'] ?? false );
+	const [disableMapSelection, setDisableMapSelection ] = useState( wcSettings.checkoutData.extensions[ settings.integrationName ]['disable_map_selection'] ?? false );
+
 	useEffect( () => {
 		let selectedRates = getSelectedRates();
 		let selectedFlexibleShippingMethods = getSelectedFlexibleShippingMethods(selectedRates);
@@ -87,7 +98,9 @@ export const PickupPointBlock = ( { checkoutExtensionData, cart, metadata, showF
 		return store.getValidationError( validationErrorId );
 	} );
 
-	const fieldLabel = __( 'Select pickup point', 'octolize-pickup-point-checkout-blocks' );
+	const fieldLabel = wcSettings.checkoutData.extensions[ settings.integrationName ]['field_label'] ?? __( 'Selected pickup point', 'octolize-pickup-point-checkout-blocks' );
+
+	const selectFromMapLabel = wcSettings.checkoutData.extensions[ settings.integrationName ]['button_label'] ?? __( 'Select from map', 'octolize-pickup-point-checkout-blocks' );
 
 	useEffect( () => {
 		setExtensionData( settings.integrationName, settings.fieldName, pointId );
@@ -165,53 +178,103 @@ export const PickupPointBlock = ( { checkoutExtensionData, cart, metadata, showF
 		debouncedLoadOptions( loadOptionsSettings( '', setPointId, pointId ) );
 	}
 
+	const setPointSelectedFromMap = ( point ) => {
+		setPointId( point.id );
+		setFilteredOptions( [ { label: point.label, value: point.id } ] );
+		pointIdChanged( point.id );
+	}
+
+	const selectPontFromMapAction = (e) => {
+		e.preventDefault();
+		selectPointFromMapCallback(
+			{
+				pointId: pointId,
+				address: cart.shippingAddress,
+				setPointSelectedFromMap: setPointSelectedFromMap,
+				cart: cart,
+			}
+		);
+	}
+
 	return (
 		<>
-			{ showField && <div className="wc-block-components-combobox is-active">
-				<ComboboxControl
-					className={ 'wc-block-components-combobox-control ' +
-						( validationError?.hidden === false
-							? ' has-error'
-							: '' ) }
-					label={ fieldLabel }
-					value={ pointId }
-					required={ requiredField }
-					options={ filteredOptions }
-					filteredValue={ filteredValue }
-					onFilterValueChange={ ( filterValue ) => {
-						if ( filterValue.length ) {
-							const activeElement = isObject( controlRef.current )
-								? controlRef.current.ownerDocument.activeElement
-								: undefined;
+			{ showField && <>
+				{(! disableListSelection ) &&
+					<div className="wc-block-components-combobox is-active">
+						<ComboboxControl
+							className={ 'wc-block-components-combobox-control' +
+								( validationError?.hidden === false
+									? ' has-error'
+									: '' ) }
+							label={ fieldLabel }
+							value={ pointId }
+							required={ requiredField }
+							options={ filteredOptions }
+							filteredValue={ filteredValue }
+							onFilterValueChange={ ( filterValue ) => {
+								if ( filterValue.length ) {
+									const activeElement = isObject( controlRef.current )
+										? controlRef.current.ownerDocument.activeElement
+										: undefined;
 
-							if (
-								activeElement &&
-								isObject( controlRef.current ) &&
-								controlRef.current.contains( activeElement )
-							) {
-								return;
-							}
+									if (
+										activeElement &&
+										isObject( controlRef.current ) &&
+										controlRef.current.contains( activeElement )
+									) {
+										return;
+									}
 
-							if ( ! autoloadOptions ) {
-								if ( filterValue.length < 3 ) {
-									setFilteredOptions( defaultOptions );
-									return;
+									if ( ! autoloadOptions ) {
+										if ( filterValue.length < 3 ) {
+											setFilteredOptions( defaultOptions );
+											return;
+										}
+										debouncedLoadOptions( loadOptionsSettings( filterValue ) );
+									}
 								}
-								debouncedLoadOptions( loadOptionsSettings( filterValue ) );
-							}
+							} }
+							onChange={ pointIdChanged }
+							allowReset={ false }
+							aria-invalid={ validationError?.message && ! validationError?.hidden }
+						/>
+						{ validationError?.hidden === false &&
+							<div className="wc-block-components-validation-error" role="alert"
+								 style={ { 'marginTop': '20px' } }>
+								<p id={ validationErrorId }>{ validationError?.message }</p>
+							</div>
 						}
-					} }
-					onChange={ pointIdChanged }
-					allowReset={ false }
-					aria-invalid={ validationError?.message && ! validationError?.hidden }
-				/>
-				{ validationError?.hidden === false &&
-					<div className="wc-block-components-validation-error" role="alert"
-						 style={ { 'margin-top': '20px' } }>
-						<p id={ validationErrorId }>{ validationError?.message }</p>
 					</div>
 				}
-			</div> }
+				{ disableListSelection &&
+					<div className="wc-block-components-text-input is-active">
+						<TextControl
+							className={ 'wc-block-components-text-input' +
+								( validationError?.hidden === false
+									? ' has-error'
+									: '' ) }
+							value={ filteredOptions[0]?.label }
+							label={ fieldLabel }
+							readOnly={ true }
+							onClick={ (e) => {selectPontFromMapAction(e) } }
+							aria-invalid={ validationError?.message && ! validationError?.hidden }
+						/>
+						{ validationError?.hidden === false &&
+							<div className="wc-block-components-validation-error" role="alert"
+								 style={ { 'marginTop': '20px' } }>
+								<p id={ validationErrorId }>{ validationError?.message }</p>
+							</div>
+						}
+					</div>
+				}
+				{( selectPointFromMapCallback && ! disableMapSelection ) && <>
+					<div className="wc-block-checkout__actions_row" style={ { 'marginTop': disableListSelection ? '20px' : '40px', 'marginLeft': '10px' } }>
+						<button className="wc-block-components-button wp-element-button is-link" onClick={ selectPontFromMapAction }>{selectFromMapLabel}</button>
+					</div>
+				</> }
+			</> }
 		</>
 	);
 };
+
+export { PickupPointBlock };

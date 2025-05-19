@@ -10,6 +10,7 @@ export default function ShippingExtensions(props) {
         admin_page_title,
         header_title,
         header_description,
+        header_promo,
         plugins,
         text_filter,
         default_category,
@@ -30,6 +31,7 @@ export default function ShippingExtensions(props) {
                 assets_url={assets_url}
                 header_title={header_title}
                 header_description={header_description}
+                header_promo={header_promo ?? []}
             />
 
             <CategoryFilter

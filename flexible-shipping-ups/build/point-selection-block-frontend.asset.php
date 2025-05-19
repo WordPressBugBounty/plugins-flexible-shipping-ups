@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('lodash', 'react', 'wc-blocks-checkout', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n'), 'version' => 'e1aa57dd1fe3d17e3405');
+<?php return array('dependencies' => array('lodash', 'react', 'wc-blocks-checkout', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n'), 'version' => '07c7167fdc57325717e2');

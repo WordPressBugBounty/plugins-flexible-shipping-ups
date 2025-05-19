@@ -53,6 +53,7 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
         unset($payload['ShipmentRequest']['Shipment']['Service']['Services']);
         $payload = $this->prepare_packages($payload);
         $payload = $this->prepare_negotiated_rates($payload);
+        $payload = $this->prepare_access_point_data($payload);
         return $payload;
     }
     private function prepare_ship_from(array $payload): array
@@ -113,6 +114,26 @@ class Shipping extends \UpsFreeVendor\Ups\Shipping
             $payload['ShipmentRequest']['Shipment']['ShipmentRatingOptions'] = $payload['ShipmentRequest']['Shipment']['ShipmentRatingOptions'] ?? [];
             $payload['ShipmentRequest']['Shipment']['ShipmentRatingOptions']['NegotiatedRatesIndicator'] = '1';
             unset($payload['ShipmentRequest']['Shipment']['RateInformation']['NegotiatedRatesIndicator']);
+        }
+        return $payload;
+    }
+    private function prepare_access_point_data(array $payload): array
+    {
+        if (isset($payload['ShipmentRequest']['Shipment']['AlternateDeliveryAddress']['Address']['AddressLine1'])) {
+            $payload['ShipmentRequest']['Shipment']['AlternateDeliveryAddress']['Address']['AddressLine'] = $payload['ShipmentRequest']['Shipment']['AlternateDeliveryAddress']['Address']['AddressLine1'];
+            unset($payload['ShipmentRequest']['Shipment']['AlternateDeliveryAddress']['Address']['AddressLine1']);
+        }
+        if (isset($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notifications'])) {
+            $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'] = $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notifications'];
+            unset($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notifications']);
+            foreach ($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'] as $key => $notification) {
+                if ($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EmailMessage']) {
+                    $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EMail'] = $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EmailMessage'];
+                    $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EMail']['EMailAddress'] = $payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EMail']['EmailAddresses'];
+                    unset($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EMail']['EmailAddresses']);
+                    unset($payload['ShipmentRequest']['Shipment']['ShipmentServiceOptions']['Notification'][$key]['EmailMessage']);
+                }
+            }
         }
         return $payload;
     }

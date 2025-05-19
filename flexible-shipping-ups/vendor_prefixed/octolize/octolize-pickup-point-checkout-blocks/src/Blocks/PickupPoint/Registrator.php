@@ -34,4 +34,24 @@ class Registrator implements Hookable
         });
         (new StoreEndpoint($this->integration_name, $this->meta_data_name))->hooks();
     }
+    protected function get_integration_name(): string
+    {
+        return $this->integration_name;
+    }
+    protected function get_meta_data_name(): string
+    {
+        return $this->meta_data_name;
+    }
+    protected function get_plugin_dir(): string
+    {
+        return $this->plugin_dir;
+    }
+    protected function get_plugin_file(): string
+    {
+        return $this->plugin_file;
+    }
+    protected function get_integration_data(): IntegrationData
+    {
+        return $this->integration_data;
+    }
 }
