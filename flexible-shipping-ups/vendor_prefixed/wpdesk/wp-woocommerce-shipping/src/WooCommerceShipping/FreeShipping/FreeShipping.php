@@ -10,7 +10,7 @@ namespace UpsFreeVendor\WPDesk\WooCommerceShipping\FreeShipping;
 use UpsFreeVendor\Psr\Log\LoggerInterface;
 use WC_Cart;
 use WC_Shipping_Method;
-use UpsFreeVendor\WPDesk\WooCommerceShipping\DisplayNoticeLogger;
+use UpsFreeVendor\WPDesk\WooCommerceShipping\Logger\DisplayNoticeLogger;
 /**
  * Can apply handling fees to price.
  */

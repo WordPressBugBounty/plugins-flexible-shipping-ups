@@ -4,7 +4,7 @@ Donate link: https://wordpress.org/plugins/flexible-shipping-ups/
 Tags: ups shipping, woocommerce ups, ups api, ups calculator, ups access points
 Requires at least: 4.5
 Tested up to: 6.8
-Stable tag: 3.2.7
+Stable tag: 3.3.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -16,6 +16,8 @@ Provide auto-calculated UPS rates and Access Point options. Easy 5-minute setup.
 = Most powerful UPS WooCommerce integration =
 
 Provide your customers with the automatically calculated shipping rates for numerous UPS services and let them choose their preferred Access Points. You’ll integrate the plugin in just 5 minutes.
+
+[youtube https://www.youtube.com/watch?v=081i3tbgHy4]
 
 How does it work? Conveniently connect your UPS account with one click using OAuth (REST API). **No need to "create an application" on the UPS website**. Alternatively, you can still use the XML API. The shipping cost is calculated automatically online via UPS API connection, so your clients will see every UPS shipping option in the checkout with its real price. You can **offer delivery to UPS Access Point**, too.
 
@@ -173,6 +175,15 @@ Sometimes API doesn’t respond or return an error. In that case, the UPS shippi
 7. UPS Live Rates and Access Points in the checkout
 
 == Changelog ==
+
+= 3.3.0 - 2025-06-05 =
+* Added 3D Packer algorithm
+* Added CSAT in shipping method
+* Error notices displayed for admins without debug mode enabled
+* Changed default services settings
+* Changed default pickup type
+* Changed SurePost to Ground Saver
+* Added info for weight-based API errors
 
 = 3.2.7 - 2025-05-19 =
 * Fixed block checkout related scripts loading issue

@@ -9,6 +9,7 @@ namespace WPDesk\FlexibleShippingUps;
 
 use UpsFreeVendor\Octolize\Blocks\PickupPoint\IntegrationData;
 use UpsFreeVendor\Octolize\Blocks\PickupPoint\Registrator;
+use UpsFreeVendor\Octolize\Csat\Csat;
 use UpsFreeVendor\Octolize\ShippingExtensions\ShippingExtensions;
 use UpsFreeVendor\Octolize\Tracker\DeactivationTracker\OctolizeReasonsFactory;
 use UpsFreeVendor\Octolize\Tracker\TrackerInitializer;
@@ -28,6 +29,7 @@ use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\HookableParent;
 use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\TemplateLoad;
 use UpsFreeVendor\WPDesk\RepositoryRating\RatingPetitionNotice;
 use UpsFreeVendor\WPDesk\RepositoryRating\TimeWatcher\ShippingMethodInstanceWatcher;
+use UpsFreeVendor\WPDesk\ShowDecision\WooCommerce\ShippingMethodInstanceStrategy;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsAccessPoints;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsServices;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition;
@@ -59,6 +61,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\XmlApiNotice;
 use UpsFreeVendor\WPDesk_Plugin_Info;
 use WC_Shipping_Method;
 use WPDesk\FlexibleShippingUps\AdvertMetabox\ProPluginMetaBox;
+use WPDesk\FlexibleShippingUps\CSAT\ShowCsat;
 use WPDesk\FlexibleShippingUps\UpsFreeShippingService\UpsFreeShippingService;
 
 /**
@@ -198,6 +201,24 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		$this->add_hookable( new AjaxActions() );
 
 		add_action( 'init', [ $this, 'init_tracker' ] );
+
+		$this->add_hookable(
+			Csat::create_for_shipping_method_instance(
+				UpsShippingService::UNIQUE_ID,
+				UpsShippingService::UNIQUE_ID . '_pro',
+				__DIR__ . '/views/csat.php',
+				'woocommerce_after_settings_shipping'
+			)
+		);
+
+		$this->add_hookable(
+			Csat::create_for_shipping_method_instance(
+				UpsSurepostShippingService::UNIQUE_ID,
+				UpsShippingService::UNIQUE_ID . '_pro',
+				__DIR__ . '/views/csat.php',
+				'woocommerce_after_settings_shipping'
+			)
+		);
 
 		$this->init_checkout_blocks();
 

@@ -1,0 +1,195 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Desk Tracker\n"
+"POT-Creation-Date: 2022-08-08 19:03+0200\n"
+"PO-Revision-Date: 2022-08-08 19:10+0200\n"
+"Last-Translator: Sebastian Pisula <sebastian.pisula@gmail.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+"X-Poedit-SearchPathExcluded-1: vendor_prefixed\n"
+
+#: src/PSR/WPDesk/Tracker/OptOut.php:45
+#, php-format
+msgid ""
+"You successfully opted out of collecting usage data by %1$s. If you change "
+"your mind, you can always opt in later in the plugin's quick links."
+msgstr ""
+"Optaste por que %1$s no recoja datos de usuario. Si cambias de opinión, "
+"siempre puedes cambiar las opciones en los enlaces del plugin."
+
+#: src/PSR/WPDesk/Tracker/PluginActionLinks.php:55
+msgid "Enable usage tracking"
+msgstr "Habilitar rastreo de uso"
+
+#: src/PSR/WPDesk/Tracker/PluginActionLinks.php:58
+msgid "Disable usage tracking"
+msgstr "Deshabilitar rastreo de uso"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:15
+#: src/views/tracker-connect.php:7 src/views/tracker-notice.php:7
+#, php-format
+msgid "Hey %s,"
+msgstr "Hola %s,"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:16
+#: src/views/tracker-connect.php:8
+msgid ""
+"Please help us improve our plugins! If you opt-in, we will collect some non-"
+"sensitive data and usage information anonymously. If you skip this, that's "
+"okay! All plugins will work just fine."
+msgstr ""
+"¡Por favor, ayúdanos a mejorar nuestros plugins! Si colaboras, recogeremos "
+"datos no sensibles y utilizaremos la información de manera anónima. ¡Si "
+"ignoras esto, será genial! Todos los plugins funcionarán correctamente."
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:21
+#: src/views/tracker-connect.php:13
+msgid "Allow & Continue &rarr;"
+msgstr "Permitir y continuar &rarr;"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:22
+#: src/views/tracker-connect.php:14
+msgid "Skip"
+msgstr "Omitir"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:27
+#: src/views/tracker-connect.php:19
+msgid "What permissions are being granted?"
+msgstr "¿Qué permisos se otorgan?"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:34
+#: src/views/tracker-connect.php:26
+msgid "Your Site Overview"
+msgstr "Resumen de tu sitio"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:35
+#: src/views/tracker-connect.php:27
+msgid "WP version, PHP info"
+msgstr "Versión de WordPress, información de PHP"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:41
+#: src/views/tracker-connect.php:33
+msgid "Plugin Usage"
+msgstr "Uso del plugin"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:42
+#, php-format
+msgid "Current settings and usage information of %1$s plugins"
+msgstr "Ajustes actuales e información de uso de los plugins de «%1$s»"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:48
+#: src/views/tracker-connect.php:40
+msgid "Your Store Overview"
+msgstr "Resumen de tu tienda"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:49
+#: src/views/tracker-connect.php:41
+msgid "Anonymized and non-sensitive store usage information"
+msgstr "Uso de la información almacenada de manera anónima y no sensible"
+
+#: src/PSR/WPDesk/Tracker/views/tracker-connect.php:55
+#: src/views/tracker-connect.php:47 src/views/tracker-notice.php:9
+msgid "Find out more &raquo;"
+msgstr "Descubre más &raquo;"
+
+#: src/views/tracker-connect.php:34
+msgid "Current settings and usage information of WP Desk plugins"
+msgstr "Ajustes actuales e información de uso de los plugins de «WP Desk»"
+
+#: src/views/tracker-deactivate.php:3
+#, php-format
+msgid "You are deactivating %s plugin."
+msgstr "Estás desactivando el plugin %s."
+
+#: src/views/tracker-deactivate.php:9
+msgid ""
+" If you have a moment, please let us know why you are deactivating plugin "
+"(anonymous feedback):"
+msgstr ""
+" Si tienes un momento, por favor, dinos por qué estás desactivando el plugin "
+"(respuesta anónima):"
+
+#: src/views/tracker-deactivate.php:16
+msgid "The plugin suddenly stopped working"
+msgstr "El plugin, de repente, ha dejado de funcionar"
+
+#: src/views/tracker-deactivate.php:24
+msgid "The plugin broke my site"
+msgstr "El plugin ha roto mi sitio"
+
+#: src/views/tracker-deactivate.php:32
+msgid "I found a better plugin"
+msgstr "He encontrado un plugin mejor"
+
+#: src/views/tracker-deactivate.php:35
+msgid "What's the plugin's name?"
+msgstr "¿Cuál es el nombre del plugin?"
+
+#: src/views/tracker-deactivate.php:43
+msgid "I only needed the plugin for a short period"
+msgstr "Solo necesitaba el plugin durante un periodo corto"
+
+#: src/views/tracker-deactivate.php:51
+msgid "I no longer need the plugin"
+msgstr "Ya no necesito el plugin"
+
+#: src/views/tracker-deactivate.php:59
+msgid "It's a temporary deactivation. I'm just debugging an issue."
+msgstr "Es una desactivación temporal. Solo estoy depurando un problema."
+
+#: src/views/tracker-deactivate.php:67
+msgid "Other"
+msgstr "Otro"
+
+#: src/views/tracker-deactivate.php:70
+msgid "Kindly tell us the reason so we can improve"
+msgstr "Agradeceremos que nos digas la razón para que podamos mejorar"
+
+#: src/views/tracker-deactivate.php:77
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/views/tracker-deactivate.php:78
+msgid "Skip &amp; Deactivate"
+msgstr "Omitir y desactivar"
+
+#: src/class-wpdesk-tracker.php:253
+msgid "Submit &amp; Deactivate"
+msgstr "Enviar y desactivar"
+
+#: src/views/tracker-notice.php:8
+msgid ""
+"We need your help to improve <strong>WP Desk plugins</strong>, so they are "
+"more useful for you and the rest of <strong>30,000+ users</strong>. By "
+"collecting data on how you use our plugins, you will help us a lot. We will "
+"not collect any sensitive data, so you can feel safe."
+msgstr ""
+"Necesitamos tu ayuda para mejorar los <strong>plugins de WP Desk</strong>, "
+"para que sean más útiles para ti y para el resto de los <strong>más de "
+"30.000 usuarios</strong>. Recogiendo datos de cómo usas nuestros plugins, "
+"nos ayudarás mucho. No recogeremos ningún dato sensible, así que puedes "
+"sentirte seguro."
+
+#: src/views/tracker-notice.php:15
+msgid "Allow"
+msgstr "Permitir"
+
+#: src/views/tracker-opt-out-notice.php:3
+msgid ""
+"You successfully opted out of collecting usage data by WP Desk. If you "
+"change your mind, you can always opt in later in the plugin's quick links."
+msgstr ""
+"Optaste por que WP Desk no recoja datos de usuario. Si cambias de opinión, "
+"siempre puedes cambiar las opciones en los enlaces del plugin."

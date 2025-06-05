@@ -113,7 +113,7 @@ class UpsServices
      */
     public function get_surepost_services()
     {
-        return [self::SUREPOST_LESS_THAN_1_LB => __('SurePost Less than 1 lb', 'flexible-shipping-ups'), self::SUREPOST_1_LB_OR_GREATER => __('SurePost 1 lb or Greater', 'flexible-shipping-ups'), '94' => __('SurePost BPM', 'flexible-shipping-ups'), '95' => __('SurePost Media Mail', 'flexible-shipping-ups')];
+        return [self::SUREPOST_LESS_THAN_1_LB => __('Ground Saver Less than 1 lb', 'flexible-shipping-ups'), self::SUREPOST_1_LB_OR_GREATER => __('Ground Saver 1 lb or Greater', 'flexible-shipping-ups'), '94' => __('Ground Saver BPM', 'flexible-shipping-ups'), '95' => __('Ground Saver Media Mail', 'flexible-shipping-ups')];
     }
     /**
      * @return array

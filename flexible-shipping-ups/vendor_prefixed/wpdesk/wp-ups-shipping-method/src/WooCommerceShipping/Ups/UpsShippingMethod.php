@@ -13,6 +13,7 @@ use UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth\TokenOption;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsServices;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\ApiStatus\FieldApiStatusAjax;
+use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\Services\FieldServices;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomOrigin\CustomOriginFields;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShippingMethod;
 /**
@@ -75,7 +76,12 @@ class UpsShippingMethod extends ShippingMethod implements ShippingMethod\HasFree
         $default_api_type_xml = empty($this->get_option(UpsSettingsDefinition::API_TYPE, '')) && !empty($this->get_option(UpsSettingsDefinition::USER_ID, ''));
         $ups_settings_definition = new UpsSettingsDefinitionWooCommerce($this->form_fields, $default_api_type_xml);
         $this->form_fields = $ups_settings_definition->get_form_fields();
-        $this->instance_form_fields = $ups_settings_definition->get_instance_form_fields();
+        $this->instance_form_fields = $this->set_default_values_for_instance_form_fields($ups_settings_definition->get_instance_form_fields());
+    }
+    private function set_default_values_for_instance_form_fields(array $form_fields): array
+    {
+        $form_fields[UpsSettingsDefinition::SERVICES]['default'] = FieldServices::convert_services_to_settings_services(UpsServices::get_services_for_country($this->get_origin_country_code()));
+        return $form_fields;
     }
     /**
      * Create meta data builder.

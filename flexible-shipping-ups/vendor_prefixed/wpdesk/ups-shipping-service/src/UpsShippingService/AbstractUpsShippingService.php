@@ -25,6 +25,7 @@ use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\Sender;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateReplyInterpretation;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsRateRequestBuilder;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsSender;
+use UpsFreeVendor\WPDesk\WooCommerceShipping\CustomFields\Services\FieldServices;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\ShopSettings;
 /**
  * Ups main shipping class injected into WooCommerce shipping method.
@@ -207,7 +208,7 @@ abstract class AbstractUpsShippingService extends ShippingService implements Has
      */
     protected function get_services(SettingsValues $settings)
     {
-        return $this->is_custom_services_enabled($settings) ? $settings->get_value(UpsSettingsDefinition::FIELD_SERVICES_TABLE) : $this->convert_services_to_settings_services(UpsServices::get_services_for_country($this->origin_country));
+        return $this->is_custom_services_enabled($settings) ? $settings->get_value(UpsSettingsDefinition::FIELD_SERVICES_TABLE) : FieldServices::convert_services_to_settings_services(UpsServices::get_services_for_country($this->origin_country));
     }
     /**
      * Verify currency.

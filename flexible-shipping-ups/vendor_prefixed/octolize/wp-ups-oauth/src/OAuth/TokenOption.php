@@ -2,6 +2,7 @@
 
 namespace UpsFreeVendor\Octolize\WooCommerceShipping\Ups\OAuth;
 
+use wpdb;
 class TokenOption
 {
     private const TIME_BUFFER_SECONDS = 0;
@@ -14,6 +15,11 @@ class TokenOption
         $this->option_name = $option_name;
         $this->is_testing = $is_testing;
     }
+    private function get_wpdb(): wpdb
+    {
+        global $wpdb;
+        return $wpdb;
+    }
     public function get_option_name(): string
     {
         if ($this->is_testing) {
@@ -23,7 +29,13 @@ class TokenOption
     }
     public function get()
     {
-        $token = json_decode(get_option($this->get_option_name(), '[]'), \true);
+        $option_name = $this->get_option_name();
+        $wpdb = $this->get_wpdb();
+        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1", $option_name), \ARRAY_A);
+        $token = [];
+        if ($row && isset($row['option_value'])) {
+            $token = json_decode($row['option_value'], \true);
+        }
         if ($this->token_is_valid($token)) {
             return $token;
         }
@@ -58,9 +70,12 @@ class TokenOption
     }
     public function set(array $token)
     {
-        if (!update_option($this->get_option_name(), json_encode($token), \false)) {
-            $this->clear_wp_cache();
-            update_option($this->get_option_name(), json_encode($token), \false);
+        $option_name = $this->get_option_name();
+        $option_value = json_encode($token);
+        $wpdb = $this->get_wpdb();
+        $result = $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, 'no')\n                ON DUPLICATE KEY UPDATE option_value = VALUES(option_value), autoload = 'no'", $option_name, $option_value));
+        if ($result === \false) {
+            $wpdb->update($wpdb->options, ['option_value' => $option_value, 'autoload' => 'no'], ['option_name' => $option_name]);
         }
         $this->clear_wp_cache();
     }

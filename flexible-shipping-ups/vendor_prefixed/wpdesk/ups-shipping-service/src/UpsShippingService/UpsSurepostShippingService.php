@@ -39,7 +39,7 @@ class UpsSurepostShippingService extends AbstractUpsShippingService
                         $sender = $this->create_single_rate_sender($settings, $surepost_service_code);
                         $ups_shipment_rating->merge_ratings($this->rate_shipment_for_ups($settings, $shipment, $surepost_services, $sender));
                     } catch (\Exception $e) {
-                        $this->get_logger()->info(sprintf('UPS surepost rate not added! %1$s', $e->getMessage()));
+                        $this->get_logger()->info(sprintf('UPS Ground Saver rate not added! %1$s', $e->getMessage()));
                     }
                 }
             }
@@ -95,7 +95,7 @@ class UpsSurepostShippingService extends AbstractUpsShippingService
      */
     public function get_name()
     {
-        return __('UPS SurePost Live Rates', 'flexible-shipping-ups');
+        return __('UPS Ground Saver Live Rates', 'flexible-shipping-ups');
     }
     /**
      * Get description.

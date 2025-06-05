@@ -76,7 +76,7 @@ class UpsRestApiSenderSingleRate extends UpsSenderSingleRate
             }
             $reply = $rate->getRate($request);
         } catch (InvalidResponseException $e) {
-            throw new RateException($e->getMessage(), ['exception' => $e->getCode()]);
+            throw new RateExceptionWithExtendedInfo($e->getMessage(), ['exception' => $e->getCode()], $e->getCode(), $e);
             //phpcs:ignore
         }
         $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled());

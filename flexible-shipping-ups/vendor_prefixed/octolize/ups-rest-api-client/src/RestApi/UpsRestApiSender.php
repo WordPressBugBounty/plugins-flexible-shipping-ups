@@ -68,8 +68,7 @@ class UpsRestApiSender extends UpsSender
         try {
             $reply = $rate->shopRates($request);
         } catch (\RuntimeException $e) {
-            throw new RateException($e->getMessage(), ['exception' => $e->getMessage()]);
-            //phpcs:ignore
+            throw new RateExceptionWithExtendedInfo($e->getMessage(), ['exception' => $e->getMessage()], $e->getCode(), $e);
         }
         $rate_interpretation = new UpsRateReplyInterpretation($reply, $this->is_tax_enabled);
         if ($rate_interpretation->has_reply_error()) {

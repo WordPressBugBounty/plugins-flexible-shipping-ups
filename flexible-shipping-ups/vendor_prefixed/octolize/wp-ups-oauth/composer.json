@@ -24,7 +24,8 @@
         "wpdesk\/wp-builder": "^2.0",
         "wpdesk\/wp-mutex": "^1.1",
         "wpdesk\/wp-notice": "^3.2",
-        "wpdesk\/ups-shipping-service": "^3.2"
+        "wpdesk\/ups-shipping-service": "^3.2",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit\/phpunit": "^7||^8||^9",

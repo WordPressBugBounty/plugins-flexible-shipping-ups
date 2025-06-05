@@ -87,7 +87,7 @@ class UpsSurepostShippingMethod extends ShippingMethod implements ShippingMethod
         }
         return sprintf(
             // Translators: docs URL.
-            __('Dynamically calculated UPS SurePost live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
+            __('Dynamically calculated UPS Ground Saver live rates based on the established UPS API connection. %1$sLearn more →%2$s', 'flexible-shipping-ups'),
             '<a target="_blank" href="' . $docs_link . '">',
             '</a>'
         );

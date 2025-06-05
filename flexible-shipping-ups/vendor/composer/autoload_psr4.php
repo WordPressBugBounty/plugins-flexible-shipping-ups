@@ -6,5 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WPDesk\\View\\' => array($vendorDir . '/wpdesk/wp-view/src'),
+    'WPDesk\\ShowDecision\\' => array($vendorDir . '/wpdesk/wp-show-decision/src'),
+    'WPDesk\\PluginBuilder\\' => array($vendorDir . '/wpdesk/wp-builder/src'),
+    'WPDesk\\Notice\\' => array($vendorDir . '/wpdesk/wp-notice/src/WPDesk/Notice'),
     'WPDesk\\FlexibleShippingUps\\' => array($baseDir . '/src/Plugin'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Octolize\\Csat\\' => array($vendorDir . '/octolize/wp-csat-petition/src'),
+    '' => array($vendorDir . '/wpdesk/wp-wpdesk-tracker/src/PSR'),
 );

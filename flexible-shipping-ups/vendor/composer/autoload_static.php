@@ -4,24 +4,85 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
+class ComposerStaticInit13a3818838d058a04fc17375dc9629d2
 {
+    public static $files = array (
+        '0509b34a4bd7aebefeac629c9dc8a978' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/notice-functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
+            'WPDesk\\View\\' => 12,
+            'WPDesk\\ShowDecision\\' => 20,
+            'WPDesk\\PluginBuilder\\' => 21,
+            'WPDesk\\Notice\\' => 14,
             'WPDesk\\FlexibleShippingUps\\' => 27,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'O' => 
+        array (
+            'Octolize\\Csat\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'WPDesk\\View\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wpdesk/wp-view/src',
+        ),
+        'WPDesk\\ShowDecision\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src',
+        ),
+        'WPDesk\\PluginBuilder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wpdesk/wp-builder/src',
+        ),
+        'WPDesk\\Notice\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice',
+        ),
         'WPDesk\\FlexibleShippingUps\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Plugin',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Octolize\\Csat\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/octolize/wp-csat-petition/src',
+        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR',
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Octolize\\Csat\\Csat' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/Csat.php',
+        'Octolize\\Csat\\CsatCode' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/CsatCode.php',
+        'Octolize\\Csat\\CsatCodeFromFile' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/CsatCodeFromFile.php',
+        'Octolize\\Csat\\CsatCodeFromString' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/CsatCodeFromString.php',
+        'Octolize\\Csat\\CsatOption' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/CsatOption.php',
+        'Octolize\\Csat\\CsatOptionDependedOnShippingMethod' => __DIR__ . '/..' . '/octolize/wp-csat-petition/src/CsatOptionDependedOnShippingMethod.php',
+        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
+        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
+        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
+        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
+        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
+        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
+        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
+        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
+        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
+        'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'UpsFreeVendor\\GuzzleHttp\\Client' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Client.php',
         'UpsFreeVendor\\GuzzleHttp\\ClientInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/ClientInterface.php',
         'UpsFreeVendor\\GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
@@ -238,6 +299,12 @@ class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodAndConstantDisplayStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodAndConstantDisplayStrategy.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodInstanceShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodInstanceShouldShowStrategy.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodShouldShowStrategy.php',
+        'UpsFreeVendor\\Octolize\\Csat\\Csat' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/Csat.php',
+        'UpsFreeVendor\\Octolize\\Csat\\CsatCode' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatCode.php',
+        'UpsFreeVendor\\Octolize\\Csat\\CsatCodeFromFile' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatCodeFromFile.php',
+        'UpsFreeVendor\\Octolize\\Csat\\CsatCodeFromString' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatCodeFromString.php',
+        'UpsFreeVendor\\Octolize\\Csat\\CsatOption' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatOption.php',
+        'UpsFreeVendor\\Octolize\\Csat\\CsatOptionDependedOnShippingMethod' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatOptionDependedOnShippingMethod.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\Field\\Html' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/Field/Html.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\Onboarding' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/Onboarding.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\OnboardingAjax' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/OnboardingAjax.php',
@@ -285,6 +352,7 @@ class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\Locator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/Locator.php',
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\ObjectProperties' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/ObjectProperties.php',
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\Rate' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/Rate.php',
+        'UpsFreeVendor\\Octolize\\Ups\\RestApi\\RateExceptionWithExtendedInfo' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RateExceptionWithExtendedInfo.php',
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\RestApiClient' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php',
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\RestApiException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiException.php',
         'UpsFreeVendor\\Octolize\\Ups\\RestApi\\RestApiToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiToken.php',
@@ -750,7 +818,6 @@ class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\CustomFields\\Services\\FieldServicesSanitizer' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/CustomFields/Services/FieldServicesSanitizer.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\CustomOrigin\\CustomOriginFields' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/CustomOrigin/CustomOriginFields.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\CustomOrigin\\InstanceCustomOriginFields' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/CustomOrigin/InstanceCustomOriginFields.php',
-        'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\DisplayNoticeLogger' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/DisplayNoticeLogger.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\EstimatedDelivery\\EstimatedDeliveryDatesDisplay' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/EstimatedDelivery/EstimatedDeliveryDatesDisplay.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\EstimatedDelivery\\EstimatedDeliveryMetaDataBuilder' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/EstimatedDelivery/EstimatedDeliveryMetaDataBuilder.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\FreeShipping\\FreeShipping' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/FreeShipping/FreeShipping.php',
@@ -760,6 +827,7 @@ class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\HandlingFees\\PriceAdjustmentFixed' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/HandlingFees/PriceAdjustmentFixed.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\HandlingFees\\PriceAdjustmentNone' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/HandlingFees/PriceAdjustmentNone.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\HandlingFees\\PriceAdjustmentPercentage' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/HandlingFees/PriceAdjustmentPercentage.php',
+        'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\Logger\\DisplayNoticeLogger' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/Logger/DisplayNoticeLogger.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\OrderMetaData\\AdminMetaDataUnchangedTrait' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/OrderMetaData/AdminMetaDataUnchangedTrait.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\OrderMetaData\\AdminOrderMetaDataDisplay' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/OrderMetaData/AdminOrderMetaDataDisplay.php',
         'UpsFreeVendor\\WPDesk\\WooCommerceShipping\\OrderMetaData\\FrontOrderMetaDataDisplay' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/OrderMetaData/FrontOrderMetaDataDisplay.php',
@@ -879,18 +947,113 @@ class ComposerStaticInit402844aa23dd449025e20b080b78ec1f
         'WPDesk\\FlexibleShippingUps\\UpsFreeShippingService\\UpsFreeSettingsDefinition' => __DIR__ . '/../..' . '/src/Plugin/UpsFreeShippingService/UpsFreeSettingsDefinition.php',
         'WPDesk\\FlexibleShippingUps\\UpsFreeShippingService\\UpsFreeShippingService' => __DIR__ . '/../..' . '/src/Plugin/UpsFreeShippingService/UpsFreeShippingService.php',
         'WPDesk\\Helper\\HelperAsLibrary' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Helper/HelperAsLibrary.php',
+        'WPDesk\\Notice\\AjaxHandler' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice/AjaxHandler.php',
+        'WPDesk\\Notice\\Factory' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice/Factory.php',
+        'WPDesk\\Notice\\Notice' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice/Notice.php',
+        'WPDesk\\Notice\\PermanentDismissibleNotice' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice/PermanentDismissibleNotice.php',
+        'WPDesk\\PluginBuilder\\BuildDirector\\LegacyBuildDirector' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/BuildDirector/LegacyBuildDirector.php',
+        'WPDesk\\PluginBuilder\\Builder\\AbstractBuilder' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Builder/AbstractBuilder.php',
+        'WPDesk\\PluginBuilder\\Builder\\InfoActivationBuilder' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Builder/InfoActivationBuilder.php',
+        'WPDesk\\PluginBuilder\\Builder\\InfoBuilder' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Builder/InfoBuilder.php',
+        'WPDesk\\PluginBuilder\\Plugin\\AbstractPlugin' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php',
+        'WPDesk\\PluginBuilder\\Plugin\\Activateable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/Activateable.php',
+        'WPDesk\\PluginBuilder\\Plugin\\ActivationAware' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/ActivationAware.php',
+        'WPDesk\\PluginBuilder\\Plugin\\ActivationTracker' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/ActivationTracker.php',
+        'WPDesk\\PluginBuilder\\Plugin\\Conditional' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/Conditional.php',
+        'WPDesk\\PluginBuilder\\Plugin\\Deactivateable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/Deactivateable.php',
+        'WPDesk\\PluginBuilder\\Plugin\\Hookable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/Hookable.php',
+        'WPDesk\\PluginBuilder\\Plugin\\HookableCollection' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/HookableCollection.php',
+        'WPDesk\\PluginBuilder\\Plugin\\HookableParent' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/HookableParent.php',
+        'WPDesk\\PluginBuilder\\Plugin\\HookablePluginDependant' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/HookablePluginDependant.php',
+        'WPDesk\\PluginBuilder\\Plugin\\PluginAccess' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/PluginAccess.php',
+        'WPDesk\\PluginBuilder\\Plugin\\SlimPlugin' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/SlimPlugin.php',
+        'WPDesk\\PluginBuilder\\Plugin\\TemplateLoad' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/TemplateLoad.php',
+        'WPDesk\\PluginBuilder\\Storage\\Exception\\ClassAlreadyExists' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/Exception/ClassAlreadyExists.php',
+        'WPDesk\\PluginBuilder\\Storage\\Exception\\ClassNotExists' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/Exception/ClassNotExists.php',
+        'WPDesk\\PluginBuilder\\Storage\\PluginStorage' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/PluginStorage.php',
+        'WPDesk\\PluginBuilder\\Storage\\StaticStorage' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/StaticStorage.php',
+        'WPDesk\\PluginBuilder\\Storage\\StorageFactory' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/StorageFactory.php',
+        'WPDesk\\PluginBuilder\\Storage\\WordpressFilterStorage' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Storage/WordpressFilterStorage.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\BuilderTrait' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\InitializationFactory' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/InitializationFactory.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\InitializationStrategy' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/InitializationStrategy.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\PluginDisablerByFileTrait' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/PluginDisablerByFileTrait.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\Simple\\SimpleFactory' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFactory.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\Simple\\SimpleFreeStrategy' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\Simple\\SimplePaidStrategy' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimplePaidStrategy.php',
+        'WPDesk\\Plugin\\Flow\\Initialization\\Simple\\TrackerInstanceAsFilterTrait' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/Initialization/TrackerInstanceAsFilterTrait.php',
+        'WPDesk\\Plugin\\Flow\\PluginBootstrap' => __DIR__ . '/..' . '/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php',
+        'WPDesk\\ShowDecision\\AndStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/AndStrategy.php',
+        'WPDesk\\ShowDecision\\ConstantDefinedStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/ConstantDefinedStrategy.php',
+        'WPDesk\\ShowDecision\\ConstantNotDefinedStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/ConstantNotDefinedStrategy.php',
+        'WPDesk\\ShowDecision\\GetStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/GetStrategy.php',
+        'WPDesk\\ShowDecision\\OrStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/OrStrategy.php',
+        'WPDesk\\ShowDecision\\PostTypeStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/PostTypeStrategy.php',
+        'WPDesk\\ShowDecision\\ShouldShowStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/ShouldShowStrategy.php',
+        'WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodInstanceStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodInstanceStrategy.php',
+        'WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodStrategy' => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodStrategy.php',
+        'WPDesk\\Tracker\\Assets' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Assets.php',
+        'WPDesk\\Tracker\\OptInOptOut' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInOptOut.php',
+        'WPDesk\\Tracker\\OptInPage' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInPage.php',
+        'WPDesk\\Tracker\\OptOut' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptOut.php',
+        'WPDesk\\Tracker\\PluginActionLinks' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/PluginActionLinks.php',
+        'WPDesk\\Tracker\\Shop' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Shop.php',
+        'WPDesk\\View\\PluginViewBuilder' => __DIR__ . '/..' . '/wpdesk/wp-view/src/PluginViewBuilder.php',
+        'WPDesk\\View\\Renderer\\LoadTemplatePlugin' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Renderer/LoadTemplatePlugin.php',
+        'WPDesk\\View\\Renderer\\Renderer' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Renderer/Renderer.php',
+        'WPDesk\\View\\Renderer\\SimplePhpRenderer' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Renderer/SimplePhpRenderer.php',
+        'WPDesk\\View\\Resolver\\ChainResolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/ChainResolver.php',
+        'WPDesk\\View\\Resolver\\DirResolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/DirResolver.php',
+        'WPDesk\\View\\Resolver\\Exception\\CanNotResolve' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/Exception/CanNotResolve.php',
+        'WPDesk\\View\\Resolver\\NullResolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/NullResolver.php',
+        'WPDesk\\View\\Resolver\\Resolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/Resolver.php',
+        'WPDesk\\View\\Resolver\\WPThemeResolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/WPThemeResolver.php',
+        'WPDesk\\View\\Resolver\\WooTemplateResolver' => __DIR__ . '/..' . '/wpdesk/wp-view/src/Resolver/WooTemplateResolver.php',
+        'WPDesk_Buildable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Buildable.php',
+        'WPDesk_Has_Plugin_Info' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Has_Plugin_Info.php',
+        'WPDesk_Plugin_Info' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Plugin_Info.php',
+        'WPDesk_Tracker' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/class-wpdesk-tracker.php',
         'WPDesk_Tracker_Data_Provider' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-data-provider.php',
+        'WPDesk_Tracker_Data_Provider_Gateways' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-gateways.php',
+        'WPDesk_Tracker_Data_Provider_Identification' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-identification.php',
+        'WPDesk_Tracker_Data_Provider_Identification_Gdpr' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-identification-gdpr.php',
+        'WPDesk_Tracker_Data_Provider_Jetpack' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-jetpack.php',
+        'WPDesk_Tracker_Data_Provider_License_Emails' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-license-emails.php',
+        'WPDesk_Tracker_Data_Provider_Orders' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-orders.php',
+        'WPDesk_Tracker_Data_Provider_Orders_Country' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-orders-country.php',
+        'WPDesk_Tracker_Data_Provider_Orders_Month' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-orders-month.php',
+        'WPDesk_Tracker_Data_Provider_Plugins' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-plugins.php',
+        'WPDesk_Tracker_Data_Provider_Products' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-products.php',
+        'WPDesk_Tracker_Data_Provider_Products_Variations' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-products-variations.php',
+        'WPDesk_Tracker_Data_Provider_Server' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-server.php',
+        'WPDesk_Tracker_Data_Provider_Settings' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-settings.php',
+        'WPDesk_Tracker_Data_Provider_Shipping_Classes' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-shipping-classes.php',
+        'WPDesk_Tracker_Data_Provider_Shipping_Methods' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-shipping-methods.php',
+        'WPDesk_Tracker_Data_Provider_Shipping_Methods_Zones' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-shipping-methods-zones.php',
+        'WPDesk_Tracker_Data_Provider_Templates' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-templates.php',
+        'WPDesk_Tracker_Data_Provider_Theme' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-theme.php',
+        'WPDesk_Tracker_Data_Provider_User_Agent' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-user-agent.php',
+        'WPDesk_Tracker_Data_Provider_Users' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-users.php',
+        'WPDesk_Tracker_Data_Provider_Wordpress' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/data_provider/class-wpdesk-tracker-data-provider-wordpress.php',
         'WPDesk_Tracker_Factory' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Helper/TrackerFactory.php',
+        'WPDesk_Tracker_Factory_Prefixed' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/class-wpdesk-tracker-factory-prefixed.php',
         'WPDesk_Tracker_Interface' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-interface.php',
+        'WPDesk_Tracker_Persistence_Consent' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/persistence/class-wpdesk-tracker-persistence-consent.php',
         'WPDesk_Tracker_Sender' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-sender.php',
+        'WPDesk_Tracker_Sender_Exception_WpError' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/sender/Exception/class-wpdesk-tracker-sender-exception-wperror.php',
+        'WPDesk_Tracker_Sender_Logged' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-logged.php',
+        'WPDesk_Tracker_Sender_Wordpress_To_WPDesk' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-wordpress-to-wpdesk.php',
+        'WPDesk_Translable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translable.php',
+        'WPDesk_Translatable' => __DIR__ . '/..' . '/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translatable.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit402844aa23dd449025e20b080b78ec1f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit13a3818838d058a04fc17375dc9629d2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit13a3818838d058a04fc17375dc9629d2::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit13a3818838d058a04fc17375dc9629d2::$fallbackDirsPsr4;
+            $loader->classMap = ComposerStaticInit13a3818838d058a04fc17375dc9629d2::$classMap;
 
         }, null, ClassLoader::class);
     }
