@@ -1,4 +1,5 @@
 import { MapPopup, MiniMap } from "@octolize/flexible-shipping-points-map";
+import { TranslateProvider } from "@octolize/flexible-shipping-points-map/src/points/js/providers";
 import { useEffect, useState, useCallback, useRef } from '@wordpress/element';
 import {
 	Spinner,
@@ -314,20 +315,22 @@ const MapPickupPointBlock = ( { checkoutExtensionData, cart, metadata } ) => {
 					}
 					{ settings.displayPopup &&
 						<div className="points-popup-map">
-							<MapPopup
-								key={ 'flexible-shipping-map-popup' }
-								show={ showMap }
-								address={ mapAddress }
-								lat={ currentPoint?.lat ?? coordinates.lat }
-								lng={ currentPoint?.long ?? coordinates.lon }
-								currentPoint={ pointId }
-								zoom={ pointId ? 18 : 10 }
-								availableProviders={ providers }
-								availableCountries={ availableCountries }
-								availablePointTypes={ pointTypes }
-								setShowCallback={ setShowMap }
-								pointSelectedCallback={ pointSelectedCallback }
-							/>
+							<TranslateProvider>
+								<MapPopup
+									key={ 'flexible-shipping-map-popup' }
+									show={ showMap }
+									address={ mapAddress }
+									lat={ currentPoint?.lat ?? coordinates.lat }
+									lng={ currentPoint?.long ?? coordinates.lon }
+									currentPoint={ pointId }
+									zoom={ pointId ? 18 : 10 }
+									availableProviders={ providers }
+									availableCountries={ availableCountries }
+									availablePointTypes={ pointTypes }
+									setShowCallback={ setShowMap }
+									pointSelectedCallback={ pointSelectedCallback }
+								/>
+							</TranslateProvider>
 							<Button isDefault onClick={ () => setShowMap( true ) }>{ __( 'Select point from map', 'octolize-pickup-point-checkout-blocks')}</Button>
 						</div>
 					}

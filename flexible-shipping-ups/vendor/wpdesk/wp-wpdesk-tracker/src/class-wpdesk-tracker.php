@@ -204,7 +204,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 					self::ADMIN_PLUGINS_LOCALIZE,
 					[
 						'plugins'  => wp_json_encode( $plugins ),
-						'base_url' => esc_url_raw( admin_url( "admin.php?page=wpdesk_tracker_deactivate" ) ),
+						'base_url' => esc_url_raw( wp_nonce_url( admin_url( "admin.php?page=wpdesk_tracker_deactivate" ), self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE ) ),
 					]
 				);
 			}
@@ -231,9 +231,14 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 				);
 				wp_enqueue_script( self::ADMIN_HANDLER );
 
-				$plugin         = sanitize_text_field( wp_unslash( $_GET['plugin'] ?? '' ) );
-				$active_plugins = get_plugins();
-				$plugin_name    = $active_plugins[ $plugin ]['Name'] ?? '';
+				$plugin = '';
+				$plugin_name = '';
+
+				if ( current_user_can( 'activate_plugins' ) && false !== check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE, false ) ) {
+					$plugin         = sanitize_text_field( wp_unslash( $_GET['plugin'] ?? '' ) );
+					$active_plugins = get_plugins();
+					$plugin_name    = $active_plugins[ $plugin ]['Name'] ?? '';
+				}
 
 				$deactivation_plugins = [
 					'wpdesk-helper/wpdesk-helper.php' => 'wpdesk-helper/wpdesk-helper.php',
@@ -261,7 +266,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 			if ( ! $this->should_enable_wpdesk_tracker() ) {
 				return false;
 			}
-			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			if ( ! current_user_can( 'activate_plugins' ) ) {
 				return false;
 			}
 
@@ -309,7 +314,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 
 		public function admin_menu() {
 			add_submenu_page(
-				'',
+				'wpdesk_tracker',
 				'WP Desk Tracker',
 				'WP Desk Tracker',
 				'manage_options',
@@ -317,7 +322,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 				[ $this, 'wpdesk_tracker_page' ]
 			);
 			add_submenu_page(
-				'',
+				'wpdesk_tracker',
 				'Deactivate plugin',
 				'Deactivate plugin',
 				'manage_options',
@@ -337,7 +342,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 
 		public function wp_ajax_wpdesk_tracker_notice_handler() {
 			check_ajax_referer( self::WPDESK_TRACKER_NOTICE, 'security' );
-			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			if ( ! current_user_can( 'activate_plugins' ) ) {
 				die();
 			}
 			$option = get_option( 'wpdesk_helper_options' );
@@ -424,7 +429,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 				include 'views/tracker-notice.php';
 			}
 
-			if ( isset( $_GET['wpdesk_tracker_opt_out'] ) && current_user_can( 'manage_woocommerce' ) && $this->should_enable_wpdesk_tracker() ) {
+			if ( isset( $_GET['wpdesk_tracker_opt_out'] ) && current_user_can( 'activate_plugins' ) && $this->should_enable_wpdesk_tracker() ) {
 				$options = get_option( 'wpdesk_helper_options', [] );
 				if ( ! is_array( $options ) ) {
 					$options = [];
@@ -451,6 +456,10 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 		}
 
 		public function wpdesk_tracker_deactivate() {
+			if ( ! current_user_can( 'activate_plugins' ) || false === check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE ) ) {
+				die();
+			}
+
 			$user           = wp_get_current_user();
 			$username       = $user->first_name;
 			$plugin         = sanitize_text_field( wp_unslash( $_GET['plugin'] ?? '' ) );
@@ -464,7 +473,7 @@ if ( ! class_exists( 'WPDesk_Tracker' ) ) {
 
 				if ( isset( $_GET['plugin'] ) && isset( $_GET['allow'] ) ) {
 
-					if ( ! current_user_can( 'manage_woocommerce' ) || false === check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE ) ) {
+					if ( ! current_user_can( 'activate_plugins' ) || false === check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE ) ) {
 						die();
 					}
 

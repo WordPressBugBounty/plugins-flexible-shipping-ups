@@ -8,6 +8,9 @@ use WPDesk\View\Resolver\DirResolver;
 
 class OptInPage implements Hookable {
 
+	public const WPDESK_TRACKER_ACTION      = 'wpdesk_tracker_action';
+	public const WPDESK_TRACKER_NONCE       = 'nonce';
+
 	/**
 	 * @var string
 	 */
@@ -39,7 +42,7 @@ class OptInPage implements Hookable {
 
 	public function add_submenu_page() {
 		add_submenu_page(
-			'',
+			'wpdesk_tracker',
 			'WP Desk Tracker',
 			'WP Desk Tracker',
 			'manage_options',
@@ -59,7 +62,8 @@ class OptInPage implements Hookable {
 		$skip_url  = $allow_url;
 		$allow_url = add_query_arg( 'allow', '1', $allow_url );
 		$skip_url  = add_query_arg( 'allow', '0', $skip_url );
-		if ( isset( $_GET['shop_url'] ) ) {
+
+		if ( current_user_can( 'activate_plugins' ) && false !== check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE, false ) && isset( $_GET['shop_url'] ) ) {
 			$shop = new Shop( sanitize_text_field( wp_unslash( $_GET['shop_url'] ) ) );
 		} else {
 			$shop = $this->shop;
@@ -91,7 +95,7 @@ class OptInPage implements Hookable {
 
 	public function admin_init() {
 		if ( isset( $_GET['wpdesk_tracker'] ) && $_GET['wpdesk_tracker'] === $this->plugin_slug ) {
-			if ( isset( $_GET['allow'] ) && current_user_can( 'manage_woocommerce' ) && isset( $_GET['security'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['security'] ) ), $this->plugin_slug ) ) {
+			if ( isset( $_GET['allow'] ) && current_user_can( 'activate_plugins' ) && isset( $_GET['security'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['security'] ) ), $this->plugin_slug ) ) {
 				if ( $_GET['allow'] === '1' ) {
 					$persistence = new \WPDesk_Tracker_Persistence_Consent();
 					$persistence->set_active( true );

@@ -4,7 +4,7 @@ Donate link: https://wordpress.org/plugins/flexible-shipping-ups/
 Tags: ups shipping, woocommerce ups, ups api, ups calculator, ups access points
 Requires at least: 4.5
 Tested up to: 6.8
-Stable tag: 3.3.0
+Stable tag: 3.4.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -175,6 +175,12 @@ Sometimes API doesn’t respond or return an error. In that case, the UPS shippi
 7. UPS Live Rates and Access Points in the checkout
 
 == Changelog ==
+
+= 3.4.0 - 2025-07-21 =
+* Added communication regarding the auth code
+
+= 3.3.1 - 2025-06-23 =
+* Added support for WooCommerce 10.0
 
 = 3.3.0 - 2025-06-05 =
 * Added 3D Packer algorithm

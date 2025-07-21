@@ -1,3 +1,7 @@
+## [3.9.1]- 2025-06-09
+### Added
+- Security fixes
+
 ## [3.9.0] - 2025-05-21
 ### Changed
 - Plugin activation option key.

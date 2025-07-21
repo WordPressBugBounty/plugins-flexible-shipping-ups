@@ -52,6 +52,7 @@ use UpsFreeVendor\WPDesk\WooCommerceShipping\ThirdParty\Germanized\TaxSettingsNo
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\AjaxActions;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Advertisement\UpsLabels;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\AjaxCollectionPoints;
+use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\AuthCodeNotice;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\Tracker;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsAdminOrderMetaDataDisplay;
 use UpsFreeVendor\WPDesk\WooCommerceShipping\Ups\UpsFrontOrderMetaDataDisplay;
@@ -189,6 +190,8 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		$this->add_hookable( new TaxSettingsNotice( 'UPS Live Rates', 'https://octol.io/ups-germanized' ) );
 
 		$this->add_hookable( new XmlApiNotice( $this->get_global_ups_settings() ) );
+
+		$this->add_hookable( new AuthCodeNotice( $this->get_global_ups_settings() ) );;
 
 		$this->add_hookable( new PluginLinks( $this->get_plugin_file_path() ) );
 
