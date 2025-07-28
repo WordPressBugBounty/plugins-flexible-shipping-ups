@@ -1,5 +1,5 @@
 import { MapPopup, MiniMap } from "@octolize/flexible-shipping-points-map";
-import { TranslateProvider } from "@octolize/flexible-shipping-points-map/src/points/js/providers";
+import { TranslateProvider } from "@octolize/flexible-shipping-points-map";
 import { useEffect, useState, useCallback, useRef } from '@wordpress/element';
 import {
 	Spinner,

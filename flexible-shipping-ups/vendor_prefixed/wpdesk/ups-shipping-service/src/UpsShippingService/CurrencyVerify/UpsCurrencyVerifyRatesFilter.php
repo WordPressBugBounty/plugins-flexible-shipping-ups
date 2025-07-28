@@ -75,7 +75,7 @@ class UpsCurrencyVerifyRatesFilter implements ShipmentRating
                     __('Invalid UPS currency %1$s for service %2$s. %3$sCheck out more →%4$s', 'flexible-shipping-ups'),
                     $rate->total_charge->currency,
                     $rate->service_type,
-                    '<a href="' . ('pl_PL' === $this->shop_settings->get_locale() ? 'https://wpde.sk/ups-pro-currency-pl' : 'https://wpde.sk/ups-pro-currency') . '" target="_blank">',
+                    '<a href="' . ('pl_PL' === $this->shop_settings->get_locale() ? 'https://octol.io/ups-pro-currency-pl' : 'https://octol.io/ups-pro-currency') . '" target="_blank">',
                     '</a>'
                 ));
             }

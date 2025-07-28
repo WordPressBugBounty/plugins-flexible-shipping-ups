@@ -67,9 +67,7 @@ class StoreEndpoint implements Hookable
     }
     public static function update_callback(array $data): void
     {
-        $user_id = get_current_user_id();
-        if (isset($data['point_id']) && $user_id !== 0) {
-            update_user_meta($user_id, self::$field_name, $data['point_id']);
+        if (isset($data['point_id'])) {
             WC()->session->set(self::$field_name, $data['point_id']);
             WC()->cart->calculate_shipping();
         }

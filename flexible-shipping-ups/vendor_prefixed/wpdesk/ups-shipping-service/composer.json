@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.4",
         "psr\/log": "^1.1",
         "wpdesk\/wp-woocommerce-shipping": "^3.1.0",
         "wpdesk\/ups-api": "^0.10.0",
@@ -57,7 +57,10 @@
     "config": {
         "gitlab-domains": [
             "gitlab.wpdesk.dev"
-        ]
+        ],
+        "platform": {
+            "php": "7.4"
+        }
     },
     "minimum-stability": "dev",
     "repositories": {

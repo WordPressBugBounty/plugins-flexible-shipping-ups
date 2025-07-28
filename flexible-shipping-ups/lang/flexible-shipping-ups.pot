@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shipping Live Rates and Access Points for UPS for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.4.0\n"
+"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T06:41:18+00:00\n"
+"POT-Creation-Date: 2025-07-28T09:06:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -89,7 +89,6 @@ msgstr ""
 
 #: src/Plugin/Plugin.php:265
 #: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:64
-#: build/point-selection-block.js:1
 msgid "Select pickup point"
 msgstr ""
 
@@ -299,7 +298,6 @@ msgid "Please enter at least 3 characters"
 msgstr ""
 
 #: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:60
-#: build/point-selection-block-frontend.js:1
 msgid "Selected pickup point"
 msgstr ""
 
@@ -1102,22 +1100,22 @@ msgid "Enable debug mode to display messages in the cart/checkout. Admins and sh
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Method Settings"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Set how UPS services are displayed."
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Method Title"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "This controls the title which the user sees during checkout when fallback is used."
 msgstr ""
 
@@ -1151,7 +1149,7 @@ msgid "Only access points"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 #: vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/FreeShipping/FreeShippingFields.php:27
 msgid "Free Shipping"
 msgstr ""
@@ -1173,33 +1171,28 @@ msgid "UPS Services Table"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Rates Adjustments"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 #, php-format
 msgid "Adjust these settings to get more accurate rates. Read %swhat affects the UPS rates in UPS WooCommerce plugin →%s"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
-msgid "https://wpde.sk/ups-free-rates-eng/"
-msgstr ""
-
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Negotiated Rates"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Enable negotiated rates"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Enable this option only if your shipping account has negotiated rates available."
 msgstr ""
 
@@ -1216,22 +1209,22 @@ msgid "Enable if you want to include insurance in UPS rates when it is available
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Pickup Type"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "'Pickup Type' may affect the live rates. In most cases selecting the 'Customer Counter' or 'One Time Pickup' grants the most accurate rates. If the 'Not set' option has been chosen, the 'Pickup Type' value will not be sent in the UPS API request."
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Not set"
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Daily Pickup"
 msgstr ""
 
@@ -1264,12 +1257,12 @@ msgstr ""
 msgid "UPS integration"
 msgstr ""
 
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostShippingService.php:98
 msgid "UPS Ground Saver Live Rates"
 msgstr ""
 
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:46
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSurepostSettingsDefinition.php:51
 msgid "Services"
 msgstr ""
 
