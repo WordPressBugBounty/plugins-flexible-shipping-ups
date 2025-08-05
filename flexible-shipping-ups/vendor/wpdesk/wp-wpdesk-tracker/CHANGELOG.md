@@ -1,3 +1,11 @@
+## [3.9.3]- 2025-07-23
+### Fixed
+- Changed sanitization
+
+## [3.9.2]- 2025-07-22
+### Fixed
+- Added plugin checking to avoid duplicate survey form
+
 ## [3.9.1]- 2025-06-09
 ### Added
 - Security fixes

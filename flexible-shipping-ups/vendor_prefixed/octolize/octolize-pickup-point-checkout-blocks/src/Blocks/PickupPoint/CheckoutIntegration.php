@@ -5,21 +5,18 @@ namespace UpsFreeVendor\Octolize\Blocks\PickupPoint;
 use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 class CheckoutIntegration extends \UpsFreeVendor\Octolize\Blocks\CheckoutIntegration
 {
-    const SINGLE_CSS_FILE_PATH = '/build/style-point-selection-block.css';
     const FRONTEND_CSS_FILE_PATH = '/build/point-selection-block-frontend.css';
     const EDITOR_CSS_FILE_PATH = '/build/point-selection-block.css';
     private string $integration_name;
     private string $plugin_dir;
     private string $plugin_file;
     private IntegrationData $integration_data;
-    private bool $single_css;
-    public function __construct(IntegrationData $integration_data, string $plugin_dir, string $plugin_file, bool $single_css = \true)
+    public function __construct(IntegrationData $integration_data, string $plugin_dir, string $plugin_file, bool $single_css = \false)
     {
         $this->integration_data = $integration_data;
         $this->integration_name = $integration_data->get_integration_name();
         $this->plugin_dir = $plugin_dir;
         $this->plugin_file = $plugin_file;
-        $this->single_css = $single_css;
     }
     public function get_name(): string
     {
@@ -36,7 +33,7 @@ class CheckoutIntegration extends \UpsFreeVendor\Octolize\Blocks\CheckoutIntegra
     private function register_main_integration(): void
     {
         $script_path = '/build/index.js';
-        $style_path = $this->single_css ? self::SINGLE_CSS_FILE_PATH : self::FRONTEND_CSS_FILE_PATH;
+        $style_path = self::FRONTEND_CSS_FILE_PATH;
         $script_url = plugins_url($script_path, $this->plugin_file);
         $style_url = plugins_url($style_path, $this->plugin_file);
         $script_asset_path = $this->plugin_dir . '/build/index.asset.php';
@@ -62,13 +59,13 @@ class CheckoutIntegration extends \UpsFreeVendor\Octolize\Blocks\CheckoutIntegra
     }
     public function register_shipping_workshop_block_frontend_styles(): void
     {
-        $style_path = $this->single_css ? self::SINGLE_CSS_FILE_PATH : self::FRONTEND_CSS_FILE_PATH;
+        $style_path = self::FRONTEND_CSS_FILE_PATH;
         $style_url = plugins_url($style_path, $this->plugin_file);
         wp_enqueue_style($this->integration_name . '-blocks-integration-frontend', $style_url, ['wp-components'], $this->get_file_version($style_path));
     }
     public function register_shipping_workshop_block_editor_styles(): void
     {
-        $style_path = $this->single_css ? self::SINGLE_CSS_FILE_PATH : self::EDITOR_CSS_FILE_PATH;
+        $style_path = self::EDITOR_CSS_FILE_PATH;
         $style_url = plugins_url($style_path, $this->plugin_file);
         wp_enqueue_style($this->integration_name . '-blocks-integration-editor', $style_url, ['wp-components'], $this->get_file_version($style_path));
     }

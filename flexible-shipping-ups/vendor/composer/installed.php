@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'octolize-plugin/flexible-shipping-ups',
-        'pretty_version' => '3.4.2',
-        'version' => '3.4.2.0',
-        'reference' => '071d4cea9cf3170cf68959dd259c526eac9e24f2',
+        'pretty_version' => '3.4.3',
+        'version' => '3.4.3.0',
+        'reference' => '8529b951ce14af09c37881c7b0393f9ffa679451',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'octolize-plugin/flexible-shipping-ups' => array(
-            'pretty_version' => '3.4.2',
-            'version' => '3.4.2.0',
-            'reference' => '071d4cea9cf3170cf68959dd259c526eac9e24f2',
+            'pretty_version' => '3.4.3',
+            'version' => '3.4.3.0',
+            'reference' => '8529b951ce14af09c37881c7b0393f9ffa679451',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/wp-wpdesk-tracker' => array(
-            'pretty_version' => '3.9.1',
-            'version' => '3.9.1.0',
-            'reference' => '8c32240d0fb7f9021cd987a6f5653eeba4edd744',
+            'pretty_version' => '3.9.3',
+            'version' => '3.9.3.0',
+            'reference' => '15aff56631e909d3ff18a2bbc66ef2853a8ad994',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpdesk/wp-wpdesk-tracker',
             'aliases' => array(),
