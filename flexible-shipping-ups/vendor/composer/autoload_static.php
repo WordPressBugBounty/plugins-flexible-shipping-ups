@@ -366,6 +366,7 @@ class ComposerStaticInitad7985255773b5f512195249801a1e36
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithCredentials' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithCredentials.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithRefreshToken' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithRefreshToken.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Ajax' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php',
+        'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\ClientCredentialsTokenActions' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/ClientCredentialsTokenActions.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\CreateTokenAction' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/CreateTokenAction.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Exceptions\\CreateTokenException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Exceptions/CreateTokenException.php',
         'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Exceptions\\RefreshTokenException' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Exceptions/RefreshTokenException.php',

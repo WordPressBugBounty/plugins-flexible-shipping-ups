@@ -307,6 +307,7 @@ return array(
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithCredentials' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithCredentials.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Actions\\RefreshTokenWithRefreshToken' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Actions/RefreshTokenWithRefreshToken.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Ajax' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Ajax.php',
+    'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\ClientCredentialsTokenActions' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/ClientCredentialsTokenActions.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\CreateTokenAction' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/CreateTokenAction.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Exceptions\\CreateTokenException' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Exceptions/CreateTokenException.php',
     'UpsFreeVendor\\Octolize\\WooCommerceShipping\\Ups\\OAuth\\Exceptions\\RefreshTokenException' => $baseDir . '/vendor_prefixed/octolize/wp-ups-oauth/src/OAuth/Exceptions/RefreshTokenException.php',
