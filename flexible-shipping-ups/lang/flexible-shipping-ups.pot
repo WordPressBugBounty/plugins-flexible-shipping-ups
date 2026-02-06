@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Octolize
+# Copyright (C) 2026 Octolize
 # This file is distributed under the same license as the Shipping Live Rates and Access Points for UPS for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.5.0\n"
+"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-25T12:59:51+00:00\n"
+"POT-Creation-Date: 2026-01-20T00:16:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -87,34 +87,40 @@ msgstr ""
 msgid "\"Flexible Shipping UPS PRO\" plugin version %1$s cannot run with this version of \"Flexible Shipping for UPS\" plugin. %2$sPlease update \"Flexible Shipping UPS PRO\" plugin to the newest version!%3$s"
 msgstr ""
 
-#: src/Plugin/Plugin.php:265
-#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:64
+#: src/Plugin/Plugin.php:264
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
+#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsShippingService.php:83
+msgid "UPS Live Rates"
+msgstr ""
+
+#: src/Plugin/Plugin.php:320
+#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:71
 msgid "Select pickup point"
 msgstr ""
 
-#: src/Plugin/Plugin.php:326
+#: src/Plugin/Plugin.php:381
 msgid "Flexible Shipping UPS PRO"
 msgstr ""
 
-#: src/Plugin/Plugin.php:426
+#: src/Plugin/Plugin.php:481
 #: vendor_prefixed/wpdesk/wp-ups-shipping-method/src/WooCommerceShipping/Ups/UpsAdminOrderMetaDataDisplay.php:36
 msgid "UPS Access Point"
 msgstr ""
 
-#: src/Plugin/Plugin.php:427
+#: src/Plugin/Plugin.php:482
 msgid "Access point unavailable for selected shipping address!"
 msgstr ""
 
-#: src/Plugin/Plugin.php:428
+#: src/Plugin/Plugin.php:483
 msgid "The closest point based on the billing address or shipping address."
 msgstr ""
 
-#: src/Plugin/Plugin.php:522
+#: src/Plugin/Plugin.php:577
 #: vendor_prefixed/wpdesk/wp-builder/src/Plugin/AbstractPlugin.php:188
 msgid "Settings"
 msgstr ""
 
-#: src/Plugin/Plugin.php:527
+#: src/Plugin/Plugin.php:582
 msgid "Buy PRO"
 msgstr ""
 
@@ -291,17 +297,17 @@ msgstr ""
 msgid "Please select a pickup point."
 msgstr ""
 
-#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:60
+#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:67
 #: build/point-selection-block-frontend.js:1
 #: build/point-selection-block.js:1
 msgid "Please enter at least 3 characters"
 msgstr ""
 
-#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:60
+#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:67
 msgid "Selected pickup point"
 msgstr ""
 
-#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:60
+#: vendor_prefixed/octolize/octolize-pickup-point-checkout-blocks/src/Blocks/PickupPoint/StoreEndpoint.php:67
 msgid "Select from map"
 msgstr ""
 
@@ -313,6 +319,40 @@ msgstr ""
 #: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:149
 #, php-format
 msgid "Invalid response: %s"
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:89
+msgid "Hi there! 👋 I’m here to help you set up and use the plugin."
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:89
+msgid ""
+"You can ask me about:\n"
+"- settings and configuration,\n"
+"- common errors and how to fix them,\n"
+"- integrations with other tools.\n"
+"\n"
+"Just tell me what you need help with 🙂"
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:97
+msgid "Hi there! 👋"
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:100
+msgid "I’m your AI Assistant. I’ll help you quickly configure the plugin and solve any issues."
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:103
+msgid "Type your question to get instant answer.."
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:106
+msgid "AI can make mistakes. Octolize has access to the conversation held in this chat."
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:109
+msgid "New conversation"
 msgstr ""
 
 #: vendor_prefixed/octolize/wp-octolize-tracker/src/DeactivationTracker/OctolizeProReasonsFactory.php:22
@@ -1120,11 +1160,6 @@ msgid "This controls the title which the user sees during checkout when fallback
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsShippingService.php:83
-msgid "UPS Live Rates"
-msgstr ""
-
-#: vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/UpsSettingsDefinition.php:170
 msgid "Access Points"
 msgstr ""
 
@@ -1266,52 +1301,52 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:189
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:206
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run on PHP versions older than %s. Please contact your host and ask them to upgrade."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:192
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:209
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run on WordPress versions older than %s. Please update WordPress."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:195
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:212
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run on WooCommerce versions older than %s. Please update WooCommerce."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:198
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:215
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run without OpenSSL module version at least %s. Please update OpenSSL module."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:285
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:303
 #, php-format
 msgid "The &#8220;%1$s&#8221; plugin requires at least %2$s version of %3$s to work correctly. Please update it to its latest release."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:391
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:409
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run without %s active. Please install and activate %s plugin."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:428
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:461
 #, php-format
 msgid "The &#8220;%s&#8221; plugin requires free %s plugin. <a href=\"%s\">Install %s</a>"
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:434
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:467
 #, php-format
 msgid "The &#8220;%s&#8221; plugin requires activating %s plugin. <a href=\"%s\">Activate %s</a>"
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:476
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:509
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run without %s PHP module installed. Please contact your host and ask them to install %s."
 msgstr ""
 
-#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:501
+#: vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php:534
 #, php-format
 msgid "The &#8220;%s&#8221; plugin cannot run without %s PHP setting set to %s. Please contact your host and ask them to set %s."
 msgstr ""

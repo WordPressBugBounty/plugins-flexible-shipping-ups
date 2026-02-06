@@ -4,14 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitad7985255773b5f512195249801a1e36
+class ComposerStaticInit55c348a33bbd6f9418d9cbf7c444e82c
 {
     public static $files = array (
         '0509b34a4bd7aebefeac629c9dc8a978' => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/notice-functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WPDesk\\View\\' => 12,
             'WPDesk\\ShowDecision\\' => 20,
@@ -19,42 +19,42 @@ class ComposerStaticInitad7985255773b5f512195249801a1e36
             'WPDesk\\Notice\\' => 14,
             'WPDesk\\FlexibleShippingUps\\' => 27,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
         ),
-        'O' => 
+        'O' =>
         array (
             'Octolize\\Csat\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPDesk\\View\\' => 
+        'WPDesk\\View\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/wp-view/src',
         ),
-        'WPDesk\\ShowDecision\\' => 
+        'WPDesk\\ShowDecision\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/wp-show-decision/src',
         ),
-        'WPDesk\\PluginBuilder\\' => 
+        'WPDesk\\PluginBuilder\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/wp-builder/src',
         ),
-        'WPDesk\\Notice\\' => 
+        'WPDesk\\Notice\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/wp-notice/src/WPDesk/Notice',
         ),
-        'WPDesk\\FlexibleShippingUps\\' => 
+        'WPDesk\\FlexibleShippingUps\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Plugin',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Octolize\\Csat\\' => 
+        'Octolize\\Csat\\' =>
         array (
             0 => __DIR__ . '/..' . '/octolize/wp-csat-petition/src',
         ),
@@ -305,6 +305,11 @@ class ComposerStaticInitad7985255773b5f512195249801a1e36
         'UpsFreeVendor\\Octolize\\Csat\\CsatCodeFromString' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatCodeFromString.php',
         'UpsFreeVendor\\Octolize\\Csat\\CsatOption' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatOption.php',
         'UpsFreeVendor\\Octolize\\Csat\\CsatOptionDependedOnShippingMethod' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-csat-petition/src/CsatOptionDependedOnShippingMethod.php',
+        'UpsFreeVendor\\Octolize\\Docs\\Chat\\AjaxChatSettings' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/AjaxChatSettings.php',
+        'UpsFreeVendor\\Octolize\\Docs\\Chat\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/Assets.php',
+        'UpsFreeVendor\\Octolize\\Docs\\Chat\\ChatContainer' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatContainer.php',
+        'UpsFreeVendor\\Octolize\\Docs\\Chat\\ChatSettings' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php',
+        'UpsFreeVendor\\Octolize\\Docs\\Chat\\HookableChatObjects' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/HookableChatObjects.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\Field\\Html' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/Field/Html.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\Onboarding' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/Onboarding.php',
         'UpsFreeVendor\\Octolize\\Onboarding\\OnboardingAjax' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/OnboardingAjax.php',
@@ -324,6 +329,7 @@ class ComposerStaticInitad7985255773b5f512195249801a1e36
         'UpsFreeVendor\\Octolize\\Onboarding\\PluginUpgrade\\PluginUpgradeWatcher' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-onboarding/src/Onboarding/PluginUpgrade/PluginUpgradeWatcher.php',
         'UpsFreeVendor\\Octolize\\ShippingExtensions\\AdminPage' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/AdminPage.php',
         'UpsFreeVendor\\Octolize\\ShippingExtensions\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Assets.php',
+        'UpsFreeVendor\\Octolize\\ShippingExtensions\\BlackFriday2025Promo' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/BlackFriday2025Promo.php',
         'UpsFreeVendor\\Octolize\\ShippingExtensions\\Page' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Page.php',
         'UpsFreeVendor\\Octolize\\ShippingExtensions\\PageViewTracker' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/PageViewTracker.php',
         'UpsFreeVendor\\Octolize\\ShippingExtensions\\PluginLinks' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/PluginLinks.php',
@@ -1048,10 +1054,10 @@ class ComposerStaticInitad7985255773b5f512195249801a1e36
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitad7985255773b5f512195249801a1e36::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitad7985255773b5f512195249801a1e36::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitad7985255773b5f512195249801a1e36::$fallbackDirsPsr4;
-            $loader->classMap = ComposerStaticInitad7985255773b5f512195249801a1e36::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit55c348a33bbd6f9418d9cbf7c444e82c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit55c348a33bbd6f9418d9cbf7c444e82c::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit55c348a33bbd6f9418d9cbf7c444e82c::$fallbackDirsPsr4;
+            $loader->classMap = ComposerStaticInit55c348a33bbd6f9418d9cbf7c444e82c::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -124,12 +124,21 @@ body.woocommerce_page_octolize-shipping-extensions {
                 }
                 p.oct-promo {
                     font-family: "Poppins", sans-serif;
-                    max-width: 80%;
-                    line-height: 32px;
+                    max-width: 60%;
+                    line-height: 1.5em;
                     span {
-                        border-radius: 10px 0 0 10px;
-                        background-color: $color-green_20;
-                        padding: 15px;
+                        border-radius: 10px;
+                        background: #002333;
+                        color: #EAEBEB;
+                        padding: 15px 20px;
+
+                        a {
+                            color: #fff;
+
+                            &:hover {
+                                color: #00E3C0;
+                            }
+                        }
                     }
                     span.oct-code {
                         border-radius: 0 10px 10px 0;

@@ -136,12 +136,12 @@
         },
         {
             "name": "wpdesk/wp-basic-requirements",
-            "version": "3.7.1",
-            "version_normalized": "3.7.1.0",
+            "version": "3.8.1",
+            "version_normalized": "3.8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.wpdesk.dev/wpdesk/wp-basic-requirements",
-                "reference": "865de6ab3c40aefa87381523ac85deb3796c332a"
+                "reference": "040cf97fc086213d76383905c1cba3211df8c3d3"
             },
             "require": {
                 "php": ">=5.3"
@@ -154,7 +154,7 @@
                 "wimg/php-compatibility": "^8",
                 "wpdesk/wp-code-sniffer": "^1.2"
             },
-            "time": "2025-06-09T08:23:19+00:00",
+            "time": "2025-10-30T12:11:34+00:00",
             "type": "library",
             "extra": {
                 "po-files": {
@@ -458,24 +458,24 @@
         },
         {
             "name": "wpdesk/wp-view",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.1.2",
+            "version_normalized": "2.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.wpdesk.dev/wpdesk/wp-view",
-                "reference": "4fe4f47110d74b6c9b6a6f77291db49ef42126f5"
+                "reference": "7642031b4a8c453a0eafa46b15612f576775d2ca"
             },
             "require": {
-                "php": ">=7.0 | ^8"
+                "php": ">=7.4 | ^8"
             },
             "require-dev": {
                 "10up/wp_mock": "*",
                 "mockery/mockery": "*",
-                "phpunit/phpunit": "<7",
+                "phpunit/phpunit": "^7||^8||^9",
                 "wpdesk/phpstan-rules": "^1.1",
                 "wpdesk/wp-code-sniffer": "^1"
             },
-            "time": "2024-06-12T12:05:32+00:00",
+            "time": "2025-12-02T13:08:36+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -539,17 +539,17 @@
         },
         {
             "name": "wpdesk/wp-wpdesk-tracker",
-            "version": "3.9.3",
-            "version_normalized": "3.9.3.0",
+            "version": "3.9.5",
+            "version_normalized": "3.9.5.0",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.wpdesk.dev:wpdesk/wp-wpdesk-tracker.git",
-                "reference": "15aff56631e909d3ff18a2bbc66ef2853a8ad994"
+                "reference": "f4e5eeaa7ec57bb3e2072dc98bc71861ae23371c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.wpdesk.dev/api/v4/projects/782/packages/composer/archives/wpdesk/wp-wpdesk-tracker.zip?sha=15aff56631e909d3ff18a2bbc66ef2853a8ad994",
-                "reference": "15aff56631e909d3ff18a2bbc66ef2853a8ad994",
+                "url": "https://gitlab.wpdesk.dev/api/v4/projects/782/packages/composer/archives/wpdesk/wp-wpdesk-tracker.zip?sha=f4e5eeaa7ec57bb3e2072dc98bc71861ae23371c",
+                "reference": "f4e5eeaa7ec57bb3e2072dc98bc71861ae23371c",
                 "shasum": ""
             },
             "require": {

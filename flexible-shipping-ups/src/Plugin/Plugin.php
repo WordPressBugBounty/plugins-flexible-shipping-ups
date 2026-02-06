@@ -10,6 +10,8 @@ namespace WPDesk\FlexibleShippingUps;
 use UpsFreeVendor\Octolize\Blocks\PickupPoint\IntegrationData;
 use UpsFreeVendor\Octolize\Blocks\PickupPoint\Registrator;
 use UpsFreeVendor\Octolize\Csat\Csat;
+use UpsFreeVendor\Octolize\Docs\Chat\ChatSettings;
+use UpsFreeVendor\Octolize\Docs\Chat\HookableChatObjects;
 use UpsFreeVendor\Octolize\ShippingExtensions\ShippingExtensions;
 use UpsFreeVendor\Octolize\Tracker\DeactivationTracker\OctolizeReasonsFactory;
 use UpsFreeVendor\Octolize\Tracker\TrackerInitializer;
@@ -29,7 +31,9 @@ use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\HookableParent;
 use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\TemplateLoad;
 use UpsFreeVendor\WPDesk\RepositoryRating\RatingPetitionNotice;
 use UpsFreeVendor\WPDesk\RepositoryRating\TimeWatcher\ShippingMethodInstanceWatcher;
+use UpsFreeVendor\WPDesk\ShowDecision\OrStrategy;
 use UpsFreeVendor\WPDesk\ShowDecision\WooCommerce\ShippingMethodInstanceStrategy;
+use UpsFreeVendor\WPDesk\ShowDecision\WooCommerce\ShippingMethodStrategy;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsApi\UpsAccessPoints;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsServices;
 use UpsFreeVendor\WPDesk\UpsShippingService\UpsSettingsDefinition;
@@ -230,7 +234,58 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		} );
 
 		$this->hooks();
+
+		add_action( 'admin_init', [ $this, 'init_octolize_docs_chat' ] );
 	}
+
+	public function init_octolize_docs_chat() {
+		$plugin_slug = 'flexible-shipping-ups';
+
+		$show_strategy              = new OrStrategy(
+			new ShippingMethodStrategy( UpsShippingService::UNIQUE_ID )
+		);
+		$show_strategy->addCondition(
+			new ShippingMethodInstanceStrategy(
+				new \WC_Shipping_Zones(),
+				UpsShippingService::UNIQUE_ID
+			)
+		);
+		$show_strategy->addCondition(
+			new ShippingMethodInstanceStrategy(
+				new \WC_Shipping_Zones(),
+				UpsSurepostShippingService::UNIQUE_ID
+			)
+		);
+
+		add_filter(
+			'octolize_docs_chat_settings_' . $plugin_slug,
+			function ( $settings, $data ) {
+				$chat_settings = new ChatSettings();
+				$chat_settings->set_plugin( __( 'UPS Live Rates', 'flexible-shipping-ups' ) );
+				$chat_settings->set_plugin_settings( $this->get_global_ups_settings() );
+				$instance_id = $data['instance_id'] ?? '';
+				$chat_settings->set_current_page( $instance_id ? 'Shipping method' : 'Plugin Settings' );
+				if ( $instance_id ) {
+					$shipping_method = \WC_Shipping_Zones::get_shipping_method( (int) $instance_id );
+					$chat_settings->set_shipping_method_settings( $shipping_method->instance_settings );
+				}
+
+				return $chat_settings->get_settings();
+			},
+			10,
+			2
+		);
+
+		(
+		new HookableChatObjects(
+			$plugin_slug,
+			$this->plugin_url,
+			$this->plugin_info->get_version(),
+			$show_strategy
+		)
+		)->hooks();
+	}
+
 
 	private function init_logger(): void {
 		$global_ups_woocommerce_options  = $this->get_global_ups_settings();

@@ -32,7 +32,7 @@ class OptInPage implements Hookable {
 	public function __construct( $plugin_file, $plugin_slug, $shop = null ) {
 		$this->plugin_file = $plugin_file;
 		$this->plugin_slug = $plugin_slug;
-		$this->shop        = $shop ?? new Shop( '' );
+		$this->shop        = $shop ?? new Shop( '', $this->plugin_slug );
 	}
 
 	public function hooks() {
@@ -64,7 +64,7 @@ class OptInPage implements Hookable {
 		$skip_url  = add_query_arg( 'allow', '0', $skip_url );
 
 		if ( current_user_can( 'activate_plugins' ) && false !== check_ajax_referer( self::WPDESK_TRACKER_ACTION, self::WPDESK_TRACKER_NONCE, false ) && isset( $_GET['shop_url'] ) ) {
-			$shop = new Shop( sanitize_text_field( wp_unslash( $_GET['shop_url'] ) ) );
+			$shop = new Shop( sanitize_text_field( wp_unslash( $_GET['shop_url'] ) ), $this->plugin_slug );
 		} else {
 			$shop = $this->shop;
 		}

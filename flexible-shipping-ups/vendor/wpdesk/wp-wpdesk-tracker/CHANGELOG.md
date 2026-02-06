@@ -1,3 +1,11 @@
+## [3.9.5]- 2025-10-06
+### Fixed
+- Missing js script on tracker page
+
+## [3.9.4]- 2025-10-06
+### Changed
+- Usage tracking page url
+
 ## [3.9.3]- 2025-07-23
 ### Fixed
 - Changed sanitization

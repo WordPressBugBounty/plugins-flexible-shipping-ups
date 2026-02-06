@@ -34,8 +34,15 @@ class StoreEndpoint implements Hookable
      */
     public function update_order_from_request($order, $request): void
     {
+        if (!$request instanceof \WP_REST_Request) {
+            return;
+        }
+        if (!$request->has_param('extensions') || !isset($request['extensions'][self::$integration_name])) {
+            return;
+        }
         $request_data = $request['extensions'][self::$integration_name];
         $value = $request_data[self::$field_name];
+        do_action('octolize-pickup-point-blocks-' . self::$integration_name . '-before_update_order_meta', $value, $order);
         $order->update_meta_data(self::$field_name, $value);
         $customer_id = $order->get_customer_id();
         if ($customer_id !== 0) {

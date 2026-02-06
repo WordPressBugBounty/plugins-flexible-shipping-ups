@@ -1,10 +1,10 @@
 === Shipping Live Rates and Access Points for UPS for WooCommerce ===
 Contributors: octolize,grola,sebastianpisula
 Donate link: https://wordpress.org/plugins/flexible-shipping-ups/
-Tags: ups shipping, woocommerce ups, ups api, ups calculator, ups access points
+Tags: ups, ups rates, ups shipping, ups woocommerce, ups live rates
 Requires at least: 4.5
-Tested up to: 6.8
-Stable tag: 3.5.0
+Tested up to: 6.9
+Stable tag: 3.6.1
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -13,44 +13,45 @@ Provide auto-calculated UPS rates and Access Point options. Easy 5-minute setup.
 
 == Description ==
 
-= Most powerful UPS WooCommerce integration =
+= The best free plugin to display UPS live rates in your WooCommerce store =
 
-Provide your customers with the automatically calculated shipping rates for numerous UPS services and let them choose their preferred Access Points. You’ll integrate the plugin in just 5 minutes.
+Provide your customers with automatically calculated shipping rates for numerous UPS services and let them choose their preferred Access Points. You’ll integrate the plugin in just 5 minutes.
 
 [youtube https://www.youtube.com/watch?v=081i3tbgHy4]
 
-How does it work? Conveniently connect your UPS account with one click using OAuth (REST API). **No need to "create an application" on the UPS website**. Alternatively, you can still use the XML API. The shipping cost is calculated automatically online via UPS API connection, so your clients will see every UPS shipping option in the checkout with its real price. You can **offer delivery to UPS Access Point**, too.
+**How does it work?**
 
-**Give your customers the opportunity to pick up packages when and where it's best for them.** Enable Access Points support to show store customers the option to choose the UPS Access Point service. The plugin suggests the nearest points for the customer's address and saves the point to the customer’s order.
+The shipping cost is calculated automatically online via UPS API connection, so your clients will see every UPS shipping option in the checkout with its real price. There’s no need to “create an application” on the UPS website.
 
-> **Upgrade to UPS PRO**<br />
-> Get priority e-mail support and access all PRO features, upgrade to [Flexible Shipping UPS PRO now &rarr;](https://octol.io/upsrepoupgrade)
+You can **offer delivery to a UPS Access Point**, too. Allow your customers to pick up packages when and where it’s best for them. Enable Access Points support to let the plugin suggest the nearest points for the customer’s address and save the point to the customer’s order.
+
+**Upgrade to UPS PRO**
+Get priority e-mail support and access all PRO features, upgrade to [Flexible Shipping UPS PRO now →](https://octol.io/upsrepoupgrade)
 
 or
 
-> **Extend the default UPS functionalities with UPS Labels**<br />
-> Get the [Flexible Shipping UPS Labels](https://octol.io/upslabels-repo) and create the shipments, generate the printable UPS shipping labels for the placed orders and track the parcels directly from your WooCommerce store!
+**Extend the default UPS functionalities with UPS Labels**
+Get the [Flexible Shipping UPS Labels](https://octol.io/upslabels-repo) and create shipments, generate printable UPS shipping labels for placed orders and track parcels directly from your WooCommerce store!
 
 = Features =
 
 * Automatic shipping costs calculator for UPS live rates
 * Pickup types selection
 * Shipping cost for UPS services based on cart weight and shipping address
-* OAuth one click authorization with your UPS account (REST API)
+* OAuth one-click authorization with your UPS account (REST API)
 * Alternative connection via UPS Access Key (XML API)
 * UPS negotiated rates
 * Nearest UPS Access Point
-* Limiting services only for those available for the customer's address
+* Limiting services only to those available for the customer’s address
 * Manual UPS services limiting
 * UPS SurePost services available for United States shipments
 * Ability to add insurance
-* Fallback cost in case of connection problems with UPS API
+* Fallback cost in case of connection problems with the UPS API
 * All currencies supported by UPS
 * Debug mode
 * Compatible with WooCommerce Shipping Zones
 * Free shipping threshold
 * UPS Labels extension compatibility
-
 
 = PRO Features =
 
@@ -58,16 +59,16 @@ or
 * UPS Access Points selection and search
 * Fixed value and percentage handling fees/discounts for UPS rates
 * Flat rate for UPS Access Points
-* Estimated delivery date displayed in the checkout
+* Estimated delivery date displayed at checkout
 * Advanced estimated delivery date with maximum time in transit, cutoff and lead time
-* Excluding certain days of the week from estimated delivery date
+* Excluding certain days of the week from the estimated delivery date
 * Destination address types
 * Custom boxes with box weight and padding
 * Various box packing methods
 * Multi-currency support using WooCommerce currency switcher plugins
 * Delivery Confirmation
 
-[Upgrade to PRO Now &rarr;](https://octol.io/upsrepoupgrade)
+[Upgrade to PRO Now →](https://octol.io/upsrepoupgrade)
 
 = Available UPS services =
 
@@ -93,15 +94,17 @@ or
 
 = Actively developed and supported =
 
-The UPS WooCommerce Live Rates plugin is constantly being developed by Octolize. Our plugins are used by **over 250,000 WooCommerce stores worldwide**. Over the years we proved to have become not only the authors of stable and high-quality plugins, but also as a team providing excellent technical support. Join the community of our satisfied plugins’ users. Bet on quality and let our plugins do the rest.
+Over **250.000 WooCommerce stores worldwide** use our plugins. We constantly develop them, earning the reputation of authors of stable and high-quality solutions. We are also praised for providing excellent technical support. Join the community of our satisfied plugin users: bet on quality, and let our plugins do the rest.
 
-= Power of Table Rate =
+= The power of Table Rate =
 
-The UPS WooCommerce Live Rates plugin is now compatible with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/) - the most powerful Table Rate shipping plugin for WooCommerce. This provides greater control over delivery costs and allows you to take advantage of both live rates and condition-based shipping costs. You can now combine rates returned by UPS WooCommerce Live Rates with cost calculated based on price and weight. Moreover, when using [Flexible Shipping PRO](https://octol.io/fs-repo-up), you get access to 15+ conditions, such as shipping class or product categories. Try for free with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/)!
+The UPS Live Rates plugin for WooCommerce is now compatible with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/) – the most powerful Table Rate shipping plugin for WooCommerce. This provides greater control over delivery costs and allows you to take advantage of both live rates and condition-based shipping costs.
+
+You can now combine the prices from the UPS Live Rates plugin with costs calculated based on price and weight. Moreover, when using [Flexible Shipping PRO](https://octol.io/fs-repo-up), you get access to **15+ conditions**, such as shipping class or product categories. Try for free with [Flexible Shipping](https://wordpress.org/plugins/flexible-shipping/)!
 
 = Conditional Shipping Methods =
 
-Extend the default functionalities and **conditionally display or hide the UPS shipping methods** in your WooCommerce store with Conditional Shipping Methods plugin. Define the rules when the specific shipping methods should be available to pick by your customers and when not to.
+Extend the default functionalities and **conditionally display or hide the UPS shipping methods** in your WooCommerce store with the Conditional Shipping Methods plugin. Define the rules when the specific shipping methods should be available to pick by your customers and when not to.
 
 Hide the UPS shipping methods based on:
 
@@ -110,7 +113,7 @@ Hide the UPS shipping methods based on:
 * Destination & Time (Day of the week, Time of the day, Location)
 * Other shipping methods and shipping methods with zero cost.
 
-[Buy Conditional Shipping Methods now &rarr;](https://octol.io/csm-repo-ups)
+[Buy Conditional Shipping Methods now →](https://octol.io/csm-repo-ups)
 
 = Docs =
 
@@ -118,23 +121,27 @@ View the dedicated [Flexible Shipping UPS WooCommerce documentation](https://oct
 
 = Support Policy =
 
-We provide a limited support for the free version in the [plugin Support Forum](https://wordpress.org/support/plugin/flexible-shipping-ups/). Please upgrade to PRO version to get priority e-mail support as well as all PRO features. [Upgrade Now &rarr;](https://octol.io/upsrepoupgrade)
+We provide limited support for the free version in the [plugin Support Forum](https://wordpress.org/support/plugin/flexible-shipping-ups/). Please upgrade to the PRO version to get priority e-mail support, as well as all PRO features. [Upgrade Now →](https://octol.io/upsrepoupgrade)
 
-= Why should you choose our UPS WooCommerce Live Rates plugin as a shipping integration in your shop? =
+= Why should you choose our UPS Live Rates plugin for WooCommerce as a shipping integration in your shop? =
 
-UPS is a well-known and a trusted brand - one of the leaders in its category. UPS delivers 18 million parcels and letters worldwide every day. You’ll integrate UPS services with your WooCommerce store via the UPS API. **You’ll provide your clients with a choice of the brand they trust**.
+UPS is a well-known and trusted brand – one of the leaders in its category. It delivers 18 million parcels and letters worldwide every day.
 
-You’ll integrate UPS services with your store **within a few moments** and will be able to offer dynamic UPS rates to your customers. Your customers will be able to choose Access Points service, too. **Give your customers access to more than 27,000 locations across Europe and North America to pick up their online purchases**.
+* Integrate UPS services with your WooCommerce store via the UPS API.
+* Provide your clients with a choice of the brand they trust.
+* Integrate UPS services with your store **within a few moments** and offer dynamic UPS rates to your customers.
+* Allow your customers to choose the Access Points service.
+* Give your customers access to **more than 27,000 locations** across Europe and North America to pick up their online purchases.
 
-This plugin fully integrates with WooCommerce. It lets you add UPS shipping methods to your store’s shipping zones in WooCommerce shipping settings.
+This plugin fully integrates with WooCommerce. It lets you add UPS shipping methods to your store’s shipping zones in the WooCommerce shipping settings.
 
 = Interested in plugin translations? =
 
-We are actively looking for contributors to translate this and [other Octolize plugins](https://profiles.wordpress.org/octolize/#content-plugins). Each supported language tremendously help store owners to conveniently manage shipping operations.
+We are actively looking for contributors to translate this and [other Octolize plugins](https://profiles.wordpress.org/octolize/#content-plugins). Each supported language tremendously helps store owners to conveniently manage shipping operations.
 
-Your translations contribute to the WordPress community at large. Moreover, we're glad to offer you discounts for our PRO plugins and establish long-term collaboration. If you have any translation related questions, please email us at [translations@octolize.com](mailto:translations@octolize.com).
+Your translations contribute to the WordPress community at large. Moreover, **we’re glad to offer you discounts** for our PRO plugins and establish long-term collaboration. If you have any translation-related questions, please email us at translations@octolize.com.
 
-Head over here and help us to translate this plugin:
+Head over here and help us translate this plugin:
 [https://translate.wordpress.org/projects/wp-plugins/flexible-shipping-ups/](https://translate.wordpress.org/projects/wp-plugins/flexible-shipping-ups/)
 
 == Installation	 ==
@@ -175,6 +182,24 @@ Sometimes API doesn’t respond or return an error. In that case, the UPS shippi
 7. UPS Live Rates and Access Points in the checkout
 
 == Changelog ==
+
+= 3.6.1 - 2026-01-20 =
+* Added support for WooCommerce 10.5
+
+= 3.6.0 - 2025-12-11 =
+* Added AI chat in plugin settings and shipping method settings
+
+= 3.5.4 - 2025-12-02 =
+* Added support for WordPress 6.9
+
+= 3.5.3 - 2025-11-25 =
+* Added support for WooCommerce 10.4
+
+= 3.5.2 - 2025-10-30 =
+* Updated Shipping Extensions tab
+
+= 3.5.1 - 2025-10-06 =
+* Added support for WooCommerce 10.3
 
 = 3.5.0 - 2025-08-25 =
 * Changed the notice type in debug mode
