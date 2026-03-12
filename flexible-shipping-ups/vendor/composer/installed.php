@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'octolize-plugin/flexible-shipping-ups',
-        'pretty_version' => '3.6.2',
-        'version' => '3.6.2.0',
-        'reference' => 'fe202c4477cb4d34ea72378dd618c3b275320597',
+        'pretty_version' => '3.6.3',
+        'version' => '3.6.3.0',
+        'reference' => '650e425f918f400ea5106159924c39898693fcca',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'octolize-plugin/flexible-shipping-ups' => array(
-            'pretty_version' => '3.6.2',
-            'version' => '3.6.2.0',
-            'reference' => 'fe202c4477cb4d34ea72378dd618c3b275320597',
+            'pretty_version' => '3.6.3',
+            'version' => '3.6.3.0',
+            'reference' => '650e425f918f400ea5106159924c39898693fcca',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -38,9 +38,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/wp-basic-requirements' => array(
-            'pretty_version' => '3.8.1',
-            'version' => '3.8.1.0',
-            'reference' => '040cf97fc086213d76383905c1cba3211df8c3d3',
+            'pretty_version' => '3.8.2',
+            'version' => '3.8.2.0',
+            'reference' => '4dfb322fa5e6f1a2c2e65b9221c1cdaf847721ee',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpdesk/wp-basic-requirements',
             'aliases' => array(),
@@ -83,9 +83,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/wp-view' => array(
-            'pretty_version' => '2.1.2',
-            'version' => '2.1.2.0',
-            'reference' => '7642031b4a8c453a0eafa46b15612f576775d2ca',
+            'pretty_version' => '2.1.3',
+            'version' => '2.1.3.0',
+            'reference' => 'cc24257506d2d084ca4db1b34238154228759cef',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpdesk/wp-view',
             'aliases' => array(),

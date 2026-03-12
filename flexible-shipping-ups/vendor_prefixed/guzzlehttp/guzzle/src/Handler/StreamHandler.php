@@ -8,6 +8,7 @@ use UpsFreeVendor\GuzzleHttp\Promise\FulfilledPromise;
 use UpsFreeVendor\GuzzleHttp\Promise\PromiseInterface;
 use UpsFreeVendor\GuzzleHttp\Psr7;
 use UpsFreeVendor\GuzzleHttp\TransferStats;
+use UpsFreeVendor\GuzzleHttp\Utils;
 use UpsFreeVendor\Psr\Http\Message\RequestInterface;
 use UpsFreeVendor\Psr\Http\Message\ResponseInterface;
 use UpsFreeVendor\Psr\Http\Message\StreamInterface;
@@ -31,7 +32,7 @@ class StreamHandler
         if (isset($options['delay'])) {
             usleep($options['delay'] * 1000);
         }
-        $startTime = isset($options['on_stats']) ? \UpsFreeVendor\GuzzleHttp\_current_time() : null;
+        $startTime = isset($options['on_stats']) ? Utils::currentTime() : null;
         try {
             // Does not support the expect header.
             $request = $request->withoutHeader('Expect');
@@ -58,7 +59,7 @@ class StreamHandler
     private function invokeStats(array $options, RequestInterface $request, $startTime, ResponseInterface $response = null, $error = null)
     {
         if (isset($options['on_stats'])) {
-            $stats = new TransferStats($request, $response, \UpsFreeVendor\GuzzleHttp\_current_time() - $startTime, $error, []);
+            $stats = new TransferStats($request, $response, Utils::currentTime() - $startTime, $error, []);
             call_user_func($options['on_stats'], $stats);
         }
     }

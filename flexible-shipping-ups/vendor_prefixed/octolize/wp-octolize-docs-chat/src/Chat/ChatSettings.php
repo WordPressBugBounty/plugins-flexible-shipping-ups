@@ -5,6 +5,7 @@ namespace UpsFreeVendor\Octolize\Docs\Chat;
 class ChatSettings
 {
     private const WEBHOOK_URL = 'webhook_url';
+    private const STREAMING = 'streaming';
     private const INITIAL_MESSAGES = 'initial_messages';
     private const TITLE = 'title';
     private const SUBTITLE = 'subtitle';
@@ -12,6 +13,8 @@ class ChatSettings
     private const INPUT_PLACEHOLDER = 'input_placeholder';
     private const GET_STARTED = 'get_started';
     private const METADATA = 'metadata';
+    private const CONSENT = 'consent';
+    private const CONSENT_DISABLED = 'consent_disabled';
     private string $plugin = 'Octolize';
     private array $plugin_settings = [];
     private array $plugin_settings_masked_fields = ['api_key', 'api_secret', 'client_id', 'client_secret', 'user_id', 'password', 'access_key', 'account_numer'];
@@ -21,6 +24,10 @@ class ChatSettings
     public function set_webhook_url(string $url): void
     {
         $this->settings[self::WEBHOOK_URL] = $url;
+    }
+    public function set_streaming(bool $streaming): void
+    {
+        $this->settings[self::STREAMING] = $streaming;
     }
     public function set_initial_messages(array $messages): void
     {
@@ -48,7 +55,8 @@ class ChatSettings
     }
     /**
      * @param string $key
-     * @param $value
+     * @param        $value
+     *
      * @return void
      */
     public function add_metadata(string $key, $value): void
@@ -62,6 +70,18 @@ class ChatSettings
     public function set_get_started(string $get_started): void
     {
         $this->settings[self::GET_STARTED] = $get_started;
+    }
+    /**
+     * Enable or disable consent popup explicitly.
+     * When true, consent popup is disabled and chat can initialize without asking.
+     */
+    public function set_consent_disabled(bool $disabled): void
+    {
+        $this->settings[self::CONSENT_DISABLED] = $disabled;
+    }
+    public function set_consent(array $consent): void
+    {
+        $this->settings[self::CONSENT] = $consent;
     }
     public function set_shipping_method_settings(array $settings): void
     {
@@ -84,6 +104,9 @@ class ChatSettings
         $settings = $this->settings;
         if (empty($settings[self::WEBHOOK_URL])) {
             $settings[self::WEBHOOK_URL] = 'https://n8n.octolize.dev/webhook/5f60a382-151a-49bf-8baa-52b070c11179/chat';
+        }
+        if (empty($settings[self::STREAMING])) {
+            $settings[self::STREAMING] = \false;
         }
         if (empty($settings[self::INITIAL_MESSAGES])) {
             $settings[self::INITIAL_MESSAGES] = [__('Hi there! 👋 I’m here to help you set up and use the plugin.', 'flexible-shipping-ups'), __('You can ask me about:
@@ -108,6 +131,25 @@ Just tell me what you need help with 🙂', 'flexible-shipping-ups')];
         if (empty($settings[self::GET_STARTED])) {
             $settings[self::GET_STARTED] = __('New conversation', 'flexible-shipping-ups');
         }
+        // Consent texts for gating chat initialization
+        if (empty($settings[self::CONSENT]) || !is_array($settings[self::CONSENT])) {
+            $settings[self::CONSENT] = [];
+        }
+        $settings[self::CONSENT] = wp_parse_args($settings[self::CONSENT], [
+            'title' => __('Do you consent to sending data to the chat?', 'flexible-shipping-ups'),
+            'message' => __('To start the chat, we need to send your inputs and technical data to the chat service. Read more in our Privacy Policy.', 'flexible-shipping-ups'),
+            'accept' => __('Accept', 'flexible-shipping-ups'),
+            'decline' => __('Decline', 'flexible-shipping-ups'),
+            'privacy_policy_url' => 'https://octolize.com/terms-of-service/privacy-policy/',
+            'privacy_link_label' => __('Privacy Policy', 'flexible-shipping-ups'),
+            // Support fallback values shown when user does not want to give consent
+            'support_url' => 'https://octolize.com/support/',
+            'support_text' => __('If you don’t want to give consent, you can contact our support using this form:', 'flexible-shipping-ups'),
+            'support_link_label' => __('Support form', 'flexible-shipping-ups'),
+        ]);
+        if (!array_key_exists(self::CONSENT_DISABLED, $settings)) {
+            $settings[self::CONSENT_DISABLED] = \false;
+        }
         return $settings;
     }
     private function add_metadata_to_settings(array $settings): array
@@ -122,7 +164,17 @@ Just tell me what you need help with 🙂', 'flexible-shipping-ups')];
         $metadata['shipping_method_settings'] = $this->shipping_method_settings;
         $metadata['user_id'] = $this->user_id ?? md5(site_url());
         $metadata['current_page'] = $this->current_page;
+        $metadata['wc_store_address'] = $this->prepare_store_address();
+        $metadata['wc_shipping_options'] = $this->prepare_shipping_options();
         return $metadata;
+    }
+    private function prepare_store_address(): array
+    {
+        return ['woocommerce_store_address' => get_option('woocommerce_store_address', ''), 'woocommerce_store_address_2' => get_option('woocommerce_store_address_2', ''), 'woocommerce_store_city' => get_option('woocommerce_store_city', ''), 'woocommerce_store_postcode' => get_option('woocommerce_store_postcode', ''), 'woocommerce_default_country' => get_option('woocommerce_default_country', '')];
+    }
+    private function prepare_shipping_options(): array
+    {
+        return ['woocommerce_allowed_countries' => get_option('woocommerce_allowed_countries', ''), 'woocommerce_ship_to_countries' => get_option('woocommerce_ship_to_countries', ''), 'woocommerce_default_customer_address' => get_option('woocommerce_default_customer_address', '')];
     }
     private function mask_settings(array $settings): array
     {
