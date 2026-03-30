@@ -33,7 +33,7 @@ class HookableObjects implements HookableCollection
         $this->add_hookable(new Notices($this->token_option, $this->oauth_url->get_url(), $this->app));
         $this->add_hookable(new CreateTokenAction($this->token_option, $this->oauth_url->get_url(), $this->app, $this->test_api));
         $this->add_hookable(new Ajax($this->token_option, $this->settings_url, $this->app));
-        $this->add_hookable(new RefreshTokenActionScheduler($this->rest_api_token, $this->token_option, $this->logger));
+        $this->add_hookable(new RefreshTokenActionScheduler($this->app, $this->rest_api_token, $this->token_option, $this->logger));
         if (!empty($this->client_credentials_option_name)) {
             $this->add_hookable(new ClientCredentialsTokenActions($this->client_credentials_option_name, $this->logger));
         }

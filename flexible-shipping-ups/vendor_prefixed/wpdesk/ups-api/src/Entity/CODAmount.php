@@ -44,7 +44,7 @@ class CODAmount implements NodeInterface
      */
     public function getCurrencyCode()
     {
-        return $this->CODCode;
+        return $this->CurrencyCode;
     }
     /**
      * @param mixed $CurrencyCode

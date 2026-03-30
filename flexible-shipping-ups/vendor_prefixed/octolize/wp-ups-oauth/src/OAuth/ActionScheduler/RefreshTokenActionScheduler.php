@@ -8,14 +8,15 @@ use UpsFreeVendor\Psr\Log\LoggerInterface;
 use UpsFreeVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 class RefreshTokenActionScheduler implements Hookable
 {
-    public const REFRESH_TOKEN_ACTION_NAME = 'flexible_shipping_ups_refresh_token';
     private const TEN_MINUTES = 600;
     private RestApiToken $rest_api_token;
     private LoggerInterface $logger;
     private TokenOption $token_option;
     private ?int $current_action_id = null;
-    public function __construct(RestApiToken $rest_api_token, TokenOption $token_option, LoggerInterface $logger)
+    private string $app;
+    public function __construct(string $app, RestApiToken $rest_api_token, TokenOption $token_option, LoggerInterface $logger)
     {
+        $this->app = $app;
         $this->rest_api_token = $rest_api_token;
         $this->token_option = $token_option;
         $this->logger = $logger;
@@ -23,7 +24,7 @@ class RefreshTokenActionScheduler implements Hookable
     }
     public function hooks(): void
     {
-        add_action(self::REFRESH_TOKEN_ACTION_NAME, [$this, 'refresh_token']);
+        add_action($this->get_refresh_token_action_name(), [$this, 'refresh_token']);
         add_action('flexible_shipping_ups_token_created', [$this, 'schedule']);
         add_action('flexible_shipping_ups_token_refreshed', [$this, 'schedule']);
         add_action('action_scheduler_before_execute', [$this, 'track_current_refresh_action'], 10, 1);
@@ -39,14 +40,18 @@ class RefreshTokenActionScheduler implements Hookable
     {
         return $this->current_action_id;
     }
+    public function get_refresh_token_action_name(): string
+    {
+        return 'flexible_shipping_ups_' . $this->app . '_refresh_token';
+    }
     public function enqueue(): void
     {
         $this->logger->debug('Enqueuing refresh token action.');
-        if (as_has_scheduled_action(self::REFRESH_TOKEN_ACTION_NAME)) {
+        if (as_has_scheduled_action($this->get_refresh_token_action_name())) {
             $this->logger->debug('Refresh token action already enqueued.');
             return;
         }
-        if (!as_enqueue_async_action(self::REFRESH_TOKEN_ACTION_NAME, [], '', \true)) {
+        if (!as_enqueue_async_action($this->get_refresh_token_action_name(), [], '', \true)) {
             $this->logger->error('Error during enqueue refresh token action.');
         } else {
             $this->logger->debug('Refresh token action enqueued.');
@@ -62,8 +67,8 @@ class RefreshTokenActionScheduler implements Hookable
             $this->logger->debug('A pending refresh token action already exists past-due or due no later than the target schedule time. Skipping reschedule.');
             return;
         }
-        as_unschedule_all_actions(self::REFRESH_TOKEN_ACTION_NAME, ['force_refresh' => \true]);
-        if (!as_schedule_single_action($schedule_timestamp, self::REFRESH_TOKEN_ACTION_NAME, ['force_refresh' => \true], '', \false)) {
+        as_unschedule_all_actions($this->get_refresh_token_action_name(), ['force_refresh' => \true]);
+        if (!as_schedule_single_action($schedule_timestamp, $this->get_refresh_token_action_name(), ['force_refresh' => \true], '', \false)) {
             $this->logger->error('Error during schedule refresh token action.');
         } else {
             $this->logger->debug('Refresh token action scheduled.');
@@ -71,15 +76,15 @@ class RefreshTokenActionScheduler implements Hookable
     }
     public function cleanup_legacy_async_actions(): void
     {
-        if (!as_has_scheduled_action(self::REFRESH_TOKEN_ACTION_NAME, [])) {
+        if (!as_has_scheduled_action($this->get_refresh_token_action_name(), [])) {
             return;
         }
         $this->logger->debug('Removing legacy async refresh token actions.');
-        as_unschedule_all_actions(self::REFRESH_TOKEN_ACTION_NAME, []);
+        as_unschedule_all_actions($this->get_refresh_token_action_name(), []);
     }
     private function has_pending_action_due_no_later_than(int $schedule_timestamp): bool
     {
-        $scheduled_actions = as_get_scheduled_actions(['hook' => self::REFRESH_TOKEN_ACTION_NAME, 'args' => ['force_refresh' => \true], 'status' => 'pending', 'date' => max(time(), $schedule_timestamp), 'date_compare' => '<=', 'per_page' => 1, 'orderby' => 'date', 'order' => 'ASC'], 'ids');
+        $scheduled_actions = as_get_scheduled_actions(['hook' => $this->get_refresh_token_action_name(), 'args' => ['force_refresh' => \true], 'status' => 'pending', 'date' => max(time(), $schedule_timestamp), 'date_compare' => '<=', 'per_page' => 1, 'orderby' => 'date', 'order' => 'ASC'], 'ids');
         if (null !== $this->current_action_id) {
             $scheduled_actions = array_values(array_filter($scheduled_actions, fn($action_id): bool => (int) $action_id !== $this->current_action_id));
         }
@@ -90,7 +95,7 @@ class RefreshTokenActionScheduler implements Hookable
      */
     public function track_current_refresh_action(int $action_id): void
     {
-        if (self::REFRESH_TOKEN_ACTION_NAME !== $this->get_action_hook($action_id)) {
+        if ($this->get_refresh_token_action_name() !== $this->get_action_hook($action_id)) {
             return;
         }
         $this->current_action_id = $action_id;
