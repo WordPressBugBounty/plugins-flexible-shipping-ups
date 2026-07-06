@@ -1,7 +1,8 @@
 import React from 'react';
 
-export default function PluginItem({name, icon, description, plugin_url, assets_url, buy_plugin_label}) {
+export default function PluginItem({name, icon, description, plugin_url, assets_url, buy_plugin_label, button_class}) {
     const icon_url = `${assets_url}img/plugin-icons/${icon}`
+    const buttonClass = button_class ? `btn-buy ${button_class}` : 'btn-buy';
 
     return <div className="oct-shipping-extensions-plugin">
         <div className="oct-plugin-info">
@@ -22,7 +23,7 @@ export default function PluginItem({name, icon, description, plugin_url, assets_
         </div>
 
         <div className="oct-plugin-actions">
-            <a href={plugin_url} target="_blank" className="btn-buy">{buy_plugin_label}</a>
+            <a href={plugin_url} target="_blank" className={buttonClass}>{buy_plugin_label}</a>
         </div>
     </div>;
 }

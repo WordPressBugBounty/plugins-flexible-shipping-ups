@@ -18,7 +18,7 @@ class XmlApiNotice implements Hookable
     }
     public function ups_xml_api_notice()
     {
-        if (UpsSettingsDefinition::API_TYPE_XML === ($this->ups_settings[UpsSettingsDefinition::API_TYPE] ?? UpsSettingsDefinition::API_TYPE_XML)) {
+        if ($this->should_display_notice()) {
             $settings_url = admin_url('admin.php?page=wc-settings&tab=shipping&section=flexible_shipping_ups');
             ob_start();
             include __DIR__ . '/view/xml-api-notice.php';
@@ -26,5 +26,17 @@ class XmlApiNotice implements Hookable
             ob_end_clean();
             new Notice($content, 'warning');
         }
+    }
+    protected function should_display_notice(): bool
+    {
+        $api_type = $this->ups_settings[UpsSettingsDefinition::API_TYPE] ?? '';
+        if ('' !== $api_type) {
+            return UpsSettingsDefinition::API_TYPE_XML === $api_type;
+        }
+        return $this->has_legacy_xml_credentials();
+    }
+    private function has_legacy_xml_credentials(): bool
+    {
+        return !empty($this->ups_settings[UpsSettingsDefinition::USER_ID]) || !empty($this->ups_settings[UpsSettingsDefinition::PASSWORD]) || !empty($this->ups_settings[UpsSettingsDefinition::ACCESS_KEY]);
     }
 }

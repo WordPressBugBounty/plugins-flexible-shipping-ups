@@ -1,16 +1,25 @@
 import React from 'react';
 
 export default function Top({assets_url, header_title, header_description, header_promo = []}) {
-    const url = `${assets_url}img/logo-black.svg`;
+    const logoUrl = `${assets_url}img/logo-black.svg`;
+    const headerImageUrl = `${assets_url}img/sp-bg-image.svg`;
 
     return <>
         <section className="oct-shipping-extensions-top">
-            <h1>{header_title} <img alt="Octolize" src={url}/></h1>
-            <p>{header_description}</p>
-            {header_promo.map(promo => {
-                const markup = { __html: promo };
-                return <p className="oct-promo" dangerouslySetInnerHTML={markup}></p>
-            })}
+            <div className="oct-shipping-extensions-top-content">
+                <h1>{header_title} <img alt="Octolize" src={logoUrl}/></h1>
+                <p>{header_description}</p>
+                {header_promo.map(promo => {
+                    const markup = { __html: promo };
+                    return <p className="oct-promo" dangerouslySetInnerHTML={markup}></p>
+                })}
+            </div>
+            <img
+                className="oct-shipping-extensions-top-image"
+                src={headerImageUrl}
+                alt=""
+                aria-hidden="true"
+            />
         </section>
 
         <div className="oct-shipping-extensions-notice-list-hide">

@@ -1,4 +1,6 @@
 $color-turquoise: #00e3c0;
+$color-yellow: #F4D35E;
+$color-yellow-light: #F6DE88;
 $black: #002333;
 $color-green_50: #80f1e0;
 $color-green_20: #e5fcf9;
@@ -64,18 +66,27 @@ body.woocommerce_page_octolize-shipping-extensions {
                 background-position: 100% 100%;
                 background-repeat: no-repeat;
                 border-radius: 15px;
-                position: relative;
                 display: flex;
-                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 25px;
 
-                &:after {
-                    content: "";
-                    background: url(../../img/sp-bg-image.svg) no-repeat;
-                    height: 204px;
+                .oct-shipping-extensions-top-content {
+                    display: flex;
+                    flex: 1 1 auto;
+                    flex-direction: column;
+                }
+
+                .oct-shipping-extensions-top-image {
+                    display: block;
+                    align-self: flex-start;
+                    flex: 0 0 auto;
+                    margin-left: auto;
+                    margin-top: -10px;
+                    margin-right: -95px;
                     width: 317px;
-                    position: absolute;
-                    bottom: -21px;
-                    right: 0;
+                    max-width: 35%;
+                    height: auto;
 
                     @media screen and (max-width: 940px) {
                         display: none;
@@ -114,38 +125,118 @@ body.woocommerce_page_octolize-shipping-extensions {
                     color: #333333;
                     flex: none;
                     order: 1;
-                    max-width: 60%;
+                    max-width: 100%;
                     margin-top: 5px;
                     margin-bottom: 5px;
-
-                    @media screen and (max-width: 940px) {
-                        max-width: 100%;
-                    }
                 }
                 p.oct-promo {
                     font-family: "Poppins", sans-serif;
-                    max-width: 60%;
+                    max-width: 100%;
                     line-height: 1.5em;
-                    span {
+                    span.oct-promo-content {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 16px;
+                        width: 100%;
                         border-radius: 10px;
-                        background: #002333;
-                        color: #EAEBEB;
+                        background: $color-green_20;
+                        color: $black;
                         padding: 15px 20px;
 
                         a {
-                            color: #fff;
+                            color: $black;
 
                             &:hover {
                                 color: #00E3C0;
                             }
                         }
                     }
+                    span.oct-promo-text {
+                        display: flex;
+                        flex: 1 1 auto;
+                        flex-direction: column;
+                        gap: 8px;
+                        min-width: 0;
+                    }
+                    span.oct-promo-line {
+                        display: block;
+                        line-height: 1.5;
+                    }
                     span.oct-code {
-                        border-radius: 0 10px 10px 0;
-                        padding: 14px 14px 14px 18px;
+                        display: inline-flex;
+                        align-items: center;
+                        flex-direction: column;
+                        flex: 0 0 auto;
+                        gap: 8px;
+                        margin-left: auto;
+                        white-space: nowrap;
+                        border-radius: 10px;
+                        padding: 12px 14px;
                         font-weight: 900;
                         outline: 2px dashed #d3d3d3;
                         outline-offset: -7px;
+                        position: relative;
+                        cursor: help;
+
+                        &:before,
+                        &:after {
+                            opacity: 0;
+                            pointer-events: none;
+                            position: absolute;
+                            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+                            z-index: 10;
+                        }
+
+                        &:before {
+                            content: "";
+                            border: 6px solid transparent;
+                            border-top-color: $black;
+                            bottom: calc(100% + 1px);
+                            right: 24px;
+                            transform: translateY(4px);
+                        }
+
+                        &:after {
+                            content: attr(data-tooltip);
+                            background: $black;
+                            border-radius: 8px;
+                            bottom: calc(100% + 12px);
+                            box-shadow: 0 8px 18px rgba(0, 35, 51, 0.18);
+                            color: #fff;
+                            font-size: 12px;
+                            font-weight: 400;
+                            line-height: 1.4;
+                            padding: 8px 10px;
+                            right: 0;
+                            transform: translateY(4px);
+                            white-space: normal;
+                            width: 240px;
+                        }
+
+                        &:hover,
+                        &:focus,
+                        &:focus-within {
+                            &:before,
+                            &:after {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        }
+                    }
+                    span.oct-code-value {
+                        background: transparent;
+                        padding: 0;
+                    }
+                    @media screen and (max-width: 940px) {
+                        span.oct-promo-content {
+                            align-items: flex-start;
+                            flex-direction: column;
+                        }
+
+                        span.oct-code {
+                            margin-left: 0;
+                        }
                     }
                     span.oct-copy-to-clipboard {
                         background-color: $color-green_50;
@@ -335,16 +426,14 @@ body.woocommerce_page_octolize-shipping-extensions {
                 border-color: $color-green_50 !important;
             }
         }
-    }
 
-    &.rtl {
-        .oct-shipping-extensions {
-            .oct-shipping-extension-content-wrapper {
-                .oct-shipping-extensions-top {
-                    &:after {
-                        right: calc(100% - 317px);
-                    }
-                }
+        .btn-yellow {
+            background-color: $color-yellow !important;
+            border: 1px solid $color-yellow !important;
+            &:hover,
+            &:active {
+                background-color: $color-yellow-light !important;
+                border-color: $color-yellow-light !important;
             }
         }
     }
