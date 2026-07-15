@@ -4,7 +4,7 @@ Donate link: https://wordpress.org/plugins/flexible-shipping-ups/
 Tags: ups, ups rates, ups shipping, ups woocommerce, ups live rates
 Requires at least: 4.5
 Tested up to: 7.0
-Stable tag: 3.7.1
+Stable tag: 3.7.2
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,6 +182,9 @@ Sometimes API doesn’t respond or return an error. In that case, the UPS shippi
 7. UPS Live Rates and Access Points in the checkout
 
 == Changelog ==
+
+= 3.7.2 - 2026-07-13 =
+* Added support for WooCommerce 11.0
 
 = 3.7.1 - 2026-07-06 =
 * Fixed unnecessary UPS API notices displayed on fresh installations
