@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shipping Live Rates and Access Points for UPS for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.7.2\n"
+"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-13T23:09:24+00:00\n"
+"POT-Creation-Date: 2026-07-20T13:38:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -316,16 +316,26 @@ msgstr ""
 msgid "%1$sTo calculate rates using multiple boxes, use \"Pack items separately\" or \"Pack into custom boxes\". Learn more here: %2$soctolize.com/docs%3$s"
 msgstr ""
 
-#: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:149
+#: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:150
+#: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:153
+msgid "UPS API returned an invalid JSON response."
+msgstr ""
+
+#: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:161
 #, php-format
 msgid "Invalid response: %s"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:112
+#: vendor_prefixed/octolize/ups-rest-api-client/src/RestApi/RestApiClient.php:183
+#, php-format
+msgid "UPS API request failed with HTTP status %d."
+msgstr ""
+
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:121
 msgid "Hi there! 👋 I’m here to help you set up and use the plugin."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:112
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:121
 msgid ""
 "You can ask me about:\n"
 "- settings and configuration,\n"
@@ -335,51 +345,51 @@ msgid ""
 "Just tell me what you need help with 🙂"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:120
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:129
 msgid "Hi there! 👋"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:123
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:132
 msgid "I’m your AI Assistant. I’ll help you quickly configure the plugin and solve any issues."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:126
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:135
 msgid "Type your question to get instant answer.."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:129
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:138
 msgid "AI can make mistakes. Octolize has access to the conversation held in this chat."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:132
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:141
 msgid "New conversation"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:139
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "Do you consent to sending data to the chat?"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:140
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "To start the chat, we need to send your inputs and technical data to the chat service. Read more in our Privacy Policy."
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:141
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "Accept"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:142
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "Decline"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:144
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "Privacy Policy"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:147
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "If you don’t want to give consent, you can contact our support using this form:"
 msgstr ""
 
-#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ChatSettings.php:148
+#: vendor_prefixed/octolize/wp-octolize-docs-chat/src/Chat/ConsentSettings.php:77
 msgid "Support form"
 msgstr ""
 
@@ -610,11 +620,11 @@ msgid "WooCommerce UPS integration packed with many advanced features. Display t
 msgstr ""
 
 #: vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Plugin/PluginFactory.php:48
-msgid "FedEx WooCommerce Live Rates PRO"
+msgid "FedEx WooCommerce Live Rates PRO<br>(with LTL Freight)"
 msgstr ""
 
 #: vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Plugin/PluginFactory.php:48
-msgid "Enable the FedEx live rates for international delivery and integrate it with your shop in less than 5 minutes. Save your time and money – let the shipping cost be calculated automatically."
+msgid "Enable the FedEx live rates for international delivery and integrate it with your shop in less than 5 minutes. Save your time and money – let the shipping cost be calculated automatically. Now with LTL Freight support!"
 msgstr ""
 
 #: vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Plugin/PluginFactory.php:51

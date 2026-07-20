@@ -122,7 +122,7 @@ class RestApiClient implements LoggerAwareInterface
         if ($response->getStatusCode() !== 200) {
             $this->throw_exception_from_response($response);
         }
-        $content = json_decode($response->getBody()->getContents(), \false);
+        $content = $this->decode_object_response($response);
         $this->logger->debug('UPS API Response', ['response' => json_encode($content)]);
         return $content;
     }
@@ -140,7 +140,19 @@ class RestApiClient implements LoggerAwareInterface
         if ($response->getStatusCode() !== 200) {
             $this->throw_exception_from_response($response);
         }
-        return json_decode($response->getBody()->getContents(), \false);
+        return $this->decode_object_response($response);
+    }
+    private function decode_object_response(ResponseInterface $response): \stdClass
+    {
+        try {
+            $content = json_decode($response->getBody()->getContents(), \false, 512, \JSON_THROW_ON_ERROR);
+        } catch (\JsonException $exception) {
+            throw new RestApiException(__('UPS API returned an invalid JSON response.', 'flexible-shipping-ups'), $response->getStatusCode(), $exception);
+        }
+        if (!$content instanceof \stdClass) {
+            throw new RestApiException(__('UPS API returned an invalid JSON response.', 'flexible-shipping-ups'), $response->getStatusCode());
+        }
+        return $content;
     }
     private function throw_exception_from_response(ResponseInterface $response): void
     {
@@ -168,5 +180,6 @@ class RestApiClient implements LoggerAwareInterface
             }
             throw new RestApiException(trim($message, ', '), $code);
         }
+        throw new RestApiException(sprintf(__('UPS API request failed with HTTP status %d.', 'flexible-shipping-ups'), $response->getStatusCode()), $response->getStatusCode());
     }
 }
