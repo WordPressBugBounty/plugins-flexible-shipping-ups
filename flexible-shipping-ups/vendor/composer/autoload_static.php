@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb
+class ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -50,6 +50,7 @@ class ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb
         'UpsFreeVendor\\GuzzleHttp\\Handler\\CurlVersion' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlVersion.php',
         'UpsFreeVendor\\GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/EasyHandle.php',
         'UpsFreeVendor\\GuzzleHttp\\Handler\\HeaderProcessor' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/HeaderProcessor.php',
+        'UpsFreeVendor\\GuzzleHttp\\Handler\\HostValidator' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/HostValidator.php',
         'UpsFreeVendor\\GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/MockHandler.php',
         'UpsFreeVendor\\GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/Proxy.php',
         'UpsFreeVendor\\GuzzleHttp\\Handler\\ProxyEnvironment' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/ProxyEnvironment.php',
@@ -722,7 +723,7 @@ class ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb
         'UpsFreeVendor\\WPDesk\\ShowDecision\\ShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/ShouldShowStrategy.php',
         'UpsFreeVendor\\WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodInstanceStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodInstanceStrategy.php',
         'UpsFreeVendor\\WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodStrategy.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Assets.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Assets.php',
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\AjaxDeactivationDataHandler' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/AjaxDeactivationDataHandler.php',
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\DeactivationContent' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/DeactivationContent.php',
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\DefaultReasonsFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/DefaultReasonsFactory.php',
@@ -733,11 +734,12 @@ class ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\Thickbox' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/Thickbox.php',
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\Tracker' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/Tracker.php',
         'UpsFreeVendor\\WPDesk\\Tracker\\Deactivation\\TrackerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/TrackerFactory.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\OptInOptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInOptOut.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\OptInPage' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInPage.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\OptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptOut.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\PluginActionLinks' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/PluginActionLinks.php',
-        'UpsFreeVendor\\WPDesk\\Tracker\\Shop' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Shop.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\OptInOptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptInOptOut.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\OptInPage' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptInPage.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\OptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptOut.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\PluginActionLinks' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/PluginActionLinks.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\Shop' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Shop.php',
+        'UpsFreeVendor\\WPDesk\\Tracker\\Tracker' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Tracker.php',
         'UpsFreeVendor\\WPDesk\\UpsShippingService\\AbstractUpsShippingService' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/AbstractUpsShippingService.php',
         'UpsFreeVendor\\WPDesk\\UpsShippingService\\CurrencyVerify\\UpsCurrencyVerifyRatesFilter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/CurrencyVerify/UpsCurrencyVerifyRatesFilter.php',
         'UpsFreeVendor\\WPDesk\\UpsShippingService\\Exception\\CurrencySwitcherException' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/ups-shipping-service/src/UpsShippingService/Exception/CurrencySwitcherException.php',
@@ -935,9 +937,9 @@ class ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit7ced522d2723e88f3ba183fea64aacbb::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$classMap;
 
         }, null, ClassLoader::class);
     }

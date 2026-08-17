@@ -2,7 +2,7 @@ import React from 'react';
 import Onboarding from "./components/onboarding";
 import {render} from "react-dom";
 
-const version = 2;
+const version = 3;
 
 document.addEventListener( 'DOMContentLoaded', function () {
     let container_selector = '.onboarding-container-' + version;
