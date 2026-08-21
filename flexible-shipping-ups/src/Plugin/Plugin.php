@@ -579,7 +579,7 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 
 		if ( ! defined( 'FLEXIBLE_SHIPPING_UPS_PRO_VERSION' ) ) {
 			$upgrade_link   = $is_pl ? 'https://octol.io/ups-upgrade-pl' : 'https://octol.io/ups-upgrade';
-			$plugin_links[] = '<a target="_blank" href="' . $upgrade_link . '" style="color:#00B62E;font-weight:bold;">' . __( 'Buy PRO', 'flexible-shipping-ups' ) . '</a>';
+			$plugin_links[] = '<a target="_blank" href="' . $upgrade_link . '" style="color:#00e3c0;font-weight:bold;">' . __( 'Buy Flexible Shipping UPS PRO', 'flexible-shipping-ups' ) . '</a>';
 		}
 
 		return array_merge( $plugin_links, $links );

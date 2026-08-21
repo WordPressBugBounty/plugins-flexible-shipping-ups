@@ -23,6 +23,7 @@ class PluginLinks implements Hookable {
 			$support_link = $is_pl ? 'https://octol.io/ups-support-pl' : 'https://octol.io/ups-support';
 
 			$plugin_links = [
+				'<a target="_blank" rel="noopener noreferrer" href="' . esc_url( 'https://octol.io/fs-ups-rate' ) . '" aria-label="' . esc_attr__( 'Rate Flexible Shipping UPS', 'flexible-shipping-ups' ) . '" style="color:#ffb900;font-size:20px;text-decoration:none;">★★★★★</a>',
 				'<a href="' . $docs_link . '" target="_blank">' . __( 'Docs', 'flexible-shipping-ups' ) . '</a>',
 				'<a href="' . $support_link . '" target="_blank">' . __( 'Support', 'flexible-shipping-ups' ) . '</a>',
 			];
