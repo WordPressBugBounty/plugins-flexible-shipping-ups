@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'octolize-plugin/flexible-shipping-ups',
-        'pretty_version' => '3.8.2',
-        'version' => '3.8.2.0',
-        'reference' => '90ada30a54b16e200772fb12f2a109cc188d77f1',
+        'pretty_version' => '3.8.3',
+        'version' => '3.8.3.0',
+        'reference' => 'ce5f63290d15abb7312ebf9bf7ed6b9cb73359b7',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'octolize-plugin/flexible-shipping-ups' => array(
-            'pretty_version' => '3.8.2',
-            'version' => '3.8.2.0',
-            'reference' => '90ada30a54b16e200772fb12f2a109cc188d77f1',
+            'pretty_version' => '3.8.3',
+            'version' => '3.8.3.0',
+            'reference' => 'ce5f63290d15abb7312ebf9bf7ed6b9cb73359b7',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
