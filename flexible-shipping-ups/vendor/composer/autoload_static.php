@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3
+class ComposerStaticInitfd15cef6b0509dab07f828f29a0a1b4e
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -247,6 +247,7 @@ class ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3
         'UpsFreeVendor\\Octolize\\Blocks\\Registrator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/Registrator.php',
         'UpsFreeVendor\\Octolize\\Blocks\\StoreEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/StoreEndpoint.php',
         'UpsFreeVendor\\Octolize\\Brand\\Assets\\AdminAssets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/Assets/AdminAssets.php',
+        'UpsFreeVendor\\Octolize\\Brand\\UpgradeBox\\SettingsSidebarBox' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpgradeBox/SettingsSidebarBox.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ConstantShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ConstantShouldShowStrategy.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\SettingsSidebar' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/SettingsSidebar.php',
         'UpsFreeVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodAndConstantDisplayStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodAndConstantDisplayStrategy.php',
@@ -910,6 +911,7 @@ class ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3
         'UpsFreeVendor\\WPDesk_Translatable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translatable.php',
         'WPDesk\\FlexibleShippingUps\\ActivationDate' => __DIR__ . '/../..' . '/src/Plugin/ActivationDate.php',
         'WPDesk\\FlexibleShippingUps\\AdvertMetabox\\ProPluginMetaBox' => __DIR__ . '/../..' . '/src/Plugin/AdvertMetabox/ProPluginMetaBox.php',
+        'WPDesk\\FlexibleShippingUps\\AdvertMetabox\\UpsProOffer' => __DIR__ . '/../..' . '/src/Plugin/AdvertMetabox/UpsProOffer.php',
         'WPDesk\\FlexibleShippingUps\\Assets' => __DIR__ . '/../..' . '/src/Plugin/Assets.php',
         'WPDesk\\FlexibleShippingUps\\OldProVersionMessage' => __DIR__ . '/../..' . '/src/Plugin/OldProVersionMessage.php',
         'WPDesk\\FlexibleShippingUps\\OrderCounter' => __DIR__ . '/../..' . '/src/Plugin/OrderCounter.php',
@@ -937,9 +939,9 @@ class ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5d1fb3d1558197e5e7333e147af33bf3::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfd15cef6b0509dab07f828f29a0a1b4e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfd15cef6b0509dab07f828f29a0a1b4e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitfd15cef6b0509dab07f828f29a0a1b4e::$classMap;
 
         }, null, ClassLoader::class);
     }

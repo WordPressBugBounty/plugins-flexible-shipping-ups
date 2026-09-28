@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shipping Live Rates and Access Points for UPS for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.8.4\n"
+"Project-Id-Version: Shipping Live Rates and Access Points for UPS for WooCommerce 3.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-shipping-ups\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T23:26:27+00:00\n"
+"POT-Creation-Date: 2026-09-28T08:06:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flexible-shipping-ups\n"
@@ -39,46 +39,56 @@ msgstr ""
 msgid "https://octol.io/ups-author"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:35
-msgid "Get UPS Live Rates PRO!"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:15
+msgid "UPS PRO"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:37
-#: src/Plugin/UpsFreeShippingService/Field/HandlingFeesSettingsDefinitionDecorator.php:28
-#: vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/CustomFields/FieldHandlingFees.php:33
-msgid "Handling Fees"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:16
+msgid "Do not pay for three parcels when shipping one"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:38
-msgid "Delivery dates"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:17
+msgid "The free version shows live UPS rates. PRO combines several products into one carton and adds a precise handling fee."
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:39
-msgid "Box packing"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:19
+msgid "3 products, 3 separate rates"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:40
-msgid "Access Points Select"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:20
+msgid "NOW"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:41
-msgid "Flat Rate for Access Points"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:23
+msgid "3 products, 1 combined rate"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:42
-msgid "Multicurrency support"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:24
+msgid "PRO"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:43
-msgid "Simple Rate support"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:29
+msgid "Combine several products into one carton instead of paying for separate shipments"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/ProPluginMetaBox.php:46
-msgid "Upgrade Now"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:33
+msgid "Add fixed or percentage handling fees to UPS rates"
 msgstr ""
 
-#: src/Plugin/AdvertMetabox/view/html-pro-features.php:4
-msgid "Show functions available in PRO version"
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:37
+msgid "Show the estimated delivery date right in the cart"
+msgstr ""
+
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:40
+msgid "Trusted by 250,000+ WooCommerce stores"
+msgstr ""
+
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:41
+msgid "30-day money-back guarantee - risk-free"
+msgstr ""
+
+#: src/Plugin/AdvertMetabox/UpsProOffer.php:42
+msgid "Unlock packing"
 msgstr ""
 
 #. Translators: PRO plugin version.
@@ -232,6 +242,11 @@ msgstr ""
 
 #: src/Plugin/UpsFreeShippingService/Field/EstimatedDeliverySettingsDefinitionDecorator.php:40
 msgid "You can show customers an estimated delivery date or time in transit. The information will be added to the service name in the checkout."
+msgstr ""
+
+#: src/Plugin/UpsFreeShippingService/Field/HandlingFeesSettingsDefinitionDecorator.php:28
+#: vendor_prefixed/wpdesk/wp-woocommerce-shipping/src/WooCommerceShipping/CustomFields/FieldHandlingFees.php:33
+msgid "Handling Fees"
 msgstr ""
 
 #: src/Plugin/UpsFreeShippingService/Field/HandlingFeesSettingsDefinitionDecorator.php:30

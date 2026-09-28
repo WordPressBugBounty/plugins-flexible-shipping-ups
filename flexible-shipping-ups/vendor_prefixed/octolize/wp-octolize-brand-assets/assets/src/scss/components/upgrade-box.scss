@@ -1,0 +1,192 @@
+.oct-upgrade-box-container > p:not(.submit):not(.wc-settings-marketplace-link) {
+	max-width: calc(100% - var(--oct-upgrade-box-sidebar-space));
+}
+
+.oct-upgrade-box-container table.form-table .description {
+	max-width: calc(100% - var(--oct-upgrade-box-sidebar-space));
+}
+
+.oct-upgrade-box {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 340px;
+	border: 1.5px solid #00e3c0;
+	border-radius: 10px;
+	background: #fff;
+	color: #002333;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 13px;
+	line-height: 1.55;
+	overflow: hidden;
+
+	&--positioned {
+		position: absolute;
+		display: none;
+		width: 300px;
+		z-index: 1;
+	}
+
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
+	&__body {
+		padding: 20px 20px 0;
+	}
+
+	&__logo {
+		width: 112px;
+		height: 22px;
+		margin-bottom: 18px;
+		background: url(../../img/logo-octolize-wordmark.svg) no-repeat left center / contain;
+	}
+
+	&__eyebrow {
+		display: inline-block;
+		margin: 0 0 8px;
+		padding: 4px 9px;
+		border-radius: 5px;
+		background: #e3fbf6;
+		color: #002333;
+		font-size: 11.5px;
+		font-weight: 700;
+	}
+
+	&__headline {
+		margin: 0 0 10px;
+		color: #002333;
+		font-size: 17px;
+		font-weight: 700;
+		line-height: 1.4;
+	}
+
+	&__description {
+		margin: 0 0 20px;
+		color: #334f5c;
+		line-height: 1.65;
+	}
+
+	&__comparison {
+		margin-bottom: 20px;
+		border: 1px solid #e3e6e8;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	&__comparison-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		padding: 12px 14px;
+		font-size: 12.5px;
+
+		&--current {
+			background: #fafafa;
+			color: #686f73;
+		}
+
+		&--upgrade {
+			background: #e3fbf6;
+			color: #002333;
+			font-weight: 600;
+		}
+	}
+
+	&__badge {
+		flex: none;
+		padding: 2px 6px;
+		border-radius: 4px;
+		background: #ededed;
+		font-size: 10.5px;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	&__comparison-row--upgrade &__badge {
+		background: #00e3c0;
+	}
+
+	&__benefits {
+		margin: 0 0 20px;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: flex;
+			gap: 10px;
+			margin: 0 0 13px;
+			color: #334f5c;
+			line-height: 1.55;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			svg {
+				flex: none;
+				width: 18px;
+				height: 18px;
+				margin-top: 1px;
+				color: #002333;
+			}
+		}
+	}
+
+	&__social-proof, &__guarantee {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+
+		svg {
+			flex: none;
+			width: 14px;
+			height: 14px;
+			color: #002333;
+		}
+	}
+
+	&__social-proof {
+		margin: 0 0 20px;
+		color: #686f73;
+		font-size: 12px;
+	}
+
+	&__footer {
+		padding: 20px 20px 22px;
+		border-top: 1px solid #e3e6e8;
+		background: #f7f7f5;
+	}
+
+	&__guarantee {
+		margin: 0 0 14px;
+		color: #334f5c;
+		font-size: 11.5px;
+	}
+
+	&__cta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		width: 100%;
+		padding: 11px 14px;
+		border-radius: 6px;
+		background: #00e3c0;
+		color: #002333;
+		font-size: 14px;
+		font-weight: 700;
+		text-align: center;
+		text-decoration: none;
+
+		&:hover, &:focus {
+			background: #00c7a8;
+			color: #002333;
+		}
+
+		&:focus-visible {
+			outline: 2px solid #002333;
+			outline-offset: 2px;
+		}
+	}
+}
